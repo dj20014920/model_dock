@@ -1,0 +1,142 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.45.9",
+  "icons": {
+    "16": "src/assets/icon.png",
+    "32": "src/assets/icon.png",
+    "48": "src/assets/icon.png",
+    "128": "src/assets/icon.png"
+  },
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "action": {},
+  "host_permissions": [
+    "https://*.bing.com/",
+    "https://*.openai.com/",
+    "https://chatgpt.com/*",
+    "https://bard.google.com/",
+    "https://gemini.google.com/*",
+    "https://*.chathub.gg/",
+    "https://*.duckduckgo.com/",
+    "https://*.poe.com/",
+    "https://*.anthropic.com/",
+    "https://*.claude.ai/",
+    "https://*.perplexity.ai/",
+    "https://chat.deepseek.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "wss://*/*"
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "sidePanel",
+    "declarativeNetRequestWithHostAccess",
+    "scripting",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "assets/chatgpt-inpage-proxy.ts-loader-d24a3ea6.js"
+      ],
+      "matches": [
+        "https://chat.openai.com/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/chatgpt-inpage-proxy.ts-loader-d24a3ea6.js"
+      ],
+      "matches": [
+        "https://chatgpt.com/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/chatgpt-inpage-proxy.ts-loader-d24a3ea6.js"
+      ],
+      "matches": [
+        "https://claude.ai/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/chatgpt-inpage-proxy.ts-loader-d24a3ea6.js"
+      ],
+      "matches": [
+        "https://gemini.google.com/*"
+      ]
+    },
+    {
+      "js": [
+        "assets/chatgpt-inpage-proxy.ts-loader-d24a3ea6.js"
+      ],
+      "matches": [
+        "https://chat.deepseek.com/*"
+      ]
+    }
+  ],
+  "commands": {
+    "open-app": {
+      "suggested_key": {
+        "default": "Alt+J",
+        "windows": "Alt+J",
+        "linux": "Alt+J",
+        "mac": "Command+J"
+      },
+      "description": "Open ChatHub app"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_bing",
+        "enabled": true,
+        "path": "src/rules/bing.json"
+      },
+      {
+        "id": "ruleset_ddg",
+        "enabled": true,
+        "path": "src/rules/ddg.json"
+      },
+      {
+        "id": "ruleset_qianwen",
+        "enabled": true,
+        "path": "src/rules/qianwen.json"
+      },
+      {
+        "id": "ruleset_baichuan",
+        "enabled": true,
+        "path": "src/rules/baichuan.json"
+      },
+      {
+        "id": "ruleset_pplx",
+        "enabled": true,
+        "path": "src/rules/pplx.json"
+      }
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "https://chat.openai.com/*"
+      ],
+      "resources": [
+        "assets/browser-polyfill-5e752e65.js",
+        "assets/proxy-fetch-1d7239f3.js",
+        "assets/chatgpt-inpage-proxy.ts-ec8d5fd8.js"
+      ],
+      "use_dynamic_url": true
+    }
+  ]
+}

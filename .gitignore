@@ -36,3 +36,21 @@ next-env.d.ts
 *.har
 har/*.har
 har/*.parsed.json
+
+# editors/IDE
+.vscode/
+.idea/
+
+# lockfiles (choose one package manager; keep yarn.lock)
+package-lock.json
+pnpm-lock.yaml
+
+# caches / coverage
+.cache/
+.parcel-cache/
+.turbo/
+coverage/
+.eslintcache
+
+# logs
+*.log

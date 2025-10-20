@@ -92,34 +92,56 @@ export class ChatGPTWebBot extends AbstractBot {
   }
 
   async doSendMessage(params: SendMessageParams) {
+    console.log('[GPT-WEB] 🚀 doSendMessage started')
+    
     if (!this.accessToken) {
+      console.log('[GPT-WEB] 🔑 Getting access token...')
       this.accessToken = await chatGPTClient.getAccessToken()
+      console.log('[GPT-WEB] ✅ Access token obtained')
+    } else {
+      console.log('[GPT-WEB] ♻️ Reusing existing access token')
     }
 
+    console.log('[GPT-WEB] 🤖 Getting model name...')
     const modelName = await this.getModelName()
-    console.debug('Using model:', modelName)
+    console.log('[GPT-WEB] ✅ Using model:', modelName)
 
+    console.log('[GPT-WEB] 🎫 Getting Arkose token...')
     const arkoseToken = await getArkoseToken()
+    console.log('[GPT-WEB] ✅ Arkose token result:', arkoseToken ? `yes (${arkoseToken.substring(0, 15)}...)` : 'no (continuing without token)')
 
     let image: ImageContent | undefined = undefined
     if (params.image) {
+      console.log('[GPT-WEB] 🖼️ Uploading image...')
       image = await this.uploadImage(params.image)
+      console.log('[GPT-WEB] ✅ Image uploaded')
     }
 
+    console.log('[GPT-WEB] 📡 Calling /backend-api/conversation...')
+    const requestBody: any = {
+      action: 'next',
+      messages: [this.buildMessage(params.prompt, image)],
+      model: modelName,
+      conversation_id: this.conversationContext?.conversationId || undefined,
+      parent_message_id: this.conversationContext?.lastMessageId || uuidv4(),
+      conversation_mode: { kind: 'primary_assistant' },
+    }
+    
+    // ⚠️ Only include arkose_token if present (like ChatHub)
+    if (arkoseToken) {
+      console.log('[GPT-WEB] 🎫 Including Arkose token in request')
+      requestBody.arkose_token = arkoseToken
+    } else {
+      console.log('[GPT-WEB] ⚠️ No Arkose token - proceeding without it (ChatHub style)')
+    }
+    
     const resp = await (chatGPTClient as any).requestBackendAPIWithToken(
       this.accessToken,
       'POST',
       '/conversation',
-      {
-        action: 'next',
-        messages: [this.buildMessage(params.prompt, image)],
-        model: modelName,
-        conversation_id: this.conversationContext?.conversationId || undefined,
-        parent_message_id: this.conversationContext?.lastMessageId || uuidv4(),
-        arkose_token: arkoseToken,
-        conversation_mode: { kind: 'primary_assistant' },
-      },
+      requestBody,
     )
+    console.log('[GPT-WEB] ✅ Response received, starting SSE parsing...')
 
     const isFirstMessage = !this.conversationContext
 

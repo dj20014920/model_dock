@@ -97,7 +97,7 @@ const ErrorAction: FC<{ error: ChatError }> = ({ error }) => {
   }
   if (error.code === ErrorCode.CHATGPT_AUTH) {
     return (
-      <a href="https://chat.openai.com" target="_blank" rel="noreferrer">
+      <a href="https://chatgpt.com" target="_blank" rel="noreferrer">
         <ActionButton text={t('Login to ChatGPT')} />
       </a>
     )

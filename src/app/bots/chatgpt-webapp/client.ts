@@ -1,69 +1,134 @@
 import { ofetch } from 'ofetch'
 import { RequestInitSubset } from '~types/messaging'
 import { ChatError, ErrorCode } from '~utils/errors'
-import { Requester, globalFetchRequester, proxyFetchRequester } from './requesters'
+import { getUserConfig } from '~services/user-config'
+import { Requester, globalFetchRequester, backgroundFetchRequester, proxyFetchRequester } from './requesters'
 
 class ChatGPTClient {
   requester: Requester
   private baseHost?: string
 
   constructor() {
-    // 기본은 직접(확장 컨텍스트) fetch 사용. 필요 시에만 프록시로 전환한다.
-    this.requester = globalFetchRequester
-  }
-
-  switchRequester(newRequester: Requester) {
-    console.debug('client switchRequester', newRequester)
-    this.requester = newRequester
+    // ✅ ChatHub 방식: Background Fetch 전용 (Proxy fallback 완전 제거)
+    // Service Worker에서 직접 API 호출, Content Script/Proxy 탭 사용 안 함
+    console.log('[GPT-WEB] 🎯 Using background fetch (direct API calls, no proxy tabs)')
+    this.requester = backgroundFetchRequester
   }
 
   async fetch(url: string, options?: RequestInitSubset): Promise<Response> {
     // Ensure cookies are sent for ChatGPT web endpoints
-    const merged: any = { credentials: 'include', ...(options as any) }
-    return this.requester.fetch(url, merged)
+    const merged: any = { 
+      credentials: 'include', 
+      ...(options as any)
+    }
+    
+    console.debug('[GPT-WEB] fetch', url.substring(0, 80), {
+      hasBody: !!merged?.body,
+      method: merged?.method || 'GET',
+    })
+    
+    const resp = await this.requester.fetch(url, merged)
+    console.debug('[GPT-WEB] fetch status', resp.status, resp.statusText)
+    
+    return resp
   }
 
   async getAccessToken(): Promise<string> {
+    console.log('[GPT-WEB] 🔑 getAccessToken() called')
+    
     const trySession = async () => {
-      let resp = await this.fetch('https://chat.openai.com/api/auth/session')
-      if (resp.ok) {
-        this.baseHost = 'https://chat.openai.com'
-        return resp
-      }
-      resp = await this.fetch('https://chatgpt.com/api/auth/session')
+      // chatgpt.com 우선 시도(최근 기본 호스트)
+      console.debug('[GPT-WEB] session try chatgpt.com')
+      let resp = await this.fetch('https://chatgpt.com/api/auth/session')
       if (resp.ok) {
         this.baseHost = 'https://chatgpt.com'
+        console.debug('[GPT-WEB] session ok @ chatgpt.com')
+        return resp
+      }
+      // 구 버전/지역에서 chat.openai.com이 유효할 수 있음 → 폴백
+      console.debug('[GPT-WEB] session try chat.openai.com')
+      resp = await this.fetch('https://chat.openai.com/api/auth/session')
+      if (resp.ok) {
+        this.baseHost = 'https://chat.openai.com'
+        console.debug('[GPT-WEB] session ok @ chat.openai.com')
         return resp
       }
       return resp
     }
 
-    let resp = await trySession()
-    // 실패(세션 만료/권한 없음)에만 프록시 탭을 열어 동일-도메인으로 재시도한다.
-    if (resp.status === 401 || resp.status === 403) {
-      await this.fixAuthState()
-      resp = await trySession()
-    }
+    const resp = await trySession()
+
     if (resp.status === 403) {
-      throw new ChatError('Please pass Cloudflare check', ErrorCode.CHATGPT_CLOUDFLARE)
+      throw new ChatError(
+        'Cloudflare 보안 확인이 필요합니다.\n\n해결 방법:\n1. 브라우저에서 chatgpt.com을 직접 엽니다\n2. Cloudflare 챌린지를 완료합니다\n3. ChatGPT에 로그인합니다\n4. 5-10분 후 다시 시도합니다',
+        ErrorCode.CHATGPT_CLOUDFLARE,
+      )
     }
+
+    if (resp.status === 401) {
+      throw new ChatError(
+        'ChatGPT 로그인이 필요합니다.\n\n해결 방법:\n1. 브라우저에서 chatgpt.com을 엽니다\n2. ChatGPT 계정으로 로그인합니다\n3. 다시 시도합니다',
+        ErrorCode.CHATGPT_UNAUTHORIZED,
+      )
+    }
+
     const data = await resp.json().catch(() => ({}))
+    console.debug('[GPT-WEB] session response', {
+      status: resp.status,
+      hasAccessToken: !!data.accessToken,
+      hasUser: !!data.user,
+    })
+
     if (!data.accessToken) {
-      throw new ChatError('There is no logged-in ChatGPT account in this browser.', ErrorCode.CHATGPT_UNAUTHORIZED)
+      throw new ChatError(
+        'No logged-in ChatGPT session found. Please open chatgpt.com and login, then retry.',
+        ErrorCode.CHATGPT_UNAUTHORIZED
+      )
     }
+    console.debug('[GPT-WEB] accessToken obtained')
     return data.accessToken
   }
 
-  private async requestBackendAPIWithToken(token: string, method: 'GET' | 'POST', path: string, data?: unknown) {
-    const base = this.baseHost || 'https://chat.openai.com'
+  private async requestBackendAPIWithToken(
+    token: string,
+    method: 'GET' | 'POST',
+    path: string,
+    data?: unknown,
+    extraHeaders?: Record<string, string>,
+  ) {
+    // ✅ ChatHub 방식: 최소한의 헤더만 사용
+    const base = this.baseHost || 'https://chatgpt.com'
+    const isSSE = path.startsWith('/conversation')
+    const isSentinel = path.startsWith('/sentinel')
+    console.debug('[GPT-WEB] backend request', { base, path, method, isSSE, isSentinel })
+    
     return this.fetch(`${base}/backend-api${path}`, {
       method,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        ...(isSSE ? { Accept: 'text/event-stream' } : {}),
+        'Authorization': `Bearer ${token}`,
+        ...(extraHeaders || {}),
       },
       body: data === undefined ? undefined : JSON.stringify(data),
     })
+  }
+
+  async getSentinel(token: string): Promise<{ requirementsToken?: string; proofToken?: string }> {
+    // 일부 계정/지역에서 대화 전에 Sentinel 토큰이 필요
+    let resp: Response
+    resp = await this.requestBackendAPIWithToken(token, 'POST', '/sentinel/chat-requirements', {})
+    console.debug('[GPT-WEB] sentinel status', resp.status)
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
+    let data: any = {}
+    try {
+      data = await resp.json()
+    } catch {}
+    // 다양한 응답 형태를 관용적으로 수용
+    const requirementsToken = data?.token || data?.sentinel_token || data?.requirementsToken
+    const proofToken = data?.proof_token || data?.proofToken
+    console.debug('[GPT-WEB] sentinel tokens', { reqTok: !!requirementsToken, proofTok: !!proofToken })
+    return { requirementsToken, proofToken }
   }
 
   async getModels(token: string): Promise<{ slug: string; title: string; description: string; max_tokens: number }[]> {
@@ -112,15 +177,8 @@ class ChatGPTClient {
     return fileId
   }
 
-  // Switch to proxy mode, or refresh the proxy tab
-  async fixAuthState() {
-    if (this.requester === proxyFetchRequester) {
-      await proxyFetchRequester.refreshProxyTab()
-    } else {
-      await proxyFetchRequester.getProxyTab()
-      this.switchRequester(proxyFetchRequester)
-    }
-  }
+  // Proxy-free variant: no-op
+  async fixAuthState(_forceProxy = false) {}
 }
 
 export const chatGPTClient = new ChatGPTClient()

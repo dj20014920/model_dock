@@ -1,6 +1,6 @@
 import Browser, { Runtime } from 'webextension-polyfill'
 import { CHATGPT_HOME_URL } from '~app/consts'
-import { proxyFetch } from '~services/proxy-fetch'
+import { backgroundFetch, proxyFetch } from '~services/proxy-fetch'
 import { RequestInitSubset } from '~types/messaging'
 
 export interface Requester {
@@ -37,7 +37,7 @@ class ProxyFetchRequester implements Requester {
       let resolved = false
       const listener = async function (message: any, sender: Runtime.MessageSender) {
         if (message.event === 'PROXY_TAB_READY' && sender.tab) {
-          console.debug('new proxy tab ready')
+          console.log('[GPT-PROXY] ✅ PROXY_TAB_READY signal received from tab', sender.tab.id)
           cleanup()
           resolved = true
           resolve(sender.tab!)
@@ -55,6 +55,7 @@ class ProxyFetchRequester implements Requester {
         try {
           const url = await Browser.tabs.sendMessage(tab.id!, 'url')
           if (typeof url === 'string' && ['https://chat.openai.com', 'https://chatgpt.com'].some(h => url.startsWith(h))) {
+            console.log('[GPT-PROXY] ✅ Content script responded, tab ready', tab.id)
             cleanup(); resolved = true; resolve(tab)
           }
         } catch {
@@ -62,22 +63,32 @@ class ProxyFetchRequester implements Requester {
         }
       }, 500)
       const timer = setTimeout(() => {
-        cleanup(); if (!resolved) reject(new Error('Timeout waiting for ChatGPT tab'))
-      }, 15 * 1000)
+        cleanup()
+        if (!resolved) {
+          console.error('[GPT-PROXY] ❌ Timeout waiting for ChatGPT tab (30s)')
+          reject(new Error('Timeout waiting for ChatGPT tab'))
+        }
+      }, 30 * 1000) // 15초 → 30초로 증가
       Browser.runtime.onMessage.addListener(listener)
     })
   }
 
   async createProxyTab() {
+    console.log('[GPT-PROXY] 🆕 Creating new pinned ChatGPT tab...')
     const readyPromise = this.waitForProxyTabReady()
-    Browser.tabs.create({ url: CHATGPT_HOME_URL, pinned: true })
+    await Browser.tabs.create({ url: CHATGPT_HOME_URL, pinned: true })
+    console.log('[GPT-PROXY] ⏳ Waiting for tab to be ready...')
     return readyPromise
   }
 
   async getProxyTab() {
+    console.log('[GPT-PROXY] 🔍 Looking for existing proxy tab...')
     let tab = await this.findExistingProxyTab()
     if (!tab) {
+      console.log('[GPT-PROXY] ❌ No existing tab found, creating new one')
       tab = await this.createProxyTab()
+    } else {
+      console.log('[GPT-PROXY] ✅ Found existing proxy tab:', tab.id)
     }
     return tab
   }
@@ -94,15 +105,95 @@ class ProxyFetchRequester implements Requester {
   }
 
   async fetch(url: string, options?: RequestInitSubset) {
+    console.log('[GPT-PROXY] 🚀 Fetching via proxy tab:', url.substring(0, 80))
     const tab = await this.getProxyTab()
+    console.log('[GPT-PROXY] 📡 Using tab:', tab.id)
+    
     const resp = await proxyFetch(tab.id!, url, options)
-    if (resp.status === 403) {
+    console.log('[GPT-PROXY] 📥 Response status:', resp.status, resp.statusText)
+    
+    // 499: Port disconnected (content script 문제)
+    if (resp.status === 499) {
+      console.warn('[GPT-PROXY] 💔 Port disconnected (499), refreshing tab and retrying...')
       await this.refreshProxyTab()
       return proxyFetch(tab.id!, url, options)
     }
+    
+    // 403: Cloudflare 차단
+    if (resp.status === 403) {
+      console.warn('[GPT-PROXY] 🔒 403 Cloudflare detected, refreshing tab...')
+      await this.refreshProxyTab()
+      return proxyFetch(tab.id!, url, options)
+    }
+    
     return resp
+  }
+}
+
+class BackgroundFetchRequester implements Requester {
+  async fetch(url: string, options?: RequestInitSubset) {
+    console.debug('[GPT-WEB][REQ] 🚀 backgroundFetch (ChatHub mode - no proxy fallback)', url.substring(0, 80))
+    
+    try {
+      const resp = await backgroundFetch(url, options)
+      console.debug('[GPT-WEB][REQ] ✅ backgroundFetch status', resp.status)
+      
+      // 403: Cloudflare 보안 체크 필요
+      if (resp.status === 403) {
+        const body = await resp.text().catch(() => '')
+        console.error('[GPT-WEB][REQ] ❌ 403 Forbidden - Cloudflare challenge required')
+        console.error('[GPT-WEB][REQ] 📄 Response preview:', body.substring(0, 200))
+        throw new Error('CHATGPT_CLOUDFLARE: Please complete Cloudflare challenge at chatgpt.com')
+      }
+      
+      // 401: 로그인 필요
+      if (resp.status === 401) {
+        const body = await resp.text().catch(() => '')
+        console.error('[GPT-WEB][REQ] ❌ 401 Unauthorized - Login required')
+        console.error('[GPT-WEB][REQ] 📄 Response preview:', body.substring(0, 200))
+        console.error('[GPT-WEB][REQ] 💡 Solution: Log in to chatgpt.com in your browser')
+        throw new Error('CHATGPT_UNAUTHORIZED: Please log in to chatgpt.com')
+      }
+      
+      // 429: Rate limit
+      if (resp.status === 429) {
+        const body = await resp.text().catch(() => '')
+        console.error('[GPT-WEB][REQ] ❌ 429 Too Many Requests - Rate limited')
+        console.error('[GPT-WEB][REQ] 📄 Response preview:', body.substring(0, 200))
+        console.error('[GPT-WEB][REQ] 💡 Solution: Wait a few minutes and try again')
+        throw new Error('CHATGPT_RATE_LIMIT: Too many requests, please wait')
+      }
+
+      // 기타 HTTP 에러
+      if (!resp.ok) {
+        const body = await resp.text().catch(() => '')
+        console.error('[GPT-WEB][REQ] ❌ HTTP Error:', resp.status, resp.statusText)
+        console.error('[GPT-WEB][REQ] 📄 Response preview:', body.substring(0, 200))
+        throw new Error(`ChatGPT API error (${resp.status}): ${resp.statusText}`)
+      }
+      
+      return resp
+    } catch (error) {
+      // 네트워크 에러 또는 위에서 throw한 에러
+      const errorMsg = error instanceof Error ? error.message : String(error)
+      
+      // 이미 처리한 에러는 그대로 throw
+      if (errorMsg.startsWith('CHATGPT_') || errorMsg.startsWith('ChatGPT API error')) {
+        throw error
+      }
+      
+      // 예상치 못한 네트워크 에러
+      console.error('[GPT-WEB][REQ] ❌ Network error:', errorMsg)
+      console.error('[GPT-WEB][REQ] 💡 Troubleshooting:')
+      console.error('[GPT-WEB][REQ]   1. Check your internet connection')
+      console.error('[GPT-WEB][REQ]   2. Make sure you are logged in to chatgpt.com')
+      console.error('[GPT-WEB][REQ]   3. Try refreshing the ChatGPT page')
+      console.error('[GPT-WEB][REQ]   4. Check if ChatGPT service is available')
+      throw new Error(`Network error: ${errorMsg}`)
+    }
   }
 }
 
 export const globalFetchRequester = new GlobalFetchRequester()
 export const proxyFetchRequester = new ProxyFetchRequester()
+export const backgroundFetchRequester = new BackgroundFetchRequester()

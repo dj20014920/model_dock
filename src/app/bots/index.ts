@@ -34,9 +34,12 @@ export type BotId =
   | 'deepseek'
 
 export function createBotInstance(botId: BotId) {
+  console.log('[BOT] 🤖 Creating bot instance:', botId)
   switch (botId) {
     case 'chatgpt':
-      return new ChatGPTBot()
+      const bot = new ChatGPTBot()
+      console.log('[BOT] ✅ ChatGPT bot created')
+      return bot
     case 'bing':
       return new BingWebBot()
     case 'bard':

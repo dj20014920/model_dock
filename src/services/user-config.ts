@@ -81,6 +81,11 @@ const userConfigWithDefaultValue = {
   chatgptWebappModelName: ChatGPTWebModel.Auto,
   // optional: override Webapp model slug from session list
   chatgptWebappCustomModel: '',
+  // Webapp 네트워크 실행 정책
+  // - alwaysProxy: 항상 Same-Origin(In‑Page) 프록시만 사용(기본: false → 배경 fetch 우선)
+  // - reuseOnly: 프록시 탭 자동 생성 금지(기본: false → 필요 시 자동 생성)
+  chatgptWebappAlwaysProxy: false,
+  chatgptWebappReuseOnly: false,
   chatgptPoeModelName: PoeGPTModel['GPT-3.5'],
   startupPage: ALL_IN_ONE_PAGE_ID,
   bingConversationStyle: BingConversationStyle.Balanced,

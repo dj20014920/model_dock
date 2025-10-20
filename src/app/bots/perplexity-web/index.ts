@@ -1,95 +1,102 @@
-import WebSocketAsPromised from 'websocket-as-promised'
 import { requestHostPermissions } from '~app/utils/permissions'
+import { hybridFetch } from '~app/utils/hybrid-requester'
 import { ChatError, ErrorCode } from '~utils/errors'
 import { AbstractBot, SendMessageParams } from '../abstract-bot'
-import { createSession } from './api'
+import { createPerplexityRequest, parsePerplexitySSE } from './api'
 
-interface ConversationContext {
-  wsp: WebSocketAsPromised
-}
-
+/**
+ * Perplexity REST API 기반 봇
+ * SSE(Server-Sent Events)를 통해 스트리밍 응답 처리
+ * hybridFetch를 사용하여 쿠키 자동 처리
+ */
 export class PerplexityLabsBot extends AbstractBot {
-  private conversationContext?: ConversationContext
-
   constructor(public model: string) {
     super()
   }
 
-  private buildMessage(prompt: string) {
-    const params = [
-      'perplexity_playground',
-      {
-        version: '2.1',
-        source: 'default',
-        model: this.model,
-        messages: [{ role: 'user', content: prompt, priority: 0 }],
-      },
-    ]
-    return `42${JSON.stringify(params)}`
-  }
-
-  private async setupWebsocket(sessionId: string): Promise<WebSocketAsPromised> {
-    const wsp = new WebSocketAsPromised(
-      `wss://labs-api.perplexity.ai/socket.io/?EIO=4&transport=websocket&sid=${sessionId}`,
-    )
-    return new Promise((resolve, reject) => {
-      wsp.onOpen.addListener(() => {
-        wsp.send('2probe')
-        wsp.send('5')
-      })
-      wsp.onMessage.addListener((data: string) => {
-        if (data === '2') {
-          wsp.send('3')
-        } else if (data === '6') {
-          resolve(wsp)
-        }
-      })
-      wsp.open().catch(reject)
-    })
-  }
-
   async doSendMessage(params: SendMessageParams) {
-    if (!(await requestHostPermissions(['https://*.perplexity.ai/', 'wss://*.perplexity.ai/']))) {
+    if (!(await requestHostPermissions(['https://*.perplexity.ai/']))) {
       throw new ChatError('Missing perplexity.ai permission', ErrorCode.MISSING_HOST_PERMISSION)
     }
 
-    if (!this.conversationContext) {
-      const sessionId = await createSession()
-      const wsp = await this.setupWebsocket(sessionId)
-      this.conversationContext = { wsp }
-    }
+    try {
+      // hybridFetch를 사용하여 쿠키 자동 포함
+      const response = await createPerplexityRequest(
+        params.prompt,
+        (url, init) => hybridFetch(url, init, {
+          homeUrl: 'https://www.perplexity.ai',
+          hostStartsWith: 'https://www.perplexity.ai',
+        }),
+        params.signal,
+      )
 
-    const { wsp } = this.conversationContext
+      let fullAnswer = ''
+      let isCompleted = false
 
-    const listener = (data: string) => {
-      console.debug('pplx ws data', data)
-      if (!data.startsWith('42')) {
-        return
-      }
-      const payload = JSON.parse(data.slice(2))
-      if (payload[0] !== 'pplx-70b-online_query_progress') {
-        return
-      }
-      const chunk = payload[1]
-      if (chunk.output) {
-        params.onEvent({ type: 'UPDATE_ANSWER', data: { text: chunk.output } })
-      }
-      if (chunk.status === 'completed') {
-        wsp.onMessage.removeListener(listener)
+      await parsePerplexitySSE(
+        response,
+        (data) => {
+          console.debug('perplexity sse data', data)
+          
+          try {
+            // markdown_block에서 답변 추출
+            if (data.blocks && Array.isArray(data.blocks)) {
+              for (const block of data.blocks) {
+                if (block.markdown_block && block.markdown_block.answer) {
+                  // pplx:// 링크 제거 (번역 링크 등)
+                  const cleanAnswer = block.markdown_block.answer.replace(/\[([^\]]+)\]\(pplx:\/\/[^)]+\)/g, '$1')
+                  if (cleanAnswer !== fullAnswer) {
+                    fullAnswer = cleanAnswer
+                    params.onEvent({ type: 'UPDATE_ANSWER', data: { text: fullAnswer } })
+                  }
+                }
+              }
+            }
+
+            // 최종 메시지 확인
+            if (data.final_sse_message === true || data.status === 'COMPLETED') {
+              if (!isCompleted) {
+                isCompleted = true
+              }
+            }
+
+            // 에러 상태 체크
+            if (data.status === 'FAILED') {
+              throw new ChatError('Perplexity request failed', ErrorCode.UNKOWN_ERROR)
+            }
+          } catch (err) {
+            if (err instanceof ChatError) {
+              throw err
+            }
+            console.debug('Failed to process Perplexity message:', err)
+          }
+        },
+        () => {
+          // 완료 콜백
+          if (!isCompleted) {
+            params.onEvent({ type: 'DONE' })
+          }
+        }
+      )
+
+      // 스트림 완료 후 아직 완료 이벤트가 없었다면 전송
+      if (!isCompleted) {
         params.onEvent({ type: 'DONE' })
       }
-      if (chunk.status === 'failed') {
-        wsp.onMessage.removeListener(listener)
-        params.onEvent({ type: 'ERROR', error: new ChatError('failed', ErrorCode.UNKOWN_ERROR) })
-      }
+    } catch (error) {
+      console.error('Perplexity error:', error)
+      params.onEvent({
+        type: 'ERROR',
+        error: error instanceof ChatError ? error : new ChatError(
+          error instanceof Error ? error.message : 'Unknown error',
+          ErrorCode.UNKOWN_ERROR
+        ),
+      })
     }
-
-    wsp.onMessage.addListener(listener)
-    wsp.send(this.buildMessage(params.prompt))
   }
 
   resetConversation() {
-    this.conversationContext = undefined
+    // REST API는 세션 상태를 유지하지 않으므로 특별한 리셋 불필요
   }
 
   get name() {

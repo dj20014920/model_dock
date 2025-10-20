@@ -23,7 +23,8 @@ export default defineConfig(({ mode }) => {
       },
     },
     esbuild: {
-      drop: mode === 'production' ? ['console', 'debugger'] : [],
+      // 디버깅을 위해 console 로그 유지, debugger만 제거
+      drop: mode === 'production' ? ['debugger'] : [],
     },
     server: {
       strictPort: true,

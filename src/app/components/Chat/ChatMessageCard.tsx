@@ -1,6 +1,5 @@
 import { cx } from '~/utils'
 import { FC, memo, useEffect, useMemo, useState } from 'react'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { IoCheckmarkSharp, IoCopyOutline } from 'react-icons/io5'
 import { BeatLoader } from 'react-spinners'
 import { ChatMessageModel } from '~/types'
@@ -31,6 +30,25 @@ const ChatMessageCard: FC<Props> = ({ message, className }) => {
     }
   }, [message.error, message.text])
 
+  async function onCopy() {
+    try {
+      if (!copyText) return
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(copyText)
+      } else {
+        const ta = document.createElement('textarea')
+        ta.value = copyText
+        ta.style.position = 'fixed'
+        ta.style.opacity = '0'
+        document.body.appendChild(ta)
+        ta.select()
+        document.execCommand('copy')
+        document.body.removeChild(ta)
+      }
+      setCopied(true)
+    } catch {}
+  }
+
   useEffect(() => {
     if (copied) {
       setTimeout(() => setCopied(false), 1000)
@@ -54,9 +72,9 @@ const ChatMessageCard: FC<Props> = ({ message, className }) => {
         {!!message.error && <ErrorAction error={message.error} />}
       </div>
       {!!copyText && (
-        <CopyToClipboard text={copyText} onCopy={() => setCopied(true)}>
+        <button onClick={onCopy} aria-label="Copy message" title="Copy" className="bg-transparent border-0 p-0">
           {copied ? <IoCheckmarkSharp className={COPY_ICON_CLASS} /> : <IoCopyOutline className={COPY_ICON_CLASS} />}
-        </CopyToClipboard>
+        </button>
       )}
     </div>
   )

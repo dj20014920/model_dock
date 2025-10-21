@@ -220,7 +220,7 @@ const SixBotChatPanel = () => {
 const ImageInputPanel = () => {
   const chat1 = useChat('chatgpt')
   const chat2 = useChat('bing')
-  const chat3 = useChat('bard')
+  const chat3 = useChat('grok')
   const chats = useMemo(() => [chat1, chat2, chat3], [chat1, chat2, chat3])
   return <GeneralChatPanel chats={chats} supportImageInput={true} />
 }

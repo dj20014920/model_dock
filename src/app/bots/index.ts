@@ -1,11 +1,10 @@
 import { BaichuanWebBot } from './baichuan'
-import { BardBot } from './bard'
 import { BingWebBot } from './bing'
 import { ChatGPTBot } from './chatgpt'
 import { ClaudeBot } from './claude'
 import { GeminiBot } from './gemini'
 import { DeepSeekBot } from './deepseek'
-import { GrokWebBot } from './grok'
+import { GrokBot } from './grok'
 import { LMSYSBot } from './lmsys'
 import { PerplexityBot } from './perplexity'
 import { PiBot } from './pi'
@@ -15,7 +14,7 @@ import { XunfeiBot } from './xunfei'
 export type BotId =
   | 'chatgpt'
   | 'bing'
-  | 'bard'
+  | 'grok'
   | 'claude'
   | 'perplexity'
   | 'xunfei'
@@ -29,7 +28,6 @@ export type BotId =
   | 'qianwen'
   | 'baichuan'
   | 'yi'
-  | 'grok'
   | 'gemini'
   | 'deepseek'
 
@@ -42,8 +40,8 @@ export function createBotInstance(botId: BotId) {
       return bot
     case 'bing':
       return new BingWebBot()
-    case 'bard':
-      return new BardBot()
+    case 'grok':
+      return new GrokBot()
     case 'claude':
       return new ClaudeBot()
     case 'xunfei':
@@ -70,8 +68,6 @@ export function createBotInstance(botId: BotId) {
       return new BaichuanWebBot()
     case 'perplexity':
       return new PerplexityBot()
-    case 'grok':
-      return new GrokWebBot()
     case 'gemini':
       return new GeminiBot()
     case 'deepseek':

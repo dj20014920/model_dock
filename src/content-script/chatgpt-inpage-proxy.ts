@@ -80,6 +80,27 @@ async function main() {
     if (message === 'url') {
       return location.href
     }
+    if (message === 'read-oai-did') {
+      try {
+        const match = document.cookie.match(/(?:^|; )oai-did=([^;]+)/)
+        return match ? decodeURIComponent(match[1]) : undefined
+      } catch {
+        return undefined
+      }
+    }
+    if (message && typeof message === 'object' && message.type === 'read-cookie' && message.name) {
+      try {
+        const re = new RegExp(`(?:^|; )${String(message.name).replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}=([^;]+)`) // escape name
+        const m = document.cookie.match(re)
+        return m ? decodeURIComponent(m[1]) : undefined
+      } catch {
+        return undefined
+      }
+    }
+    if (message && typeof message === 'object' && message.type === 'TURNSTILE_SOLVE') {
+      const dx: string | undefined = (message && (message as any).dx) || undefined
+      return await solveTurnstileViaInpage(dx)
+    }
   })
   
   // PROXY_TAB_READY 신호 전송 함수 (재시도 로직 포함)
@@ -165,3 +186,40 @@ setupProxyExecutor()
 main().catch((error) => {
   console.error('[GPT-PROXY] ❌ Main initialization failed:', error)
 })
+
+// -------- Turnstile in-page solver ---------
+async function solveTurnstileViaInpage(dx?: string): Promise<string | undefined> {
+  const requestId = `${Date.now()}_${Math.random().toString(36).slice(2)}`
+  return new Promise((resolve) => {
+    let done = false
+    const onMsg = (ev: MessageEvent) => {
+      const data: any = ev.data
+      if (!data || data.type !== 'INPAGE_TURNSTILE_SOLVE_RESULT' || data.requestId !== requestId) return
+      try { window.removeEventListener('message', onMsg as any) } catch {}
+      if (!done) {
+        done = true
+        if (data && typeof data.token === 'string' && data.token) {
+          resolve(data.token)
+        } else {
+          resolve(undefined)
+        }
+      }
+    }
+    window.addEventListener('message', onMsg as any)
+    // fire request to page bridge
+    try {
+      window.postMessage({ type: 'INPAGE_TURNSTILE_SOLVE', requestId, dx: dx || null }, location.origin)
+    } catch {
+      resolve(undefined)
+      return
+    }
+    // timeout
+    setTimeout(() => {
+      if (!done) {
+        try { window.removeEventListener('message', onMsg as any) } catch {}
+        done = true
+        resolve(undefined)
+      }
+    }, 8000)
+  })
+}

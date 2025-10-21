@@ -69,6 +69,18 @@ export enum DeepSeekMode {
   API = 'api',
 }
 
+export enum GrokMode {
+  Webapp = 'webapp',
+  API = 'api',
+}
+
+export enum GrokAPIModel {
+  'grok-beta' = 'grok-beta',
+  'grok-2-latest' = 'grok-2-latest',
+  'grok-3-latest' = 'grok-3-latest',
+  'grok-4-latest' = 'grok-4-latest',
+}
+
 const userConfigWithDefaultValue = {
   openaiApiKey: '',
   openaiApiHost: 'https://api.openai.com',
@@ -82,10 +94,18 @@ const userConfigWithDefaultValue = {
   // optional: override Webapp model slug from session list
   chatgptWebappCustomModel: '',
   // Webapp 네트워크 실행 정책
-  // - alwaysProxy: 항상 Same-Origin(In‑Page) 프록시만 사용(기본: false → 배경 fetch 우선)
+  // - alwaysProxy: 항상 Same-Origin(In‑Page) 프록시만 사용(기본: false → background fetch 사용)
   // - reuseOnly: 프록시 탭 자동 생성 금지(기본: false → 필요 시 자동 생성)
-  chatgptWebappAlwaysProxy: false,
+  chatgptWebappAlwaysProxy: false, // Background fetch 기본, 필요 시 same-origin 강제
   chatgptWebappReuseOnly: false,
+  // Webapp 요청 헤더 구성: 'minimal' | 'browserlike'
+  // - minimal: ChatHub 스타일(쿠키 기반 + 최소 헤더)
+  // - browserlike: 브라우저스러운 헤더 보강
+  chatgptWebappHeaderMode: 'minimal' as 'minimal' | 'browserlike',
+  // Webapp 인증: 쿠키만 사용(Authorization Bearer 제거)
+  chatgptWebappCookieOnly: true,
+  // Turnstile이 요구되면 기본적으로 중단하고 사용자 안내(403 회피)
+  chatgptWebappForceWhenTurnstile: false,
   chatgptPoeModelName: PoeGPTModel['GPT-3.5'],
   startupPage: ALL_IN_ONE_PAGE_ID,
   bingConversationStyle: BingConversationStyle.Balanced,
@@ -126,6 +146,14 @@ const userConfigWithDefaultValue = {
   deepseekApiModel: 'deepseek-chat',
   deepseekWebappCustomModel: '',
   geminiWebappCustomModel: '',
+  // Grok (xAI API)
+  grokMode: GrokMode.Webapp,
+  grokApiKey: '',
+  grokApiModel: GrokAPIModel['grok-beta'],
+  grokApiCustomModel: '',
+  // Optional override for Grok Web (twitter.com) Authorization header.
+  // Leave empty to use the built-in default web bearer.
+  grokWebAuthorization: '',
 }
 
 export type UserConfig = typeof userConfigWithDefaultValue
@@ -155,6 +183,14 @@ export async function getUserConfig(): Promise<UserConfig> {
   ) {
     result.claudeApiModel = ClaudeAPIModel['claude-2']
   }
+  
+  // Migration: Add 'grok' to enabledBots if it's missing
+  if (result.enabledBots && Array.isArray(result.enabledBots) && !result.enabledBots.includes('grok')) {
+    result.enabledBots = [...result.enabledBots, 'grok']
+    // Persist the update immediately
+    await Browser.storage.sync.set({ enabledBots: result.enabledBots })
+  }
+  
   return defaults(result, userConfigWithDefaultValue)
 }
 

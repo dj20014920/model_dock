@@ -1,6 +1,5 @@
 import claudeLogo from '~/assets/logos/anthropic.png'
 import baichuanLogo from '~/assets/logos/baichuan.png'
-import bardLogo from '~/assets/logos/bard.svg'
 import bingLogo from '~/assets/logos/bing.svg'
 import chatglmLogo from '~/assets/logos/chatglm.svg'
 import chatgptLogo from '~/assets/logos/chatgpt.svg'
@@ -28,9 +27,9 @@ export const CHATBOTS: Record<BotId, { name: string; avatar: string }> = {
     name: 'Claude',
     avatar: claudeLogo,
   },
-  bard: {
-    name: 'Bard',
-    avatar: bardLogo,
+  grok: {
+    name: 'Grok',
+    avatar: grokLogo,
   },
   bing: {
     name: 'Bing',
@@ -63,10 +62,6 @@ export const CHATBOTS: Record<BotId, { name: string; avatar: string }> = {
   falcon: {
     name: 'Falcon',
     avatar: falconLogo,
-  },
-  grok: {
-    name: 'Grok',
-    avatar: grokLogo,
   },
   pi: {
     name: 'Pi',

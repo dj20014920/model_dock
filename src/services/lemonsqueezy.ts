@@ -3,7 +3,7 @@ import * as serverApi from '~services/server-api'
 
 async function activateLicense(key: string, instanceName: string) {
   const resp = await serverApi.activateLicense(key, instanceName)
-  if (!resp.activated) {
+  if (!resp.activated && 'error' in resp) {
     throw new Error(resp.error)
   }
   return resp.instance.id

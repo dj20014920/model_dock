@@ -23,6 +23,7 @@ import PerplexityAPISettings from '~app/components/Settings/PerplexityAPISetting
 import GeminiWebappSettings from '~app/components/Settings/GeminiWebappSettings'
 import DeepSeekWebappSettings from '~app/components/Settings/DeepSeekWebappSettings'
 import DeepSeekAPISettings from '~app/components/Settings/DeepSeekAPISettings'
+import GrokAPISettings from '~app/components/Settings/GrokAPISettings'
 import ShortcutPanel from '~app/components/Settings/ShortcutPanel'
 import { ALL_IN_ONE_PAGE_ID, CHATBOTS } from '~app/consts'
 import RiskConsentModal from '~app/components/Modals/RiskConsentModal'
@@ -33,6 +34,7 @@ import {
   PerplexityMode,
   GeminiMode,
   DeepSeekMode,
+  GrokMode,
   UserConfig,
   getUserConfig,
   updateUserConfig,
@@ -279,6 +281,16 @@ function SettingPage() {
               <DeepSeekAPISettings userConfig={userConfig} updateConfigValue={updateConfigValue} />
             ) : (
               <DeepSeekWebappSettings userConfig={userConfig} updateConfigValue={updateConfigValue} />
+            )}
+          </ChatBotSettingPanel>
+          <ChatBotSettingPanel title="Grok (xAI)">
+            <RadioGroup
+              options={Object.entries(GrokMode).map(([k, v]) => ({ label: `${k} ${t('Mode')}`, value: v }))}
+              value={(userConfig as any).grokMode || 'webapp'}
+              onChange={(v) => updateConfigValue({ grokMode: v as any })}
+            />
+            {(userConfig as any).grokMode === 'api' && (
+              <GrokAPISettings userConfig={userConfig} updateConfigValue={updateConfigValue} />
             )}
           </ChatBotSettingPanel>
         </div>

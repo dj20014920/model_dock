@@ -25,11 +25,21 @@ const ChatGPWebSettings: FC<Props> = ({ userConfig, updateConfigValue }) => {
           size="small"
           onClick={async () => {
             try {
-              await requestHostPermission('https://*.openai.com/')
-            } catch (e) {
-              console.error(e)
+              // Ensure both domains are granted for later same-origin usage
+              try { await requestHostPermission('https://*.openai.com/') } catch {}
+              try { await requestHostPermission('https://chatgpt.com/*') } catch {}
+
+              // Prefer pinned+active so 사용자가 즉시 보도록 함
+              await Browser.tabs.create({ url: CHATGPT_HOME_URL, pinned: true, active: true })
+            } catch (e1) {
+              console.error('[SETTINGS] tabs.create failed, fallback to chrome API/window.open', e1)
+              try {
+                // @ts-ignore chrome global fallback
+                await chrome.tabs.create({ url: CHATGPT_HOME_URL, pinned: true, active: true })
+              } catch (e2) {
+                try { window.open(CHATGPT_HOME_URL, '_blank') } catch {}
+              }
             }
-            await Browser.tabs.create({ url: CHATGPT_HOME_URL, pinned: true })
           }}
         />
         <span className="text-xs text-secondary-text">

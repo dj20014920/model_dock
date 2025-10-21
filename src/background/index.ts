@@ -90,9 +90,69 @@ Browser.runtime.onConnect.addListener((port) => {
     controller = new AbortController()
     const { url, options } = msg as { url: string; options?: RequestInit }
     try {
+      // 헤더 구성: 모드에 따라 최소/브라우저스러운 헤더 적용
+      const headers = new Headers(options?.headers || {})
+      let headerMode: 'minimal' | 'browserlike' = 'browserlike'
+      try {
+        const cfg = await getUserConfig()
+        headerMode = (cfg as any).chatgptWebappHeaderMode || 'browserlike'
+      } catch {}
+      
+      // 필수 헤더: 실제 브라우저처럼 보이게
+      if (headerMode === 'browserlike') {
+        if (!headers.has('User-Agent')) {
+          try { headers.set('User-Agent', navigator.userAgent) } catch {}
+        }
+        if (!headers.has('Accept')) {
+          // SSE 요청인 경우 text/event-stream, 일반 요청은 JSON
+          if (url.includes('/conversation')) {
+            headers.set('Accept', 'text/event-stream')
+          } else {
+            headers.set('Accept', 'application/json, text/plain, */*')
+          }
+        }
+        if (!headers.has('Accept-Language')) {
+          headers.set('Accept-Language', navigator.language || 'en-US,en;q=0.9')
+        }
+        if (!headers.has('Accept-Encoding')) {
+          headers.set('Accept-Encoding', 'gzip, deflate, br')
+        }
+        if (!headers.has('Origin')) {
+          headers.set('Origin', 'https://chatgpt.com')
+        }
+        if (!headers.has('Referer')) {
+          headers.set('Referer', 'https://chatgpt.com/')
+        }
+        if (!headers.has('Sec-Fetch-Dest')) {
+          headers.set('Sec-Fetch-Dest', 'empty')
+        }
+        if (!headers.has('Sec-Fetch-Mode')) {
+          headers.set('Sec-Fetch-Mode', 'cors')
+        }
+        if (!headers.has('Sec-Fetch-Site')) {
+          headers.set('Sec-Fetch-Site', 'same-origin')
+        }
+        // UA-CH client hints (best-effort)
+        try {
+          const uaData: any = (navigator as any).userAgentData
+          if (uaData && Array.isArray(uaData.brands)) {
+            const brands = uaData.brands.map((b: any) => `"${b.brand}";v="${b.version}"`).join(', ')
+            if (!headers.has('Sec-CH-UA')) headers.set('Sec-CH-UA', brands)
+          }
+          if (uaData && typeof uaData.mobile === 'boolean' && !headers.has('Sec-CH-UA-Mobile')) {
+            headers.set('Sec-CH-UA-Mobile', uaData.mobile ? '?1' : '?0')
+          }
+          if (uaData && uaData.platform && !headers.has('Sec-CH-UA-Platform')) {
+            headers.set('Sec-CH-UA-Platform', `"${uaData.platform}"`)
+          }
+        } catch {}
+      }
+
+      
       const resp = await fetch(url, {
         ...(options || {}),
-        credentials: 'include',
+        headers,
+        credentials: 'include', // ✅ 쿠키 포함 필수
         signal: controller.signal,
       })
       port.postMessage({

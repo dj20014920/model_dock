@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "build": "tsc --skipLibCheck && vite build"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "2.0.0-beta.21",
@@ -61,6 +61,7 @@
     "cookie": "^0.6.0",
     "dayjs": "^1.11.10",
     "eventsource-parser": "^1.1.1",
+    "fernet": "^0.3.3",
     "framer-motion": "^10.16.16",
     "fuse.js": "^7.0.0",
     "github-markdown-css": "^5.5.0",

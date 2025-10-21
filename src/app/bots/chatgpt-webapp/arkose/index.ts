@@ -5,12 +5,12 @@ export async function getArkoseToken() {
   console.log('[ARKOSE] 🎫 Starting Arkose token acquisition...')
   
   try {
-    // 5초 타임아웃 설정
+    // 3초 타임아웃 설정 (background fetch에서는 enforcement 로드 안되므로 빠르게 스킵)
     const timeout = new Promise<undefined>((resolve) => {
       setTimeout(() => {
-        console.log('[ARKOSE] ⏰ Timeout - enforcement not ready in 5s')
+        console.log('[ARKOSE] ⏰ Timeout - enforcement not ready in 3s (expected in background mode)')
         resolve(undefined)
-      }, 5000)
+      }, 3000)
     })
     
     const tokenPromise = arkoseTokenGenerator.generate()

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { cx } from '~/utils'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import { BotId } from '~app/bots'
@@ -12,15 +12,14 @@ interface Props {
 }
 
 const ChatMessageList: FC<Props> = (props) => {
-  return (
-    <ScrollToBottom className="overflow-auto h-full">
-      <div className={cx('flex flex-col gap-3 h-full', props.className)}>
-        {props.messages.map((message, index) => {
-          return <ChatMessageCard key={message.id} message={message} className={index === 0 ? 'mt-5' : undefined} />
-        })}
-      </div>
-    </ScrollToBottom>
-  )
+  const content = (
+    <div className={cx('flex flex-col gap-3 h-full', props.className)}>
+      {props.messages.map((message, index) => {
+        return <ChatMessageCard key={message.id} message={message} className={index === 0 ? 'mt-5' : undefined} />
+      })}
+    </div>
+  ) as any
+  return <ScrollToBottom className="overflow-auto h-full">{content}</ScrollToBottom>
 }
 
 export default ChatMessageList

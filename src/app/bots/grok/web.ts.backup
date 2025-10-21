@@ -1,0 +1,369 @@
+import { FetchError, ofetch } from 'ofetch'
+import Browser from 'webextension-polyfill'
+import { requestHostPermission } from '~app/utils/permissions'
+import { ChatError, ErrorCode } from '~utils/errors'
+import { streamAsyncIterable } from '~utils/stream-async-iterable'
+import { AbstractBot, SendMessageParams } from '../abstract-bot'
+import { getUserConfig } from '~services/user-config'
+
+const DEFAULT_AUTHORIZATION =
+  'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs=1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA'
+
+// 재시도 설정
+const MAX_RETRIES = 3
+const RETRY_DELAY_MS = 1000
+const REQUEST_TIMEOUT_MS = 60000
+
+interface StreamMessage {
+  result: {
+    sender: string
+    message: string
+    query: string
+  }
+}
+
+interface ChatMessage {
+  sender: 1 | 2
+  message: string
+}
+
+interface ConversationContext {
+  conversationId: string
+  messages: ChatMessage[]
+  lastMessageTime: number
+}
+
+export class GrokWebBot extends AbstractBot {
+  private csrfToken?: string
+  private conversationContext?: ConversationContext
+  private requestCount = 0
+  private cachedAuth?: string
+
+  constructor() {
+    super()
+  }
+
+  /**
+   * 재시도 로직이 포함된 메시지 전송
+   */
+  async doSendMessage(params: SendMessageParams) {
+    console.log('[GROK-WEB] 🚀 Starting message send...')
+    
+    let lastError: Error | undefined
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        console.log(`[GROK-WEB] 🔄 Attempt ${attempt}/${MAX_RETRIES}`)
+        await this.doSendMessageInternal(params)
+        console.log('[GROK-WEB] ✅ Message sent successfully')
+        return
+      } catch (error) {
+        lastError = error as Error
+        console.error(`[GROK-WEB] ❌ Attempt ${attempt} failed:`, error)
+
+        // 재시도 불가능한 에러는 즉시 throw
+        if (error instanceof ChatError) {
+          if (
+            error.code === ErrorCode.MISSING_HOST_PERMISSION ||
+            error.code === ErrorCode.TWITTER_UNAUTHORIZED ||
+            error.code === ErrorCode.GROK_UNAVAILABLE
+          ) {
+            throw error
+          }
+        }
+
+        // 마지막 시도가 아니면 재시도
+        if (attempt < MAX_RETRIES) {
+          const delay = RETRY_DELAY_MS * attempt
+          console.log(`[GROK-WEB] ⏳ Retrying in ${delay}ms...`)
+          await new Promise((resolve) => setTimeout(resolve, delay))
+          
+          // CSRF 토큰 및 conversation 초기화하여 재시도
+          this.csrfToken = undefined
+          this.conversationContext = undefined
+        }
+      }
+    }
+
+    // 모든 재시도 실패
+    console.error('[GROK-WEB] ❌ All retries failed')
+    throw lastError || new ChatError('Failed to send message after retries', ErrorCode.UNKOWN_ERROR)
+  }
+
+  /**
+   * 실제 메시지 전송 로직
+   */
+  private async doSendMessageInternal(params: SendMessageParams) {
+    // 권한 확인
+    if (!(await requestHostPermission('https://*.twitter.com/'))) {
+      throw new ChatError('Missing twitter.com permission', ErrorCode.MISSING_HOST_PERMISSION)
+    }
+
+    // CSRF 토큰 확보
+    if (!this.csrfToken) {
+      console.log('[GROK-WEB] 🔑 Getting CSRF token...')
+      this.csrfToken = await this.readCsrfToken()
+      console.log('[GROK-WEB] ✅ CSRF token obtained')
+    }
+
+    // Conversation 초기화 또는 재사용
+    if (!this.conversationContext) {
+      console.log('[GROK-WEB] 💬 Creating new conversation...')
+      const conversationId = await this.getConversationId()
+      this.conversationContext = { 
+        conversationId, 
+        messages: [],
+        lastMessageTime: Date.now()
+      }
+      console.log('[GROK-WEB] ✅ Conversation created:', conversationId)
+    } else {
+      // 오래된 conversation은 새로 생성
+      const timeSinceLastMessage = Date.now() - this.conversationContext.lastMessageTime
+      if (timeSinceLastMessage > 30 * 60 * 1000) { // 30분 이상 경과
+        console.log('[GROK-WEB] ⏰ Conversation too old, creating new one...')
+        this.conversationContext = undefined
+        return this.doSendMessageInternal(params)
+      }
+      console.log('[GROK-WEB] ♻️ Reusing existing conversation')
+    }
+
+    // 메시지 추가
+    this.conversationContext.messages.push({ sender: 1, message: params.prompt })
+    this.conversationContext.lastMessageTime = Date.now()
+    this.requestCount++
+
+    console.log('[GROK-WEB] 📡 Sending request to Grok API...')
+    
+    // 타임아웃 설정
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+    
+    try {
+      const auth = await this.getAuthorizationValue()
+      const resp = await fetch('https://api.twitter.com/2/grok/add_response.json', {
+        method: 'POST',
+        headers: {
+          Authorization: auth,
+          'x-csrf-token': this.csrfToken!,
+        },
+        body: JSON.stringify({
+          conversationId: this.conversationContext.conversationId,
+          responses: this.conversationContext.messages,
+          systemPromptName: 'fun',
+        }),
+        signal: params.signal || controller.signal,
+      })
+
+      clearTimeout(timeoutId)
+
+      // 응답 상태 확인
+      if (!resp.ok) {
+        await this.handleErrorResponse(resp)
+      }
+
+      console.log('[GROK-WEB] ✅ Response received, parsing stream...')
+      await this.parseStreamResponse(resp, params)
+      
+    } catch (error) {
+      clearTimeout(timeoutId)
+      
+      if ((error as Error).name === 'AbortError') {
+        throw new ChatError('Request timeout', ErrorCode.NETWORK_ERROR)
+      }
+      throw error
+    }
+  }
+
+  /**
+   * 에러 응답 처리
+   */
+  private async handleErrorResponse(resp: Response) {
+    const statusText = await resp.text().catch(() => 'Unknown error')
+    console.error('[GROK-WEB] ❌ Error response:', resp.status, statusText)
+
+    switch (resp.status) {
+      case 401:
+        throw new ChatError(
+          'Grok requires an X (Twitter) account.\n\nℹ️ All X users get limited free Grok access.\n\nPlease log into X (Twitter) in this browser.',
+          ErrorCode.GROK_UNAVAILABLE
+        )
+      case 403:
+        // CSRF 토큰 갱신 후 재시도
+        console.log('[GROK-WEB] 🔄 CSRF mismatch, refreshing token...')
+        this.csrfToken = await this.readCsrfToken({ refresh: true })
+        throw new Error('CSRF token refreshed, retry needed')
+      case 429:
+        throw new ChatError(
+          'Daily Grok limit reached.\n\nℹ️ Free users have limited messages.\nPlease wait or upgrade to Premium+.',
+          ErrorCode.CONVERSATION_LIMIT
+        )
+      case 451:
+        throw new ChatError('Grok is not available in your region.', ErrorCode.GROK_UNAVAILABLE)
+      case 503:
+        throw new ChatError('Grok service is temporarily unavailable. Please try again later.', ErrorCode.NETWORK_ERROR)
+      default:
+        throw new Error(`${resp.status}: ${statusText}`)
+    }
+  }
+
+  /**
+   * 스트림 응답 파싱
+   */
+  private async parseStreamResponse(resp: Response, params: SendMessageParams) {
+    const decoder = new TextDecoder()
+    let result = ''
+    let buffer = '' // 불완전한 JSON 청크를 위한 버퍼
+
+    for await (const uint8Array of streamAsyncIterable(resp.body!)) {
+      const str = decoder.decode(uint8Array, { stream: true })
+      buffer += str
+      
+      const lines = buffer.split('\n')
+      buffer = lines.pop() || '' // 마지막 불완전한 줄 보관
+
+      for (const line of lines) {
+        if (!line.trim()) continue
+
+        try {
+          const payload: StreamMessage = JSON.parse(line)
+          
+          if (!payload.result) continue
+
+          // 쿼리 표시 (첫 응답)
+          if (!result && !payload.result.message && payload.result.query) {
+            params.onEvent({ type: 'UPDATE_ANSWER', data: { text: '_' + payload.result.query + '_' } })
+            continue
+          }
+
+          // 메시지 업데이트
+          const text = payload.result.message
+          if (text) {
+            // Twitter 카드 링크는 건너뛰기
+            if (text.startsWith('[link]')) {
+              console.debug('[GROK-WEB] 🔗 Skipping Twitter card link')
+              continue
+            }
+            
+            result += text
+            params.onEvent({ type: 'UPDATE_ANSWER', data: { text: result } })
+          }
+        } catch (parseError) {
+          console.warn('[GROK-WEB] ⚠️ Failed to parse stream line:', line, parseError)
+          // JSON 파싱 오류는 무시하고 계속 진행
+        }
+      }
+    }
+
+    // 응답을 conversation에 추가
+    this.conversationContext!.messages.push({ sender: 2, message: result })
+    this.conversationContext!.lastMessageTime = Date.now()
+    
+    console.log('[GROK-WEB] ✅ Stream parsing complete, chars:', result.length)
+    params.onEvent({ type: 'DONE' })
+  }
+
+  /**
+   * Conversation ID 획득
+   */
+  private async getConversationId(): Promise<string> {
+    console.log('[GROK-WEB] 🆔 Requesting conversation ID...')
+    const auth = await this.getAuthorizationValue()
+    try {
+      const resp = await ofetch('https://twitter.com/i/api/2/grok/conversation_id.json', {
+        headers: {
+          Authorization: auth,
+          'x-csrf-token': this.csrfToken!,
+        },
+        timeout: 10000, // 10초 타임아웃
+      })
+      
+      console.log('[GROK-WEB] ✅ Conversation ID obtained:', resp.conversationId)
+      return resp.conversationId
+    } catch (err) {
+      console.error('[GROK-WEB] ❌ Failed to get conversation ID:', err)
+      
+      if (err instanceof FetchError) {
+        if (err.status === 401) {
+          throw new ChatError(
+            'Grok requires an X (Twitter) account.\n\nℹ️ All X users get limited free Grok access daily.\n\nPlease ensure:\n1. You are logged into X (Twitter)\n2. Your account has Grok access enabled\n\nNote: Premium+ subscribers get priority access and higher limits.',
+            ErrorCode.GROK_UNAVAILABLE
+          )
+        }
+        if (err.status === 451) {
+          throw new ChatError(
+            'Grok is not available in your region.\n\nPlease check Grok availability in your country.',
+            ErrorCode.GROK_UNAVAILABLE
+          )
+        }
+        // CSRF & cookie mismatch - 자동 갱신 후 재시도
+        if (err.status === 403) {
+          console.log('[GROK-WEB] 🔄 CSRF token mismatch, refreshing...')
+          this.csrfToken = await this.readCsrfToken({ refresh: true })
+          return this.getConversationId()
+        }
+        if (err.status === 429) {
+          throw new ChatError(
+            'Daily Grok limit reached.\n\nℹ️ Free users: Limited daily messages\nℹ️ Premium+ users: Higher limits\n\nPlease wait until tomorrow or upgrade for more access.',
+            ErrorCode.CONVERSATION_LIMIT
+          )
+        }
+      }
+      throw err
+    }
+  }
+
+  /**
+   * Authorization 헤더 값 획득(환경설정 우선, 없으면 기본값)
+   */
+  private async getAuthorizationValue(): Promise<string> {
+    if (this.cachedAuth) return this.cachedAuth
+    try {
+      const cfg = await getUserConfig()
+      const override = (cfg as any).grokWebAuthorization
+      if (typeof override === 'string' && override.trim()) {
+        this.cachedAuth = override.trim()
+        console.debug('[GROK-WEB] Using custom Authorization value (config)')
+        return this.cachedAuth
+      }
+    } catch {}
+    this.cachedAuth = DEFAULT_AUTHORIZATION
+    return this.cachedAuth
+  }
+
+  /**
+   * CSRF 토큰 읽기
+   */
+  private async readCsrfToken({ refresh }: { refresh?: boolean } = {}): Promise<string> {
+    console.log(`[GROK-WEB] 🔑 Reading CSRF token (refresh: ${refresh})...`)
+    
+    try {
+      const token = await Browser.runtime.sendMessage({
+        type: 'read-twitter-csrf-token',
+        data: { refresh },
+        target: 'background',
+      })
+      
+      if (!token) {
+        throw new ChatError(
+          'No X (Twitter) account found.\n\nPlease:\n1. Log into X (Twitter) in this browser\n2. Ensure you have Grok access\n\nℹ️ All X users get free Grok access (with daily limits).',
+          ErrorCode.TWITTER_UNAUTHORIZED
+        )
+      }
+      
+      console.log('[GROK-WEB] ✅ CSRF token obtained:', token.substring(0, 8) + '...')
+      return token
+    } catch (error) {
+      console.error('[GROK-WEB] ❌ Failed to read CSRF token:', error)
+      throw error
+    }
+  }
+
+  resetConversation() {
+    console.log('[GROK-WEB] 🔄 Resetting conversation context')
+    this.conversationContext = undefined
+    this.requestCount = 0
+  }
+
+  get name() {
+    return 'Grok'
+  }
+}

@@ -238,8 +238,11 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
               try { port.onMessage.removeListener(onMessage) } catch {}
               try { port.disconnect() } catch {}
             } else {
-              const chunk = string2Uint8Array(message.value)
-              controller.enqueue(chunk)
+              // Narrowing for discriminated union { done: false; value: string }
+              if ('value' in message) {
+                const chunk = string2Uint8Array(message.value)
+                controller.enqueue(chunk)
+              }
             }
           }
         })

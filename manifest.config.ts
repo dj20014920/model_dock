@@ -6,7 +6,7 @@ export default defineManifest(async () => {
     name: '__MSG_appName__',
     description: '__MSG_appDesc__',
     default_locale: 'en',
-    version: '1.45.16',
+    version: '1.45.18',
     icons: {
       '16': 'src/assets/icon.png',
       '32': 'src/assets/icon.png',
@@ -31,6 +31,9 @@ export default defineManifest(async () => {
       'https://*.claude.ai/',
       'https://*.perplexity.ai/',
       'https://chat.deepseek.com/*',
+      'https://*.twitter.com/*',
+      'https://*.x.com/*',
+      'https://grok.com/*',
     ],
     optional_host_permissions: ['https://*/*', 'wss://*/*'],
     permissions: ['storage', 'unlimitedStorage', 'sidePanel', 'declarativeNetRequestWithHostAccess', 'scripting', 'tabs'],
@@ -43,6 +46,7 @@ export default defineManifest(async () => {
           'https://claude.ai/*',
           'https://gemini.google.com/*',
           'https://chat.deepseek.com/*',
+          'https://grok.com/*',
         ],
         js: ['src/content-script/chatgpt-inpage-proxy.ts'],
         run_at: 'document_start',
@@ -93,10 +97,29 @@ export default defineManifest(async () => {
     },
     web_accessible_resources: [
       {
-        // 404 에러 방지: 빌드 후 실제 경로는 js/inpage-fetch-bridge.js만 존재
+        // 페이지 주입 스크립트(브리지). 동적 URL을 끄고 정적 EXTID 경로로 고정시켜
+        // 하위 모듈이 상대 경로로 불러올 때 차단되지 않도록 한다.
+        // ✅ Turnstile 우회형 크롤링을 일반 사이트에도 재사용하기 위해 범위를 확대한다.
         resources: ['js/inpage-fetch-bridge.js'],
-        matches: ['https://chatgpt.com/*', 'https://chat.openai.com/*'],
-        use_dynamic_url: true,
+        // 기존: chatgpt 한정 → 변경: 일반 https 도메인 전역 허용
+        matches: ['https://*/*'],
+        use_dynamic_url: false,
+      },
+      {
+        // 브리지가 불러오는 모듈 번들들. 정적 경로로 노출 필요.
+        resources: [
+          'assets/browser-polyfill-*.js',
+          'assets/proxy-fetch-*.js',
+          'assets/chatgpt-inpage-proxy.ts-*.js',
+        ],
+        matches: [
+          'https://chatgpt.com/*',
+          'https://chat.openai.com/*',
+          'https://claude.ai/*',
+          'https://gemini.google.com/*',
+          'https://chat.deepseek.com/*',
+        ],
+        use_dynamic_url: false,
       },
     ],
   }

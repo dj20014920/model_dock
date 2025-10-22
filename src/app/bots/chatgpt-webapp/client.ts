@@ -39,139 +39,70 @@ class ChatGPTClient {
 
   async getAccessToken(): Promise<string> {
     console.log('[GPT-WEB] 🔑 getAccessToken() called')
-    const cfg = await getUserConfig().catch(() => ({} as any))
-    const trySession = async () => {
-      // chatgpt.com 우선 시도(최근 기본 호스트)
-      console.debug('[GPT-WEB] session try chatgpt.com')
-      let resp: Response
-      if ((cfg as any).chatgptWebappAlwaysProxy === true) {
-        // same-origin로 세션 확인(권한/탭 자동 생성은 downstream 경로에서 처리)
-        let tabId = await this.findExistingChatGPTTabId().catch(() => undefined)
-        if (!tabId) {
-          try { await Browser.tabs.create({ url: 'https://chatgpt.com', pinned: true, active: false }); await new Promise(r=>setTimeout(r,1000)) } catch {}
-          tabId = await this.findExistingChatGPTTabId().catch(() => undefined)
-        }
-        if (tabId) {
-          try {
-            // inpage-bridge는 기본적으로 credentials:'include'로 호출하므로 옵션 없이 호출
-            resp = await proxyFetch(tabId, 'https://chatgpt.com/api/auth/session')
-          } catch {
-            resp = await this.fetch('https://chatgpt.com/api/auth/session')
-          }
-        } else {
-          resp = await this.fetch('https://chatgpt.com/api/auth/session')
-        }
-      } else {
-        resp = await this.fetch('https://chatgpt.com/api/auth/session')
-      }
-      if (resp.ok) {
-        this.baseHost = 'https://chatgpt.com'
-        console.debug('[GPT-WEB] session ok @ chatgpt.com')
-        return resp
-      }
-      // 구 버전/지역에서 chat.openai.com이 유효할 수 있음 → 폴백
-      console.debug('[GPT-WEB] session try chat.openai.com')
-      resp = await this.fetch('https://chat.openai.com/api/auth/session')
-      if (resp.ok) {
-        this.baseHost = 'https://chat.openai.com'
-        console.debug('[GPT-WEB] session ok @ chat.openai.com')
-        return resp
-      }
-      return resp
+    // 동일출처(Main world) 경로만 허용: 이미 열린 chatgpt.com 탭이 필요
+    const tabId = await this.findExistingChatGPTTabId().catch(() => undefined)
+    if (!tabId) {
+      throw new ChatError(
+        'chatgpt.com 탭이 필요합니다.\n\n해결:\n1) 브라우저에서 chatgpt.com을 열어 로그인\n2) 페이지에서 1회 대화를 보낸 뒤 확장에서 다시 시도',
+        ErrorCode.CHATGPT_AUTH,
+      )
     }
-
-    const resp = await trySession()
-
+    const base = 'https://chatgpt.com'
+    let resp: Response
+    try {
+      resp = await proxyFetch(tabId, `${base}/api/auth/session`)
+    } catch (e) {
+      throw new ChatError('세션 확인 실패: chatgpt.com 탭을 새로고침 후 다시 시도하세요.', ErrorCode.NETWORK_ERROR)
+    }
     if (resp.status === 403) {
-      throw new ChatError(
-        'Cloudflare 보안 확인이 필요합니다.\n\n해결 방법:\n1. 브라우저에서 chatgpt.com을 직접 엽니다\n2. Cloudflare 챌린지를 완료합니다\n3. ChatGPT에 로그인합니다\n4. 5-10분 후 다시 시도합니다',
-        ErrorCode.CHATGPT_CLOUDFLARE,
-      )
+      throw new ChatError('Cloudflare 보안 확인 필요: chatgpt.com 탭에서 보안 검증 통과 후 재시도', ErrorCode.CHATGPT_CLOUDFLARE)
     }
-
     if (resp.status === 401) {
-      throw new ChatError(
-        'ChatGPT 로그인이 필요합니다.\n\n해결 방법:\n1. 브라우저에서 chatgpt.com을 엽니다\n2. ChatGPT 계정으로 로그인합니다\n3. 다시 시도합니다',
-        ErrorCode.CHATGPT_UNAUTHORIZED,
-      )
+      throw new ChatError('ChatGPT 로그인이 필요합니다. chatgpt.com에서 로그인 후 재시도', ErrorCode.CHATGPT_UNAUTHORIZED)
     }
-
     const data = await resp.json().catch(() => ({}))
-    console.debug('[GPT-WEB] session response', {
-      status: resp.status,
-      hasAccessToken: !!data.accessToken,
-      hasUser: !!data.user,
-    })
-
     if (!data.accessToken) {
-      throw new ChatError(
-        'No logged-in ChatGPT session found. Please open chatgpt.com and login, then retry.',
-        ErrorCode.CHATGPT_UNAUTHORIZED
-      )
+      throw new ChatError('로그인 세션이 없습니다. chatgpt.com에서 로그인 후 재시도', ErrorCode.CHATGPT_UNAUTHORIZED)
     }
+    this.baseHost = base
     console.debug('[GPT-WEB] accessToken obtained')
     return data.accessToken
   }
 
   private async requestBackendAPIWithToken(
-    token: string,
+    _token: string,
     method: 'GET' | 'POST',
     path: string,
     data?: unknown,
     extraHeaders?: Record<string, string>,
   ) {
-    // ✅ ChatHub 방식: 최소한의 헤더만 사용
+    // 동일출처(Main world) 경로만 허용: 이미 열린 chatgpt.com 탭 필요
+    const tabId = await this.findExistingChatGPTTabId().catch(() => undefined)
+    if (!tabId) {
+      throw new ChatError('chatgpt.com 탭이 필요합니다. 페이지를 열고 다시 시도하세요.', ErrorCode.CHATGPT_AUTH)
+    }
     const base = this.baseHost || 'https://chatgpt.com'
     const isSSE = path.startsWith('/conversation')
-    const isSentinel = path.startsWith('/sentinel')
-    const cfg = await getUserConfig().catch(() => ({} as any))
-    const headerMode: 'minimal' | 'browserlike' = (cfg as any).chatgptWebappHeaderMode || 'browserlike'
-    const cookieOnly = (cfg as any).chatgptWebappCookieOnly === true
-    console.debug('[GPT-WEB] backend request', { base, path, method, isSSE, isSentinel, headerMode, cookieOnly })
-    
-    // 공통 헤더: Sentinel/Conversation 모두에 디바이스/언어 헤더 포함 (HAR 패턴 모방)
     const deviceId = await this.getConsistentDeviceId()
-    const commonHeaders: Record<string, string> = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...(headerMode === 'browserlike' ? (isSSE ? { Accept: 'text/event-stream' } : { Accept: 'application/json' }) : {}),
-      ...(cookieOnly ? {} : { 'Authorization': `Bearer ${token}` }),
+      ...(isSSE ? { Accept: 'text/event-stream' } : { Accept: 'application/json' }),
       'oai-device-id': deviceId,
       'oai-language': navigator.language || 'en-US',
+      ...(extraHeaders || {}),
     }
-    
-    // 🔥 CRITICAL: Sentinel proof token을 헤더로 추가 (ChatHub HAR 패턴)
-    // conversation 요청 시에만 proof token 헤더 추가
-    if (isSSE && extraHeaders?.['openai-sentinel-proof-token']) {
-      commonHeaders['openai-sentinel-proof-token'] = extraHeaders['openai-sentinel-proof-token']
-    }
-    
-    // 🔥 CRITICAL: Sentinel requirements token을 헤더로 추가 (ChatHub HAR 패턴)
-    if (isSSE && extraHeaders?.['openai-sentinel-chat-requirements-token']) {
-      commonHeaders['openai-sentinel-chat-requirements-token'] = extraHeaders['openai-sentinel-chat-requirements-token']
-    }
-    
-    // extraHeaders 병합 (위의 특별 헤더 제외)
-    const filteredExtraHeaders = { ...extraHeaders }
-    delete filteredExtraHeaders['openai-sentinel-proof-token']
-    delete filteredExtraHeaders['openai-sentinel-chat-requirements-token']
-    Object.assign(commonHeaders, filteredExtraHeaders)
-
-    return this.fetch(`${base}/backend-api${path}`, {
-      method,
-      headers: commonHeaders,
-      body: data === undefined ? undefined : JSON.stringify(data),
-    })
+    const body = data === undefined ? undefined : JSON.stringify(data)
+    return proxyFetch(tabId, `${base}/backend-api${path}`, { method, headers, body })
   }
 
   async getSentinel(
-    token: string,
+    _token: string,
   ): Promise<{
     requirementsToken?: string
     proofToken?: string
     powProof?: string
     powRequired?: boolean
     turnstileRequired?: boolean
-    // for future offscreen Turnstile solver
     turnstileDx?: string
   }> {
     // 일부 계정/지역에서 대화 전에 Sentinel 토큰이 필요
@@ -185,118 +116,78 @@ class ChatGPTClient {
     
     // Sentinel 요청 시 proof data도 body에 포함
     let resp: Response
-    // Prefer same-origin path for Sentinel when possible to unify context (or when alwaysProxy enabled)
-    let existingTabId = await this.findExistingChatGPTTabId().catch(() => undefined)
+    // 동일출처(Main world) 필수: 탭 없으면 중단
+    const existingTabId = await this.findExistingChatGPTTabId().catch(() => undefined)
+    if (!existingTabId) {
+      throw new ChatError('chatgpt.com 탭이 필요합니다. 페이지를 열고 다시 시도하세요.', ErrorCode.CHATGPT_AUTH)
+    }
     try {
-      const cfg = await getUserConfig().catch(() => ({} as any))
-      if (!existingTabId && (cfg as any).chatgptWebappAlwaysProxy === true) {
-        await Browser.tabs.create({ url: 'https://chatgpt.com', pinned: true, active: false })
-        await new Promise((r) => setTimeout(r, 1000))
-        existingTabId = await this.findExistingChatGPTTabId().catch(() => undefined)
+      const base = this.baseHost || 'https://chatgpt.com'
+      const deviceId = await this.getConsistentDeviceId()
+      const url = `${base}/backend-api/sentinel/chat-requirements`
+      const headers: Record<string, string> = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'oai-device-id': deviceId,
+        'oai-language': navigator.language || 'en-US',
       }
-    } catch {}
-    if (existingTabId) {
-      try {
-        const base = this.baseHost || 'https://chatgpt.com'
-        const deviceId = await this.getConsistentDeviceId()
-        const url = `${base}/backend-api/sentinel/chat-requirements`
-        const headers: Record<string, string> = {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          'oai-device-id': deviceId,
-          'oai-language': navigator.language || 'en-US',
-        }
-        resp = await proxyFetch(existingTabId, url, { method: 'POST', headers, body: JSON.stringify({ p: proofToken }) })
-      } catch (e) {
-        resp = await this.requestBackendAPIWithToken(token, 'POST', '/sentinel/chat-requirements', { p: proofToken })
-      }
-    } else {
-      resp = await this.requestBackendAPIWithToken(token, 'POST', '/sentinel/chat-requirements', { p: proofToken })
+      resp = await proxyFetch(existingTabId, url, { method: 'POST', headers, body: JSON.stringify({ p: proofToken }) })
+    } catch (e) {
+      throw new ChatError('Sentinel 요청 실패(동일출처). chatgpt.com 탭을 새로고침 후 재시도', ErrorCode.NETWORK_ERROR)
     }
     console.log(`[GPT-WEB][SENTINEL] Response status: ${resp.status}`)
-    
+
     if (!resp.ok) {
       const errorText = await resp.text().catch(() => '')
       console.error(`[GPT-WEB][SENTINEL] ❌ Error ${resp.status}:`, errorText.substring(0, 300))
       throw new Error(`HTTP ${resp.status}`)
     }
-    
-    let data: any = {}
+
+    // 강건한 JSON 파싱(XSSI/HTML 방어) + 토큰 필수 게이트
+    const parseSentinelJson = async (r: Response) => {
+      const ctype = (r.headers?.get('content-type') || '').toLowerCase()
+      const raw = await r.text()
+      console.log('[GPT-WEB][SENTINEL] 📦 Raw response length:', raw.length)
+      if (!ctype.includes('application/json')) {
+        throw new Error('NON_JSON')
+      }
+      const cleaned = raw
+        .replace(/^\)\]\}',?\s*/, '')
+        .replace(/^for\s*\(\s*;;\s*\);\s*/, '')
+        .replace(/^\uFEFF/, '')
+      let json: any
+      try { json = JSON.parse(cleaned) } catch { throw new Error('BAD_JSON') }
+      const token = json?.token || json?.sentinel_token || json?.requirementsToken
+      if (!token) throw new Error('NO_REQ_TOKEN')
+      return json
+    }
+
+    let data: any
     try {
-      data = await resp.json()
-      // Log full response for debugging
+      data = await parseSentinelJson(resp)
+      console.log('[GPT-WEB][SENTINEL] ✅ JSON parsed successfully')
       console.log('[GPT-WEB][SENTINEL] 📦 Full response:', JSON.stringify(data, null, 2))
     } catch (err) {
-      console.error('[GPT-WEB][SENTINEL] Failed to parse JSON:', err)
+      console.error('[GPT-WEB][SENTINEL] ❌ Sentinel parse/token error:', (err as Error)?.message)
+      throw new ChatError(
+        'Sentinel 토큰을 획득하지 못했습니다.\n\n해결:\n1) chatgpt.com 탭에서 보안 확인을 통과\n2) 로그인 후 1회 대화 전송\n3) 확장에서 다시 시도',
+        ErrorCode.CHATGPT_CLOUDFLARE,
+      )
     }
     
     // 다양한 응답 형태를 관용적으로 수용
     const requirementsToken = data?.token || data?.sentinel_token || data?.requirementsToken
-    
-    const powRequired = data?.proofofwork?.required === true
-    const turnstileRequired = data?.turnstile?.required === true
-    
-    // 🔥 CRITICAL: POW 계산 필수 - Base64 proof와 별도로 POW 답안 생성
-    let powProof: string | undefined = undefined
-    
-    if (powRequired && data?.proofofwork?.seed && data?.proofofwork?.difficulty) {
-      console.log('[GPT-WEB][SENTINEL] 🔨 POW required - calculating proof...')
-      
-      try {
-        const { calculateProofOfWorkWithTimeout } = await import('~services/pow-calculator')
-        
-        const powResult = await calculateProofOfWorkWithTimeout(
-          data.proofofwork.seed,
-          data.proofofwork.difficulty,
-          proofToken, // Base64 브라우저 지문을 proof data로 사용
-          30000 // 30초 타임아웃
-        )
-        
-        powProof = powResult.proof
-        console.log('[GPT-WEB][SENTINEL] ✅ POW calculated successfully')
-        console.log(`[POW] Nonce: ${powResult.nonce}`)
-        console.log(`[POW] Hash: ${powResult.hash}`)
-        console.log(`[POW] Attempts: ${powResult.attempts}`)
-        console.log(`[POW] Time: ${powResult.timeMs}ms`)
-      } catch (err) {
-        console.error('[GPT-WEB][SENTINEL] ❌ POW calculation failed:', err)
-        console.warn('[GPT-WEB][SENTINEL] ⚠️ Continuing without POW - request will likely fail')
-      }
-    }
-    
-    // Log what we found
+
     console.log('[GPT-WEB][SENTINEL] ✅ Parsed response:', {
       hasReqToken: !!requirementsToken,
       reqTokenPreview: requirementsToken?.substring(0, 30) + '...',
       hasProofToken: !!proofToken,
       proofTokenPreview: proofToken?.substring(0, 30) + '...',
-      hasPowProof: !!powProof,
-      powProofPreview: powProof?.substring(0, 30) + '...',
-      powRequired,
-      powDifficulty: data?.proofofwork?.difficulty,
-      powSeed: data?.proofofwork?.seed,
-      turnstileRequired,
-      turnstileDx: data?.turnstile?.dx?.substring?.(0, 30) + '...'
     })
-    
-    // ⚠️ Log warnings if additional challenges are required
-    if (turnstileRequired) {
-      console.warn(
-        `[GPT-WEB][SENTINEL] ⚠️ Turnstile challenge required (dx available: ${!!data?.turnstile?.dx})`,
-      )
-    }
-    
-    // 🎯 2개의 proof 반환:
-    // 1. proofToken: Base64 브라우저 지문 (openai-sentinel-proof-token 헤더용)
-    // 2. powProof: POW 계산 결과 (body의 proof_token 필드용 또는 별도 헤더)
+
     return {
       requirementsToken,
       proofToken,
-      powProof,
-      powRequired,
-      turnstileRequired,
-      turnstileDx: data?.turnstile?.dx,
     }
   }
 
@@ -445,8 +336,38 @@ class ChatGPTClient {
     return fileId
   }
 
-  // Proxy-free variant: no-op
-  async fixAuthState(_forceProxy = false) {}
+  // 사용자 클릭에 의해 호출됨: chatgpt.com 탭 열기/포커스 + 세션 확인
+  async fixAuthState(): Promise<boolean> {
+    try {
+      const tabId = await this.findExistingChatGPTTabId().catch(() => undefined)
+      let targetTabId = tabId
+      if (!targetTabId) {
+        try {
+          const tab = await Browser.tabs.create({ url: 'https://chatgpt.com', active: true })
+          targetTabId = tab.id
+        } catch (e) {
+          console.error('[GPT-WEB] fixAuthState: failed to create tab', (e as Error)?.message)
+          return false
+        }
+      } else {
+        try { await Browser.tabs.update(targetTabId, { active: true }) } catch {}
+      }
+      // 초기화 대기
+      await new Promise((r) => setTimeout(r, 1200))
+      if (!targetTabId) return false
+      // 세션 확인 시도
+      try {
+        const resp = await proxyFetch(targetTabId, 'https://chatgpt.com/api/auth/session')
+        if (!resp.ok) return false
+        const data = await resp.json().catch(() => ({}))
+        return !!(data && (data.user || data.accessToken))
+      } catch (e) {
+        return false
+      }
+    } catch (e) {
+      return false
+    }
+  }
 }
 
 export const chatGPTClient = new ChatGPTClient()

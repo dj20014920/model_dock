@@ -19,19 +19,21 @@ const ChatGPTAuthErrorAction = () => {
 
   const fixChatGPT = useCallback(async () => {
     setFixing(true)
+    let ok = false
     try {
-      await chatGPTClient.fixAuthState()
+      ok = await chatGPTClient.fixAuthState()
     } catch (e) {
       console.error(e)
-      return
     } finally {
       setFixing(false)
     }
-    setFixed(true)
+    if (ok) {
+      setFixed(true)
+    }
   }, [])
 
   if (fixed) {
-    return <MessageBubble color="flat">Fixed, please retry chat</MessageBubble>
+    return <MessageBubble color="flat">Logged in. Please retry chat</MessageBubble>
   }
 
   return (
@@ -172,6 +174,13 @@ const ErrorAction: FC<{ error: ChatError }> = ({ error }) => {
           labs.perplexity.ai
         </a>{' '}
         and try again
+      </p>
+    )
+  }
+  if (error.code === ErrorCode.CLAUDE_WEB_RATE_LIMIT) {
+    return (
+      <p className="ml-2 text-secondary-text text-sm">
+        {error.message}
       </p>
     )
   }

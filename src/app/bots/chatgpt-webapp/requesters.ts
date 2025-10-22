@@ -83,21 +83,20 @@ class ProxyFetchRequester implements Requester {
 
   async getProxyTab() {
     console.log('[GPT-PROXY] 🔍 Looking for existing proxy tab...')
-    let tab = await this.findExistingProxyTab()
+    const tab = await this.findExistingProxyTab()
     if (!tab) {
-      console.log('[GPT-PROXY] ❌ No existing tab found, creating new one')
-      tab = await this.createProxyTab()
-    } else {
-      console.log('[GPT-PROXY] ✅ Found existing proxy tab:', tab.id)
+      console.log('[GPT-PROXY] 🚫 No existing tab; proxy tab creation is disabled')
+      throw new Error('NO_PROXY_TAB_AVAILABLE')
     }
+    console.log('[GPT-PROXY] ✅ Found existing proxy tab:', tab.id)
     return tab
   }
 
   async refreshProxyTab() {
     const tab = await this.findExistingProxyTab()
     if (!tab) {
-      await this.createProxyTab()
-      return
+      console.log('[GPT-PROXY] 🚫 No existing tab to refresh; proxy tab creation is disabled')
+      throw new Error('NO_PROXY_TAB_AVAILABLE')
     }
     const readyPromise = this.waitForProxyTabReady()
     Browser.tabs.reload(tab.id!)
@@ -125,7 +124,7 @@ class ProxyFetchRequester implements Requester {
       await this.refreshProxyTab()
       return proxyFetch(tab.id!, url, options)
     }
-    
+
     return resp
   }
 }

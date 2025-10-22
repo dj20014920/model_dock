@@ -11,9 +11,36 @@ const statusTextMap = new Map([
 ])
 
 export async function parseSSEResponse(resp: Response, onMessage: (message: string) => void) {
-  console.debug('[SSE] begin parse', { status: resp.status, ok: resp.ok, hasBody: !!resp.body })
+  console.log('[SSE] 🔄 begin parse', { status: resp.status, ok: resp.ok, hasBody: !!resp.body })
   if (!resp.ok) {
-    const error = await resp.json().catch(() => ({}))
+    const error = await resp.json().catch(() => ({} as any))
+    // Claude webapp rate limit → provide user-friendly message
+    try {
+      const errType = error?.error?.type || error?.type
+      if (resp.status === 429 && errType === 'rate_limit_error') {
+        let resetsAt: number | undefined
+        let windowHint: string | undefined
+        try {
+          const inner = JSON.parse(error?.error?.message || '{}')
+          resetsAt = typeof inner?.resetsAt === 'number' ? inner.resetsAt : undefined
+          if (inner?.windows && typeof inner.windows === 'object') {
+            // pick the window with exceeded_limit
+            for (const [k, v] of Object.entries(inner.windows as any)) {
+              if ((v as any)?.status === 'exceeded_limit') {
+                windowHint = k
+                break
+              }
+            }
+          }
+        } catch {}
+        const dateStr = resetsAt ? new Date(resetsAt * 1000).toLocaleString() : ''
+        const hint = windowHint ? `(${windowHint})` : ''
+        const msg = dateStr
+          ? `Claude 사용량 제한을 초과했습니다 ${hint}. 재시도 가능 시각: ${dateStr}`
+          : `Claude 사용량 제한을 초과했습니다 ${hint}. 잠시 후 다시 시도하세요.`
+        throw new ChatError(msg, ErrorCode.CLAUDE_WEB_RATE_LIMIT)
+      }
+    } catch {}
     if (!isEmpty(error)) {
       throw new Error(JSON.stringify(error))
     }
@@ -29,6 +56,7 @@ export async function parseSSEResponse(resp: Response, onMessage: (message: stri
   let sawDone = false
   const parser = createParser((event) => {
     if (event.type === 'event') {
+      console.log('[SSE] 📨 Event received:', { data: event.data.substring(0, 100) })
       try {
         if (event.data === '[DONE]') sawDone = true
         onMessage(event.data)
@@ -70,26 +98,34 @@ export async function parseSSEResponse(resp: Response, onMessage: (message: stri
   if (firstResult.done) {
     // 서버가 즉시 종료한 경우에도 상위로 완료 신호를 보낸다
     try { onMessage('[DONE]') } catch {}
-    console.debug('[SSE] stream ended immediately (first chunk done)')
+    console.log('[SSE] ⚠️ stream ended immediately (first chunk done)')
     return
   }
   firstChunk = firstResult.value
-  console.debug('[SSE] first chunk received', { bytes: firstChunk?.byteLength || 0 })
+  console.log('[SSE] ✅ first chunk received', { bytes: firstChunk?.byteLength || 0 })
   parser.feed(decoder.decode(firstChunk))
 
-  // 이후 나머지 스트림 처리
-  for await (const chunk of streamAsyncIterable(resp.body)) {
-    const str = decoder.decode(chunk)
-    // log small preview to avoid noisy console
-    try {
-      const preview = str.length > 120 ? str.slice(0, 120) + '…' : str
-      console.debug('[SSE] chunk', { len: str.length, preview })
-    } catch {}
-    parser.feed(str)
+  // 이후 나머지 스트림 처리 (이미 생성된 reader를 계속 사용)
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) {
+        break
+      }
+      const str = decoder.decode(value)
+      // log small preview to avoid noisy console
+      try {
+        const preview = str.length > 120 ? str.slice(0, 120) + '…' : str
+        console.log('[SSE] 📦 chunk', { len: str.length, preview })
+      } catch {}
+      parser.feed(str)
+    }
+  } finally {
+    reader.releaseLock()
   }
   // 스트림이 자연 종료되었고 [DONE] 이벤트를 못 받았다면 명시적으로 완료 신호 전달
   if (!sawDone) {
     try { onMessage('[DONE]') } catch {}
-    console.debug('[SSE] stream completed without explicit [DONE]')
+    console.log('[SSE] ⚠️ stream completed without explicit [DONE]')
   }
 }

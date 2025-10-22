@@ -7,10 +7,8 @@ import { getUserConfig } from '~services/user-config'
 import { ChatError, ErrorCode } from '~utils/errors'
 import { parseSSEResponse } from '~utils/sse'
 import { AbstractBot, SendMessageParams } from '../abstract-bot'
-import { getArkoseToken } from './arkose'
 import { chatGPTClient } from './client'
 import { proxyFetch } from '~services/proxy-fetch'
-import { proxyFetchRequester } from './requesters'
 import { requestHostPermissions } from '~app/utils/permissions'
 import { ImageContent, ResponseContent, ResponsePayload } from './types'
 
@@ -62,12 +60,26 @@ export class ChatGPTWebBot extends AbstractBot {
       const token = await chatGPTClient.getAccessToken()
       const models = await chatGPTClient.getModels(token).catch(() => [] as any[])
       const slugs: string[] = models?.map((m: any) => m.slug) || []
-      // Prefer newest if present; safe to include unknown entries as this filters by availability
+
+      console.log('[GPT-WEB] 🤖 availableModels', models)
+
+      // 🎯 우선순위 1: OpenAI의 'auto' 모델이 있으면 우선 선택 (GPT-4o, GPT-4o-mini 등을 자동 선택)
+      if (slugs.includes('auto')) {
+        console.log('[GPT-WEB] ✅ Using OpenAI auto model (intelligent routing)')
+        return 'auto'
+      }
+
+      // 🎯 우선순위 2: 최신 모델 우선 선택
       const priority = ['gpt-5', 'gpt-4.1', 'gpt-4o', 'gpt-4o-mini', 'o3-mini', 'gpt-4', 'gpt-3.5']
       for (const p of priority) {
-        if (slugs.includes(p)) return p
+        if (slugs.includes(p)) {
+          console.log(`[GPT-WEB] ✅ Selected model from priority: ${p}`)
+          return p
+        }
       }
-      // fallback to free tier default
+
+      // 🎯 폴백: 무료 티어 기본값
+      console.log('[GPT-WEB] ⚠️ No preferred model found, falling back to gpt-4o-mini')
       return 'gpt-4o-mini'
     }
     // Explicit picks
@@ -115,66 +127,30 @@ export class ChatGPTWebBot extends AbstractBot {
     await new Promise((r) => setTimeout(r, 150 + Math.floor(Math.random() * 250)))
     console.log('[GPT-WEB] 🛡️ Getting Sentinel tokens (chat-requirements)...')
     const sentinelTokens = await chatGPTClient.getSentinel(this.accessToken).catch((err) => {
-      console.warn('[GPT-WEB] ⚠️ Sentinel request failed (continuing):', err.message)
-      return { requirementsToken: undefined, proofToken: undefined, powProof: undefined, powRequired: false, turnstileRequired: false }
+      console.warn('[GPT-WEB] ⚠️ Sentinel request failed:', err.message)
+      return { requirementsToken: undefined, proofToken: undefined }
     })
     console.log('[GPT-WEB] ✅ Sentinel response:', { 
       hasReqToken: !!sentinelTokens.requirementsToken, 
       hasProofToken: !!sentinelTokens.proofToken,
-      hasPowProof: !!sentinelTokens.powProof,
-      powRequired: sentinelTokens.powRequired,
-      turnstileRequired: sentinelTokens.turnstileRequired
     })
-    
-    // Log additional challenges if present
-    if (sentinelTokens.powRequired && !sentinelTokens.powProof) {
-      console.warn('[GPT-WEB] ⚠️ Proof of Work required but calculation failed - request will likely fail')
-    } else if (sentinelTokens.powProof) {
-      console.log('[GPT-WEB] ✅ POW proof calculated successfully')
-    }
-    // 🔥 Turnstile 우회: cf_clearance 쿠키만으로 진행 (ChatHub 방식)
-    // Turnstile 토큰 생성이 실패하더라도 cf_clearance가 있으면 대부분 작동
-    let turnstileContext: { token?: string; tabId?: number; cfClearance?: string } = {}
-    if (sentinelTokens.turnstileRequired) {
-      console.log('[GPT-WEB] 🔐 Turnstile required - attempting to bypass with cf_clearance cookie')
-      const reuseOnly = true // 기존 탭만 사용 (새 탭 생성 방지)
-      turnstileContext = await this.prepareTurnstileProof((sentinelTokens as any).turnstileDx, { reuseOnly })
 
-      // Turnstile 토큰 생성 시도 (선택사항)
-      if (turnstileContext.token) {
-        console.log(
-          '[GPT-WEB] ✅ Turnstile token prepared automatically (preview):',
-          turnstileContext.token.substring(0, 12) + '...',
-        )
-      } else {
-        console.log('[GPT-WEB] ℹ️ Turnstile token not available - will rely on cf_clearance cookie')
-      }
+    // 📌 최소 정책: Sentinel token 없으면 종료, 있으면 진행
 
-      // cf_clearance 쿠키 확인
-      if (!turnstileContext.cfClearance) {
-        turnstileContext.cfClearance = await this.readCookieFromTab(turnstileContext.tabId, 'cf_clearance')
-      }
+    // 동일 출처 요청 준비
+    let turnstileContext: { tabId?: number } = {}
 
-      // 🔥 핵심 변경: cf_clearance가 있으면 Turnstile 토큰 없이도 진행
-      if (!turnstileContext.cfClearance) {
-        console.warn('[GPT-WEB] ⚠️ cf_clearance cookie not found - Cloudflare challenge required')
-        throw new ChatError(
-          'Cloudflare 보안 확인이 필요합니다.\n\n해결 방법:\n1) 브라우저에서 chatgpt.com을 여세요\n2) Cloudflare 챌린지를 완료하세요\n3) ChatGPT에 로그인하고 메시지를 1회 전송하세요\n4) 5-10분 후 다시 시도하세요',
-          ErrorCode.CHATGPT_CLOUDFLARE,
-        )
-      }
-
-      // cf_clearance 있으면 Turnstile 없어도 진행
-      if (!turnstileContext.token) {
-        console.log('[GPT-WEB] ✅ cf_clearance cookie found - proceeding without Turnstile token (ChatHub bypass)')
-      } else {
-        console.log('[GPT-WEB] ✅ Both Turnstile token and cf_clearance available - optimal security')
-      }
+    // 기존 탭이 있으면 same-origin 사용
+    const existingTabId = await this.findExistingChatGPTTabId()
+    if (existingTabId) {
+      turnstileContext.tabId = existingTabId
+      console.log('[GPT-WEB] ✅ Using existing chatgpt.com tab for same-origin request:', existingTabId)
+    } else {
+      console.log('[GPT-WEB] ℹ️ No chatgpt.com tab found - will use background fetch (may fail if Cloudflare blocks)')
     }
 
-    console.log('[GPT-WEB] 🎫 Getting Arkose token...')
-    const arkoseToken = await getArkoseToken()
-    console.log('[GPT-WEB] ✅ Arkose token result:', arkoseToken ? `yes (${arkoseToken.substring(0, 15)}...)` : 'no (continuing without token)')
+    // Arkose/Turnstile 비활성: 토큰 획득 시도하지 않음
+    const arkoseToken: string | undefined = undefined
 
     let image: ImageContent | undefined = undefined
     if (params.image) {
@@ -197,50 +173,37 @@ export class ChatGPTWebBot extends AbstractBot {
     
     // 🔥 CRITICAL: Sentinel tokens를 헤더로 전달 (ChatHub HAR 패턴)
     const conversationHeaders: Record<string, string> = {}
-    
+
     if (sentinelTokens.requirementsToken) {
       console.log('[GPT-WEB] 🛡️ Including Sentinel requirements token in header')
       conversationHeaders['openai-sentinel-chat-requirements-token'] = sentinelTokens.requirementsToken
+    } else {
+      throw new ChatError(
+        'Sentinel 토큰이 없어 대화 요청이 거부됩니다.\n\n해결:\n1) chatgpt.com 탭을 열어 보안 확인(Cloudflare)을 통과\n2) 로그인 상태에서 웹에서 1회 대화 후 다시 시도',
+        ErrorCode.CHATGPT_CLOUDFLARE,
+      )
     }
     
     if (sentinelTokens.proofToken) {
       console.log('[GPT-WEB] 🛡️ Including Sentinel proof token (Base64 fingerprint) in header')
       conversationHeaders['openai-sentinel-proof-token'] = sentinelTokens.proofToken
-    }
-    
-    // POW proof를 헤더에 추가 (있을 경우)
-    if (sentinelTokens.powProof) {
-      console.log('[GPT-WEB] 🔨 Including POW proof in header')
-      conversationHeaders['openai-sentinel-pow-proof'] = sentinelTokens.powProof
-    }
-    
-    if (turnstileContext.token) {
-      conversationHeaders['openai-sentinel-turnstile-token'] = turnstileContext.token
-    }
-    
-    // Arkose token은 body에 포함 (있을 때만)
-    if (arkoseToken) {
-      console.log('[GPT-WEB] 🎫 Including Arkose token in request body')
-      requestBody.arkose_token = arkoseToken
     } else {
-      console.log('[GPT-WEB] ⚠️ No Arkose token - proceeding without it (ChatHub style)')
+      console.warn('[GPT-WEB] ⚠️ No proof token - this may affect request success rate')
     }
-    
-    // 우선순위: Turnstile 필요 시/설정(alwaysProxy) 시 동일 출처 요청을 우선
+
+    // 우선순위: 탭이 있거나 설정(alwaysProxy) 시 동일 출처 요청을 우선
     let resp: Response | undefined
     const cfg2 = await getUserConfig().catch(() => ({} as any))
     let tabIdCandidate = turnstileContext.tabId || (await this.findExistingChatGPTTabId())
-    const preferProxy = (cfg2 as any).chatgptWebappAlwaysProxy === true || sentinelTokens.turnstileRequired === true || !!tabIdCandidate
+    // 🔥 ChatHub 방식: Turnstile required 플래그 무시
+    const preferProxy = (cfg2 as any).chatgptWebappAlwaysProxy === true || !!tabIdCandidate
     if (preferProxy) {
       // 런타임 권한 확인/요청: content-script 주입 허용 필요
       const granted = await requestHostPermissions(['https://chatgpt.com/*', 'https://chat.openai.com/*']).catch(() => false)
       if (!granted) {
         console.warn('[GPT-WEB] ⚠️ Site access not granted for chatgpt.com; cannot use same-origin path')
       }
-      if (!tabIdCandidate && (cfg2 as any).chatgptWebappAlwaysProxy === true) {
-        try { await Browser.tabs.create({ url: 'https://chatgpt.com', pinned: true, active: false }); await new Promise(r=>setTimeout(r,1000)) } catch {}
-        tabIdCandidate = await this.findExistingChatGPTTabId()
-      }
+      // 프록시 탭 자동 생성 금지: 이미 열린 탭만 사용
       const tabId = tabIdCandidate || await this.findExistingChatGPTTabId()
       if (tabId) {
         console.log('[GPT-WEB] 🌐 Using existing ChatGPT tab for same-origin request')
@@ -252,14 +215,17 @@ export class ChatGPTWebBot extends AbstractBot {
           const deviceId = oaiDid || (chatGPTClient as any).getPersistentDeviceId?.() || '00000000-0000-4000-8000-000000000000'
           const cfg = await getUserConfig().catch(() => ({} as any))
           const cookieOnly = (cfg as any).chatgptWebappCookieOnly === true
+          // 🔥 핵심: same-origin proxyFetch에서는 Authorization 헤더를 보내지 않음!
+          // 브라우저가 자동으로 Cookie를 포함시키므로, Authorization 헤더는 오히려 봇으로 감지될 수 있음
           resp = await proxyFetch(tabId, url, {
             method: 'POST',
             headers: {
+              'Accept': 'text/event-stream',
               'Content-Type': 'application/json',
               'oai-device-id': deviceId,
               'oai-language': navigator.language || 'en-US',
               ...conversationHeaders,
-              ...(cookieOnly ? {} : { Authorization: `Bearer ${this.accessToken}` }),
+              // ❌ Authorization 헤더 제거 - Cookie 기반 인증 사용
             },
             body: JSON.stringify(requestBody),
           })
@@ -269,40 +235,10 @@ export class ChatGPTWebBot extends AbstractBot {
       }
     }
     if (!resp) {
-      // 기본: background fetch (쿠키 정책으로 Turnstile이 필요하면 403이 날 수 있음)
-      const bgResp = await (chatGPTClient as any).requestBackendAPIWithToken(
-        this.accessToken,
-        'POST',
-        '/conversation',
-        requestBody,
-        conversationHeaders,
-      ).catch(async (err: Error) => {
-        // 403 Cloudflare 시에도 열린 탭이 있으면 한번 더 same-origin로 재시도
-        if (err.message?.includes('CHATGPT_CLOUDFLARE')) {
-          const tabId = turnstileContext.tabId || (await this.findExistingChatGPTTabId())
-          if (tabId) {
-            console.warn('[GPT-WEB] 🔁 Retrying via same-origin (existing tab) due to Cloudflare 403')
-            const url = `https://chatgpt.com/backend-api/conversation`
-            let oaiDid: string | undefined
-            try { oaiDid = await Browser.tabs.sendMessage(tabId, 'read-oai-did') } catch {}
-            const deviceId = oaiDid || (chatGPTClient as any).getPersistentDeviceId?.() || '00000000-0000-4000-8000-000000000000'
-            return proxyFetch(tabId, url, {
-              method: 'POST',
-              headers: {
-                Accept: 'text/event-stream',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${this.accessToken}`,
-                'oai-device-id': deviceId,
-                'oai-language': navigator.language || 'en-US',
-                ...conversationHeaders,
-              },
-              body: JSON.stringify(requestBody),
-            })
-          }
-        }
-        throw err
-      })
-      resp = bgResp
+      throw new ChatError(
+        '동일출처 요청을 보낼 chatgpt.com 탭이 없습니다.\n\n해결:\n1) chatgpt.com 탭을 열고 로그인\n2) 페이지에서 1회 대화 전송\n3) 확장에서 다시 시도',
+        ErrorCode.CHATGPT_AUTH,
+      )
     }
     if (!resp) {
       throw new ChatError('Failed to obtain response', ErrorCode.NETWORK_ERROR)
@@ -375,55 +311,59 @@ export class ChatGPTWebBot extends AbstractBot {
 
   private async readCookieFromTab(tabId: number | undefined, name: string): Promise<string | undefined> {
     if (!tabId) return undefined
+
+    // 🔥 Chrome cookies API 사용 (HTTPOnly 쿠키 읽기 가능)
     try {
+      // 1. 먼저 Chrome cookies API로 시도 (HTTPOnly 쿠키 지원)
+      const tab = await Browser.tabs.get(tabId)
+      if (!tab?.url) return undefined
+
+      // chatgpt.com 또는 .chatgpt.com 도메인에서 쿠키 검색
+      let cookies = await Browser.cookies.getAll({
+        name,
+        url: tab.url,
+      })
+
+      // url 기반 검색 실패 시 도메인 직접 지정 (서브도메인 포함)
+      if (!cookies || cookies.length === 0) {
+        cookies = await Browser.cookies.getAll({
+          name,
+          domain: 'chatgpt.com',
+        })
+      }
+
+      // 여전히 없으면 .chatgpt.com (서브도메인 포함) 시도
+      if (!cookies || cookies.length === 0) {
+        cookies = await Browser.cookies.getAll({
+          name,
+          domain: '.chatgpt.com',
+        })
+      }
+
+      // 가장 최근 쿠키 사용
+      if (cookies && cookies.length > 0) {
+        const cookie = cookies[0]
+        console.log(`[GPT-WEB] ✅ Cookie '${name}' found via Chrome API (HTTPOnly: ${cookie.httpOnly})`)
+        return cookie.value
+      }
+
+      // 2. Chrome API 실패 시 fallback: Content Script의 document.cookie 시도
+      console.log(`[GPT-WEB] ℹ️ Cookie '${name}' not found via Chrome API, trying document.cookie...`)
       const value = await Browser.tabs.sendMessage(tabId, { type: 'read-cookie', name })
-      return typeof value === 'string' && value ? value : undefined
-    } catch {
+      if (typeof value === 'string' && value) {
+        console.log(`[GPT-WEB] ✅ Cookie '${name}' found via document.cookie`)
+        return value
+      }
+
+      console.log(`[GPT-WEB] ⚠️ Cookie '${name}' not found in either Chrome API or document.cookie`)
+      return undefined
+    } catch (err) {
+      console.warn('[GPT-WEB] ⚠️ Error reading cookie:', (err as Error)?.message)
       return undefined
     }
   }
 
-  private async prepareTurnstileProof(
-    dx?: string,
-    options?: { reuseOnly?: boolean },
-  ): Promise<{ token?: string; tabId?: number; cfClearance?: string }> {
-    const reuseOnly = options?.reuseOnly === true
-    let tabId: number | undefined
-
-    if (reuseOnly) {
-      tabId = await this.findExistingChatGPTTabId()
-    } else {
-      try {
-        const proxyTab = await proxyFetchRequester.getProxyTab()
-        tabId = proxyTab?.id ?? undefined
-      } catch (err) {
-        console.warn('[GPT-WEB] ⚠️ Failed to ensure proxy tab for Turnstile:', (err as Error)?.message)
-      }
-      if (!tabId) {
-        tabId = await this.findExistingChatGPTTabId()
-      }
-    }
-
-    let cfClearance = await this.readCookieFromTab(tabId, 'cf_clearance')
-    let token: string | undefined
-
-    if (dx && tabId) {
-      try {
-        const solved = await Browser.tabs.sendMessage(tabId, { type: 'TURNSTILE_SOLVE', dx })
-        if (typeof solved === 'string' && solved) {
-          token = solved
-        } else if (solved && typeof solved === 'object' && typeof (solved as any).token === 'string') {
-          token = (solved as any).token
-        }
-      } catch (err) {
-        console.warn('[GPT-WEB] ⚠️ Turnstile solver error:', (err as Error)?.message)
-      }
-      const updated = await this.readCookieFromTab(tabId, 'cf_clearance')
-      if (updated) cfClearance = updated
-    }
-
-    return { token, tabId, cfClearance }
-  }
+  // Turnstile solver removed (minimal policy).
 
   private async findExistingChatGPTTabId(): Promise<number | undefined> {
     try {

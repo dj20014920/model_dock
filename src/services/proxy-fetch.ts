@@ -88,6 +88,15 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
             tabId
           })
         })
+
+        // 인페이지 브리지(js/inpage-fetch-bridge.js)를 MAIN world로 주입(CSP nonce 우회)
+        try {
+          // @ts-ignore chrome global
+          await chrome.scripting?.executeScript?.({ target: { tabId }, files: ['js/inpage-fetch-bridge.js'], world: 'MAIN' as any })
+          console.debug('[PROXY-FETCH] ✅ In-page bridge injected via scripting.executeScript (MAIN world)')
+        } catch (e: any) {
+          console.warn('[PROXY-FETCH] ⚠️ In-page bridge inject failed (will rely on fallback if present):', e?.message)
+        }
         
         // Content Script 초기화 대기 시간 증가 (300ms → 1000ms)
         // Arkose CAPTCHA 등 외부 리소스 로딩 대기
@@ -95,6 +104,14 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
         await new Promise(resolve => setTimeout(resolve, 1000))
       } else {
         console.warn('[PROXY-FETCH] ⚠️ No content scripts found in manifest to inject')
+        // 그래도 브리지는 주입 시도(탭에 CS가 이미 있을 수 있음)
+        try {
+          // @ts-ignore chrome global
+          await chrome.scripting?.executeScript?.({ target: { tabId }, files: ['js/inpage-fetch-bridge.js'], world: 'MAIN' as any })
+          console.debug('[PROXY-FETCH] ✅ In-page bridge injected (without CS list)')
+        } catch (e: any) {
+          console.warn('[PROXY-FETCH] ⚠️ In-page bridge inject failed (no CS list):', e?.message)
+        }
       }
     } catch (e) {
       console.error('[PROXY-FETCH] ❌ scripting.executeScript error:', {

@@ -3,7 +3,7 @@ import { proxyFetch } from '~services/proxy-fetch'
 import { RequestInitSubset } from '~types/messaging'
 
 export class ProxyRequester {
-  constructor(private opts: { homeUrl: string; hostStartsWith: string }) {}
+  constructor(private opts: { homeUrl: string; hostStartsWith: string; reuseOnly?: boolean }) {}
 
   private async findExistingProxyTab() {
     const tabs = await Browser.tabs.query({})
@@ -61,7 +61,10 @@ export class ProxyRequester {
 
   private async getProxyTab() {
     let tab = await this.findExistingProxyTab()
-    if (!tab) tab = await this.createProxyTab()
+    if (!tab) {
+      if (this.opts.reuseOnly) return null as unknown as Browser.Tabs.Tab
+      tab = await this.createProxyTab()
+    }
     return tab
   }
 
@@ -78,6 +81,11 @@ export class ProxyRequester {
 
   async fetch(url: string, options?: RequestInitSubset) {
     const tab = await this.getProxyTab()
+    if (!tab) {
+      // 재사용만 허용되고 탭이 없다면 자동 생성 금지 → 401 반환
+      const empty = new ReadableStream({ start(c) { try { c.close() } catch {} } })
+      return new Response(empty, { status: 401, statusText: 'NO_PROXY_TAB' })
+    }
     // Webapp 계정 기반 호출은 항상 쿠키 포함(redirect 등에서도 안전)
     const merged: any = { credentials: 'include', ...(options as any) }
     const resp = await proxyFetch(tab.id!, url, merged)

@@ -97,6 +97,24 @@ Browser.runtime.onConnect.addListener((port) => {
         const cfg = await getUserConfig()
         headerMode = (cfg as any).chatgptWebappHeaderMode || 'browserlike'
       } catch {}
+
+      // 언어/디바이스ID 보강 (고정 값 유지)
+      async function getStableDeviceId() {
+        try {
+          const got = await Browser.storage.local.get('oaiDeviceId')
+          const existing = (got as any)?.oaiDeviceId as string | undefined
+          if (existing) return existing
+          const id = crypto.randomUUID()
+          try { await Browser.storage.local.set({ oaiDeviceId: id }) } catch {}
+          return id
+        } catch {
+          return crypto.randomUUID()
+        }
+      }
+      const uiLang = (typeof chrome !== 'undefined' && (chrome as any)?.i18n?.getUILanguage)
+        ? (chrome as any).i18n.getUILanguage()
+        : (navigator.language || 'en-US')
+      const deviceId = await getStableDeviceId()
       
       // 필수 헤더: 실제 브라우저처럼 보이게
       if (headerMode === 'browserlike') {
@@ -112,7 +130,7 @@ Browser.runtime.onConnect.addListener((port) => {
           }
         }
         if (!headers.has('Accept-Language')) {
-          headers.set('Accept-Language', navigator.language || 'en-US,en;q=0.9')
+          headers.set('Accept-Language', `${uiLang},en-US;q=0.9,en;q=0.8`)
         }
         if (!headers.has('Accept-Encoding')) {
           headers.set('Accept-Encoding', 'gzip, deflate, br')
@@ -123,15 +141,10 @@ Browser.runtime.onConnect.addListener((port) => {
         if (!headers.has('Referer')) {
           headers.set('Referer', 'https://chatgpt.com/')
         }
-        if (!headers.has('Sec-Fetch-Dest')) {
-          headers.set('Sec-Fetch-Dest', 'empty')
-        }
-        if (!headers.has('Sec-Fetch-Mode')) {
-          headers.set('Sec-Fetch-Mode', 'cors')
-        }
-        if (!headers.has('Sec-Fetch-Site')) {
-          headers.set('Sec-Fetch-Site', 'same-origin')
-        }
+        // Note: Do NOT forge Sec-Fetch-* headers in extension context (can look inconsistent)
+        // ChatHub 스타일 전용 헤더
+        if (!headers.has('oai-language')) headers.set('oai-language', uiLang)
+        if (!headers.has('oai-device-id')) headers.set('oai-device-id', deviceId)
         // UA-CH client hints (best-effort)
         try {
           const uaData: any = (navigator as any).userAgentData
@@ -148,13 +161,19 @@ Browser.runtime.onConnect.addListener((port) => {
         } catch {}
       }
 
-      
-      const resp = await fetch(url, {
+      // ChatHub 스타일 전용 헤더(항상 설정)
+      if (!headers.has('oai-language')) headers.set('oai-language', uiLang)
+      if (!headers.has('oai-device-id')) headers.set('oai-device-id', deviceId)
+
+      const init: RequestInit = {
         ...(options || {}),
         headers,
         credentials: 'include', // ✅ 쿠키 포함 필수
         signal: controller.signal,
-      })
+      }
+      if (!('referrer' in (options || {}))) (init as any).referrer = 'https://chatgpt.com/'
+      if (!('referrerPolicy' in (options || {}))) (init as any).referrerPolicy = 'strict-origin-when-cross-origin'
+      const resp = await fetch(url, init)
       port.postMessage({
         type: 'BG_FETCH_META',
         meta: {

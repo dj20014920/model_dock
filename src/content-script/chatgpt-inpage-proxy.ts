@@ -6,24 +6,8 @@ const MAX_RETRY_ATTEMPTS = 5
 const RETRY_INTERVAL_MS = 1000
 const ARKOSE_WAIT_MS = 2000
 
-function injectTip() {
-  const div = document.createElement('div')
-  div.innerText = '⚠️ 이 탭을 열어두세요! ChatHub로 돌아가도 됩니다. Please keep this tab open, now you can go back to ChatHub'
-  div.style.position = 'fixed'
-  div.style.top = '0'
-  div.style.right = '0'
-  div.style.zIndex = '999999'
-  div.style.padding = '12px 16px'
-  div.style.margin = '10px'
-  div.style.border = '2px solid #ef4444'
-  div.style.borderRadius = '8px'
-  div.style.backgroundColor = '#fee2e2'
-  div.style.color = '#991b1b'
-  div.style.fontWeight = 'bold'
-  div.style.fontSize = '14px'
-  div.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'
-  document.body.appendChild(div)
-}
+// tip banner disabled (no-op)
+function injectTip() {}
 
 function injectInpageFetchBridge() {
   const inject = () => {
@@ -72,8 +56,8 @@ function injectInpageFetchBridge() {
 async function main() {
   console.debug('[GPT-PROXY] 🚀 Content script initializing', location.href)
   
-  // Bridge 주입 (비동기, 실패해도 계속 진행)
-  injectInpageFetchBridge()
+  // Bridge는 background의 chrome.scripting.executeScript로 MAIN world에 주입됨(CSP/nonce 회피)
+  // 여기서는 별도 <script> 태그 주입을 하지 않음.
   
   // URL 요청 리스너
   Browser.runtime.onMessage.addListener(async (message) => {
@@ -97,10 +81,7 @@ async function main() {
         return undefined
       }
     }
-    if (message && typeof message === 'object' && message.type === 'TURNSTILE_SOLVE') {
-      const dx: string | undefined = (message && (message as any).dx) || undefined
-      return await solveTurnstileViaInpage(dx)
-    }
+
   })
   
   // PROXY_TAB_READY 신호 전송 함수 (재시도 로직 포함)
@@ -158,25 +139,7 @@ async function main() {
     await ensureReadySignal()
   }
   
-  // ChatGPT 페이지에서만 안내 팁 표시
-  if ((location.host.includes('chat.openai.com') || location.host.includes('chatgpt.com'))) {
-    // Next.js 앱 로딩 대기
-    let attempts = 0
-    const maxAttempts = 50 // 5초
-    const waitForNextApp = setInterval(() => {
-      attempts++
-      if ((window as any).__NEXT_DATA__) {
-        clearInterval(waitForNextApp)
-        injectTip()
-        console.debug('[GPT-PROXY] ✅ Tip injected (Next.js ready)')
-      } else if (attempts >= maxAttempts) {
-        clearInterval(waitForNextApp)
-        // Next.js 로딩 실패해도 팁 표시
-        injectTip()
-        console.warn('[GPT-PROXY] ⚠️ Tip injected (timeout - Next.js not detected)')
-      }
-    }, 100)
-  }
+
 }
 
 // 중요: setupProxyExecutor()를 먼저 동기적으로 실행하여 port listener 등록
@@ -187,39 +150,4 @@ main().catch((error) => {
   console.error('[GPT-PROXY] ❌ Main initialization failed:', error)
 })
 
-// -------- Turnstile in-page solver ---------
-async function solveTurnstileViaInpage(dx?: string): Promise<string | undefined> {
-  const requestId = `${Date.now()}_${Math.random().toString(36).slice(2)}`
-  return new Promise((resolve) => {
-    let done = false
-    const onMsg = (ev: MessageEvent) => {
-      const data: any = ev.data
-      if (!data || data.type !== 'INPAGE_TURNSTILE_SOLVE_RESULT' || data.requestId !== requestId) return
-      try { window.removeEventListener('message', onMsg as any) } catch {}
-      if (!done) {
-        done = true
-        if (data && typeof data.token === 'string' && data.token) {
-          resolve(data.token)
-        } else {
-          resolve(undefined)
-        }
-      }
-    }
-    window.addEventListener('message', onMsg as any)
-    // fire request to page bridge
-    try {
-      window.postMessage({ type: 'INPAGE_TURNSTILE_SOLVE', requestId, dx: dx || null }, location.origin)
-    } catch {
-      resolve(undefined)
-      return
-    }
-    // timeout
-    setTimeout(() => {
-      if (!done) {
-        try { window.removeEventListener('message', onMsg as any) } catch {}
-        done = true
-        resolve(undefined)
-      }
-    }, 8000)
-  })
-}
+// Turnstile solver removed (minimal policy).

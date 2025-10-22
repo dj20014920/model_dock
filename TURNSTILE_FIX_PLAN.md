@@ -1,3 +1,24 @@
+# Turnstile 토큰 생성 실패 문제 해결 계획 (✅ 완료)
+
+## ✅ 작업 완료 상태 (2025-10-21)
+
+**구현된 솔루션**: Option 1 - Turnstile Bypass (cf_clearance 쿠키 기반)
+
+**변경 사항**:
+1. `/src/app/bots/chatgpt-webapp/index.ts`
+   - `doSendMessage()` 함수 (135-173줄): Turnstile 토큰 없이도 cf_clearance 쿠키만으로 진행
+   - `prepareTurnstileProof()` 함수 (410-428줄): 향상된 로깅 및 에러 처리
+   - Turnstile 실패 시에도 대화 차단하지 않음
+
+**핵심 로직**:
+- cf_clearance 쿠키가 있으면 → Turnstile 토큰 없이도 진행 ✅
+- cf_clearance 쿠키가 없으면 → 사용자에게 Cloudflare 확인 요청 ⚠️
+- Turnstile 토큰은 "선택사항"으로 동작, 실패해도 에러 발생 안 함
+
+**빌드 완료**: `npm run build` ✅ (2025-10-21)
+
+---
+
 # Turnstile 토큰 생성 실패 문제 해결 계획
 
 ## 🔍 문제 진단 결과

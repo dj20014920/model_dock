@@ -6,7 +6,7 @@ export default defineManifest(async () => {
     name: '__MSG_appName__',
     description: '__MSG_appDesc__',
     default_locale: 'en',
-    version: '1.45.18',
+    version: '1.45.24',
     icons: {
       '16': 'src/assets/icon.png',
       '32': 'src/assets/icon.png',
@@ -36,7 +36,7 @@ export default defineManifest(async () => {
       'https://grok.com/*',
     ],
     optional_host_permissions: ['https://*/*', 'wss://*/*'],
-    permissions: ['storage', 'unlimitedStorage', 'sidePanel', 'declarativeNetRequestWithHostAccess', 'scripting', 'tabs'],
+    permissions: ['storage', 'unlimitedStorage', 'sidePanel', 'declarativeNetRequestWithHostAccess', 'scripting', 'tabs', 'cookies'],
     content_scripts: [
       {
         // 단일 블록으로 통합하여 CRX가 동적 모듈(WAR)을 모든 도메인에 일관되게 매핑하도록 함
@@ -118,6 +118,7 @@ export default defineManifest(async () => {
           'https://claude.ai/*',
           'https://gemini.google.com/*',
           'https://chat.deepseek.com/*',
+          'https://grok.com/*',
         ],
         use_dynamic_url: false,
       },

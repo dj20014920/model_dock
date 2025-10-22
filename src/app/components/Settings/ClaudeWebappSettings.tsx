@@ -1,12 +1,10 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserConfig } from '~services/user-config'
-import Select from '../Select'
 import Blockquote from './Blockquote'
 import Browser from 'webextension-polyfill'
 import Button from '~app/components/Button'
 import { requestHostPermission } from '~app/utils/permissions'
-import { Input } from '~app/components/Input'
 
 interface Props {
   userConfig: UserConfig
@@ -34,16 +32,7 @@ const ClaudeWebappSettings: FC<Props> = ({ userConfig, updateConfigValue }) => {
         <span className="text-xs text-secondary-text">{t('Sign in first, then come back')}</span>
       </div>
       <p className="font-medium text-sm">{t('Model')}</p>
-      <div className="w-[250px] mb-1">
-        <Select options={[{ name: 'Claude 2', value: 'claude-2' }]} value="claude-2" onChange={console.log} />
-      </div>
-      <p className="font-medium text-sm mt-1">{t('Custom model slug (optional)')}</p>
-      <Input
-        className="w-[320px]"
-        placeholder="e.g. claude-3-opus / claude-3.5-sonnet"
-        value={(userConfig as any).claudeWebappCustomModel || ''}
-        onChange={(e) => updateConfigValue({ claudeWebappCustomModel: e.currentTarget.value } as any)}
-      />
+      <div className="text-xs text-secondary-text mb-1">Auto (recommended) — 계정이 지원하는 최신 모델을 자동 선택합니다.</div>
     </div>
   )
 }

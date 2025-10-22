@@ -41,7 +41,18 @@ export class ClaudeWebBot extends AbstractBot {
       }
     } catch {}
 
-    // 최신 선호 모델 반환 (completion 요청 시 폴백 루프가 가용성 검증)
+    // 사용자 설정에서 모델 읽기
+    const { getUserConfig } = await import('~/services/user-config')
+    const config = await getUserConfig()
+    const customModel = config.claudeWebappCustomModel
+    
+    if (customModel && customModel !== '' && customModel !== 'auto') {
+      console.log('[Claude] ⚙️ Using user-selected model:', customModel)
+      return customModel
+    }
+
+    // Auto 또는 미설정: 최신 선호 모델 반환 (completion 요청 시 폴백 루프가 가용성 검증)
+    console.log('[Claude] 🔄 Auto mode: using preferred model:', this.preferredModels[0])
     return this.preferredModels[0]
   }
 

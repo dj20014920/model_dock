@@ -90,7 +90,10 @@ export class ClaudeWebBot extends AbstractBot {
     let resp: Response | undefined
     for (let i = 0; i < candidates.length; i++) {
       const model = candidates[i]
-      const requestBody = {
+      
+      // HAR 파일 분석 결과: Claude API는 아주 단순한 요청만 지원
+      // tools, extended_thinking, personalized_styles 등은 모두 지원하지 않음
+      const requestBody: any = {
         prompt: params.prompt,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
         model,
@@ -99,7 +102,7 @@ export class ClaudeWebBot extends AbstractBot {
         files: [],
       }
       
-      console.log('[Claude] 📤 Sending completion request with body:', JSON.stringify(requestBody).substring(0, 200))
+      console.log('[Claude] 📤 Sending completion request with body:', JSON.stringify(requestBody).substring(0, 300))
       
       resp = await hybridFetch(
         `https://claude.ai/api/organizations/${this.organizationId}/chat_conversations/${this.conversationContext!.conversationId}/completion`,

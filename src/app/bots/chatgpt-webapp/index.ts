@@ -7,8 +7,10 @@ import { getUserConfig } from '~services/user-config'
 import { ChatError, ErrorCode } from '~utils/errors'
 import { parseSSEResponse } from '~utils/sse'
 import { AbstractBot, SendMessageParams } from '../abstract-bot'
+import { getArkoseToken } from './arkose'
 import { chatGPTClient } from './client'
 import { proxyFetch } from '~services/proxy-fetch'
+import { proxyFetchRequester } from './requesters'
 import { requestHostPermissions } from '~app/utils/permissions'
 import { ImageContent, ResponseContent, ResponsePayload } from './types'
 
@@ -127,20 +129,52 @@ export class ChatGPTWebBot extends AbstractBot {
     await new Promise((r) => setTimeout(r, 150 + Math.floor(Math.random() * 250)))
     console.log('[GPT-WEB] 🛡️ Getting Sentinel tokens (chat-requirements)...')
     const sentinelTokens = await chatGPTClient.getSentinel(this.accessToken).catch((err) => {
-      console.warn('[GPT-WEB] ⚠️ Sentinel request failed:', err.message)
-      return { requirementsToken: undefined, proofToken: undefined }
+      console.warn('[GPT-WEB] ⚠️ Sentinel request failed (continuing):', err.message)
+      return { requirementsToken: undefined, proofToken: undefined, powProof: undefined, powRequired: false, turnstileRequired: false }
     })
     console.log('[GPT-WEB] ✅ Sentinel response:', { 
       hasReqToken: !!sentinelTokens.requirementsToken, 
       hasProofToken: !!sentinelTokens.proofToken,
+      hasPowProof: !!sentinelTokens.powProof,
+      powRequired: sentinelTokens.powRequired,
+      turnstileRequired: sentinelTokens.turnstileRequired
     })
 
-    // 📌 최소 정책: Sentinel token 없으면 종료, 있으면 진행
+    // Turnstile이 필요한 경우, 가능한 범위 내에서 in-page solver로 토큰을 확보
+    let turnstileToken: string | undefined
+    if (sentinelTokens.turnstileRequired) {
+      try {
+        const turnstileDx = (sentinelTokens as any).turnstileDx
+        if (turnstileDx) {
+          const proof = await this.prepareTurnstileProof(turnstileDx, { reuseOnly: true })
+          turnstileToken = proof?.token
+          if (turnstileToken) {
+            console.log('[GPT-WEB] ✅ Turnstile token acquired (preview):', turnstileToken.substring(0, 20) + '...')
+          } else {
+            console.warn('[GPT-WEB] ⚠️ Turnstile token not available (reuseOnly). You may need to open chatgpt.com tab and pass the challenge.')
+          }
+        }
+      } catch (e) {
+        console.warn('[GPT-WEB] ⚠️ Turnstile solver failed:', (e as Error)?.message)
+      }
+    }
+    
+    // Log additional challenges if present
+    if (sentinelTokens.powRequired && !sentinelTokens.powProof) {
+      console.warn('[GPT-WEB] ⚠️ Proof of Work required but calculation failed - request will likely fail')
+    } else if (sentinelTokens.powProof) {
+      console.log('[GPT-WEB] ✅ POW proof calculated successfully')
+    }
+    // 🔥 ChatHub 방식: Turnstile 완전 무시! (HAR 분석 결과)
+    // ChatHub는 Turnstile required 플래그를 무시하고 Sentinel 토큰만 사용
+    // Authorization 헤더 없이, Cookie 없이, Turnstile 토큰 없이 성공
 
-    // 동일 출처 요청 준비
-    let turnstileContext: { tabId?: number } = {}
+    // 📌 핵심: Sentinel 토큰 + same-origin proxyFetch = 성공!
+    console.log('[GPT-WEB] 💡 Using ChatHub strategy: Sentinel tokens only, no Turnstile, no Authorization')
 
-    // 기존 탭이 있으면 same-origin 사용
+    let turnstileContext: { token?: string; tabId?: number } = {}
+
+    // Turnstile required 플래그를 무시하고, 기존 탭이 있으면 same-origin 사용
     const existingTabId = await this.findExistingChatGPTTabId()
     if (existingTabId) {
       turnstileContext.tabId = existingTabId
@@ -191,6 +225,37 @@ export class ChatGPTWebBot extends AbstractBot {
       console.warn('[GPT-WEB] ⚠️ No proof token - this may affect request success rate')
     }
 
+    // POW proof를 헤더에 추가 (있을 경우)
+    if (sentinelTokens.powProof) {
+      console.log('[GPT-WEB] 🔨 Including POW proof in header')
+      conversationHeaders['openai-sentinel-pow-proof'] = sentinelTokens.powProof
+    } else if (sentinelTokens.powRequired) {
+      console.warn('[GPT-WEB] ⚠️ POW was required but proof missing - request may fail')
+    }
+
+    // Turnstile 토큰이 확보된 경우 헤더에 포함
+    if (turnstileToken) {
+      console.log('[GPT-WEB] 🎫 Including Turnstile token in header')
+      conversationHeaders['openai-sentinel-turnstile-token'] = turnstileToken
+    }
+
+    // 🔥 ChatHub 방식: Turnstile 토큰 헤더 제거!
+    // ChatHub HAR 분석 결과, openai-sentinel-turnstile-token 헤더가 없음
+    // Sentinel 토큰만으로 충분
+
+    // Arkose token은 body에 포함 (있을 때만)
+    if (arkoseToken) {
+      requestBody.arkose_token = arkoseToken
+    }
+
+    // Turnstile이 필요한데 토큰을 확보하지 못한 경우, 강행하지 않음
+    if (sentinelTokens.turnstileRequired && !turnstileToken) {
+      throw new ChatError(
+        'Cloudflare Turnstile 검증이 필요합니다.\n\n해결: chatgpt.com 탭을 열어 보안 챌린지를 통과(자동으로 나타남)한 뒤, 다시 시도하세요.',
+        ErrorCode.CHATGPT_CLOUDFLARE,
+      )
+    }
+    
     // 우선순위: 탭이 있거나 설정(alwaysProxy) 시 동일 출처 요청을 우선
     let resp: Response | undefined
     const cfg2 = await getUserConfig().catch(() => ({} as any))
@@ -235,10 +300,41 @@ export class ChatGPTWebBot extends AbstractBot {
       }
     }
     if (!resp) {
-      throw new ChatError(
-        '동일출처 요청을 보낼 chatgpt.com 탭이 없습니다.\n\n해결:\n1) chatgpt.com 탭을 열고 로그인\n2) 페이지에서 1회 대화 전송\n3) 확장에서 다시 시도',
-        ErrorCode.CHATGPT_AUTH,
-      )
+      // 기본: background fetch (쿠키 정책으로 Turnstile이 필요하면 403이 날 수 있음)
+      const bgResp = await (chatGPTClient as any).requestBackendAPIWithToken(
+        this.accessToken,
+        'POST',
+        '/conversation',
+        requestBody,
+        conversationHeaders,
+      ).catch(async (err: Error) => {
+        // 403 Cloudflare 시에도 열린 탭이 있으면 한번 더 same-origin로 재시도
+        if (err.message?.includes('CHATGPT_CLOUDFLARE')) {
+          const tabId = turnstileContext.tabId || (await this.findExistingChatGPTTabId())
+          if (tabId) {
+            console.warn('[GPT-WEB] 🔁 Retrying via same-origin (existing tab) due to Cloudflare 403')
+            const url = `https://chatgpt.com/backend-api/conversation`
+            let oaiDid: string | undefined
+            try { oaiDid = await Browser.tabs.sendMessage(tabId, 'read-oai-did') } catch {}
+            const deviceId = oaiDid || (chatGPTClient as any).getPersistentDeviceId?.() || '00000000-0000-4000-8000-000000000000'
+            // 🔥 Cloudflare 재시도: Cookie 기반 인증 (Authorization 헤더 제거)
+            return proxyFetch(tabId, url, {
+              method: 'POST',
+              headers: {
+                'Accept': 'text/event-stream',
+                'Content-Type': 'application/json',
+                'oai-device-id': deviceId,
+                'oai-language': navigator.language || 'en-US',
+                ...conversationHeaders,
+                // ❌ Authorization 헤더 제거 - Cookie로만 인증
+              },
+              body: JSON.stringify(requestBody),
+            })
+          }
+        }
+        throw err
+      })
+      resp = bgResp
     }
     if (!resp) {
       throw new ChatError('Failed to obtain response', ErrorCode.NETWORK_ERROR)
@@ -363,7 +459,52 @@ export class ChatGPTWebBot extends AbstractBot {
     }
   }
 
-  // Turnstile solver removed (minimal policy).
+  private async prepareTurnstileProof(
+    dx?: string,
+    options?: { reuseOnly?: boolean },
+  ): Promise<{ token?: string; tabId?: number; cfClearance?: string }> {
+    const reuseOnly = options?.reuseOnly === true
+    let tabId: number | undefined
+
+    if (reuseOnly) {
+      tabId = await this.findExistingChatGPTTabId()
+    } else {
+      try {
+        const proxyTab = await proxyFetchRequester.getProxyTab()
+        tabId = proxyTab?.id ?? undefined
+      } catch (err) {
+        console.warn('[GPT-WEB] ⚠️ Failed to ensure proxy tab for Turnstile:', (err as Error)?.message)
+      }
+      if (!tabId) {
+        tabId = await this.findExistingChatGPTTabId()
+      }
+    }
+
+    let cfClearance = await this.readCookieFromTab(tabId, 'cf_clearance')
+    let token: string | undefined
+
+    if (dx && tabId) {
+      try {
+        console.log('[GPT-WEB] 🎯 Attempting auto-solve Turnstile via tab', tabId)
+        const solved = await Browser.tabs.sendMessage(tabId, { type: 'TURNSTILE_SOLVE', dx })
+        if (typeof solved === 'string' && solved) {
+          token = solved
+          console.log('[GPT-WEB] ✅ Turnstile token obtained (preview):', solved.substring(0, 20) + '...')
+        } else if (solved && typeof solved === 'object' && typeof (solved as any).token === 'string') {
+          token = (solved as any).token
+          console.log('[GPT-WEB] ✅ Turnstile token obtained (preview):', (solved as any).token.substring(0, 20) + '...')
+        } else {
+          console.log('[GPT-WEB] ℹ️ Turnstile solver did not return a token (will rely on cf_clearance)')
+        }
+      } catch (err) {
+        console.log('[GPT-WEB] ℹ️ Turnstile solve attempt failed (expected if sitekey not found):', (err as Error)?.message)
+      }
+      const updated = await this.readCookieFromTab(tabId, 'cf_clearance')
+      if (updated) cfClearance = updated
+    }
+
+    return { token, tabId, cfClearance }
+  }
 
   private async findExistingChatGPTTabId(): Promise<number | undefined> {
     try {

@@ -121,6 +121,23 @@ const userConfigWithDefaultValue = {
   claudeApiCustomModel: '',
   // optional: override Claude Webapp model slug when available
   claudeWebappCustomModel: '',
+  // Claude Advanced Features
+  claudeExtendedThinking: false, // 심층 사고 모드
+  claudeExtendedThinkingLimit: 3, // 비결제자 제한 (7일간 3회)
+  claudeExtendedThinkingUsed: 0, // 사용 횟수
+  claudeExtendedThinkingResetDate: 0, // 다음 리셋 날짜 (timestamp)
+  claudeResearchMode: false, // 연구 모드
+  claudePersonalizedStyle: 'default' as 'default' | 'concise' | 'detailed' | 'technical' | 'friendly',
+  // Claude Tools 설정
+  claudeToolsEnabled: true, // Tools 전체 활성화
+  claudeWebSearchEnabled: true, // 웹 검색
+  claudeArtifactsEnabled: true, // 아티팩트
+  claudeReplEnabled: true, // 코드 실행
+  // Claude Connectors
+  claudeConnectorsEnabled: false, // 커넥터 전체 활성화
+  claudeGmailEnabled: false, // Gmail 연동
+  claudeDriveEnabled: false, // Google Drive 연동
+  claudeCalendarEnabled: false, // Google Calendar 연동
   chatgptWebAccess: false,
   claudeWebAccess: false,
   openrouterOpenAIModel: CHATGPT_API_MODELS[0] as (typeof CHATGPT_API_MODELS)[number],

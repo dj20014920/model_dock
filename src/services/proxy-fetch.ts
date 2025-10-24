@@ -61,7 +61,7 @@ export function setupProxyExecutor() {
 }
 
 export async function proxyFetch(tabId: number, url: string, options?: RequestInitSubset): Promise<Response> {
-  console.debug('[PROXY-FETCH] 🚀 Starting request', { tabId, url: url.substring(0, 80), method: options?.method || 'GET' })
+  console.log('[PROXY-FETCH] 🚀 Starting request', { tabId, url: url.substring(0, 80), method: options?.method || 'GET' })
   return new Promise(async (resolve, reject) => {
     // 강제 주입: content-script가 로드되지 않은 탭에서도 확실히 연결되도록 한다
     let injectionAttempted = false
@@ -80,27 +80,40 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
       ) as string[]
       if (files.length) {
         injectionAttempted = true
-        console.debug('[PROXY-FETCH] 💉 Injecting content scripts:', files)
+        console.log('[PROXY-FETCH] 💉 Injecting content scripts:', files)
         // @ts-ignore chrome global
         await chrome.scripting?.executeScript?.({ target: { tabId }, files }).catch((err: any) => {
+          const errorMsg = err?.message || ''
           console.warn('[PROXY-FETCH] ⚠️ Script injection failed (non-fatal - may already exist):', {
-            error: err?.message,
-            tabId
+            error: errorMsg,
+            tabId,
+            attemptedFiles: files
           })
+
+          // 파일 해시 불일치 감지 (Chrome 캐시 문제)
+          if (errorMsg.includes('Could not load file') || errorMsg.includes('chatgpt-inpage-proxy')) {
+            console.error('[PROXY-FETCH] ❌ MANIFEST CACHE ISSUE DETECTED!')
+            console.error('[PROXY-FETCH] 💡 해결 방법:')
+            console.error('  1. Chrome에서 이 확장 프로그램 완전 제거')
+            console.error('  2. Chrome 재시작')
+            console.error('  3. yarn build 재실행')
+            console.error('  4. 확장 프로그램 다시 로드')
+            console.error('  자세한 내용: TROUBLESHOOTING.md 참고')
+          }
         })
 
         // 인페이지 브리지(js/inpage-fetch-bridge.js)를 MAIN world로 주입(CSP nonce 우회)
         try {
           // @ts-ignore chrome global
           await chrome.scripting?.executeScript?.({ target: { tabId }, files: ['js/inpage-fetch-bridge.js'], world: 'MAIN' as any })
-          console.debug('[PROXY-FETCH] ✅ In-page bridge injected via scripting.executeScript (MAIN world)')
+          console.log('[PROXY-FETCH] ✅ In-page bridge injected via scripting.executeScript (MAIN world)')
         } catch (e: any) {
           console.warn('[PROXY-FETCH] ⚠️ In-page bridge inject failed (will rely on fallback if present):', e?.message)
         }
         
         // Content Script 초기화 대기 시간 증가 (300ms → 1000ms)
         // Arkose CAPTCHA 등 외부 리소스 로딩 대기
-        console.debug('[PROXY-FETCH] ⏳ Waiting for content script initialization (1000ms)...')
+        console.log('[PROXY-FETCH] ⏳ Waiting for content script initialization (1000ms)...')
         await new Promise(resolve => setTimeout(resolve, 1000))
       } else {
         console.warn('[PROXY-FETCH] ⚠️ No content scripts found in manifest to inject')
@@ -126,11 +139,11 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
     const maxPingRetries = 3
     for (let retry = 1; retry <= maxPingRetries; retry++) {
       try {
-        console.debug(`[PROXY-FETCH] 🏓 Checking content script status (attempt ${retry}/${maxPingRetries})...`)
+        console.log(`[PROXY-FETCH] 🏓 Checking content script status (attempt ${retry}/${maxPingRetries})...`)
         const response = await Browser.tabs.sendMessage(tabId, 'url')
         if (response && typeof response === 'string') {
           contentScriptReady = true
-          console.debug('[PROXY-FETCH] ✅ Content script is ready', { 
+          console.log('[PROXY-FETCH] ✅ Content script is ready', { 
             url: response.substring(0, 50),
             attempt: retry
           })
@@ -138,12 +151,22 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
         }
       } catch (pingError) {
         if (retry === maxPingRetries) {
+          const errorMsg = (pingError as Error)?.message || ''
           console.warn('[PROXY-FETCH] ⚠️ Content script ping failed after all retries', {
-            error: (pingError as Error)?.message,
+            error: errorMsg,
             tabId,
             attempts: maxPingRetries
           })
-          
+
+          // 파일 해시 불일치로 인한 실패 가능성 경고
+          if (errorMsg.includes('Could not establish connection') || errorMsg.includes('Receiving end does not exist')) {
+            console.error('[PROXY-FETCH] ❌ Content script 초기화 실패!')
+            console.error('[PROXY-FETCH] 💡 가능한 원인:')
+            console.error('  1. Chrome이 이전 빌드의 manifest.json을 캐시')
+            console.error('  2. Content script 파일 해시 불일치')
+            console.error('[PROXY-FETCH] 🔧 해결 방법: TROUBLESHOOTING.md 참고')
+          }
+
           // 🔄 최후의 수단: 탭 리로드하여 content script 강제 재주입
           console.warn('[PROXY-FETCH] 🔄 Attempting tab reload to recover content script...')
           try {
@@ -171,7 +194,7 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
     let port: Browser.Runtime.Port
     try {
       port = Browser.tabs.connect(tabId, { name: uuid() })
-      console.debug('[PROXY-FETCH] ✅ Port connected successfully', { tabId, portName: port.name })
+      console.log('[PROXY-FETCH] ✅ Port connected successfully', { tabId, portName: port.name })
     } catch (err) {
       console.error('[PROXY-FETCH] ❌ Failed to connect to tab', {
         tabId,
@@ -236,7 +259,7 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
             clearTimeout(connectionTimeout)
             if (!settled) {
               const elapsed = Date.now() - startTime
-              console.debug(`[PROXY-FETCH] 📊 Metadata received (${elapsed}ms)`, {
+              console.log(`[PROXY-FETCH] 📊 Metadata received (${elapsed}ms)`, {
                 status: message.metadata?.status,
                 statusText: message.metadata?.statusText,
                 url: url.substring(0, 80)
@@ -263,7 +286,7 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
             }
           }
         })
-        console.debug('[PROXY-FETCH] sending request to content script')
+        console.log('[PROXY-FETCH] 📤 Sending request to content script via port')
         port.postMessage({ url, options } as ProxyFetchRequestMessage)
       },
       cancel(_reason: string) {

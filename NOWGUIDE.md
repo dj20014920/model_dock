@@ -1,6 +1,6 @@
 # NOWGUIDE - Model Dock (간단 요약)
 
-업데이트: 2025-10-22 · 버전: 1.45.26
+업데이트: 2025-10-24 · 버전: 1.45.27
 
 —
 
@@ -52,12 +52,16 @@
 - `src/content-script/chatgpt-inpage-proxy.ts` — 인페이지 브리지(쿠키 읽기·턴스타일 시도)
 - **`src/app/bots/claude-web/index.ts`** — Claude Webapp SSE 파싱·대화 관리
 - **`src/app/bots/claude-web/api.ts`** — Claude API 호출 (org, conversation, title)
+- **`src/app/bots/grok/index.ts`** — Grok iframe 내장 통합 (새 탭 방식 제거)
+- **`src/app/bots/grok/webapp.ts`** — Grok 웹앱 봇 (iframe 폴백 메시지)
+- **`src/app/components/Chat/ConversationPanel.tsx`** — Grok 전용 UI (배율 조절 포함)
 - **`src/utils/sse.ts`** — SSE 스트림 파싱 (eventsource-parser 기반, ReadableStream 처리)
 
 **권한/매니페스트**
-- `host_permissions`: `https://*.openai.com/*`, `https://chatgpt.com/*`(CORS 회피)
-- `permissions`: `cookies`, `tabs`, `scripting`, `storage` 등
-- `content_scripts`: `chatgpt.com`, `chat.openai.com`에 브리지 스크립트 주입
+- `host_permissions`: `https://*.openai.com/*`, `https://chatgpt.com/*`, `https://grok.com/*`(CORS 회피)
+- `permissions`: `cookies`, `tabs`, `scripting`, `storage`, `declarativeNetRequestWithHostAccess` 등
+- `content_scripts`: `chatgpt.com`, `chat.openai.com`, `grok.com`에 브리지 스크립트 주입
+- `declarative_net_request`: Grok iframe 내장을 위한 X-Frame-Options 헤더 제거 규칙
 
 **문제 해결(요약)**
 - **ChatGPT**:
@@ -71,14 +75,32 @@
   - ReadableStream locked 에러: `getReader()` 중복 호출 방지
   - `message_limit` 이벤트: 사용량 정보 (5h/7d 윈도우), `within_limit` 정상
   - 403 model_not_allowed: 모델 자동 폴백 루프로 대체 모델 시도
+- **Grok**:
+  - iframe 내장 방식으로 새 탭 없이 프로그램 UI에 직접 표시
+  - X-Frame-Options 우회: `declarativeNetRequest`로 보안 헤더 제거
+  - 로그인 필요: `grok.com`에서 로그인 후 iframe 내에서 직접 사용
+  - 배율 조절: 슬라이더(50%-300%) + 텍스트 입력(직접 숫자 입력) 듀얼 방식
+  - localStorage 자동 저장: 크롬 재시작 시에도 배율 설정 유지
 
 **보안/정책**
 - Authorization 헤더·민감 쿠키 수집/보관 없음(브라우저가 쿠키를 자동 포함)
 - 서버리스(프록시 서버 없음), 사용자 로컬 스토리지만 사용
 - OpenAI 내부 API 변경 시 영향 가능 → 최소 헤더·Sentinel 토큰으로 호환성 우선
 
-**변경 요약(1.45.26)**
-- **Claude Webapp 통합 수정 완료**:
+**변경 요약(1.45.27)**
+- **Grok iframe 내장 및 배율 조절 UI 완성**:
+  - **새 탭 열기 방식 제거**: 기존 `window.open()` 방식 완전 제거
+  - **iframe 내장**: ConversationPanel에 `<iframe src="https://grok.com">` 직접 내장
+  - **X-Frame-Options 우회**: `src/rules/grok-iframe.json` declarativeNetRequest 규칙으로 보안 헤더 제거
+  - **듀얼 배율 조절 UI**:
+    - 슬라이더: 50% ~ 300% 범위, 5% 단위 조절 (w-20 컴팩트 사이즈)
+    - 텍스트 입력: 직접 숫자 입력 가능 (w-12 초소형 필드)
+    - 보안 강화: 정규식 입력 정제, 범위 검증, 타입 강제, XSS/Injection 방지
+  - **localStorage 영구 저장**: 크롬 재시작 시에도 배율 설정 유지
+  - **동적 transform**: `transform: scale(${grokZoom})`, `width/height: ${100/grokZoom}%`
+  - **React Hooks 순서 수정**: Error #300 해결 (hooks를 조건부 렌더링 전에 호출)
+  - **UI 최적화**: Grok 타이틀과 같은 줄 우측에 배치, 10px 작은 폰트, 초록색 슬라이더
+- **Claude Webapp 통합 수정 완료** (1.45.26):
   - SSE 이벤트 형식 수정: `content_block_delta` 이벤트에서 `delta.text` 추출
   - 요청 body 개선: `timezone`, `rendering_mode: "messages"` 추가
   - ReadableStream lock 문제 해결: reader 재사용 로직 수정
@@ -103,9 +125,14 @@
 - 모델 선택 시 `auto` 우선, 그 외 최신 슬러그 우선순위 적용
 
 **수동 테스트 체크리스트**
-- `yarn dev` 또는 `yarn build` 후 로드
+- `npm run build` 후 Chrome 확장 재로드
 - **ChatGPT**: 브라우저에서 `chatgpt.com` 로그인 → 확장에서 질문 전송 → 스트리밍 수신 확인
 - **Claude**: 브라우저에서 `claude.ai` 로그인 → 확장에서 질문 전송 → SSE 이벤트 수신 확인
+- **Grok**: 브라우저에서 `grok.com` 로그인 → 확장에서 Grok 패널 선택 → iframe에 grok.com 표시 확인
+  - 배율 슬라이더 테스트: 50% ~ 300% 드래그하며 iframe 크기 변경 확인
+  - 텍스트 입력 테스트: 직접 숫자(예: 175) 입력하여 배율 변경 확인
+  - 보안 테스트: `<script>`, `abc`, `9999`, `-100` 등 입력 시 자동 차단 확인
+  - 영구 저장 테스트: 배율 변경 → 크롬 재시작 → 설정 유지 확인
 - 필요 시 사용자가 직접 해당 서비스 탭을 열어 둠(자동 생성 없음)
 - 콘솔 로그 확인:
   - `[Claude] 📝 Updated answer (+N chars)` — 텍스트 수신 성공

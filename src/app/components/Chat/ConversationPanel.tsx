@@ -46,7 +46,18 @@ const ConversationPanel: FC<Props> = (props) => {
   const [showShareDialog, setShowShareDialog] = useState(false)
   const [isMainBrain, setIsMainBrain] = useState(false)
 
+  // Grok 전용: 배율 조절 상태 (localStorage에서 불러오기)
+  const [grokZoom, setGrokZoom] = useState(() => {
+    try {
+      const saved = localStorage.getItem('grok-zoom')
+      return saved ? Number(saved) : 1.25
+    } catch {
+      return 1.25
+    }
+  })
+
   // observe mainBrain changes to highlight panel
+  // ⚠️ CRITICAL: hooks는 항상 최상위에서 호출되어야 함 (조건문보다 먼저)
   useEffect(() => {
     let mounted = true
     getUserConfig().then((c) => mounted && setIsMainBrain(c.mainBrainBotId === props.botId))
@@ -105,6 +116,93 @@ const ConversationPanel: FC<Props> = (props) => {
         <UsageBadge text={draft} botIds={[props.botId]} />
         <Button text={t('Send')} color="primary" type="submit" />
       </div>
+    )
+  }
+
+  // Grok 전용 렌더링 (모든 hooks 호출 후에 처리)
+  if (props.botId === 'grok') {
+    return (
+      <ConversationContext.Provider value={context}>
+        <div className="flex flex-col overflow-hidden bg-primary-background h-full rounded-[20px]">
+          {/* 헤더 */}
+          <div className={cx('flex flex-row items-center justify-between border-b border-solid border-primary-border', mode === 'full' ? 'py-3 mx-5' : 'py-[10px] mx-3')}>
+            {/* 왼쪽: 타이틀 */}
+            <div className="flex flex-row items-center gap-2">
+              <img src={botInfo.avatar} className="w-5 h-5 object-contain rounded-full" />
+              <ChatbotName botId={props.botId} name={botInfo.name} onSwitchBot={props.onSwitchBot} />
+            </div>
+
+            {/* 오른쪽: 배율 조절 (슬라이더 + 텍스트 입력) */}
+            <div className="flex flex-row items-center gap-2">
+              <span className="text-[10px] text-light-text whitespace-nowrap">배율</span>
+              <input
+                type="range"
+                min="0.5"
+                max="3.0"
+                step="0.05"
+                value={grokZoom}
+                onChange={(e) => {
+                  const newZoom = Number(e.target.value)
+                  setGrokZoom(newZoom)
+                  localStorage.setItem('grok-zoom', String(newZoom))
+                }}
+                className="w-20 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                style={{ accentColor: '#10a37f' }}
+                title="드래그하여 배율 조절"
+              />
+              <input
+                type="text"
+                value={Math.round(grokZoom * 100)}
+                onChange={(e) => {
+                  // 입력값 정제: 숫자만 허용
+                  const sanitized = e.target.value.replace(/[^\d]/g, '')
+                  if (sanitized === '') return
+
+                  // 범위 제한: 50 ~ 300
+                  const numValue = Math.max(50, Math.min(300, parseInt(sanitized, 10)))
+                  const newZoom = numValue / 100
+
+                  setGrokZoom(newZoom)
+                  localStorage.setItem('grok-zoom', String(newZoom))
+                }}
+                onBlur={(e) => {
+                  // blur 시 빈 값이면 기본값으로 복원
+                  if (!e.target.value.trim()) {
+                    setGrokZoom(1.25)
+                    localStorage.setItem('grok-zoom', '1.25')
+                  }
+                }}
+                className="w-12 px-1.5 py-0.5 text-[10px] text-center border border-primary-border rounded bg-secondary text-primary-text focus:outline-none focus:ring-1 focus:ring-blue-500"
+                placeholder="100"
+                title="직접 입력 (50-300)"
+                maxLength={3}
+                pattern="[0-9]*"
+                inputMode="numeric"
+              />
+              <span className="text-[10px] text-light-text">%</span>
+            </div>
+          </div>
+
+          {/* Grok.com iframe 내장 - 동적 배율 조절 */}
+          <div className="flex-1 relative overflow-auto">
+            <iframe
+              src="https://grok.com"
+              className="w-full h-full border-0"
+              style={{
+                minHeight: '100%',
+                minWidth: '100%',
+                transform: `scale(${grokZoom})`,
+                transformOrigin: 'top left',
+                width: `${100 / grokZoom}%`,
+                height: `${100 / grokZoom}%`
+              }}
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
+              allow="clipboard-read; clipboard-write"
+              title="Grok Chat"
+            />
+          </div>
+        </div>
+      </ConversationContext.Provider>
     )
   }
 

@@ -39,16 +39,21 @@ export default defineManifest(async () => {
     permissions: ['storage', 'unlimitedStorage', 'sidePanel', 'declarativeNetRequestWithHostAccess', 'scripting', 'tabs', 'cookies'],
     content_scripts: [
       {
-        // 단일 블록으로 통합하여 CRX가 동적 모듈(WAR)을 모든 도메인에 일관되게 매핑하도록 함
+        // 기존 proxy-fetch 관련 (ChatGPT, Claude, Gemini, DeepSeek 등)
         matches: [
           'https://chat.openai.com/*',
           'https://chatgpt.com/*',
           'https://claude.ai/*',
           'https://gemini.google.com/*',
           'https://chat.deepseek.com/*',
-          'https://grok.com/*',
         ],
         js: ['src/content-script/chatgpt-inpage-proxy.ts'],
+        run_at: 'document_start',
+      },
+      {
+        // Grok.com UI 테마링 (DOM 기반 커스터마이징)
+        matches: ['https://grok.com/*'],
+        js: ['src/content-script/customize-grok.ts'],
         run_at: 'document_start',
       },
     ],
@@ -93,6 +98,11 @@ export default defineManifest(async () => {
           enabled: true,
           path: 'src/rules/pplx.json',
         },
+        {
+          id: 'ruleset_grok_iframe',
+          enabled: true,
+          path: 'src/rules/grok-iframe.json',
+        },
       ],
     },
     web_accessible_resources: [
@@ -118,7 +128,6 @@ export default defineManifest(async () => {
           'https://claude.ai/*',
           'https://gemini.google.com/*',
           'https://chat.deepseek.com/*',
-          'https://grok.com/*',
         ],
         use_dynamic_url: false,
       },

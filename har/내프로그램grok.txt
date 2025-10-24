@@ -1,0 +1,733 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [
+      {
+        "startedDateTime": "2025-10-22T08:21:29.556Z",
+        "id": "page_1",
+        "title": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html",
+        "pageTimings": {
+          "onContentLoad": 151.6319999936968,
+          "onLoad": 151.95799997309223
+        }
+      }
+    ],
+    "entries": [
+      {
+        "_connectionId": "564251",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ese",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 65,
+                "columnNumber": 137651
+              },
+              {
+                "functionName": "n",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 65,
+                "columnNumber": 137964
+              },
+              {
+                "functionName": "r",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 65,
+                "columnNumber": 137998
+              },
+              {
+                "functionName": "enableAutoPageviews",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 65,
+                "columnNumber": 138266
+              },
+              {
+                "functionName": "",
+                "scriptId": "25",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-321ec7ca.js",
+                "lineNumber": 249,
+                "columnNumber": 74819
+              },
+              {
+                "functionName": "",
+                "scriptId": "25",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-321ec7ca.js",
+                "lineNumber": 0,
+                "columnNumber": 22
+              },
+              {
+                "functionName": "",
+                "scriptId": "25",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-321ec7ca.js",
+                "lineNumber": 249,
+                "columnNumber": 74858
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "124"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 124,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"pageview\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1026,\"h\":1}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/22/2025 08:21:30"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.37"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "e8df2601719c3f0bb25db9d37c97ccf9"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 08:21:30 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHDCe4JT_gad9sR4WF2R"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 523,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-22T08:21:29.707Z",
+        "time": 393.32399998136987,
+        "timings": {
+          "blocked": 1.8610000168420375,
+          "dns": 0.0029999999999998916,
+          "ssl": 39.982000000000006,
+          "connect": 85.17399999999999,
+          "send": 0.2580000000000098,
+          "wait": 305.70600001559035,
+          "receive": 0.3219999489374459,
+          "_blocked_queueing": 0.7590000168420374,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "564251",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ese",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 65,
+                "columnNumber": 137651
+              },
+              {
+                "functionName": "n",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 65,
+                "columnNumber": 137964
+              },
+              {
+                "functionName": "Ra",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 65,
+                "columnNumber": 139592
+              },
+              {
+                "functionName": "",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 652,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "",
+                "scriptId": "25",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-321ec7ca.js",
+                "lineNumber": 236,
+                "columnNumber": 18951
+              },
+              {
+                "functionName": "onUserSendMessage",
+                "scriptId": "25",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-321ec7ca.js",
+                "lineNumber": 236,
+                "columnNumber": 19898
+              },
+              {
+                "functionName": "",
+                "scriptId": "25",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-321ec7ca.js",
+                "lineNumber": 236,
+                "columnNumber": 12297
+              },
+              {
+                "functionName": "",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 634,
+                "columnNumber": 1783
+              },
+              {
+                "functionName": "NV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "MV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "LV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "LA",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "PD",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "tD",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 8974
+              },
+              {
+                "functionName": "l1",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "WE",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "JV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              },
+              {
+                "functionName": "",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 634,
+                "columnNumber": 119
+              },
+              {
+                "functionName": "NV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "MV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "LV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "LA",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "PD",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "yS",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 47,
+                "columnNumber": 36955
+              },
+              {
+                "functionName": "tD",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 8998
+              },
+              {
+                "functionName": "l1",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "WE",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "JV",
+                "scriptId": "26",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-0bb9c698.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "217"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 217,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1026,\"h\":1,\"p\":\"{\\\"version\\\":\\\"1.45.24\\\",\\\"botId\\\":\\\"grok\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"Grok\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/22/2025 08:21:33"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.37"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "9b9099c64afd4e8df4ac239e6bdca06b"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 08:21:33 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHDCfEV_k7U6RB2I8gkH"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 523,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-22T08:21:33.068Z",
+        "time": 306.5410000272095,
+        "timings": {
+          "blocked": 1.5159999727271498,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.265,
+          "wait": 304.1570000031404,
+          "receive": 0.6030000513419509,
+          "_blocked_queueing": 1.1659999727271497,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

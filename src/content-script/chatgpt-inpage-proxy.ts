@@ -17,20 +17,29 @@ function injectInpageFetchBridge() {
         console.warn('[GPT-PROXY] ⚠️ Extension context may be invalid - attempting injection anyway')
       }
 
-      const script = document.createElement('script')
-      script.src = Browser.runtime.getURL('js/inpage-fetch-bridge.js')
-      script.async = true
-      script.defer = true
-      
-      // 에러 핸들링 강화
-      script.onerror = (e) => {
-        console.error('[GPT-PROXY] ❌ Failed to load inpage-fetch-bridge.js', e)
-      }
-      script.onload = () => {
-        console.debug('[GPT-PROXY] ✅ inpage-fetch-bridge.js loaded successfully')
-      }
-      
-      document.documentElement.appendChild(script)
+      // ⚠️ CRITICAL: CSP 'strict-dynamic' 우회를 위해
+      // fetch()로 내용을 가져와서 inline script로 주입
+      // (script.src는 CSP에 의해 차단되므로)
+
+      const bridgeURL = Browser.runtime.getURL('js/inpage-fetch-bridge.js')
+
+      fetch(bridgeURL)
+        .then(response => response.text())
+        .then(scriptContent => {
+          const script = document.createElement('script')
+          script.textContent = scriptContent
+          // Note: async/defer not needed for inline scripts
+
+          // Inject into page context (MAIN world)
+          ;(document.head || document.documentElement).appendChild(script)
+          script.remove() // Cleanup
+
+          console.debug('[GPT-PROXY] ✅ inpage-fetch-bridge.js injected as inline script (CSP bypass)')
+        })
+        .catch(e => {
+          console.error('[GPT-PROXY] ❌ Failed to fetch/inject inpage-fetch-bridge.js', e)
+        })
+
       return true
     } catch (e) {
       console.error('[GPT-PROXY] ❌ injectInpageFetchBridge failed', e)
@@ -55,10 +64,12 @@ function injectInpageFetchBridge() {
 
 async function main() {
   console.debug('[GPT-PROXY] 🚀 Content script initializing', location.href)
-  
-  // Bridge는 background의 chrome.scripting.executeScript로 MAIN world에 주입됨(CSP/nonce 회피)
-  // 여기서는 별도 <script> 태그 주입을 하지 않음.
-  
+
+  // ⚠️ CRITICAL FIX: Grok.com의 CSP 'strict-dynamic' 때문에
+  // proxy-fetch.ts의 executeScript가 차단됨!
+  // Content script (ISOLATED world)는 CSP 영향을 안 받으므로 여기서 주입
+  injectInpageFetchBridge()
+
   // URL 요청 리스너
   Browser.runtime.onMessage.addListener(async (message) => {
     if (message === 'url') {

@@ -116,6 +116,24 @@ Browser.runtime.onConnect.addListener((port) => {
         : (navigator.language || 'en-US')
       const deviceId = await getStableDeviceId()
       
+      // URL에 따라 Origin/Referer 결정
+      let originUrl = 'https://chatgpt.com'
+      let refererUrl = 'https://chatgpt.com/'
+      
+      if (url.includes('grok.com')) {
+        originUrl = 'https://grok.com'
+        refererUrl = 'https://grok.com/'
+      } else if (url.includes('claude.ai')) {
+        originUrl = 'https://claude.ai'
+        refererUrl = 'https://claude.ai/'
+      } else if (url.includes('gemini.google.com')) {
+        originUrl = 'https://gemini.google.com'
+        refererUrl = 'https://gemini.google.com/'
+      } else if (url.includes('deepseek.com')) {
+        originUrl = 'https://chat.deepseek.com'
+        refererUrl = 'https://chat.deepseek.com/'
+      }
+      
       // 필수 헤더: 실제 브라우저처럼 보이게
       if (headerMode === 'browserlike') {
         if (!headers.has('User-Agent')) {
@@ -136,10 +154,10 @@ Browser.runtime.onConnect.addListener((port) => {
           headers.set('Accept-Encoding', 'gzip, deflate, br')
         }
         if (!headers.has('Origin')) {
-          headers.set('Origin', 'https://chatgpt.com')
+          headers.set('Origin', originUrl)
         }
         if (!headers.has('Referer')) {
-          headers.set('Referer', 'https://chatgpt.com/')
+          headers.set('Referer', refererUrl)
         }
         // Note: Do NOT forge Sec-Fetch-* headers in extension context (can look inconsistent)
         // ChatHub 스타일 전용 헤더
@@ -171,7 +189,7 @@ Browser.runtime.onConnect.addListener((port) => {
         credentials: 'include', // ✅ 쿠키 포함 필수
         signal: controller.signal,
       }
-      if (!('referrer' in (options || {}))) (init as any).referrer = 'https://chatgpt.com/'
+      if (!('referrer' in (options || {}))) (init as any).referrer = refererUrl
       if (!('referrerPolicy' in (options || {}))) (init as any).referrerPolicy = 'strict-origin-when-cross-origin'
       const resp = await fetch(url, init)
       port.postMessage({

@@ -1,0 +1,1425 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [],
+    "entries": [
+      {
+        "_connectionId": "367730",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 3,
+                "columnNumber": 1312
+              },
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 3,
+                "columnNumber": 1312
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 20229
+              },
+              {
+                "functionName": "o",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 18985
+              },
+              {
+                "functionName": "a",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 19849
+              },
+              {
+                "functionName": "cit",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 20667
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 6154
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 8693
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 9719
+              },
+              {
+                "functionName": "IP",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 392,
+                "columnNumber": 4418
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "GET",
+          "url": "https://app.chathub.gg/api/user",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "app.chathub.gg"
+            },
+            {
+              "name": ":method",
+              "value": "GET"
+            },
+            {
+              "name": ":path",
+              "value": "/api/user"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "x-version",
+              "value": "3.99.4"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "BYPASS"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9948a3d3a95362db-NRT"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Oct 2025 08:38:52 GMT"
+            },
+            {
+              "name": "fly-request-id",
+              "value": "01K8FTQ82X25FDRNDDGV782475-nrt"
+            },
+            {
+              "name": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=1FORGW6iaf0tJ9Xw2SK8fdlB%2Bc4L1H%2FIg00kponuF4aImR69RghieGTDy%2FpUebOUbDLN7XEeUrafWoMJCiqKR1GIlGKlRiADuB%2FbpWk%3D\"}]}"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "via",
+              "value": "1.1 fly.io, 1.1 fly.io"
+            },
+            {
+              "name": "x-accel-buffering",
+              "value": "yes"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 257,
+            "mimeType": "application/json",
+            "text": "{\"user\":{\"id\":\"2128c3cc-41fd-4e1d-9f62-d6947ccc2c9a\",\"email\":\"vinny4920@gmail.com\",\"avatarUrl\":\"https://lh3.googleusercontent.com/a/ACg8ocKqna1tlwdZtgZ4QxNsPARcG46i5qlpe45YgqfeOxfnAi6_Mg=s96-c\",\"name\":\"장난감\",\"fullName\":\"장난감\",\"membership\":\"free\"}}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 735,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.26.14.89",
+        "startedDateTime": "2025-10-26T08:38:52.665Z",
+        "time": 402.3949999973411,
+        "timings": {
+          "blocked": 3.2840000006714836,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.46099999999999997,
+          "wait": 396.63199999744444,
+          "receive": 2.0179999992251396,
+          "_blocked_queueing": 2.7960000006714836,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "368041",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 19,
+                "columnNumber": 20395
+              },
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 19,
+                "columnNumber": 12884
+              },
+              {
+                "functionName": "Fpe",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 41,
+                "columnNumber": 118248
+              },
+              {
+                "functionName": "n",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 41,
+                "columnNumber": 118561
+              },
+              {
+                "functionName": "Ov",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 44,
+                "columnNumber": 97495
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 620,
+                "columnNumber": 26436
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 617,
+                "columnNumber": 31380
+              },
+              {
+                "functionName": "cse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 9872
+              },
+              {
+                "functionName": "fse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 10029
+              },
+              {
+                "functionName": "pse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 10089
+              },
+              {
+                "functionName": "l7",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 31562
+              },
+              {
+                "functionName": "zF",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 31980
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 36913
+              },
+              {
+                "functionName": "uF",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 8982
+              },
+              {
+                "functionName": "S2",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 33270
+              },
+              {
+                "functionName": "JT",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 17413
+              },
+              {
+                "functionName": "Ise",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 17196
+              },
+              {
+                "functionName": "r",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 16,
+                "columnNumber": 5169
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 599,
+                "columnNumber": 138
+              },
+              {
+                "functionName": "cse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 9872
+              },
+              {
+                "functionName": "fse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 10029
+              },
+              {
+                "functionName": "pse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 10089
+              },
+              {
+                "functionName": "l7",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 31562
+              },
+              {
+                "functionName": "zF",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 31980
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 36913
+              },
+              {
+                "functionName": "x6",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 41,
+                "columnNumber": 36961
+              },
+              {
+                "functionName": "uF",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 9006
+              },
+              {
+                "functionName": "S2",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 33270
+              },
+              {
+                "functionName": "JT",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 17413
+              },
+              {
+                "functionName": "Ise",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 17196
+              },
+              {
+                "functionName": "r",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 16,
+                "columnNumber": 5169
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.midway.run/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.midway.run"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "262"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 262,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/app.html#/chat/deepseek\",\"d\":\"chathub.gg\",\"r\":null,\"w\":898,\"h\":1,\"p\":\"{\\\"version\\\":\\\"3.99.4\\\",\\\"botId\\\":\\\"deepseek\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"Cloud (deepseek/deepseek-v3-ext)\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-expose-headers",
+              "value": ""
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=0, private, must-revalidate"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Oct 2025 08:38:55 GMT"
+            },
+            {
+              "name": "x-envoy-upstream-service-time",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "9a858b528d7b51846e2d9795491ca108"
+            },
+            {
+              "name": "x-request-id",
+              "value": "9a858b528d7b51846e2d9795491ca108"
+            },
+            {
+              "name": "x-request-id",
+              "value": "9a858b528d7b51846e2d9795491ca108"
+            },
+            {
+              "name": "x-server",
+              "value": "Potato-Server"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 343,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "8.217.234.74",
+        "startedDateTime": "2025-10-26T08:38:55.309Z",
+        "time": 260.33699999632313,
+        "timings": {
+          "blocked": 1.8359999969606289,
+          "dns": 0.010000000000000009,
+          "ssl": 54.724000000000004,
+          "connect": 111.58800000000001,
+          "send": 0.1979999999999933,
+          "wait": 146.13400000250945,
+          "receive": 0.570999996853061,
+          "_blocked_queueing": 1.4739999969606288,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "367730",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 3,
+                "columnNumber": 1312
+              },
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 3,
+                "columnNumber": 1312
+              },
+              {
+                "functionName": "fetchCompletionApi",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 536,
+                "columnNumber": 8755
+              },
+              {
+                "functionName": "sendMessage",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 536,
+                "columnNumber": 9495
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 620,
+                "columnNumber": 27032
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 617,
+                  "columnNumber": 31380
+                },
+                {
+                  "functionName": "cse",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 9872
+                },
+                {
+                  "functionName": "fse",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 10029
+                },
+                {
+                  "functionName": "pse",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 10089
+                },
+                {
+                  "functionName": "l7",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 31562
+                },
+                {
+                  "functionName": "zF",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 31980
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 36913
+                },
+                {
+                  "functionName": "uF",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 8982
+                },
+                {
+                  "functionName": "S2",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 33270
+                },
+                {
+                  "functionName": "JT",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 17413
+                },
+                {
+                  "functionName": "Ise",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 17196
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "14",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                  "lineNumber": 16,
+                  "columnNumber": 5169
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 599,
+                  "columnNumber": 138
+                },
+                {
+                  "functionName": "cse",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 9872
+                },
+                {
+                  "functionName": "fse",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 10029
+                },
+                {
+                  "functionName": "pse",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 10089
+                },
+                {
+                  "functionName": "l7",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 31562
+                },
+                {
+                  "functionName": "zF",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 31980
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 36913
+                },
+                {
+                  "functionName": "x6",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 41,
+                  "columnNumber": 36961
+                },
+                {
+                  "functionName": "uF",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 9006
+                },
+                {
+                  "functionName": "S2",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 33270
+                },
+                {
+                  "functionName": "JT",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 17413
+                },
+                {
+                  "functionName": "Ise",
+                  "scriptId": "13",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                  "lineNumber": 38,
+                  "columnNumber": 17196
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "14",
+                  "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                  "lineNumber": 16,
+                  "columnNumber": 5169
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://app.chathub.gg/api/v3/chat/completions",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "app.chathub.gg"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/v3/chat/completions"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "113"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "x-app-id",
+              "value": "extension"
+            },
+            {
+              "name": "x-client-time",
+              "value": "2025-10-26T08:38:55.322Z"
+            },
+            {
+              "name": "x-device-id",
+              "value": "63e03244-185d-4e16-809a-07d61ec68f23"
+            },
+            {
+              "name": "x-model",
+              "value": "deepseek/deepseek-v3-ext"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 113,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"model\":\"deepseek/deepseek-v3-ext\",\"messages\":[{\"role\":\"user\",\"content\":\"안녕\"}],\"tools\":[\"image_generation\"]}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9948a3e44cc162db-NRT"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-type",
+              "value": "text/event-stream; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Oct 2025 08:38:57 GMT"
+            },
+            {
+              "name": "fly-request-id",
+              "value": "01K8FTQANWFNS0YTR5QDCF00XC-nrt"
+            },
+            {
+              "name": "nel",
+              "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "report-to",
+              "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=jOuldjqGC80lFTelEcIARokSYYXqu2uvEMxvYxpAcdWwM9vY8DsFFS3gVwAb7lhoKNF%2BLSAwLghA2XyJubU%2BH8tUYoZBzy9uEzBuhcQ%3D\"}]}"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "via",
+              "value": "1.1 fly.io, 1.1 fly.io"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 621,
+            "mimeType": "text/event-stream",
+            "text": "ZXZlbnQ6IG1lc3NhZ2UKZGF0YTogeyJ0eXBlIjoidGV4dC1kZWx0YSIsInRleHREZWx0YSI6IuyViCJ9CgpldmVudDogbWVzc2FnZQpkYXRhOiB7InR5cGUiOiJ0ZXh0LWRlbHRhIiwidGV4dERlbHRhIjoi64WVIn0KCmV2ZW50OiBtZXNzYWdlCmRhdGE6IHsidHlwZSI6InRleHQtZGVsdGEiLCJ0ZXh0RGVsdGEiOiLtlZjshLjsmpQifQoKZXZlbnQ6IG1lc3NhZ2UKZGF0YTogeyJ0eXBlIjoidGV4dC1kZWx0YSIsInRleHREZWx0YSI6IiEgIn0KCmV2ZW50OiBtZXNzYWdlCmRhdGE6IHsidHlwZSI6InRleHQtZGVsdGEiLCJ0ZXh0RGVsdGEiOiIg8J+YiiDslrTrlrvqsowifQoKZXZlbnQ6IG1lc3NhZ2UKZGF0YTogeyJ0eXBlIjoidGV4dC1kZWx0YSIsInRleHREZWx0YSI6IiDrj4TsmYAifQoKZXZlbnQ6IG1lc3NhZ2UKZGF0YTogeyJ0eXBlIjoidGV4dC1kZWx0YSIsInRleHREZWx0YSI6IuuTnCJ9CgpldmVudDogbWVzc2FnZQpkYXRhOiB7InR5cGUiOiJ0ZXh0LWRlbHRhIiwidGV4dERlbHRhIjoi66a06rmMIn0KCmV2ZW50OiBtZXNzYWdlCmRhdGE6IHsidHlwZSI6InRleHQtZGVsdGEiLCJ0ZXh0RGVsdGEiOiLsmpQ/In0KCmV2ZW50OiBtZXNzYWdlCmRhdGE6IHsidHlwZSI6ImRvbmUifQoK",
+            "encoding": "base64"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 1213,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.26.14.89",
+        "startedDateTime": "2025-10-26T08:38:55.323Z",
+        "time": 3126.618000002054,
+        "timings": {
+          "blocked": 2.4290000037415886,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.968,
+          "wait": 2634.738999997654,
+          "receive": 488.48200000065845,
+          "_blocked_queueing": 1.5800000037415884,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "368063",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 19,
+                "columnNumber": 20395
+              },
+              {
+                "functionName": "",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 19,
+                "columnNumber": 12884
+              },
+              {
+                "functionName": "Fpe",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 41,
+                "columnNumber": 118248
+              },
+              {
+                "functionName": "n",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 41,
+                "columnNumber": 118561
+              },
+              {
+                "functionName": "Ov",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 44,
+                "columnNumber": 97495
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 617,
+                "columnNumber": 31743
+              },
+              {
+                "functionName": "cse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 9872
+              },
+              {
+                "functionName": "fse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 10029
+              },
+              {
+                "functionName": "pse",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 10089
+              },
+              {
+                "functionName": "l7",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 31562
+              },
+              {
+                "functionName": "zF",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 31980
+              },
+              {
+                "functionName": "",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 36913
+              },
+              {
+                "functionName": "x6",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 41,
+                "columnNumber": 36961
+              },
+              {
+                "functionName": "uF",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 9006
+              },
+              {
+                "functionName": "S2",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 33270
+              },
+              {
+                "functionName": "JT",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 17413
+              },
+              {
+                "functionName": "Ise",
+                "scriptId": "13",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/premium-CHh0JHCP.js",
+                "lineNumber": 38,
+                "columnNumber": 17196
+              },
+              {
+                "functionName": "r",
+                "scriptId": "14",
+                "url": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/assets/app-DN6dGB8Q.js",
+                "lineNumber": 16,
+                "columnNumber": 5169
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.midway.run/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.midway.run"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "180"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://iaakpnchhognanibcahlpcplchdfmgma"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 180,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"open_prompt_library\",\"u\":\"chrome-extension://iaakpnchhognanibcahlpcplchdfmgma/app.html#/chat/deepseek\",\"d\":\"chathub.gg\",\"r\":null,\"w\":898,\"h\":1,\"p\":\"{\\\"version\\\":\\\"3.99.4\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-expose-headers",
+              "value": ""
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=0, private, must-revalidate"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Oct 2025 08:38:58 GMT"
+            },
+            {
+              "name": "x-envoy-upstream-service-time",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "377f2eee0ad05592a3bedfc72818b28b"
+            },
+            {
+              "name": "x-request-id",
+              "value": "377f2eee0ad05592a3bedfc72818b28b"
+            },
+            {
+              "name": "x-request-id",
+              "value": "377f2eee0ad05592a3bedfc72818b28b"
+            },
+            {
+              "name": "x-server",
+              "value": "Potato-Server"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 343,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "8.217.234.74",
+        "startedDateTime": "2025-10-26T08:38:57.367Z",
+        "time": 1088.194000000183,
+        "timings": {
+          "blocked": 1.919999996622093,
+          "dns": 0.010000000000000009,
+          "ssl": 160.726,
+          "connect": 811.793,
+          "send": 0.6280000000000427,
+          "wait": 273.2859999968954,
+          "receive": 0.5570000066654757,
+          "_blocked_queueing": 1.472999996622093,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

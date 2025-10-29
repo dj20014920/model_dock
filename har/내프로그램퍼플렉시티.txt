@@ -1,0 +1,4417 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [],
+    "entries": [
+      {
+        "_connectionId": "625140",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Cse",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 65,
+                "columnNumber": 137643
+              },
+              {
+                "functionName": "n",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 65,
+                "columnNumber": 137956
+              },
+              {
+                "functionName": "Ia",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 65,
+                "columnNumber": 139584
+              },
+              {
+                "functionName": "",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 634,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "",
+                "scriptId": "10",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-93340ca7.js",
+                "lineNumber": 328,
+                "columnNumber": 8534
+              },
+              {
+                "functionName": "onUserSendMessage",
+                "scriptId": "10",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-93340ca7.js",
+                "lineNumber": 329,
+                "columnNumber": 632
+              },
+              {
+                "functionName": "",
+                "scriptId": "10",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-93340ca7.js",
+                "lineNumber": 236,
+                "columnNumber": 12410
+              },
+              {
+                "functionName": "",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 616,
+                "columnNumber": 2205
+              },
+              {
+                "functionName": "OV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "RV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "IV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "MA",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "TD",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "ZN",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 8974
+              },
+              {
+                "functionName": "c1",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "VE",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "YV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              },
+              {
+                "functionName": "",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 616,
+                "columnNumber": 119
+              },
+              {
+                "functionName": "OV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "RV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "IV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "MA",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "TD",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "vS",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 47,
+                "columnNumber": 36955
+              },
+              {
+                "functionName": "ZN",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 8998
+              },
+              {
+                "functionName": "c1",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "VE",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "YV",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "238"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 238,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1201,\"h\":1,\"p\":\"{\\\"version\\\":\\\"1.45.24\\\",\\\"botId\\\":\\\"perplexity\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"Perplexity (webapp)\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/28/2025 07:58:02"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.39"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "9a599740b1b77522768ee0a20320091b"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:58:02 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHKYrxVqEW8Vc3tGQqaJ"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 523,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-28T07:58:02.128Z",
+        "time": 274.5360000117216,
+        "timings": {
+          "blocked": 1.9780000083092601,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.5,
+          "wait": 271.4909999933615,
+          "receive": 0.5670000100508332,
+          "_blocked_queueing": 1.57200000830926,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Li",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 361,
+                "columnNumber": 5116
+              },
+              {
+                "functionName": "",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 605,
+                "columnNumber": 780
+              },
+              {
+                "functionName": "gpe",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 604,
+                "columnNumber": 4880
+              },
+              {
+                "functionName": "doSendMessage",
+                "scriptId": "11",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                "lineNumber": 605,
+                "columnNumber": 760
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "doSendMessage",
+                  "scriptId": "11",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                  "lineNumber": 65,
+                  "columnNumber": 159598
+                },
+                {
+                  "functionName": "start",
+                  "scriptId": "11",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158892
+                },
+                {
+                  "functionName": "doSendMessageGenerator",
+                  "scriptId": "11",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158857
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "11",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                  "lineNumber": 634,
+                  "columnNumber": 31819
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "10",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-93340ca7.js",
+                    "lineNumber": 328,
+                    "columnNumber": 8534
+                  },
+                  {
+                    "functionName": "onUserSendMessage",
+                    "scriptId": "10",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-93340ca7.js",
+                    "lineNumber": 329,
+                    "columnNumber": 632
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "10",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-93340ca7.js",
+                    "lineNumber": 236,
+                    "columnNumber": 12410
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 616,
+                    "columnNumber": 2205
+                  },
+                  {
+                    "functionName": "OV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "IV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "MA",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "TD",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "ZN",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8974
+                  },
+                  {
+                    "functionName": "c1",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "VE",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "YV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 616,
+                    "columnNumber": 119
+                  },
+                  {
+                    "functionName": "OV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "IV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "MA",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "TD",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "vS",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 47,
+                    "columnNumber": 36955
+                  },
+                  {
+                    "functionName": "ZN",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8998
+                  },
+                  {
+                    "functionName": "c1",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "VE",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "YV",
+                    "scriptId": "11",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-719a57d8.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "request": {
+          "method": "POST",
+          "url": "https://www.perplexity.ai/rest/sse/perplexity_ask",
+          "httpVersion": "",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "Referer",
+              "value": ""
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 172,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"params\":{\"search_focus\":\"internet\",\"sources\":[\"web\"],\"mode\":\"copilot\",\"model_preference\":\"pplx_pro\",\"supported_block_use_cases\":[],\"version\":\"2.18\"},\"query_str\":\"ㅎㅎ\"}"
+          }
+        },
+        "response": {
+          "status": 0,
+          "statusText": "",
+          "httpVersion": "",
+          "headers": [],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": "net::ERR_FAILED",
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "",
+        "startedDateTime": "2025-10-28T07:58:02.166Z",
+        "time": 321.7810000060126,
+        "timings": {
+          "blocked": 321.7810000060126,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0,
+          "receive": 0,
+          "_blocked_queueing": -1
+        }
+      },
+      {
+        "_connectionId": "625858",
+        "_initiator": {
+          "type": "preflight",
+          "url": "https://www.perplexity.ai/rest/sse/perplexity_ask",
+          "requestId": "11180.80"
+        },
+        "_priority": "High",
+        "_resourceType": "preflight",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "OPTIONS",
+          "url": "https://www.perplexity.ai/rest/sse/perplexity_ask",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "www.perplexity.ai"
+            },
+            {
+              "name": ":method",
+              "value": "OPTIONS"
+            },
+            {
+              "name": ":path",
+              "value": "/rest/sse/perplexity_ask"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "access-control-request-headers",
+              "value": "content-type"
+            },
+            {
+              "name": "access-control-request-method",
+              "value": "POST"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 405,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "allow",
+              "value": "POST"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9958e2be4d71c38f-ICN"
+            },
+            {
+              "name": "content-length",
+              "value": "31"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:58:02 GMT"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15552000; includeSubDomains; preload"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.18.27.48",
+        "startedDateTime": "2025-10-28T07:58:02.168Z",
+        "time": 368.78000000178906,
+        "timings": {
+          "blocked": 0.8719999956656248,
+          "dns": 49.784,
+          "ssl": 10.255000000000003,
+          "connect": 70.429,
+          "send": 0.30400000000000205,
+          "wait": 246.41499999585469,
+          "receive": 0.9760000102687627,
+          "_blocked_queueing": 0.5459999956656247,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "622634",
+        "_initiator": {
+          "type": "other"
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://grok.com/monitoring?o=4508179396558848&p=4508493378158592&r=us",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "grok.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/monitoring?o=4508179396558848&p=4508493378158592&r=us"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "300"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "name": "origin",
+              "value": "https://grok.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "o",
+              "value": "4508179396558848"
+            },
+            {
+              "name": "p",
+              "value": "4508493378158592"
+            },
+            {
+              "name": "r",
+              "value": "us"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 300,
+          "postData": {
+            "mimeType": "text/plain;charset=UTF-8",
+            "text": "{\"dsn\":\"https://b311e0f2690c81f25e2c4cf6d4f7ce1c@o4508179396558848.ingest.us.sentry.io/4508493378158592\"}\n{\"type\":\"client_report\"}\n{\"timestamp\":1761638286.583,\"discarded_events\":[{\"reason\":\"sample_rate\",\"category\":\"transaction\",\"quantity\":1},{\"reason\":\"before_send\",\"category\":\"error\",\"quantity\":1}]}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-expose-headers",
+              "value": "x-sentry-error,x-sentry-rate-limits,retry-after"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9958e2d99d197363-ICN"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "cross-origin-resource-policy",
+              "value": "cross-origin"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:58:06 GMT"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "name": "vary",
+              "value": "origin, access-control-request-method, access-control-request-headers, Accept-Encoding"
+            },
+            {
+              "name": "via",
+              "value": "1.1 google"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "application/json",
+            "text": "{}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 277,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.18.29.234",
+        "startedDateTime": "2025-10-28T07:58:06.584Z",
+        "time": 290.45200000109617,
+        "timings": {
+          "blocked": 19.322000010235236,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.837,
+          "wait": 269.7100000044974,
+          "receive": 0.5829999863635749,
+          "_blocked_queueing": 17.740000010235235,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "si",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 901443
+              },
+              {
+                "functionName": "sl._send_request",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 910575
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 912885
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 857321
+              },
+              {
+                "functionName": "oj.sendRequestPromise",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 857290
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 860195
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "oj.flush",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 857621
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 904611
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 904783
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "VeryLow",
+        "_resourceType": "ping",
+        "cache": {},
+        "request": {
+          "method": "POST",
+          "url": "https://api-js.mixpanel.com/track/?verbose=1&ip=1&_=1761638286589",
+          "httpVersion": "",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "text/plain;charset=UTF-8"
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "verbose",
+              "value": "1"
+            },
+            {
+              "name": "ip",
+              "value": "1"
+            },
+            {
+              "name": "_",
+              "value": "1761638286589"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 1087,
+          "postData": {
+            "mimeType": "text/plain;charset=UTF-8",
+            "text": "data=%5B%7B%22event%22%3A%22session_active_time%22%2C%22properties%22%3A%7B%22%24os%22%3A%22Mac%20OS%20X%22%2C%22%24browser%22%3A%22Chrome%22%2C%22%24current_url%22%3A%22https%3A%2F%2Fgrok.com%2F%22%2C%22%24browser_version%22%3A141%2C%22%24screen_height%22%3A1050%2C%22%24screen_width%22%3A1680%2C%22mp_lib%22%3A%22web%22%2C%22%24lib_version%22%3A%222.66.0%22%2C%22%24insert_id%22%3A%22a1mvh350gzc79rde%22%2C%22time%22%3A1761638286.587%2C%22distinct_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22%24device_id%22%3A%225e17208a-72a3-43fe-8a0c-2f3e6627e188%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22%24user_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22location%22%3A%22session-tracker%22%2C%22sessionActiveTimeMs%22%3A%2219105.80000001192%22%2C%22totalActiveTimeMs%22%3A%2219105.80000001192%22%2C%22page%22%3A%22main%22%2C%22eventValue%22%3A%2219105.80000001192%22%2C%22app_name%22%3A%22web%22%2C%22token%22%3A%22ea93da913ddb66b6372b89d97b1029ac%22%2C%22mp_sent_by_lib_version%22%3A%222.66.0%22%7D%7D%5D"
+          }
+        },
+        "response": {
+          "status": 0,
+          "statusText": "",
+          "httpVersion": "",
+          "headers": [],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": "net::ERR_BLOCKED_BY_CLIENT",
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "",
+        "startedDateTime": "2025-10-28T07:58:06.589Z",
+        "time": 12.023000002955087,
+        "timings": {
+          "blocked": 12.023000002955087,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0,
+          "receive": 0,
+          "_blocked_queueing": -1
+        }
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 178298
+              },
+              {
+                "functionName": "apply",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 171651
+              },
+              {
+                "functionName": "sl._send_request",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 911473
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 912885
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 857321
+              },
+              {
+                "functionName": "oj.sendRequestPromise",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 857290
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 860195
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "oj.flush",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 857621
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 857199
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "19",
+                    "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                    "lineNumber": 0,
+                    "columnNumber": 177615
+                  },
+                  {
+                    "functionName": "oj.scheduleFlush",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 857130
+                  },
+                  {
+                    "functionName": "oj.resetFlush",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 856985
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 858228
+                  }
+                ],
+                "parent": {
+                  "description": "Promise.then",
+                  "callFrames": [
+                    {
+                      "functionName": "oj.flush",
+                      "scriptId": "52",
+                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                      "lineNumber": 0,
+                      "columnNumber": 857621
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "52",
+                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                      "lineNumber": 0,
+                      "columnNumber": 857199
+                    },
+                    {
+                      "functionName": "r",
+                      "scriptId": "19",
+                      "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                      "lineNumber": 0,
+                      "columnNumber": 161287
+                    }
+                  ],
+                  "parent": {
+                    "description": "setTimeout",
+                    "callFrames": [
+                      {
+                        "functionName": "",
+                        "scriptId": "19",
+                        "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                        "lineNumber": 0,
+                        "columnNumber": 177615
+                      },
+                      {
+                        "functionName": "oj.scheduleFlush",
+                        "scriptId": "52",
+                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                        "lineNumber": 0,
+                        "columnNumber": 857130
+                      },
+                      {
+                        "functionName": "oj.resetFlush",
+                        "scriptId": "52",
+                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                        "lineNumber": 0,
+                        "columnNumber": 856985
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "52",
+                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                        "lineNumber": 0,
+                        "columnNumber": 858228
+                      }
+                    ],
+                    "parent": {
+                      "description": "Promise.then",
+                      "callFrames": [
+                        {
+                          "functionName": "oj.flush",
+                          "scriptId": "52",
+                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                          "lineNumber": 0,
+                          "columnNumber": 857621
+                        },
+                        {
+                          "functionName": "",
+                          "scriptId": "52",
+                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                          "lineNumber": 0,
+                          "columnNumber": 857199
+                        },
+                        {
+                          "functionName": "r",
+                          "scriptId": "19",
+                          "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                          "lineNumber": 0,
+                          "columnNumber": 161287
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "request": {
+          "method": "POST",
+          "url": "https://api-js.mixpanel.com/track/?verbose=1&ip=1&_=1761638287770",
+          "httpVersion": "",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "verbose",
+              "value": "1"
+            },
+            {
+              "name": "ip",
+              "value": "1"
+            },
+            {
+              "name": "_",
+              "value": "1761638287770"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 1087,
+          "postData": {
+            "mimeType": "application/x-www-form-urlencoded",
+            "text": "data=%5B%7B%22event%22%3A%22session_active_time%22%2C%22properties%22%3A%7B%22%24os%22%3A%22Mac%20OS%20X%22%2C%22%24browser%22%3A%22Chrome%22%2C%22%24current_url%22%3A%22https%3A%2F%2Fgrok.com%2F%22%2C%22%24browser_version%22%3A141%2C%22%24screen_height%22%3A1050%2C%22%24screen_width%22%3A1680%2C%22mp_lib%22%3A%22web%22%2C%22%24lib_version%22%3A%222.66.0%22%2C%22%24insert_id%22%3A%22a1mvh350gzc79rde%22%2C%22time%22%3A1761638286.587%2C%22distinct_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22%24device_id%22%3A%225e17208a-72a3-43fe-8a0c-2f3e6627e188%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22%24user_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22location%22%3A%22session-tracker%22%2C%22sessionActiveTimeMs%22%3A%2219105.80000001192%22%2C%22totalActiveTimeMs%22%3A%2219105.80000001192%22%2C%22page%22%3A%22main%22%2C%22eventValue%22%3A%2219105.80000001192%22%2C%22app_name%22%3A%22web%22%2C%22token%22%3A%22ea93da913ddb66b6372b89d97b1029ac%22%2C%22mp_sent_by_lib_version%22%3A%222.66.0%22%7D%7D%5D",
+            "params": [
+              {
+                "name": "data",
+                "value": "%5B%7B%22event%22%3A%22session_active_time%22%2C%22properties%22%3A%7B%22%24os%22%3A%22Mac%20OS%20X%22%2C%22%24browser%22%3A%22Chrome%22%2C%22%24current_url%22%3A%22https%3A%2F%2Fgrok.com%2F%22%2C%22%24browser_version%22%3A141%2C%22%24screen_height%22%3A1050%2C%22%24screen_width%22%3A1680%2C%22mp_lib%22%3A%22web%22%2C%22%24lib_version%22%3A%222.66.0%22%2C%22%24insert_id%22%3A%22a1mvh350gzc79rde%22%2C%22time%22%3A1761638286.587%2C%22distinct_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22%24device_id%22%3A%225e17208a-72a3-43fe-8a0c-2f3e6627e188%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22%24user_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22location%22%3A%22session-tracker%22%2C%22sessionActiveTimeMs%22%3A%2219105.80000001192%22%2C%22totalActiveTimeMs%22%3A%2219105.80000001192%22%2C%22page%22%3A%22main%22%2C%22eventValue%22%3A%2219105.80000001192%22%2C%22app_name%22%3A%22web%22%2C%22token%22%3A%22ea93da913ddb66b6372b89d97b1029ac%22%2C%22mp_sent_by_lib_version%22%3A%222.66.0%22%7D%7D%5D"
+              }
+            ]
+          }
+        },
+        "response": {
+          "status": 0,
+          "statusText": "",
+          "httpVersion": "",
+          "headers": [],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": "net::ERR_BLOCKED_BY_CLIENT",
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "",
+        "startedDateTime": "2025-10-28T07:58:07.770Z",
+        "time": 2.83800000033807,
+        "timings": {
+          "blocked": 2.83800000033807,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0,
+          "receive": 0,
+          "_blocked_queueing": -1
+        }
+      },
+      {
+        "_connectionId": "622634",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "c",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 438143
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 437966
+              },
+              {
+                "functionName": "h",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 930313
+              },
+              {
+                "functionName": "b",
+                "scriptId": "22",
+                "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                "lineNumber": 0,
+                "columnNumber": 2149
+              },
+              {
+                "functionName": "E",
+                "scriptId": "22",
+                "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                "lineNumber": 0,
+                "columnNumber": 2362
+              },
+              {
+                "functionName": "w",
+                "scriptId": "22",
+                "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                "lineNumber": 0,
+                "columnNumber": 2272
+              },
+              {
+                "functionName": "r",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 161287
+              }
+            ],
+            "parent": {
+              "description": "setTimeout",
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 177615
+                },
+                {
+                  "functionName": "x",
+                  "scriptId": "22",
+                  "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                  "lineNumber": 0,
+                  "columnNumber": 2472
+                },
+                {
+                  "functionName": "d",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 927740
+                },
+                {
+                  "functionName": "u",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 986560
+                },
+                {
+                  "functionName": "i",
+                  "scriptId": "100",
+                  "url": "https://grok.com/_next/static/chunks/33dee67d03c09a9c.js",
+                  "lineNumber": 0,
+                  "columnNumber": 299164
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "100",
+                  "url": "https://grok.com/_next/static/chunks/33dee67d03c09a9c.js",
+                  "lineNumber": 0,
+                  "columnNumber": 299650
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "VeryLow",
+        "_resourceType": "ping",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://grok.com/_data/v1/events",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "grok.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/_data/v1/events"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "776"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "https://grok.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=4, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 776,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"api_key\":\"un1QuRAfyI8BJ69HyL3Eq8TyiIKHfHsheVxL65BTREI=\",\"viewer_context\":{\"request_id\":\"fcd5bce2-2273-4d3e-923c-e6fb07e3d0d7\",\"user_attributes\":{\"user_id\":\"2908e56f-cfff-4fab-97a3-d4a69bca3f2f\",\"user_type\":\"LoggedIn\",\"subscription_level\":\"Free\",\"country\":\"KR\",\"email\":\"2yellow2light@gmail.com\",\"locale\":\"ko\",\"language\":\"ko\"},\"device_attributes\":{\"app_name\":\"Grok Web\",\"app_version\":\"unset\",\"os_name\":\"macOS\",\"os_version\":\"10.15\",\"device_vendor\":\"Unknown\",\"device_model\":\"Unknown\",\"device_version\":\"Unknown\"}},\"events\":[{\"event_name\":\"session_active_time\",\"event_value\":\"19105.80000001192\",\"event_metadata\":{\"location\":\"session-tracker\",\"sessionActiveTimeMs\":\"19105.80000001192\",\"totalActiveTimeMs\":\"19105.80000001192\",\"page\":\"main\"},\"timestamp\":\"2025-10-28T07:58:06.588Z\"}]}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9958e2e71bb77363-ICN"
+            },
+            {
+              "name": "content-length",
+              "value": "4"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:58:08 GMT"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 4,
+            "mimeType": "application/json",
+            "text": "null"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 121,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.18.29.234",
+        "startedDateTime": "2025-10-28T07:58:08.770Z",
+        "time": 237.33599999104626,
+        "timings": {
+          "blocked": 3.946000000161119,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.6279999999999999,
+          "wait": 232.36699999540673,
+          "receive": 0.3949999954784289,
+          "_blocked_queueing": 2.773000000161119,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "622634",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 987467
+              },
+              {
+                "functionName": "f",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 987797
+              },
+              {
+                "functionName": "m",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 488822
+              },
+              {
+                "functionName": "y",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 489019
+              },
+              {
+                "functionName": "v",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 488941
+              },
+              {
+                "functionName": "r",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 161287
+              }
+            ],
+            "parent": {
+              "description": "setTimeout",
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 177615
+                },
+                {
+                  "functionName": "iP",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 483664
+                },
+                {
+                  "functionName": "w",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 489120
+                },
+                {
+                  "functionName": "g",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 987883
+                },
+                {
+                  "functionName": "i",
+                  "scriptId": "100",
+                  "url": "https://grok.com/_next/static/chunks/33dee67d03c09a9c.js",
+                  "lineNumber": 0,
+                  "columnNumber": 1763
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 48313
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 52141
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 48583
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 48531
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "VeryLow",
+        "_resourceType": "ping",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://grok.com/api/log_metric",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "grok.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/log_metric"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "34"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "https://grok.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=4, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 34,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "[{\"type\":\"wv_lcp\",\"valueMs\":1608}]"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9958e2e71bbf7363-ICN"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-security-policy",
+              "value": "default-src 'self'; script-src 'self' 'nonce-NDM4ZTQ1OGMtY2NkMC00ZWQ0LThjNTctMWMxMTM0OGViZjM2' 'strict-dynamic' https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.cloudflareinsights.com https://unpkg.com/@googleworkspace/drive-picker-element@0/dist/index.iife.min.js https://*.reddit.com https://embed.reddit.com/widgets.js; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://*.googleapis.com; img-src 'self' blob: data: https: https://assets.grok.com https://assets.grokusercontent.com; media-src 'self' https://assets.grok.com https://*.googleapis.com https://*.x.ai; font-src https://use.typekit.net 'self' https://fonts.gstatic.com; frame-src 'self' blob: data: com.grokapp: intent: https://assets.grok.com https://www.archives.gov https://arxiv.org https://*.js.stripe.com https://js.stripe.com https://artifacts.grokusercontent.com https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.youtube.com https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com https://challenges.cloudflare.com https://*.reddit.com https://groktpcontent.com https://data.x.ai; object-src 'none'; base-uri 'none'; form-action 'self' https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com; frame-ancestors https://x.com https://starfleet.teachx.ai ; block-all-mixed-content; connect-src 'self' data: wss://*.x.ai https://*.x.ai wss://*.grok.com https://*.grok.com ws://localhost:* https://assets.grok.com https://assets.grokusercontent.com https://prodregistryv2.org https://*.statsig.com https://featuregates.org https://statsigapi.net https://*.statsigapi.net https://*.statsigcdn.com https://featureassets.org https://assetsconfigcdn.org https://prodregistryv2.org https://cloudflare-dns.com https://beyondwickedmapping.org https://ssff.grok.com https://grok-api.grok.com wss://grok-api.grok.com  https://*.stripe.com https://featureassets.org  https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com wss://livekit.grok.com https://livekit.grok.com https://*.mixpanel.com; upgrade-insecure-requests;"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:58:08 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "camera=(), microphone=(self), geolocation=(), browsing-topics=()"
+            },
+            {
+              "name": "referrer-policy",
+              "value": "origin-when-cross-origin"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "name": "vary",
+              "value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-country-code",
+              "value": "KR"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "DENY"
+            },
+            {
+              "name": "x-nonce",
+              "value": "NDM4ZTQ1OGMtY2NkMC00ZWQ0LThjNTctMWMxMTM0OGViZjM2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 38,
+            "mimeType": "application/json",
+            "text": "{\"partialSuccess\":{\"rejectedCount\":0}}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 2332,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.18.29.234",
+        "startedDateTime": "2025-10-28T07:58:08.770Z",
+        "time": 362.5620000093477,
+        "timings": {
+          "blocked": 3.6560000017872083,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.542,
+          "wait": 356.2029999963045,
+          "receive": 2.1610000112559646,
+          "_blocked_queueing": 2.219000001787208,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "622634",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "reflect",
+                "scriptId": "6",
+                "url": "",
+                "lineNumber": 259,
+                "columnNumber": 34
+              },
+              {
+                "functionName": "fetch",
+                "scriptId": "6",
+                "url": "",
+                "lineNumber": 435,
+                "columnNumber": 27
+              },
+              {
+                "functionName": "apply",
+                "scriptId": "6",
+                "url": "",
+                "lineNumber": 275,
+                "columnNumber": 19
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 380273
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 166267
+              },
+              {
+                "functionName": "t",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 1492
+              },
+              {
+                "functionName": "l",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 990868
+              },
+              {
+                "functionName": "queryFn",
+                "scriptId": "53",
+                "url": "https://grok.com/_next/static/chunks/d2e9c0f2a3ce610d.js",
+                "lineNumber": 0,
+                "columnNumber": 2331307
+              },
+              {
+                "functionName": "",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 29903
+              },
+              {
+                "functionName": "f",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 7864
+              },
+              {
+                "functionName": "h",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 27427
+              },
+              {
+                "functionName": "start",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 28003
+              },
+              {
+                "functionName": "fetch",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 9361
+              },
+              {
+                "functionName": "$",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 19768
+              },
+              {
+                "functionName": "fetch",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 14858
+              },
+              {
+                "functionName": "refetch",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 14632
+              },
+              {
+                "functionName": "onFocus",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 6333
+              },
+              {
+                "functionName": "",
+                "scriptId": "44",
+                "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                "lineNumber": 0,
+                "columnNumber": 49282
+              },
+              {
+                "functionName": "",
+                "scriptId": "44",
+                "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                "lineNumber": 0,
+                "columnNumber": 49268
+              },
+              {
+                "functionName": "batch",
+                "scriptId": "35",
+                "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                "lineNumber": 0,
+                "columnNumber": 25229
+              },
+              {
+                "functionName": "onFocus",
+                "scriptId": "44",
+                "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                "lineNumber": 0,
+                "columnNumber": 49243
+              },
+              {
+                "functionName": "",
+                "scriptId": "44",
+                "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                "lineNumber": 0,
+                "columnNumber": 51794
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 24560
+                },
+                {
+                  "functionName": "onFocus",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 24548
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 24417
+                },
+                {
+                  "functionName": "t",
+                  "scriptId": "35",
+                  "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                  "lineNumber": 0,
+                  "columnNumber": 24929
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "GET",
+          "url": "https://grok.com/api/oauth-connectors",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "grok.com"
+            },
+            {
+              "name": ":method",
+              "value": "GET"
+            },
+            {
+              "name": ":path",
+              "value": "/api/oauth-connectors"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "baggage",
+              "value": "sentry-environment=production,sentry-public_key=b311e0f2690c81f25e2c4cf6d4f7ce1c,sentry-trace_id=76bdc1ee150c80e2ec0d0b1f4a0d5366,sentry-org_id=4508179396558848,sentry-sampled=false,sentry-sample_rand=0.6802313365691324,sentry-sample_rate=0"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "sentry-trace",
+              "value": "76bdc1ee150c80e2ec0d0b1f4a0d5366-b532390ca8c19cd1-0"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9958e47d0d657363-ICN"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-security-policy",
+              "value": "default-src 'self'; script-src 'self' 'nonce-YWEzOTM3NzctNjM4ZS00NmI4LWExZDQtMjgxMzA4NjM3MzUy' 'strict-dynamic' https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.cloudflareinsights.com https://unpkg.com/@googleworkspace/drive-picker-element@0/dist/index.iife.min.js https://*.reddit.com https://embed.reddit.com/widgets.js; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://*.googleapis.com; img-src 'self' blob: data: https: https://assets.grok.com https://assets.grokusercontent.com; media-src 'self' https://assets.grok.com https://*.googleapis.com https://*.x.ai; font-src https://use.typekit.net 'self' https://fonts.gstatic.com; frame-src 'self' blob: data: com.grokapp: intent: https://assets.grok.com https://www.archives.gov https://arxiv.org https://*.js.stripe.com https://js.stripe.com https://artifacts.grokusercontent.com https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.youtube.com https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com https://challenges.cloudflare.com https://*.reddit.com https://groktpcontent.com https://data.x.ai; object-src 'none'; base-uri 'none'; form-action 'self' https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com; frame-ancestors https://x.com https://starfleet.teachx.ai ; block-all-mixed-content; connect-src 'self' data: wss://*.x.ai https://*.x.ai wss://*.grok.com https://*.grok.com ws://localhost:* https://assets.grok.com https://assets.grokusercontent.com https://prodregistryv2.org https://*.statsig.com https://featuregates.org https://statsigapi.net https://*.statsigapi.net https://*.statsigcdn.com https://featureassets.org https://assetsconfigcdn.org https://prodregistryv2.org https://cloudflare-dns.com https://beyondwickedmapping.org https://ssff.grok.com https://grok-api.grok.com wss://grok-api.grok.com  https://*.stripe.com https://featureassets.org  https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com wss://livekit.grok.com https://livekit.grok.com https://*.mixpanel.com; upgrade-insecure-requests;"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:59:13 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "camera=(), microphone=(self), geolocation=(), browsing-topics=()"
+            },
+            {
+              "name": "referrer-policy",
+              "value": "origin-when-cross-origin"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "speculation-rules",
+              "value": "\"/cdn-cgi/speculation\""
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "name": "vary",
+              "value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-country-code",
+              "value": "KR"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "DENY"
+            },
+            {
+              "name": "x-nonce",
+              "value": "YWEzOTM3NzctNjM4ZS00NmI4LWExZDQtMjgxMzA4NjM3MzUy"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 22,
+            "mimeType": "application/json",
+            "text": "{\"oauthConnectors\":[]}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 2146,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.18.29.234",
+        "startedDateTime": "2025-10-28T07:59:13.680Z",
+        "time": 298.85099999955855,
+        "timings": {
+          "blocked": 34.576999996319415,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.47099999999999986,
+          "wait": 262.92099999568893,
+          "receive": 0.8820000075502321,
+          "_blocked_queueing": 33.02299999631941,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "622634",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 987467
+              },
+              {
+                "functionName": "f",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 987797
+              },
+              {
+                "functionName": "m",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 488822
+              },
+              {
+                "functionName": "y",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 489019
+              },
+              {
+                "functionName": "v",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 488941
+              },
+              {
+                "functionName": "r",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 161287
+              }
+            ],
+            "parent": {
+              "description": "setTimeout",
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 177615
+                },
+                {
+                  "functionName": "iP",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 483664
+                },
+                {
+                  "functionName": "v",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 488948
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "19",
+                    "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                    "lineNumber": 0,
+                    "columnNumber": 177615
+                  },
+                  {
+                    "functionName": "iP",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 483664
+                  },
+                  {
+                    "functionName": "w",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 489120
+                  },
+                  {
+                    "functionName": "g",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 987883
+                  },
+                  {
+                    "functionName": "l",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 990752
+                  },
+                  {
+                    "functionName": "queryFn",
+                    "scriptId": "53",
+                    "url": "https://grok.com/_next/static/chunks/d2e9c0f2a3ce610d.js",
+                    "lineNumber": 0,
+                    "columnNumber": 2331307
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 29903
+                  },
+                  {
+                    "functionName": "f",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 7864
+                  },
+                  {
+                    "functionName": "h",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 27427
+                  },
+                  {
+                    "functionName": "start",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 28003
+                  },
+                  {
+                    "functionName": "fetch",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 9361
+                  },
+                  {
+                    "functionName": "$",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 19768
+                  },
+                  {
+                    "functionName": "fetch",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 14858
+                  },
+                  {
+                    "functionName": "refetch",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 14632
+                  },
+                  {
+                    "functionName": "onFocus",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 6333
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "44",
+                    "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                    "lineNumber": 0,
+                    "columnNumber": 49282
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "44",
+                    "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                    "lineNumber": 0,
+                    "columnNumber": 49268
+                  },
+                  {
+                    "functionName": "batch",
+                    "scriptId": "35",
+                    "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                    "lineNumber": 0,
+                    "columnNumber": 25229
+                  },
+                  {
+                    "functionName": "onFocus",
+                    "scriptId": "44",
+                    "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                    "lineNumber": 0,
+                    "columnNumber": 49243
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "44",
+                    "url": "https://grok.com/_next/static/chunks/3ebc42ab9e34b479.js",
+                    "lineNumber": 0,
+                    "columnNumber": 51794
+                  }
+                ],
+                "parent": {
+                  "description": "await",
+                  "callFrames": [
+                    {
+                      "functionName": "",
+                      "scriptId": "35",
+                      "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                      "lineNumber": 0,
+                      "columnNumber": 24560
+                    },
+                    {
+                      "functionName": "onFocus",
+                      "scriptId": "35",
+                      "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                      "lineNumber": 0,
+                      "columnNumber": 24548
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "35",
+                      "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                      "lineNumber": 0,
+                      "columnNumber": 24417
+                    },
+                    {
+                      "functionName": "t",
+                      "scriptId": "35",
+                      "url": "https://grok.com/_next/static/chunks/ad1a31956e9211ed.js",
+                      "lineNumber": 0,
+                      "columnNumber": 24929
+                    },
+                    {
+                      "functionName": "r",
+                      "scriptId": "19",
+                      "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                      "lineNumber": 0,
+                      "columnNumber": 161287
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "_priority": "VeryLow",
+        "_resourceType": "ping",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://grok.com/api/log_metric",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "grok.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/log_metric"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "121"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "https://grok.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=4, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 121,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "[{\"type\":\"client_fetch_start\",\"endpoint\":\"unknown\"},{\"type\":\"client_fetch_success\",\"endpoint\":\"unknown\",\"latencyMs\":301}]"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9958e48b2d6f7363-ICN"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-security-policy",
+              "value": "default-src 'self'; script-src 'self' 'nonce-MjFmMWZkN2YtZDE4Mi00OThiLThhMGItMWFlZTY2MGQ2ODFh' 'strict-dynamic' https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.cloudflareinsights.com https://unpkg.com/@googleworkspace/drive-picker-element@0/dist/index.iife.min.js https://*.reddit.com https://embed.reddit.com/widgets.js; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://*.googleapis.com; img-src 'self' blob: data: https: https://assets.grok.com https://assets.grokusercontent.com; media-src 'self' https://assets.grok.com https://*.googleapis.com https://*.x.ai; font-src https://use.typekit.net 'self' https://fonts.gstatic.com; frame-src 'self' blob: data: com.grokapp: intent: https://assets.grok.com https://www.archives.gov https://arxiv.org https://*.js.stripe.com https://js.stripe.com https://artifacts.grokusercontent.com https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.youtube.com https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com https://challenges.cloudflare.com https://*.reddit.com https://groktpcontent.com https://data.x.ai; object-src 'none'; base-uri 'none'; form-action 'self' https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com; frame-ancestors https://x.com https://starfleet.teachx.ai ; block-all-mixed-content; connect-src 'self' data: wss://*.x.ai https://*.x.ai wss://*.grok.com https://*.grok.com ws://localhost:* https://assets.grok.com https://assets.grokusercontent.com https://prodregistryv2.org https://*.statsig.com https://featuregates.org https://statsigapi.net https://*.statsigapi.net https://*.statsigcdn.com https://featureassets.org https://assetsconfigcdn.org https://prodregistryv2.org https://cloudflare-dns.com https://beyondwickedmapping.org https://ssff.grok.com https://grok-api.grok.com wss://grok-api.grok.com  https://*.stripe.com https://featureassets.org  https://*.googleapis.com https://*.google.com https://*.withgoogle.com https://*.gstatic.com https://*.googletagmanager.com https://*.google-analytics.com https://*.microsoftonline.com https://*.live.com https://*.microsoft.com https://*.onedrive.com wss://livekit.grok.com https://livekit.grok.com https://*.mixpanel.com; upgrade-insecure-requests;"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:59:15 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "camera=(), microphone=(self), geolocation=(), browsing-topics=()"
+            },
+            {
+              "name": "referrer-policy",
+              "value": "origin-when-cross-origin"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "name": "vary",
+              "value": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-country-code",
+              "value": "KR"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "DENY"
+            },
+            {
+              "name": "x-nonce",
+              "value": "MjFmMWZkN2YtZDE4Mi00OThiLThhMGItMWFlZTY2MGQ2ODFh"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 38,
+            "mimeType": "application/json",
+            "text": "{\"partialSuccess\":{\"rejectedCount\":0}}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 2361,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.18.29.234",
+        "startedDateTime": "2025-10-28T07:59:15.982Z",
+        "time": 276.8329999962589,
+        "timings": {
+          "blocked": 1.4959999989457429,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.19499999999999995,
+          "wait": 274.4720000033248,
+          "receive": 0.6699999939883128,
+          "_blocked_queueing": 1.0929999989457428,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 178298
+              },
+              {
+                "functionName": "apply",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 171651
+              },
+              {
+                "functionName": "sl._send_request",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 911473
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 912885
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 857321
+              },
+              {
+                "functionName": "oj.sendRequestPromise",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 857290
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 860195
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "oj.flush",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 857621
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 857199
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "19",
+                    "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                    "lineNumber": 0,
+                    "columnNumber": 177615
+                  },
+                  {
+                    "functionName": "oj.scheduleFlush",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 857130
+                  },
+                  {
+                    "functionName": "oj.resetFlush",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 856985
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "52",
+                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                    "lineNumber": 0,
+                    "columnNumber": 858228
+                  }
+                ],
+                "parent": {
+                  "description": "Promise.then",
+                  "callFrames": [
+                    {
+                      "functionName": "oj.flush",
+                      "scriptId": "52",
+                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                      "lineNumber": 0,
+                      "columnNumber": 857621
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "52",
+                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                      "lineNumber": 0,
+                      "columnNumber": 857199
+                    },
+                    {
+                      "functionName": "r",
+                      "scriptId": "19",
+                      "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                      "lineNumber": 0,
+                      "columnNumber": 161287
+                    }
+                  ],
+                  "parent": {
+                    "description": "setTimeout",
+                    "callFrames": [
+                      {
+                        "functionName": "",
+                        "scriptId": "19",
+                        "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                        "lineNumber": 0,
+                        "columnNumber": 177615
+                      },
+                      {
+                        "functionName": "oj.scheduleFlush",
+                        "scriptId": "52",
+                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                        "lineNumber": 0,
+                        "columnNumber": 857130
+                      },
+                      {
+                        "functionName": "oj.resetFlush",
+                        "scriptId": "52",
+                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                        "lineNumber": 0,
+                        "columnNumber": 856985
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "52",
+                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                        "lineNumber": 0,
+                        "columnNumber": 858228
+                      }
+                    ],
+                    "parent": {
+                      "description": "Promise.then",
+                      "callFrames": [
+                        {
+                          "functionName": "oj.flush",
+                          "scriptId": "52",
+                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                          "lineNumber": 0,
+                          "columnNumber": 857621
+                        },
+                        {
+                          "functionName": "",
+                          "scriptId": "52",
+                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                          "lineNumber": 0,
+                          "columnNumber": 857199
+                        },
+                        {
+                          "functionName": "r",
+                          "scriptId": "19",
+                          "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                          "lineNumber": 0,
+                          "columnNumber": 161287
+                        }
+                      ],
+                      "parent": {
+                        "description": "setTimeout",
+                        "callFrames": [
+                          {
+                            "functionName": "",
+                            "scriptId": "19",
+                            "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                            "lineNumber": 0,
+                            "columnNumber": 177615
+                          },
+                          {
+                            "functionName": "oj.scheduleFlush",
+                            "scriptId": "52",
+                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                            "lineNumber": 0,
+                            "columnNumber": 857130
+                          },
+                          {
+                            "functionName": "oj.resetFlush",
+                            "scriptId": "52",
+                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                            "lineNumber": 0,
+                            "columnNumber": 856985
+                          },
+                          {
+                            "functionName": "",
+                            "scriptId": "52",
+                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                            "lineNumber": 0,
+                            "columnNumber": 858228
+                          }
+                        ],
+                        "parent": {
+                          "description": "Promise.then",
+                          "callFrames": [
+                            {
+                              "functionName": "oj.flush",
+                              "scriptId": "52",
+                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                              "lineNumber": 0,
+                              "columnNumber": 857621
+                            },
+                            {
+                              "functionName": "",
+                              "scriptId": "52",
+                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                              "lineNumber": 0,
+                              "columnNumber": 857199
+                            },
+                            {
+                              "functionName": "r",
+                              "scriptId": "19",
+                              "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                              "lineNumber": 0,
+                              "columnNumber": 161287
+                            }
+                          ],
+                          "parent": {
+                            "description": "setTimeout",
+                            "callFrames": [
+                              {
+                                "functionName": "",
+                                "scriptId": "19",
+                                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                "lineNumber": 0,
+                                "columnNumber": 177615
+                              },
+                              {
+                                "functionName": "oj.scheduleFlush",
+                                "scriptId": "52",
+                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                "lineNumber": 0,
+                                "columnNumber": 857130
+                              },
+                              {
+                                "functionName": "oj.resetFlush",
+                                "scriptId": "52",
+                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                "lineNumber": 0,
+                                "columnNumber": 856985
+                              },
+                              {
+                                "functionName": "",
+                                "scriptId": "52",
+                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                "lineNumber": 0,
+                                "columnNumber": 858228
+                              }
+                            ],
+                            "parent": {
+                              "description": "Promise.then",
+                              "callFrames": [
+                                {
+                                  "functionName": "oj.flush",
+                                  "scriptId": "52",
+                                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                  "lineNumber": 0,
+                                  "columnNumber": 857621
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "52",
+                                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                  "lineNumber": 0,
+                                  "columnNumber": 857199
+                                },
+                                {
+                                  "functionName": "r",
+                                  "scriptId": "19",
+                                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                  "lineNumber": 0,
+                                  "columnNumber": 161287
+                                }
+                              ],
+                              "parent": {
+                                "description": "setTimeout",
+                                "callFrames": [
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "19",
+                                    "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 177615
+                                  },
+                                  {
+                                    "functionName": "oj.scheduleFlush",
+                                    "scriptId": "52",
+                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 857130
+                                  },
+                                  {
+                                    "functionName": "oj.resetFlush",
+                                    "scriptId": "52",
+                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 856985
+                                  },
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "52",
+                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 858228
+                                  }
+                                ],
+                                "parent": {
+                                  "description": "Promise.then",
+                                  "callFrames": [
+                                    {
+                                      "functionName": "oj.flush",
+                                      "scriptId": "52",
+                                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                      "lineNumber": 0,
+                                      "columnNumber": 857621
+                                    },
+                                    {
+                                      "functionName": "",
+                                      "scriptId": "52",
+                                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                      "lineNumber": 0,
+                                      "columnNumber": 857199
+                                    },
+                                    {
+                                      "functionName": "r",
+                                      "scriptId": "19",
+                                      "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                      "lineNumber": 0,
+                                      "columnNumber": 161287
+                                    }
+                                  ],
+                                  "parent": {
+                                    "description": "setTimeout",
+                                    "callFrames": [
+                                      {
+                                        "functionName": "",
+                                        "scriptId": "19",
+                                        "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                        "lineNumber": 0,
+                                        "columnNumber": 177615
+                                      },
+                                      {
+                                        "functionName": "oj.scheduleFlush",
+                                        "scriptId": "52",
+                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                        "lineNumber": 0,
+                                        "columnNumber": 857130
+                                      },
+                                      {
+                                        "functionName": "oj.resetFlush",
+                                        "scriptId": "52",
+                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                        "lineNumber": 0,
+                                        "columnNumber": 856985
+                                      },
+                                      {
+                                        "functionName": "",
+                                        "scriptId": "52",
+                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                        "lineNumber": 0,
+                                        "columnNumber": 858228
+                                      }
+                                    ],
+                                    "parent": {
+                                      "description": "Promise.then",
+                                      "callFrames": [
+                                        {
+                                          "functionName": "oj.flush",
+                                          "scriptId": "52",
+                                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                          "lineNumber": 0,
+                                          "columnNumber": 857621
+                                        },
+                                        {
+                                          "functionName": "",
+                                          "scriptId": "52",
+                                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                          "lineNumber": 0,
+                                          "columnNumber": 857199
+                                        },
+                                        {
+                                          "functionName": "r",
+                                          "scriptId": "19",
+                                          "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                          "lineNumber": 0,
+                                          "columnNumber": 161287
+                                        }
+                                      ],
+                                      "parent": {
+                                        "description": "setTimeout",
+                                        "callFrames": [
+                                          {
+                                            "functionName": "",
+                                            "scriptId": "19",
+                                            "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                            "lineNumber": 0,
+                                            "columnNumber": 177615
+                                          },
+                                          {
+                                            "functionName": "oj.scheduleFlush",
+                                            "scriptId": "52",
+                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                            "lineNumber": 0,
+                                            "columnNumber": 857130
+                                          },
+                                          {
+                                            "functionName": "oj.resetFlush",
+                                            "scriptId": "52",
+                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                            "lineNumber": 0,
+                                            "columnNumber": 856985
+                                          },
+                                          {
+                                            "functionName": "",
+                                            "scriptId": "52",
+                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                            "lineNumber": 0,
+                                            "columnNumber": 858228
+                                          }
+                                        ],
+                                        "parent": {
+                                          "description": "Promise.then",
+                                          "callFrames": [
+                                            {
+                                              "functionName": "oj.flush",
+                                              "scriptId": "52",
+                                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                              "lineNumber": 0,
+                                              "columnNumber": 857621
+                                            },
+                                            {
+                                              "functionName": "",
+                                              "scriptId": "52",
+                                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                              "lineNumber": 0,
+                                              "columnNumber": 857199
+                                            },
+                                            {
+                                              "functionName": "r",
+                                              "scriptId": "19",
+                                              "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                              "lineNumber": 0,
+                                              "columnNumber": 161287
+                                            }
+                                          ],
+                                          "parent": {
+                                            "description": "setTimeout",
+                                            "callFrames": [
+                                              {
+                                                "functionName": "",
+                                                "scriptId": "19",
+                                                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                "lineNumber": 0,
+                                                "columnNumber": 177615
+                                              },
+                                              {
+                                                "functionName": "oj.scheduleFlush",
+                                                "scriptId": "52",
+                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                "lineNumber": 0,
+                                                "columnNumber": 857130
+                                              },
+                                              {
+                                                "functionName": "oj.resetFlush",
+                                                "scriptId": "52",
+                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                "lineNumber": 0,
+                                                "columnNumber": 856985
+                                              },
+                                              {
+                                                "functionName": "",
+                                                "scriptId": "52",
+                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                "lineNumber": 0,
+                                                "columnNumber": 858228
+                                              }
+                                            ],
+                                            "parent": {
+                                              "description": "Promise.then",
+                                              "callFrames": [
+                                                {
+                                                  "functionName": "oj.flush",
+                                                  "scriptId": "52",
+                                                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                  "lineNumber": 0,
+                                                  "columnNumber": 857621
+                                                },
+                                                {
+                                                  "functionName": "",
+                                                  "scriptId": "52",
+                                                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                  "lineNumber": 0,
+                                                  "columnNumber": 857199
+                                                },
+                                                {
+                                                  "functionName": "r",
+                                                  "scriptId": "19",
+                                                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                  "lineNumber": 0,
+                                                  "columnNumber": 161287
+                                                }
+                                              ],
+                                              "parent": {
+                                                "description": "setTimeout",
+                                                "callFrames": [
+                                                  {
+                                                    "functionName": "",
+                                                    "scriptId": "19",
+                                                    "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                    "lineNumber": 0,
+                                                    "columnNumber": 177615
+                                                  },
+                                                  {
+                                                    "functionName": "oj.scheduleFlush",
+                                                    "scriptId": "52",
+                                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                    "lineNumber": 0,
+                                                    "columnNumber": 857130
+                                                  },
+                                                  {
+                                                    "functionName": "oj.resetFlush",
+                                                    "scriptId": "52",
+                                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                    "lineNumber": 0,
+                                                    "columnNumber": 856985
+                                                  },
+                                                  {
+                                                    "functionName": "",
+                                                    "scriptId": "52",
+                                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                    "lineNumber": 0,
+                                                    "columnNumber": 858228
+                                                  }
+                                                ],
+                                                "parent": {
+                                                  "description": "Promise.then",
+                                                  "callFrames": [
+                                                    {
+                                                      "functionName": "oj.flush",
+                                                      "scriptId": "52",
+                                                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                      "lineNumber": 0,
+                                                      "columnNumber": 857621
+                                                    },
+                                                    {
+                                                      "functionName": "",
+                                                      "scriptId": "52",
+                                                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                      "lineNumber": 0,
+                                                      "columnNumber": 857199
+                                                    },
+                                                    {
+                                                      "functionName": "r",
+                                                      "scriptId": "19",
+                                                      "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                      "lineNumber": 0,
+                                                      "columnNumber": 161287
+                                                    }
+                                                  ],
+                                                  "parent": {
+                                                    "description": "setTimeout",
+                                                    "callFrames": [
+                                                      {
+                                                        "functionName": "",
+                                                        "scriptId": "19",
+                                                        "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                        "lineNumber": 0,
+                                                        "columnNumber": 177615
+                                                      },
+                                                      {
+                                                        "functionName": "oj.scheduleFlush",
+                                                        "scriptId": "52",
+                                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                        "lineNumber": 0,
+                                                        "columnNumber": 857130
+                                                      },
+                                                      {
+                                                        "functionName": "oj.resetFlush",
+                                                        "scriptId": "52",
+                                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                        "lineNumber": 0,
+                                                        "columnNumber": 856985
+                                                      },
+                                                      {
+                                                        "functionName": "",
+                                                        "scriptId": "52",
+                                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                        "lineNumber": 0,
+                                                        "columnNumber": 858228
+                                                      }
+                                                    ],
+                                                    "parent": {
+                                                      "description": "Promise.then",
+                                                      "callFrames": [
+                                                        {
+                                                          "functionName": "oj.flush",
+                                                          "scriptId": "52",
+                                                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                          "lineNumber": 0,
+                                                          "columnNumber": 857621
+                                                        },
+                                                        {
+                                                          "functionName": "",
+                                                          "scriptId": "52",
+                                                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                          "lineNumber": 0,
+                                                          "columnNumber": 857199
+                                                        },
+                                                        {
+                                                          "functionName": "r",
+                                                          "scriptId": "19",
+                                                          "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                          "lineNumber": 0,
+                                                          "columnNumber": 161287
+                                                        }
+                                                      ],
+                                                      "parent": {
+                                                        "description": "setTimeout",
+                                                        "callFrames": [
+                                                          {
+                                                            "functionName": "",
+                                                            "scriptId": "19",
+                                                            "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                            "lineNumber": 0,
+                                                            "columnNumber": 177615
+                                                          },
+                                                          {
+                                                            "functionName": "oj.scheduleFlush",
+                                                            "scriptId": "52",
+                                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                            "lineNumber": 0,
+                                                            "columnNumber": 857130
+                                                          },
+                                                          {
+                                                            "functionName": "oj.resetFlush",
+                                                            "scriptId": "52",
+                                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                            "lineNumber": 0,
+                                                            "columnNumber": 856985
+                                                          },
+                                                          {
+                                                            "functionName": "",
+                                                            "scriptId": "52",
+                                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                            "lineNumber": 0,
+                                                            "columnNumber": 858228
+                                                          }
+                                                        ],
+                                                        "parent": {
+                                                          "description": "Promise.then",
+                                                          "callFrames": [
+                                                            {
+                                                              "functionName": "oj.flush",
+                                                              "scriptId": "52",
+                                                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                              "lineNumber": 0,
+                                                              "columnNumber": 857621
+                                                            },
+                                                            {
+                                                              "functionName": "",
+                                                              "scriptId": "52",
+                                                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                              "lineNumber": 0,
+                                                              "columnNumber": 857199
+                                                            },
+                                                            {
+                                                              "functionName": "r",
+                                                              "scriptId": "19",
+                                                              "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                              "lineNumber": 0,
+                                                              "columnNumber": 161287
+                                                            }
+                                                          ],
+                                                          "parent": {
+                                                            "description": "setTimeout",
+                                                            "callFrames": [
+                                                              {
+                                                                "functionName": "",
+                                                                "scriptId": "19",
+                                                                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                                "lineNumber": 0,
+                                                                "columnNumber": 177615
+                                                              },
+                                                              {
+                                                                "functionName": "oj.scheduleFlush",
+                                                                "scriptId": "52",
+                                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                "lineNumber": 0,
+                                                                "columnNumber": 857130
+                                                              },
+                                                              {
+                                                                "functionName": "oj.resetFlush",
+                                                                "scriptId": "52",
+                                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                "lineNumber": 0,
+                                                                "columnNumber": 856985
+                                                              },
+                                                              {
+                                                                "functionName": "",
+                                                                "scriptId": "52",
+                                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                "lineNumber": 0,
+                                                                "columnNumber": 858228
+                                                              }
+                                                            ],
+                                                            "parent": {
+                                                              "description": "Promise.then",
+                                                              "callFrames": [
+                                                                {
+                                                                  "functionName": "oj.flush",
+                                                                  "scriptId": "52",
+                                                                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                  "lineNumber": 0,
+                                                                  "columnNumber": 857621
+                                                                },
+                                                                {
+                                                                  "functionName": "",
+                                                                  "scriptId": "52",
+                                                                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                  "lineNumber": 0,
+                                                                  "columnNumber": 858872
+                                                                }
+                                                              ],
+                                                              "parent": {
+                                                                "description": "Promise.then",
+                                                                "callFrames": [
+                                                                  {
+                                                                    "functionName": "",
+                                                                    "scriptId": "52",
+                                                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                    "lineNumber": 0,
+                                                                    "columnNumber": 858348
+                                                                  },
+                                                                  {
+                                                                    "functionName": "",
+                                                                    "scriptId": "52",
+                                                                    "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                    "lineNumber": 0,
+                                                                    "columnNumber": 859649
+                                                                  }
+                                                                ],
+                                                                "parent": {
+                                                                  "description": "Promise.then",
+                                                                  "callFrames": [
+                                                                    {
+                                                                      "functionName": "",
+                                                                      "scriptId": "52",
+                                                                      "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                      "lineNumber": 0,
+                                                                      "columnNumber": 860219
+                                                                    }
+                                                                  ],
+                                                                  "parent": {
+                                                                    "description": "Promise.then",
+                                                                    "callFrames": [
+                                                                      {
+                                                                        "functionName": "oj.flush",
+                                                                        "scriptId": "52",
+                                                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                        "lineNumber": 0,
+                                                                        "columnNumber": 857621
+                                                                      },
+                                                                      {
+                                                                        "functionName": "",
+                                                                        "scriptId": "52",
+                                                                        "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                        "lineNumber": 0,
+                                                                        "columnNumber": 857199
+                                                                      },
+                                                                      {
+                                                                        "functionName": "r",
+                                                                        "scriptId": "19",
+                                                                        "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                                        "lineNumber": 0,
+                                                                        "columnNumber": 161287
+                                                                      }
+                                                                    ],
+                                                                    "parent": {
+                                                                      "description": "setTimeout",
+                                                                      "callFrames": [
+                                                                        {
+                                                                          "functionName": "",
+                                                                          "scriptId": "19",
+                                                                          "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                                          "lineNumber": 0,
+                                                                          "columnNumber": 177615
+                                                                        },
+                                                                        {
+                                                                          "functionName": "oj.scheduleFlush",
+                                                                          "scriptId": "52",
+                                                                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                          "lineNumber": 0,
+                                                                          "columnNumber": 857130
+                                                                        },
+                                                                        {
+                                                                          "functionName": "oj.resetFlush",
+                                                                          "scriptId": "52",
+                                                                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                          "lineNumber": 0,
+                                                                          "columnNumber": 856985
+                                                                        },
+                                                                        {
+                                                                          "functionName": "",
+                                                                          "scriptId": "52",
+                                                                          "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                          "lineNumber": 0,
+                                                                          "columnNumber": 858228
+                                                                        }
+                                                                      ],
+                                                                      "parent": {
+                                                                        "description": "Promise.then",
+                                                                        "callFrames": [
+                                                                          {
+                                                                            "functionName": "oj.flush",
+                                                                            "scriptId": "52",
+                                                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                            "lineNumber": 0,
+                                                                            "columnNumber": 857621
+                                                                          },
+                                                                          {
+                                                                            "functionName": "",
+                                                                            "scriptId": "52",
+                                                                            "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                            "lineNumber": 0,
+                                                                            "columnNumber": 857199
+                                                                          },
+                                                                          {
+                                                                            "functionName": "r",
+                                                                            "scriptId": "19",
+                                                                            "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                                            "lineNumber": 0,
+                                                                            "columnNumber": 161287
+                                                                          }
+                                                                        ],
+                                                                        "parent": {
+                                                                          "description": "setTimeout",
+                                                                          "callFrames": [
+                                                                            {
+                                                                              "functionName": "",
+                                                                              "scriptId": "19",
+                                                                              "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                                              "lineNumber": 0,
+                                                                              "columnNumber": 177615
+                                                                            },
+                                                                            {
+                                                                              "functionName": "oj.scheduleFlush",
+                                                                              "scriptId": "52",
+                                                                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                              "lineNumber": 0,
+                                                                              "columnNumber": 857130
+                                                                            },
+                                                                            {
+                                                                              "functionName": "oj.resetFlush",
+                                                                              "scriptId": "52",
+                                                                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                              "lineNumber": 0,
+                                                                              "columnNumber": 856985
+                                                                            },
+                                                                            {
+                                                                              "functionName": "",
+                                                                              "scriptId": "52",
+                                                                              "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                              "lineNumber": 0,
+                                                                              "columnNumber": 858228
+                                                                            }
+                                                                          ],
+                                                                          "parent": {
+                                                                            "description": "Promise.then",
+                                                                            "callFrames": [
+                                                                              {
+                                                                                "functionName": "oj.flush",
+                                                                                "scriptId": "52",
+                                                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                                "lineNumber": 0,
+                                                                                "columnNumber": 857621
+                                                                              },
+                                                                              {
+                                                                                "functionName": "",
+                                                                                "scriptId": "52",
+                                                                                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                                                                                "lineNumber": 0,
+                                                                                "columnNumber": 857199
+                                                                              },
+                                                                              {
+                                                                                "functionName": "r",
+                                                                                "scriptId": "19",
+                                                                                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                                                                                "lineNumber": 0,
+                                                                                "columnNumber": 161287
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "request": {
+          "method": "POST",
+          "url": "https://api-js.mixpanel.com/track/?verbose=1&ip=1&_=1761638363687",
+          "httpVersion": "",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "verbose",
+              "value": "1"
+            },
+            {
+              "name": "ip",
+              "value": "1"
+            },
+            {
+              "name": "_",
+              "value": "1761638363687"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 1066,
+          "postData": {
+            "mimeType": "application/x-www-form-urlencoded",
+            "text": "data=%5B%7B%22event%22%3A%22session_active_time%22%2C%22properties%22%3A%7B%22%24os%22%3A%22Mac%20OS%20X%22%2C%22%24browser%22%3A%22Chrome%22%2C%22%24current_url%22%3A%22https%3A%2F%2Fgrok.com%2F%22%2C%22%24browser_version%22%3A141%2C%22%24screen_height%22%3A1050%2C%22%24screen_width%22%3A1680%2C%22mp_lib%22%3A%22web%22%2C%22%24lib_version%22%3A%222.66.0%22%2C%22%24insert_id%22%3A%22m93kaxi378sbdh93%22%2C%22time%22%3A1761638363.68%2C%22distinct_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22%24device_id%22%3A%225e17208a-72a3-43fe-8a0c-2f3e6627e188%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22%24user_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22location%22%3A%22session-tracker%22%2C%22sessionActiveTimeMs%22%3A%2210007.5%22%2C%22totalActiveTimeMs%22%3A%2229113.30000001192%22%2C%22page%22%3A%22main%22%2C%22eventValue%22%3A%2210007.5%22%2C%22app_name%22%3A%22web%22%2C%22token%22%3A%22ea93da913ddb66b6372b89d97b1029ac%22%2C%22mp_sent_by_lib_version%22%3A%222.66.0%22%7D%7D%5D",
+            "params": [
+              {
+                "name": "data",
+                "value": "%5B%7B%22event%22%3A%22session_active_time%22%2C%22properties%22%3A%7B%22%24os%22%3A%22Mac%20OS%20X%22%2C%22%24browser%22%3A%22Chrome%22%2C%22%24current_url%22%3A%22https%3A%2F%2Fgrok.com%2F%22%2C%22%24browser_version%22%3A141%2C%22%24screen_height%22%3A1050%2C%22%24screen_width%22%3A1680%2C%22mp_lib%22%3A%22web%22%2C%22%24lib_version%22%3A%222.66.0%22%2C%22%24insert_id%22%3A%22m93kaxi378sbdh93%22%2C%22time%22%3A1761638363.68%2C%22distinct_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22%24device_id%22%3A%225e17208a-72a3-43fe-8a0c-2f3e6627e188%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22%24user_id%22%3A%222908e56f-cfff-4fab-97a3-d4a69bca3f2f%22%2C%22location%22%3A%22session-tracker%22%2C%22sessionActiveTimeMs%22%3A%2210007.5%22%2C%22totalActiveTimeMs%22%3A%2229113.30000001192%22%2C%22page%22%3A%22main%22%2C%22eventValue%22%3A%2210007.5%22%2C%22app_name%22%3A%22web%22%2C%22token%22%3A%22ea93da913ddb66b6372b89d97b1029ac%22%2C%22mp_sent_by_lib_version%22%3A%222.66.0%22%7D%7D%5D"
+              }
+            ]
+          }
+        },
+        "response": {
+          "status": 0,
+          "statusText": "",
+          "httpVersion": "",
+          "headers": [],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": "net::ERR_BLOCKED_BY_CLIENT",
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "",
+        "startedDateTime": "2025-10-28T07:59:23.688Z",
+        "time": 1.9529999990481883,
+        "timings": {
+          "blocked": 1.9529999990481883,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0,
+          "receive": 0,
+          "_blocked_queueing": -1
+        }
+      },
+      {
+        "_connectionId": "622634",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "c",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 438143
+              },
+              {
+                "functionName": "",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 437966
+              },
+              {
+                "functionName": "h",
+                "scriptId": "52",
+                "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                "lineNumber": 0,
+                "columnNumber": 930313
+              },
+              {
+                "functionName": "b",
+                "scriptId": "22",
+                "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                "lineNumber": 0,
+                "columnNumber": 2149
+              },
+              {
+                "functionName": "E",
+                "scriptId": "22",
+                "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                "lineNumber": 0,
+                "columnNumber": 2362
+              },
+              {
+                "functionName": "w",
+                "scriptId": "22",
+                "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                "lineNumber": 0,
+                "columnNumber": 2272
+              },
+              {
+                "functionName": "r",
+                "scriptId": "19",
+                "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                "lineNumber": 0,
+                "columnNumber": 161287
+              }
+            ],
+            "parent": {
+              "description": "setTimeout",
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 177615
+                },
+                {
+                  "functionName": "x",
+                  "scriptId": "22",
+                  "url": "https://grok.com/_next/static/chunks/b445e648fc44e3dd.js",
+                  "lineNumber": 0,
+                  "columnNumber": 2472
+                },
+                {
+                  "functionName": "d",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 927740
+                },
+                {
+                  "functionName": "u",
+                  "scriptId": "52",
+                  "url": "https://grok.com/_next/static/chunks/e0c900976607fbe0.js",
+                  "lineNumber": 0,
+                  "columnNumber": 986560
+                },
+                {
+                  "functionName": "i",
+                  "scriptId": "100",
+                  "url": "https://grok.com/_next/static/chunks/33dee67d03c09a9c.js",
+                  "lineNumber": 0,
+                  "columnNumber": 299164
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "19",
+                  "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                  "lineNumber": 0,
+                  "columnNumber": 161287
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "19",
+                    "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                    "lineNumber": 0,
+                    "columnNumber": 177615
+                  },
+                  {
+                    "functionName": "r",
+                    "scriptId": "100",
+                    "url": "https://grok.com/_next/static/chunks/33dee67d03c09a9c.js",
+                    "lineNumber": 0,
+                    "columnNumber": 299070
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "100",
+                    "url": "https://grok.com/_next/static/chunks/33dee67d03c09a9c.js",
+                    "lineNumber": 0,
+                    "columnNumber": 299695
+                  },
+                  {
+                    "functionName": "r",
+                    "scriptId": "19",
+                    "url": "https://grok.com/_next/static/chunks/2a7b2824f4e14804.js",
+                    "lineNumber": 0,
+                    "columnNumber": 161287
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "VeryLow",
+        "_resourceType": "ping",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://grok.com/_data/v1/events",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "grok.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/_data/v1/events"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "756"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "https://grok.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=4, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://grok.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 756,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"api_key\":\"un1QuRAfyI8BJ69HyL3Eq8TyiIKHfHsheVxL65BTREI=\",\"viewer_context\":{\"request_id\":\"4c31e741-349d-412d-83c5-1e5a9b422bb4\",\"user_attributes\":{\"user_id\":\"2908e56f-cfff-4fab-97a3-d4a69bca3f2f\",\"user_type\":\"LoggedIn\",\"subscription_level\":\"Free\",\"country\":\"KR\",\"email\":\"2yellow2light@gmail.com\",\"locale\":\"ko\",\"language\":\"ko\"},\"device_attributes\":{\"app_name\":\"Grok Web\",\"app_version\":\"unset\",\"os_name\":\"macOS\",\"os_version\":\"10.15\",\"device_vendor\":\"Unknown\",\"device_model\":\"Unknown\",\"device_version\":\"Unknown\"}},\"events\":[{\"event_name\":\"session_active_time\",\"event_value\":\"10007.5\",\"event_metadata\":{\"location\":\"session-tracker\",\"sessionActiveTimeMs\":\"10007.5\",\"totalActiveTimeMs\":\"29113.30000001192\",\"page\":\"main\"},\"timestamp\":\"2025-10-28T07:59:23.681Z\"}]}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "9958e4c7cd427363-ICN"
+            },
+            {
+              "name": "content-length",
+              "value": "4"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Tue, 28 Oct 2025 07:59:25 GMT"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 4,
+            "mimeType": "application/json",
+            "text": "null"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 124,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "104.18.29.234",
+        "startedDateTime": "2025-10-28T07:59:25.684Z",
+        "time": 352.9569999955129,
+        "timings": {
+          "blocked": 1.308999994696118,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.18399999999999994,
+          "wait": 351.004999998224,
+          "receive": 0.45900000259280205,
+          "_blocked_queueing": 0.9299999946961179,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

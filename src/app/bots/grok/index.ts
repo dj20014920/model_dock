@@ -3,6 +3,7 @@ import { ChatError, ErrorCode } from '~utils/errors'
 import { AsyncAbstractBot, MessageParams } from '../abstract-bot'
 import { GrokApiBot } from './api'
 import { GrokWebAppBot } from './webapp'
+import * as agent from '~services/agent'
 
 /**
  * Grok Bot Facade
@@ -28,6 +29,10 @@ export class GrokBot extends AsyncAbstractBot {
   }
 
   async sendMessage(params: MessageParams) {
+    const { grokWebAccess } = await getUserConfig() as any
+    if (grokWebAccess) {
+      return agent.execute(params.prompt, (prompt) => this.doSendMessageGenerator({ ...params, prompt }), params.signal)
+    }
     return this.doSendMessageGenerator(params)
   }
 }

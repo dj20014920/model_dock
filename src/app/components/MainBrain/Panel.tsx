@@ -6,7 +6,7 @@ import Button from '~app/components/Button'
 import { BotId } from '~app/bots'
 import { useMainBrain } from '~app/hooks/use-main-brain'
 
-const RECOMMENDED: BotId[] = ['chatgpt', 'claude', 'perplexity', 'gemini'].filter(
+const RECOMMENDED: BotId[] = ['chatgpt', 'claude', 'perplexity', 'gemini', 'qwen', 'deepseek'].filter(
   (id) => CHATBOTS[id as BotId],
 ) as BotId[]
 

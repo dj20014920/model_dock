@@ -4,7 +4,8 @@ import { ChatError, ErrorCode } from '~utils/errors'
 
 export class LMSYSBot extends GradioBot {
   constructor(model: string) {
-    super('wss://chat.lmsys.org/queue/join', model, [0.7, 1, 512], 'text')
+    // LMSYS Chatbot Arena - 새 도메인으로 업데이트
+    super('wss://arena.lmsys.org/queue/join', model, [0.7, 1, 512], 'text')
   }
 
   private async initializeSession(

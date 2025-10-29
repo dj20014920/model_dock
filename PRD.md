@@ -7,7 +7,7 @@
 1. 프로젝트 개요
 
 
-**사용자가 이미 구독/로그인하거나 무료 티어의 계정을 이용하여 공식 AI 웹사이트(ChatGPT, Claude, Gemini, Grok, Perplexity, Qwen, DeepSeek, Kimi, GLM 등)를 한 화면에 모아 사용하도록 구성한다 프롬프트 템플릿 + 수동 수집 + 메모장 + 온보딩 가이드를 제공한다.**
+**사용자가 이미 구독/로그인하거나 무료 티어의 계정을 이용하여 공식 AI 웹사이트(ChatGPT, Claude, Gemini, Grok, Perplexity, Qwen(통义千问), DeepSeek, Kimi, GLM 등)를 한 화면에 모아 사용하도록 구성한다 프롬프트 템플릿 + 수동 수집 + 메모장 + 온보딩 가이드를 제공한다.**
 
 1.1 목표
 프록시 탭 모드는 죽어도 사용하지 말것

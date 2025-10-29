@@ -25,7 +25,7 @@ export type UsageEstimation = {
   tokens: number
   usd?: number // undefined when pricing unknown or not in API mode
   model?: string
-  provider?: 'openai' | 'anthropic' | 'perplexity' | 'gemini' | 'deepseek'
+  provider?: 'openai' | 'anthropic' | 'perplexity' | 'gemini' | 'deepseek' | 'qwen'
 }
 
 export function estimateForBot(botId: BotId, text: string, config: UserConfig): UsageEstimation {
@@ -60,6 +60,11 @@ export function estimateForBot(botId: BotId, text: string, config: UserConfig): 
   if ((botId as any) === 'deepseek' && (config as any).deepseekApiKey) {
     // Pricing varies by model; omit cost
     return { tokens, provider: 'deepseek' }
+  }
+
+  if ((botId as any) === 'qwen') {
+    // Qwen webapp mode - no cost tracking
+    return { tokens, provider: 'qwen' }
   }
 
   return { tokens }

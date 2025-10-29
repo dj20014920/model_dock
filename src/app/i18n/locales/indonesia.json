@@ -24,9 +24,6 @@
   "Chat with more than 2 bots simultaneously": "Obrolan dengan lebih dari 2 bot secara bersamaan",
   "Full-text search for chat history": "Pencarian teks penuh untuk riwayat obrolan",
   "Customize theme": "Sesuaikan tema",
-  "Support the development of ChatHub": "Dukung pengembangan ChatHub",
-  "Enjoy ChatHub? Give us a 5-star rating!": "Menikmati ChatHub? Beri kami rating 5 bintang!",
-  "Write review": "Tulis ulasan",
   "Activate license": "Aktifkan lisensi",
   "🎉 License activated": "🎉 Lisensi diaktifkan",
   "All-In-One Mode": "Mode All-In-One",
@@ -42,7 +39,7 @@
   "Follow Arc browser theme": "Ikuti tema browser Arc",
   "iFlytek Spark": "iFlytek Spark",
   "You need to login to Poe first": "Anda perlu login ke Poe terlebih dahulu",
-  "Login at bing.com": "Login di bing.com",
+  "Login at bing.com": "Login di copilot.microsoft.com",
   "Login at poe.com": "Login di poe.com",
   "Login at xfyun.cn": "Login ke akun xfyun",
   "Lifetime license": "Lisensi seumur hidup",
@@ -51,7 +48,6 @@
   "Model used by ChatGPT iOS app, potentially faster": "Model yang digunakan oleh aplikasi ChatGPT iOS, mungkin lebih cepat",
   "Poe subscribers only": "Hanya pelanggan Poe",
   "Quick access in Chrome side bar": "Akses cepat di bilah sisi Chrome",
-  "You have opened ChatHub {{openTimes}} times, consider unlock all features?": "Anda telah membuka ChatHub {{openTimes}} kali, pertimbangkan untuk membuka semua fitur?",
   "Open Prompt Library": "Buka Perpustakaan Prompt",
   "Use / to select prompts, Shift+Enter to add new line": "Gunakan / untuk memilih prompt, Shift+Enter untuk menambahkan baris baru",
   "Your Prompts": "Prompt Anda",
@@ -87,5 +83,7 @@
   "Display": "Tampilan",
   "Display Settings": "Pengaturan tampilan",
   "Auto": "Otomatis",
-  "Language": "Bahasa"
+  "Language": "Bahasa",
+  "Grok security notice": "Karena kebijakan keamanan X(Twitter), Grok tidak dapat menggunakan bidang input terpadu. Mohon maaf atas ketidaknyamanannya. Silakan masukkan langsung di panel Grok atau gunakan mode Manual.",
+  "OK": "OK"
 }

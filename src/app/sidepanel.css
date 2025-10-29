@@ -3,4 +3,40 @@ body,
 #app {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 사이드패널 전용 스타일 */
+body {
+  background-color: var(--color-primary-background);
+}
+
+/* 컴팩트 레이아웃을 위한 스크롤바 스타일 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* 다크모드 스크롤바 */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }

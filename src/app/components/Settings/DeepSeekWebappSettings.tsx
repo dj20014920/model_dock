@@ -27,10 +27,10 @@ const DeepSeekWebappSettings: FC<Props> = ({ userConfig, updateConfigValue }) =>
             } catch (e) {
               console.error(e)
             }
-            await Browser.tabs.create({ url: 'https://chat.deepseek.com', pinned: true })
+            await Browser.tabs.create({ url: 'https://chat.deepseek.com' })
           }}
         />
-        <span className="text-xs text-secondary-text">{t('Keep the pinned tab open to keep session active')}</span>
+        <span className="text-xs text-secondary-text">{t('Login required for first use')}</span>
       </div>
       <p className="font-medium text-sm">{t('Custom model slug (optional)')}</p>
       <Input

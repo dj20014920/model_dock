@@ -57,7 +57,7 @@ const ErrorAction: FC<{ error: ChatError }> = ({ error }) => {
 
   if (error.code === ErrorCode.BING_UNAUTHORIZED) {
     return (
-      <a href="https://bing.com" target="_blank" rel="noreferrer">
+      <a href="https://copilot.microsoft.com" target="_blank" rel="noreferrer">
         <ActionButton text={t('Login at bing.com')} />
       </a>
     )

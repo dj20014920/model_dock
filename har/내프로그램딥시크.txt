@@ -1,0 +1,1147 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [
+      {
+        "startedDateTime": "2025-10-29T05:03:04.481Z",
+        "id": "page_1",
+        "title": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html",
+        "pageTimings": {
+          "onContentLoad": 177.76900000171736,
+          "onLoad": 178.13300000852905
+        }
+      }
+    ],
+    "entries": [
+      {
+        "_connectionId": "946251",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ace",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 65,
+                "columnNumber": 139097
+              },
+              {
+                "functionName": "n",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 65,
+                "columnNumber": 139410
+              },
+              {
+                "functionName": "r",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 65,
+                "columnNumber": 139444
+              },
+              {
+                "functionName": "enableAutoPageviews",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 65,
+                "columnNumber": 139712
+              },
+              {
+                "functionName": "",
+                "scriptId": "58",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-d7a7ca76.js",
+                "lineNumber": 73,
+                "columnNumber": 74735
+              },
+              {
+                "functionName": "",
+                "scriptId": "58",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-d7a7ca76.js",
+                "lineNumber": 0,
+                "columnNumber": 22
+              },
+              {
+                "functionName": "",
+                "scriptId": "58",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-d7a7ca76.js",
+                "lineNumber": 73,
+                "columnNumber": 74774
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "124"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 124,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"pageview\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1133,\"h\":1}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/29/2025 05:03:05"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.39"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "b3db2ecdcca82de088be2ab109d64beb"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 29 Oct 2025 05:03:05 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHLdt8OfRckjrRR8F_KH"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 524,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "[2401:c080:1c01:5a:ba3f:d2ff:fe0a:94b0]",
+        "startedDateTime": "2025-10-29T05:03:04.659Z",
+        "time": 1478.0089999957754,
+        "timings": {
+          "blocked": 2.2359999983943997,
+          "dns": 381.37,
+          "ssl": 176.39100000000008,
+          "connect": 733.211,
+          "send": 0.47299999999995634,
+          "wait": 359.6219999970813,
+          "receive": 1.0970000002998859,
+          "_blocked_queueing": 0.7259999983943999,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25354
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "r$",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 25477
+              },
+              {
+                "functionName": "co",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 30895
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27661
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27788
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27653
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 30591
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27653
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 29236
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 28994
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27653
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 30591
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27653
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27653
+              },
+              {
+                "functionName": "Li",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 27540
+              },
+              {
+                "functionName": "QM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 28845
+              },
+              {
+                "functionName": "jX",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 40870
+              },
+              {
+                "functionName": "Ka",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 40274
+              },
+              {
+                "functionName": "Tk",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 36884
+              },
+              {
+                "functionName": "ka",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 45,
+                "columnNumber": 3278
+              },
+              {
+                "functionName": "",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 34262
+              }
+            ],
+            "parentId": {
+              "id": "1",
+              "debuggerId": "6251552978072193527.1119712755426422401"
+            }
+          }
+        },
+        "_priority": "VeryHigh",
+        "_resourceType": "document",
+        "cache": {},
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "https://grok.com/",
+          "httpVersion": "",
+          "headers": [
+            {
+              "name": "Upgrade-Insecure-Requests",
+              "value": "1"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 0,
+          "statusText": "",
+          "httpVersion": "",
+          "headers": [],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": "net::ERR_ABORTED",
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "",
+        "startedDateTime": "2025-10-29T05:03:04.695Z",
+        "time": 55.72800000663847,
+        "timings": {
+          "blocked": 55.72800000663847,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0,
+          "receive": 0,
+          "_blocked_queueing": -1
+        }
+      },
+      {
+        "_connectionId": "946290",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ace",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 65,
+                "columnNumber": 139097
+              },
+              {
+                "functionName": "n",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 65,
+                "columnNumber": 139410
+              },
+              {
+                "functionName": "Zr",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 65,
+                "columnNumber": 141038
+              },
+              {
+                "functionName": "",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 822,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "",
+                "scriptId": "58",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-d7a7ca76.js",
+                "lineNumber": 50,
+                "columnNumber": 84139
+              },
+              {
+                "functionName": "onUserSendMessage",
+                "scriptId": "58",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-d7a7ca76.js",
+                "lineNumber": 60,
+                "columnNumber": 620
+              },
+              {
+                "functionName": "",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 888,
+                "columnNumber": 54998
+              },
+              {
+                "functionName": "",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 804,
+                "columnNumber": 2205
+              },
+              {
+                "functionName": "oY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "aY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "lY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "Z6",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "sM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "O7",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 8974
+              },
+              {
+                "functionName": "t_",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "tx",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "EY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              },
+              {
+                "functionName": "",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 804,
+                "columnNumber": 119
+              },
+              {
+                "functionName": "oY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "aY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "lY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "Z6",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "sM",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "Tx",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 47,
+                "columnNumber": 36955
+              },
+              {
+                "functionName": "O7",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 8998
+              },
+              {
+                "functionName": "t_",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "tx",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "EY",
+                "scriptId": "59",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/GrokNoticeModal-427ef6cc.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "234"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 234,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1133,\"h\":1,\"p\":\"{\\\"version\\\":\\\"1.45.24\\\",\\\"botId\\\":\\\"deepseek\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"DeepSeek (webapp)\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/29/2025 05:03:07"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.39"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "3ffa8d0e507301c43d75db533b017024"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 29 Oct 2025 05:03:07 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHLduB8Qh5y_aJt9iF8C"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 523,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "[2401:c080:1c01:5a:ba3f:d2ff:fe0a:94b0]",
+        "startedDateTime": "2025-10-29T05:03:06.867Z",
+        "time": 358.5959999889079,
+        "timings": {
+          "blocked": 1.6239999935599043,
+          "dns": 0.006000000000000005,
+          "ssl": 34.903,
+          "connect": 61.413,
+          "send": 0.17200000000000415,
+          "wait": 295.10700000445263,
+          "receive": 0.2739999908953905,
+          "_blocked_queueing": 1.3349999935599044,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

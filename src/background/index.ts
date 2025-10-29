@@ -132,6 +132,9 @@ Browser.runtime.onConnect.addListener((port) => {
       } else if (url.includes('deepseek.com')) {
         originUrl = 'https://chat.deepseek.com'
         refererUrl = 'https://chat.deepseek.com/'
+      } else if (url.includes('copilot.microsoft.com')) {
+        originUrl = 'https://copilot.microsoft.com'
+        refererUrl = 'https://copilot.microsoft.com/'
       }
       
       // 필수 헤더: 실제 브라우저처럼 보이게

@@ -1,0 +1,639 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [],
+    "entries": [
+      {
+        "_connectionId": "990951",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ace",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 65,
+                "columnNumber": 139097
+              },
+              {
+                "functionName": "n",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 65,
+                "columnNumber": 139410
+              },
+              {
+                "functionName": "Zr",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 65,
+                "columnNumber": 141038
+              },
+              {
+                "functionName": "",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 822,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "",
+                "scriptId": "8",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-d6fd44fb.js",
+                "lineNumber": 50,
+                "columnNumber": 84139
+              },
+              {
+                "functionName": "onUserSendMessage",
+                "scriptId": "8",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-d6fd44fb.js",
+                "lineNumber": 60,
+                "columnNumber": 620
+              },
+              {
+                "functionName": "",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 888,
+                "columnNumber": 55706
+              },
+              {
+                "functionName": "",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 804,
+                "columnNumber": 2205
+              },
+              {
+                "functionName": "oY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "aY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "lY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "Q6",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "s7",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "OM",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 8974
+              },
+              {
+                "functionName": "n_",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "nx",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "EY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              },
+              {
+                "functionName": "",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 804,
+                "columnNumber": 119
+              },
+              {
+                "functionName": "oY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "aY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "lY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "Q6",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "s7",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "Ax",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 47,
+                "columnNumber": 36955
+              },
+              {
+                "functionName": "OM",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 8998
+              },
+              {
+                "functionName": "n_",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "nx",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "EY",
+                "scriptId": "7",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-d3360503.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "229"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 229,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1133,\"h\":1,\"p\":\"{\\\"version\\\":\\\"1.45.24\\\",\\\"botId\\\":\\\"bing\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"Copilot (webapp)\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/29/2025 06:27:07"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.39"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "79f1ada994b16ba2499d5010b9462295"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 29 Oct 2025 06:27:07 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHLiTZURsNSzyqiCLHMD"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 524,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-29T06:27:06.915Z",
+        "time": 313.5230000085812,
+        "timings": {
+          "blocked": 2.124000009850599,
+          "dns": 0.009000000000000008,
+          "ssl": 9.166999999999998,
+          "connect": 35.721000000000004,
+          "send": 0.7719999999999985,
+          "wait": 274.57199999784586,
+          "receive": 0.32500000088475645,
+          "_blocked_queueing": 1.7270000098505989,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "990974",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "d",
+                "scriptId": "6",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/index.ts-bccf3002.js",
+                "lineNumber": 5,
+                "columnNumber": 6577
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://copilot.microsoft.com/c/api/start",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "copilot.microsoft.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/c/api/start"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "170"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "oai-device-id",
+              "value": "50a634c3-9051-4eb6-983e-717705680d01"
+            },
+            {
+              "name": "oai-language",
+              "value": "ko"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 170,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"timeZone\":\"Asia/Seoul\",\"startNewConversation\":true,\"teenSupportEnabled\":true,\"correctPersonalizationSetting\":true,\"performUserMerge\":true,\"deferredDataUseCapable\":true}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=93600"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-length",
+              "value": "6553"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 29 Oct 2025 06:27:07 GMT"
+            },
+            {
+              "name": "nel",
+              "value": "{\"report_to\":\"network-errors\",\"max_age\":604800,\"success_fraction\":0.001,\"failure_fraction\":1.0}"
+            },
+            {
+              "name": "quic-version",
+              "value": "0x00000001"
+            },
+            {
+              "name": "report-to",
+              "value": "{\"group\":\"network-errors\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://aefd.nelreports.net/api/report?cat=sbc\"}]}"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-cdn-traceid",
+              "value": "0.16da2317.1761719227.2391e539"
+            },
+            {
+              "name": "x-ceto-ref",
+              "value": "6901b3bbd0bc4d4faa15a12682c73fb2|AFD:6901b3bbd0bc4d4faa15a12682c73fb2|2025-10-29T06:27:07.018Z"
+            },
+            {
+              "name": "x-trace-id",
+              "value": "6901b3bbd0bc4d4faa15a12682c73fb2"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 11492,
+            "mimeType": "application/json",
+            "text": "{\"currentConversationId\":\"u7CWTNXzfJRMKgBqw4V77\",\"isNewUser\":false,\"allowBeta\":false,\"remainingTurns\":1000,\"features\":[\"respondingchatgpt0217\",\"imagegenv3\",\"assistant-enable-answer-cards\",\"daily-briefing\",\"think-deeper\",\"attachment-upload-error\",\"image-copy-paste\",\"connectors-no-contact\",\"a11y-keyboard-navigation\",\"microphone-denied-ui\",\"voice-call-jingles\",\"image-cards\",\"fileupload\",\"launch-greeting\",\"share-conversation\",\"suggestedsearch\",\"1s-dbrief-ttl3\",\"voicereferences\",\"share-conversation-send\",\"share-message\",\"attachmentsservice\",\"imgvideoshopcardflight\",\"teensupportextended\",\"voices56\",\"fileasyncprocessing\",\"logged-out-sharing\",\"answercardheuristic\",\"sidebar\",\"mergereasoningoutput\",\"quiz-cards\",\"landing-page\",\"localstructv2\",\"copilotassistant\",\"reducefetching\",\"suggestion-pills-20250310\",\"pod-in-discovery-feed\",\"safety-helpline-cards\",\"hackevent\",\"share-preview-modal\",\"weather-cards\",\"trimspgrdv2\",\"video-cards-tiktok\",\"gpt4otitlegeneration\",\"pay-webview-checkout\",\"video-player-moments\",\"sportscardsc1\",\"jbenabgrdv2\",\"citation-overflow\",\"labs-wham-enabled\",\"response-length-ship-ios\",\"custom-1ds\",\"userpod-in-discovery-feed\",\"discovery-1s-unified\",\"inactivitytimeout\",\"conversation-id-sync\",\"ads-pixels\",\"safetycards\",\"edgviswebground\",\"enable-all-app-actions\",\"promptedreasoningcombinedwithsearchpatch\",\"labs-landing\",\"promptmessagewithcards\",\"voices78\",\"wincopv3\",\"allow-input-for-running-task\",\"sports-lp-t1\",\"composer-v2\",\"share-uploaded-attachments-placeholder\",\"allowanonymoususershare\",\"share-chat-page-entry\",\"039add1b-use-fixed-chat-layout\",\"fileasyncprocessing_ios\",\"1s-dbchat\",\"testing-for-mac\",\"share-image-link\",\"dailybriefing\",\"pages-table\",\"user-conversation-merge\",\"wpo-ranking\",\"always-show-last-reaction-v2\",\"podcast-action-card\",\"pod-new-player\",\"ads-gms-feedback\",\"azureconfigregexblocklist\",\"video-picture-in-picture\",\"disable-cmc-auto-reload\",\"podcast-in-create-drawer\",\"onedrive\",\"suggesthangup\",\"pages-edit-response-button-text-v2\",\"correct-personalization-accidental-opt-out\",\"share-campaign\",\"039add1b-chat-sessions-drawer\",\"039add1b-pages-drawer\",\"injectselfharminstructions\",\"039add1b-refresh-token-worker\",\"account-change-chat-reset\",\"preload-chat-messages\",\"1s-moc-logosize\",\"quiz-card-suggestion\",\"send-connected\",\"image-shimmer-option1\",\"async-disclaimer-text\",\"mem-generate-post-turn\",\"sharecontinue\",\"labs-appearance-new-content\",\"share-campaign-taeb9y\",\"share-campaign-krq0kf\",\"dr-editprompt-mobile\",\"039add1b-animated-greeting-message-view\",\"greeting-message-animation\",\"image-fallback-thumbnail\",\"adsidsync\",\"think-deeper-regenerate\",\"narr-icachcreate\",\"smart-mode-flightd-cmc\",\"narr-icachuse\",\"img-followup-patch\",\"inject-user-greeting\",\"code\",\"videoserp5\",\"cmc-m365-sku\",\"searchvideos-bing-fallback\",\"searchimages-bing-fallback\",\"responding-harmony-4o-v4\",\"adsnewsponsorlabel\",\"pay-instacart-canada\",\"quiz-in-create-drawer\",\"deep-research-export-file\",\"deep-research-export-podcast\",\"multiple\",\"originaldocumentupload\",\"web-multi-fallback-languages\",\"shopping-next-gen-insights\",\"ctrl-igsfstr\",\"share-campaign-evhqea\",\"share-campaign-rbsrqk\",\"share-campaign-tkzuae\",\"share-campaign-jowp8z\",\"share-campaign-gxcdu3\",\"share-campaign-d2e0f5\",\"share-campaign-dkmev6\",\"share-campaign-coqva4\",\"share-campaign-gez3vb\",\"remove-extra-im-start-context\",\"vision-in-composer-v3\",\"deep-research-nano\",\"export-pages-t\",\"copilot-beta\",\"memory-edf\",\"039add1b-uikit-paragraph-view\",\"imagegenv3peakhour_control\",\"onedrive-fetch\",\"share-continue-v2\",\"image-feedback-command\",\"token-retry-max-2\",\"creator-gallery\",\"side-by-side-comparison\",\"quiz-improvements-t2\",\"old-search-config\",\"thinkdeepero4minichainofthought\",\"pod-share\",\"image-library-2\",\"image-library-delete-image\",\"responding-vision\",\"delete-account-msa\",\"igszcls\",\"searchimages-cache\",\"searchvideos-cache\",\"pay-consistent-buy\",\"finance-tooltip-v2\",\"m365-pills-custom\",\"copilot-beta-automatic-opt-in\",\"deep-research\",\"quiz-option-shuffle\",\"mac-upsell\",\"image-cards-v2\",\"t1_tsrv4_onedrive_finance\",\"test-srm-aa-4\",\"challenge-all-anonymous\",\"deep-research-promo-card-control\",\"recipe-card\",\"finance-watchlist-v2\",\"finance-crypto\",\"mutesuggestions\",\"finance-cards\",\"aad-student\",\"manage-cookies\",\"pages-link-navigation\",\"pages-onboarding-animation\",\"pages-sharing\",\"pages\",\"searchvideopaging\",\"pages-skip-page-selector\",\"pages-file-upload\",\"pages-suggested-followups\",\"onedrive-graph\",\"pages-anonymous\",\"pages-copy\",\"rm-relatedqna\",\"serpvideoreasoningv3\",\"serpimagereasoningv2\",\"dr-web-upd-w\",\"dr-pro-nano\",\"pay-getbuyoption-migration\",\"pay-getrecipe-migration\",\"pay-price-tracked\",\"pay-shopify-checkout\",\"sports-cards\",\"smart-mode-reason-chat\",\"enable-sentry-tracing\",\"pages-reasoning-gg\",\"bingimgsearchc\",\"memory-signal-event\",\"copilot-challenge\",\"composer-v4\",\"labs-audio-expression\",\"039add1b-sentry-hang-rate-v2\",\"voice-improved-courtesy-wait\",\"quiz-harmony\",\"sticky-conversation-mode\",\"smart-mode-ensemble-switcher\",\"t1_tsrv3_router\",\"title-generation-harmony\",\"labs-actions-replay\",\"pay-conversion-tracking\",\"history-truncation-fix-parent\",\"dr-parallel\",\"backstoryinsertall\",\"webcontent\",\"one-char-autosuggest\",\"library\",\"discover-modal-history\",\"db-lock-screen\",\"local-cards\",\"smart-mode-with-hapi\",\"optimized-responding-for-cache\",\"clarity-http-endpoint\",\"mem-time-filter\",\"share-image-continue\",\"sharemanagement\",\"labs-audio-expression-style-list-layout\",\"nosearchimageonattachment\",\"start-retry\",\"anonymousimagegen\",\"1s-moc-img-def-ar\",\"followup-align-end-question\",\"imagegenv3highfidelity_parent\",\"ui-kit-paragraph-view-2\",\"m365-cela-sheet\",\"placecardprompclean-v3\",\"title-generation-v2\",\"eea-personalization-waiting-period\",\"useggvisionmodel\",\"study-mode\",\"searchimages-safe\",\"searchvideos-safe\",\"request-thumbnail\",\"reasoner-responder-routing-c\",\"attachment-suggestions-c\",\"responding-gpt5-0815\",\"ctrl-ig1p5\",\"memory-management-v2\",\"page-title-generation-v2\",\"kill-picasso-id-on-start\",\"zircon-flight-t\",\"browser-actions-09092025\",\"share-campaign-ferk5z\",\"detailedpromptmetrics-c\",\"file-upload-config\",\"sidebar-settings\",\"labs-3d-new-assets-layout\",\"placecard-enhance-all\",\"story-v2-prompt\",\"n-30-k-20\",\"mai-vad-suppression-c\",\"pages-layout-v2\",\"enable-vad-latency-measure\",\"podcast-doc-dr-grounding\",\"pay-ams-c\",\"ceo-harmony\",\"finance-chart-clickthrough\",\"labs-audio-expression-scripted-mode\",\"labs-audio-expression-mode-coachmark\",\"labs-audio-expression-story-voice-selector\",\"thinkdeeper5reasoningloweffort\",\"no-gsi\",\"page-title-generation-hapi\",\"ctrl-igszcls-reasoning-prompt\",\"m365-pills-data-v2\",\"labs-audio-expression-auto-style\",\"edgevisionhighlightinstructionv2\",\"chat-layout-v2-t\",\"finance-earnings\",\"page-safety-check-control\",\"igsizelimit\",\"project\",\"pages-sources\",\"discover-msn-resource-preloader\",\"autosuggest\",\"aslangex\",\"analyzedocuments-extendedtokens\",\"image-safety\",\"labs-audio-expression-preset-card-fixed\",\"lazy-with-retry\",\"character-cognitive-testing-service\",\"ceo-conversation-history\",\"voice-flower-bg\",\"highertextharmthreshold\",\"proactive-dr\",\"write-memory-struct\",\"event-hub-v3\",\"voicepromptrecall\",\"labs-3d-multiple-format\",\"thinkdeeper5miniloweffortchainofthought\",\"image-dynamic-width\",\"group-conversations\",\"cocov2\",\"share-to-social-media-v1\",\"voicegreetall\",\"deep-research-share-link\",\"cococrit\",\"search-web-fanout-v2\",\"pages-sources-multi-upload\",\"mem-context-event\",\"page-action-responder-loop\",\"cot-output-panel\",\"durable-fact-actions\",\"finance-speedbird-prod-c\",\"full-prompt-enabled\",\"search-mode-t2\",\"search-citation-t6\",\"imagegen-galleryremixquota\",\"place-near-me-fix\",\"reuse-previous-tool-list\",\"ceo-tool-migration\",\"searchprompt1wc\",\"tv-voice-feedback\",\"imageip\",\"responding-pages-harmony-41mini\",\"podcast-orchestrator\",\"get-group-join-link-v2\",\"dr-nano-agent-v2\",\"pay-migrate-get-checkout-option-v2-c\",\"voice-safety-patch\",\"fix-dynamic-link-hallucination\",\"uselongcontextmodel\",\"mem-backfill-cosmos-store\",\"citation-card-max-width\",\"ltm-localinference-embedding\",\"speechtranscribev2\",\"browser-automation-inc-max-loop\",\"silence-trimming\",\"conversation-title-language\",\"thinkdeeper-truncator\",\"ltm-durable-facts\",\"portrait-redis-regional\",\"search-truncation\",\"vision-backstory-trim\",\"personal-data-sidepanel\",\"searchmodequality\",\"backstory-trim-v2\",\"student-offer-skip-interstitial-login-c\",\"artifact-sharemanagement\",\"creator-gallery-rename-to-imagine\",\"enable-extra-safety\",\"voice-time-formatting\",\"creator-gallery-imagine\",\"creator-gallery-3d-control\",\"voice-capture-delay\",\"balancedfiletokens\",\"october-moment-2025\",\"low-intent-patch\",\"calendar-allow-non-organizer-events\",\"text-paste-modal-file-upload\",\"consent-multi-reject-card\",\"empty-tool-instruction\",\"think-deeper-move-tool-instructions\",\"heycopilot-backstory\",\"voice-interruption-prevention\",\"vad-buffer\",\"hallucinated-tool-invocation\",\"mai-voice-return-story-title-and-text\",\"dr-update-references-dynamically\",\"shopping-tool-definiton-v2\",\"ceo-remove-search-web-c\",\"connectors-email-search-keyword\",\"consent-card-v2\",\"gmail-connector\",\"google-calendar-connector\",\"google-calendar-connector-v2\",\"google-drive-connector\",\"google-drive-connector-v2\",\"google-mail-connector\",\"google-mail-connector-v2\",\"mail-contacts-search-personal-data\",\"onedrive-connector\",\"onedrive-connector-substrate\",\"onedrive-connector-v2\",\"outlook-connector\",\"outlook-connector-v2\",\"search-personal-data\",\"search-personal-data-2\",\"discovery-layoutmanager\",\"chainofthoughteventprocessor\",\"chat-message-preview\",\"handle-preview-event\",\"kill-composer-creation-button\",\"smart-mode\",\"smart-mode-6e0b4c6f\",\"smart-mode-cot\",\"smart-mode-flightc\",\"smart-mode-v2-config\",\"ceo\",\"ceo-cards\",\"ceo-web\",\"searchvideos\",\"searchvideos-google\",\"serpvideocard\",\"video-cards-v2\",\"videocardrespondinginstruction\",\"m365-subscriptions\",\"subs-api-user-fetched\",\"subs-pro-premium-transition\",\"emit-all-inference-telemetry\",\"responderactions-all\",\"multi-file-upload\",\"multiple-file-upload\",\"unlimitedfilereasoning\",\"grounded-edit\",\"page-citation\",\"pages-footnote\",\"think-deeper-cot\",\"harmony-images\",\"responding-harmony-4o-vision\",\"onedrive-search\",\"searchfinance\",\"searchfinance-bing\",\"sorttoolrouterresult\",\"tsrv4_finance\",\"tsrv4_onedrive\",\"finance-follow\",\"finance-watchlist-ui\",\"prg-cmc-flws\",\"prg-cmc-fnav\",\"improve-context-precision\",\"ds-editprompt\",\"ds-new-progress\",\"smart-mode-gpt5\",\"actionspacereducerv2\",\"longqueryfilter\",\"tsrv3_router\",\"enable-history-cache-write\",\"truncatekmessages\",\"discover-nouserpods\",\"db-autoplay\",\"db-transcript\",\"db-transcript-word\",\"responding-harmony-gpt-5-nosearch\",\"responding-harmony-gpt-5-search\",\"imagegenv3highfidelity\",\"imagegenv3highfidelityforall\",\"placecardnavigationenabled\",\"placecardpromptoptimizationenabled\",\"switcher-harmony\",\"browser-actions\",\"browserautomationcomputeruse\",\"browserautomationsearchweb\",\"edgeactiondisableouter\",\"morefileupload\",\"sidebar-compact-nav-items\",\"sidebar-narrow\",\"searchplaces-enhanced-infos\",\"searchplaces-enhanced-photos\",\"truncatekmessages-k20\",\"truncatekmessages-n30\",\"pages-top-toolbar\",\"chat-layout-v2\",\"pages-responder-loop\",\"project-attachment\",\"enblsuggrndmzn\",\"encpsrchdata\",\"citationv2\",\"gnddefinitive\",\"nav-deeplink-only\",\"nav-links\",\"rrcitationv2\",\"search-mode-t1\",\"searchmode\",\"searchmode-nav\",\"citation-cards\",\"citation-modal-v2\",\"citationv2-2\",\"inline-citations\",\"one-line-citation-cards\",\"copilotsearchprompt\",\"copilotsearchwordcount\",\"searchweb-page3\",\"searchweb-sd1000\",\"searchweb-shorter\",\"backstory-trim\",\"vision-trim\",\"voice-search-timezone\"],\"banExpiresAt\":null,\"userId\":\"uanNDRSqMBiFcq3x3MXsW\",\"inDataUseWaitingPeriod\":null}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 6578,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "23.35.218.26",
+        "startedDateTime": "2025-10-29T06:27:06.963Z",
+        "time": 142.77799999332055,
+        "timings": {
+          "blocked": 3.1929999890383334,
+          "dns": 42.6,
+          "ssl": 7.832999999999998,
+          "connect": 50.628,
+          "send": 0.15699999999999648,
+          "wait": 45.56799999405444,
+          "receive": 0.6320000102277845,
+          "_blocked_queueing": 1.7299999890383333,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

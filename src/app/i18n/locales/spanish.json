@@ -24,9 +24,6 @@
   "Chat with more than 2 bots simultaneously": "Chatear con más de 2 bots simultáneamente",
   "Full-text search for chat history": "Búsqueda de texto completo para el historial de chat",
   "Customize theme": "Personalizar tema",
-  "Support the development of ChatHub": "Apoyar el desarrollo de ChatHub",
-  "Enjoy ChatHub? Give us a 5-star rating!": "¿Disfrutas de ChatHub? ¡Danos una calificación de 5 estrellas!",
-  "Write review": "Escribir reseña",
   "Activate license": "Activar licencia",
   "🎉 License activated": "🎉 Licencia activada",
   "All-In-One Mode": "Modo Todo en uno",
@@ -42,7 +39,7 @@
   "Follow Arc browser theme": "Seguir el tema del navegador Arc",
   "iFlytek Spark": "iFlytek Spark",
   "You need to login to Poe first": "Necesitas iniciar sesión en Poe primero",
-  "Login at bing.com": "Iniciar sesión en bing.com",
+  "Login at bing.com": "Iniciar sesión en copilot.microsoft.com",
   "Login at poe.com": "Iniciar sesión en poe.com",
   "Login at xfyun.cn": "Iniciar sesión en xfyun.cn",
   "Lifetime license": "Licencia de por vida",
@@ -51,7 +48,6 @@
   "Model used by ChatGPT iOS app, potentially faster": "Modelo utilizado por la aplicación ChatGPT iOS, potencialmente más rápido",
   "Poe subscribers only": "Solo suscriptores de Poe",
   "Quick access in Chrome side bar": "Acceso rápido en la barra lateral de Chrome",
-  "You have opened ChatHub {{openTimes}} times, consider unlock all features?": "Has abierto ChatHub {{openTimes}} veces, ¿consideras desbloquear todas las funciones? 🥺",
   "Open Prompt Library": "Abrir biblioteca de promts",
   "Use / to select prompts, Shift+Enter to add new line": "Usar / para seleccionar promts, Shift+Enter para agregar nueva línea",
   "Your Prompts": "Tus promts",
@@ -87,5 +83,7 @@
   "Display": "Mostrar",
   "Display Settings": "Configuración de pantalla",
   "Auto": "Automático",
-  "Language": "Idioma"
+  "Language": "Idioma",
+  "Grok security notice": "Debido a la política de seguridad de X(Twitter), Grok no puede usar el campo de entrada unificado. Disculpe las molestias. Por favor, ingrese directamente en el panel de Grok o use el modo Manual.",
+  "OK": "Aceptar"
 }

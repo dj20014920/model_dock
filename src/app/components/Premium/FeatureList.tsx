@@ -68,9 +68,6 @@ const FeatureList: FC<{ highlightFeature?: FeatureId }> = (props) => {
       {
         title: t('Activate up to 5 devices'),
       },
-      {
-        title: t('Support the development of ChatHub'),
-      },
     ]
   }, [t])
 

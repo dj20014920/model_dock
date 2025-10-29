@@ -5,6 +5,7 @@
   "Chatbots": "챗봇",
   "Send": "보내기",
   "Web Access": "웹 액세스",
+  "Improving accuracy by searching up-to-date information from the internet": "인터넷에서 최신 정보를 검색하여 답변 정확도를 향상시킵니다",
   "Manual copy & paste": "수동 복사/붙여넣기",
   "Auto routing": "자동 라우팅",
   "Main Brain": "메인 브레인",
@@ -30,6 +31,15 @@
   "Unset Main Brain": "메인 브레인 해제",
   "Set as Main Brain": "메인 브레인으로 설정",
   "Usage estimation": "사용량 추정",
-  "Include response tokens (approximate)": "응답 토큰 포함(근사)"
+  "Include response tokens (approximate)": "응답 토큰 포함(근사)",
+  "Grok security notice": "Grok은 X(Twitter)의 보안 정책으로 인해 통합 입력창을 사용할 수 없습니다. 불편을 드려 죄송합니다. Grok 패널에서 직접 입력하시거나 Manual 모드를 사용해 주세요.",
+  "OK": "확인",
+  "Open Qwen tab": "Qwen 탭 열기",
+  "Open Gemini tab": "Gemini 탭 열기",
+  "Open DeepSeek tab": "DeepSeek 탭 열기",
+  "Keep the pinned tab open to keep session active": "세션 유지를 위해 고정된 탭을 열어두세요",
+  "Login required for first use": "첫 사용 시 로그인 필요",
+  "Custom model slug (optional)": "커스텀 모델 슬러그 (선택사항)",
+  "Webapp mode uses your login session in current browser": "웹앱 모드는 현재 브라우저의 로그인 세션을 사용합니다"
 }
 

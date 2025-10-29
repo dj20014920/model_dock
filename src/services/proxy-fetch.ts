@@ -9,6 +9,15 @@ import { uuid } from '~utils'
 import { string2Uint8Array, uint8Array2String } from '~utils/encoding'
 import { streamAsyncIterable } from '~utils/stream-async-iterable'
 
+const POLICY_BLOCK_GUIDANCE = [
+  'Chrome blocked script injection on https://www.perplexity.ai/ due to an ExtensionsSettings policy.',
+  'This usually means site access for the extension is restricted or managed by an organization.',
+  'If you are using Perplexity Comet, the browser currently blocks third-party extensions on perplexity.ai. Please switch to Google Chrome/Edge/Brave (or use the Perplexity API mode).',
+  'Open chrome://extensions/?id=__EXTENSION_ID__ and set "Site access" to "On all sites" (or explicitly allow https://www.perplexity.ai).',
+  'If you are on an enterprise-managed device, ask your administrator to allow scripting for this extension.',
+  'After changing the policy, reload the extension and retry. See TROUBLESHOOTING.md for details.',
+].join('\n')
+
 export function setupProxyExecutor() {
   // one port for one fetch request
   Browser.runtime.onConnect.addListener((port) => {
@@ -63,9 +72,26 @@ export function setupProxyExecutor() {
 export async function proxyFetch(tabId: number, url: string, options?: RequestInitSubset): Promise<Response> {
   console.log('[PROXY-FETCH] 🚀 Starting request', { tabId, url: url.substring(0, 80), method: options?.method || 'GET' })
   return new Promise(async (resolve, reject) => {
+    // 0) 먼저 이미 로드된 content-script가 응답하는지 확인 → 응답하면 주입 스킵
+    let contentScriptReady = false
+    try {
+      for (let i = 1; i <= 2; i++) {
+        console.log(`[PROXY-FETCH] 🏓 Preflight ping (attempt ${i}/2) ...`)
+        const pong = await Browser.tabs.sendMessage(tabId, 'url')
+        if (typeof pong === 'string' && pong.length > 0) {
+          contentScriptReady = true
+          console.log('[PROXY-FETCH] ✅ Preflight OK, content script present')
+          break
+        }
+        await new Promise(r => setTimeout(r, 250))
+      }
+    } catch {}
+
     // 강제 주입: content-script가 로드되지 않은 탭에서도 확실히 연결되도록 한다
     let injectionAttempted = false
+    let injectionBlockedByPolicy = false
     try {
+      if (!contentScriptReady) {
       // 주입 파일 경로는 빌드 모드에서 해시가 붙은 에셋으로 변경된다.
       // 따라서 매니페스트의 content_scripts 항목에서 js 파일 목록을 수집하여 주입한다.
       // @ts-ignore chrome global
@@ -90,6 +116,10 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
             attemptedFiles: files
           })
 
+          if (errorMsg.includes('ExtensionsSettings')) {
+            injectionBlockedByPolicy = true
+          }
+
           // 파일 해시 불일치 감지 (Chrome 캐시 문제)
           if (errorMsg.includes('Could not load file') || errorMsg.includes('chatgpt-inpage-proxy')) {
             console.error('[PROXY-FETCH] ❌ MANIFEST CACHE ISSUE DETECTED!')
@@ -108,13 +138,16 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
           await chrome.scripting?.executeScript?.({ target: { tabId }, files: ['js/inpage-fetch-bridge.js'], world: 'MAIN' as any })
           console.log('[PROXY-FETCH] ✅ In-page bridge injected via scripting.executeScript (MAIN world)')
         } catch (e: any) {
-          console.warn('[PROXY-FETCH] ⚠️ In-page bridge inject failed (will rely on fallback if present):', e?.message)
+          const bridgeErrorMsg = e?.message || ''
+          if (bridgeErrorMsg.includes('ExtensionsSettings')) {
+            injectionBlockedByPolicy = true
+          }
+          console.warn('[PROXY-FETCH] ⚠️ In-page bridge inject failed (will rely on fallback if present):', bridgeErrorMsg)
         }
         
-        // Content Script 초기화 대기 시간 증가 (300ms → 1000ms)
-        // Arkose CAPTCHA 등 외부 리소스 로딩 대기
-        console.log('[PROXY-FETCH] ⏳ Waiting for content script initialization (1000ms)...')
-        await new Promise(resolve => setTimeout(resolve, 1000))
+        // Content Script 초기화 대기 (최대 800ms)
+        console.log('[PROXY-FETCH] ⏳ Waiting for content script initialization (800ms)...')
+        await new Promise(resolve => setTimeout(resolve, 800))
       } else {
         console.warn('[PROXY-FETCH] ⚠️ No content scripts found in manifest to inject')
         // 그래도 브리지는 주입 시도(탭에 CS가 이미 있을 수 있음)
@@ -126,6 +159,7 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
           console.warn('[PROXY-FETCH] ⚠️ In-page bridge inject failed (no CS list):', e?.message)
         }
       }
+      }
     } catch (e) {
       console.error('[PROXY-FETCH] ❌ scripting.executeScript error:', {
         error: (e as Error)?.message,
@@ -133,9 +167,38 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
         tabId
       })
     }
+
+    if (injectionBlockedByPolicy) {
+      // Before aborting, double-check if a content script is already present and responsive
+      try {
+        const pong = await Browser.tabs.sendMessage(tabId, 'url')
+        if (typeof pong === 'string' && pong.length > 0) {
+          console.warn('[PROXY-FETCH] ⚠️ Policy error reported, but content script responded; continuing')
+        } else {
+          const extensionId = Browser.runtime?.id || 'this extension'
+          const guidance = POLICY_BLOCK_GUIDANCE.replace('__EXTENSION_ID__', extensionId)
+          console.error('[PROXY-FETCH] 🚫 Aborting due to ExtensionsSettings policy block (no CS response)')
+          resolve(new Response(guidance, {
+            status: 452,
+            statusText: 'EXTENSION_POLICY_BLOCKED',
+            headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+          }))
+          return
+        }
+      } catch {
+        const extensionId = Browser.runtime?.id || 'this extension'
+        const guidance = POLICY_BLOCK_GUIDANCE.replace('__EXTENSION_ID__', extensionId)
+        console.error('[PROXY-FETCH] 🚫 Aborting due to ExtensionsSettings policy block (ping failed)')
+        resolve(new Response(guidance, {
+          status: 452,
+          statusText: 'EXTENSION_POLICY_BLOCKED',
+          headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+        }))
+        return
+      }
+    }
     
     // Content Script 존재 확인 (ping-pong 체크) - 재시도 로직 추가
-    let contentScriptReady = false
     const maxPingRetries = 3
     for (let retry = 1; retry <= maxPingRetries; retry++) {
       try {
@@ -228,7 +291,7 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
         resolve(new Response(empty, { status: 499, statusText: 'CONNECTION_TIMEOUT' }))
         try { port.disconnect() } catch {}
       }
-    }, 30000) // 타임아웃 30초로 증가 (Arkose 로딩 + 초기화 대기)
+    }, 12000) // 타임아웃 12초로 단축 (불필요한 대기 감소)
     
     port.onDisconnect.addListener(() => {
       clearTimeout(connectionTimeout)

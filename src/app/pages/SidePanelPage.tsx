@@ -1,79 +1,266 @@
-import { useAtom } from 'jotai'
-import { useCallback, useMemo } from 'react'
+import { useAtom, useAtomValue } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
+import { sample, uniqBy } from 'lodash-es'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import clearIcon from '~/assets/icons/clear.svg'
+import toast from 'react-hot-toast'
 import { cx } from '~/utils'
 import Button from '~app/components/Button'
 import ChatMessageInput from '~app/components/Chat/ChatMessageInput'
-import ChatMessageList from '~app/components/Chat/ChatMessageList'
-import ChatbotName from '~app/components/Chat/ChatbotName'
-import { CHATBOTS } from '~app/consts'
-import { ConversationContext, ConversationContextValue } from '~app/context'
+import LayoutSwitch from '~app/components/Chat/LayoutSwitch'
+import ConversationPanel from '~app/components/Chat/ConversationPanel'
+import RiskConsentModal from '~app/components/Modals/RiskConsentModal'
+import GrokNoticeModal from '~app/components/Modals/GrokNoticeModal'
+import UsageBadge from '~app/components/Usage/Badge'
+import Browser from 'webextension-polyfill'
+import { CHATBOTS, Layout } from '~app/consts'
 import { useChat } from '~app/hooks/use-chat'
-import { sidePanelBotAtom } from '~app/state'
+import { BotId } from '~app/bots'
+import { getUserConfig, updateUserConfig } from '~services/user-config'
+import { startManualDispatch, startAutoDispatch } from '~app/utils/manual-dispatch'
+import { trackEvent } from '~app/plausible'
 
-function SidePanelPage() {
+const DEFAULT_BOTS: BotId[] = Object.keys(CHATBOTS).slice(0, 4) as BotId[]
+
+// 사이드패널 전용 레이아웃 및 봇 설정
+const sidePanelLayoutAtom = atomWithStorage<Layout>('sidePanelLayout', 2, undefined, { getOnInit: true })
+const sidePanelTwoBotsAtom = atomWithStorage<BotId[]>('sidePanelBots:2', DEFAULT_BOTS.slice(0, 2))
+const sidePanelThreeBotsAtom = atomWithStorage<BotId[]>('sidePanelBots:3', DEFAULT_BOTS.slice(0, 3))
+const sidePanelFourBotsAtom = atomWithStorage<BotId[]>('sidePanelBots:4', DEFAULT_BOTS.slice(0, 4))
+
+function replaceDeprecatedBots(bots: BotId[]): BotId[] {
+  return bots.map((bot) => {
+    if (CHATBOTS[bot]) {
+      return bot
+    }
+    return sample(DEFAULT_BOTS)!
+  })
+}
+
+// 사이드패널용 컴팩트 멀티봇 패널
+function SidePanelMultiBotPanel({
+  chats,
+  setBots,
+}: {
+  chats: ReturnType<typeof useChat>[]
+  setBots?: (fn: (prev: BotId[]) => BotId[]) => void
+}) {
   const { t } = useTranslation()
-  const [botId, setBotId] = useAtom(sidePanelBotAtom)
-  const botInfo = CHATBOTS[botId]
-  const chat = useChat(botId)
+  const generating = useMemo(() => chats.some((c) => c.generating), [chats])
+  const [layout, setLayout] = useAtom(sidePanelLayoutAtom)
+  const [riskOpen, setRiskOpen] = useState(false)
+  const [grokNoticeOpen, setGrokNoticeOpen] = useState(false)
+  const [draft, setDraft] = useState('')
 
-  const onSubmit = useCallback(
-    async (input: string) => {
-      chat.sendMessage(input)
+  const sendSingleMessage = useCallback(
+    (input: string, botId: BotId) => {
+      const chat = chats.find((c) => c.botId === botId)
+      chat?.sendMessage(input)
     },
-    [chat],
+    [chats],
   )
 
-  const resetConversation = useCallback(() => {
-    if (!chat.generating) {
-      chat.resetConversation()
-    }
-  }, [chat])
+  const sendAllMessage = useCallback(
+    async (input: string, image?: File) => {
+      const config = await getUserConfig()
+      const botIds = uniqBy(chats, (c) => c.botId).map((c) => c.botId)
 
-  const context: ConversationContextValue = useMemo(() => {
-    return {
-      reset: resetConversation,
-    }
-  }, [resetConversation])
+      // Grok 첫 사용 시 안내 모달 표시
+      const hasGrok = botIds.includes('grok')
+      if (hasGrok) {
+        const grokNoticeShown = await Browser.storage.local.get('grokNoticeShown')
+        console.log('🔍 [SidePanel] Grok 안내 체크:', { 
+          hasGrok, 
+          alreadyShown: grokNoticeShown.grokNoticeShown,
+          willShow: !grokNoticeShown.grokNoticeShown 
+        })
+        
+        if (!grokNoticeShown.grokNoticeShown) {
+          console.log('✅ [SidePanel] Grok 안내 모달 표시!')
+          setGrokNoticeOpen(true)
+          await Browser.storage.local.set({ grokNoticeShown: true })
+        } else {
+          console.log('⏭️ [SidePanel] Grok 안내 이미 표시됨 - 건너뜀')
+        }
+      }
+
+      if (config.messageDispatchMode === 'manual') {
+        await startManualDispatch(input, botIds, config.mainBrainBotId)
+        const hasGrok = botIds.includes('grok')
+        
+        if (hasGrok) {
+          toast.success(
+            '📋 클립보드에 복사됨!\n각 패널에 붙여넣기\n(Grok은 iframe 클릭 후)',
+            { duration: 4000 }
+          )
+        } else {
+          toast.success('📋 클립보드에 복사됨!\n각 패널에 붙여넣기', { duration: 3000 })
+        }
+      } else {
+        if (!config.autoRoutingConsent) {
+          setRiskOpen(true)
+          return
+        }
+
+        const result = await startAutoDispatch(input, botIds, config.mainBrainBotId, image)
+        trackEvent('send_messages_sidepanel', {
+          layout,
+          mode: 'auto_simulation',
+          successCount: result.successCount,
+          skippedCount: result.skippedBots.length,
+        })
+
+        if (result.skippedBots.length > 0) {
+          const skippedNames = result.skippedBots.map((id) => CHATBOTS[id]?.name || id).join(', ')
+          const hasGrok = result.skippedBots.includes('grok')
+
+          if (hasGrok) {
+            toast(
+              `✅ ${result.successCount}개 전송\n📋 ${skippedNames}는 Manual 모드 사용`,
+              { duration: 5000, icon: 'ℹ️' }
+            )
+          } else {
+            toast.success(`${result.successCount}개 전송 (${skippedNames} 건너뜀)`, { duration: 3000 })
+          }
+        } else {
+          toast.success(`${result.successCount}개 봇에 전송 완료`)
+        }
+      }
+    },
+    [chats, layout],
+  )
+
+  const onSwitchBot = useCallback(
+    (botId: BotId, index: number) => {
+      if (!setBots) return
+      trackEvent('switch_bot_sidepanel', { botId, panel: chats.length })
+      setBots((bots) => {
+        const newBots = [...bots]
+        newBots[index] = botId
+        return newBots
+      })
+    },
+    [chats.length, setBots],
+  )
+
+  const onLayoutChange = useCallback(
+    (v: Layout) => {
+      // 사이드패널은 2, 3, 4 레이아웃만 지원
+      if (v === 2 || v === 3 || v === 4) {
+        trackEvent('switch_sidepanel_layout', { layout: v })
+        setLayout(v)
+      }
+    },
+    [setLayout],
+  )
 
   return (
-    <ConversationContext.Provider value={context}>
-      <div className="flex flex-col overflow-hidden bg-primary-background h-full">
-        <div className="border-b border-solid border-primary-border flex flex-row items-center justify-between gap-2 py-3 mx-3">
-          <div className="flex flex-row items-center gap-2">
-            <img src={botInfo.avatar} className="w-4 h-4 object-contain rounded-full" />
-            <ChatbotName botId={botId} name={botInfo.name} onSwitchBot={setBotId} />
-          </div>
-          <div className="flex flex-row items-center gap-3">
-            <img
-              src={clearIcon}
-              className={cx('w-4 h-4', chat.generating ? 'cursor-not-allowed' : 'cursor-pointer')}
-              onClick={resetConversation}
-            />
-          </div>
-        </div>
-        <ChatMessageList botId={botId} messages={chat.messages} className="mx-3" />
-        <div className="flex flex-col mx-3 my-3 gap-3">
-          <hr className="grow border-primary-border" />
-          <ChatMessageInput
+    <div className="flex flex-col overflow-hidden h-full bg-primary-background">
+      <div
+        className={cx(
+          'grid overflow-hidden grow auto-rows-fr gap-2 mb-2',
+          chats.length === 2 ? 'grid-cols-1' : chats.length === 3 ? 'grid-cols-1' : 'grid-cols-2',
+        )}
+      >
+        {chats.map((chat, index) => (
+          <ConversationPanel
+            key={`${chat.botId}-${index}`}
+            botId={chat.botId}
+            bot={chat.bot}
+            messages={chat.messages}
+            onUserSendMessage={(input) => sendSingleMessage(input, chat.botId)}
+            generating={chat.generating}
+            stopGenerating={chat.stopGenerating}
             mode="compact"
-            disabled={chat.generating}
-            autoFocus={true}
-            placeholder="Ask me anything..."
-            onSubmit={onSubmit}
-            actionButton={
-              chat.generating ? (
-                <Button text={t('Stop')} color="flat" size="small" onClick={chat.stopGenerating} />
-              ) : (
-                <Button text={t('Send')} color="primary" type="submit" size="small" />
-              )
-            }
+            resetConversation={chat.resetConversation}
+            onSwitchBot={setBots ? (botId) => onSwitchBot(botId, index) : undefined}
           />
-        </div>
+        ))}
       </div>
-    </ConversationContext.Provider>
+
+      {riskOpen && (
+        <RiskConsentModal
+          open={riskOpen}
+          onClose={() => setRiskOpen(false)}
+          onAccept={async () => {
+            await updateUserConfig({ autoRoutingConsent: true })
+            setRiskOpen(false)
+          }}
+        />
+      )}
+      <GrokNoticeModal open={grokNoticeOpen} onClose={() => setGrokNoticeOpen(false)} />
+
+      <div className="flex flex-col gap-2 px-2 pb-2">
+        <LayoutSwitch
+          layout={layout}
+          onChange={onLayoutChange}
+          // 사이드패널은 2, 3, 4만 지원
+          availableLayouts={[2, 3, 4]}
+        />
+        <ChatMessageInput
+          mode="compact"
+          className="rounded-xl bg-secondary-background px-3 py-2"
+          disabled={generating}
+          onSubmit={sendAllMessage}
+          onDraftChange={setDraft}
+          actionButton={
+            !generating && (
+              <div className="flex flex-row items-center gap-2">
+                <UsageBadge text={draft} botIds={uniqBy(chats, (c) => c.botId).map((c) => c.botId)} />
+                <Button text={t('Send')} color="primary" type="submit" size="small" />
+              </div>
+            )
+          }
+          autoFocus={true}
+        />
+      </div>
+    </div>
   )
+}
+
+// 2봇 패널
+function TwoBotPanel() {
+  const [bots, setBots] = useAtom(sidePanelTwoBotsAtom)
+  const botIds = useMemo(() => replaceDeprecatedBots(bots), [bots])
+  const chat1 = useChat(botIds[0])
+  const chat2 = useChat(botIds[1])
+  const chats = useMemo(() => [chat1, chat2], [chat1, chat2])
+  return <SidePanelMultiBotPanel chats={chats} setBots={setBots} />
+}
+
+// 3봇 패널
+function ThreeBotPanel() {
+  const [bots, setBots] = useAtom(sidePanelThreeBotsAtom)
+  const botIds = useMemo(() => replaceDeprecatedBots(bots), [bots])
+  const chat1 = useChat(botIds[0])
+  const chat2 = useChat(botIds[1])
+  const chat3 = useChat(botIds[2])
+  const chats = useMemo(() => [chat1, chat2, chat3], [chat1, chat2, chat3])
+  return <SidePanelMultiBotPanel chats={chats} setBots={setBots} />
+}
+
+// 4봇 패널
+function FourBotPanel() {
+  const [bots, setBots] = useAtom(sidePanelFourBotsAtom)
+  const botIds = useMemo(() => replaceDeprecatedBots(bots), [bots])
+  const chat1 = useChat(botIds[0])
+  const chat2 = useChat(botIds[1])
+  const chat3 = useChat(botIds[2])
+  const chat4 = useChat(botIds[3])
+  const chats = useMemo(() => [chat1, chat2, chat3, chat4], [chat1, chat2, chat3, chat4])
+  return <SidePanelMultiBotPanel chats={chats} setBots={setBots} />
+}
+
+function SidePanelPage() {
+  const layout = useAtomValue(sidePanelLayoutAtom)
+
+  if (layout === 4) {
+    return <FourBotPanel />
+  }
+  if (layout === 3) {
+    return <ThreeBotPanel />
+  }
+  return <TwoBotPanel />
 }
 
 export default SidePanelPage

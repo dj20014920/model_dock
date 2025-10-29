@@ -1,8 +1,8 @@
 {
   "appName": {
-    "message": "ChatHub - All-in-one chatbot client"
+    "message": "ModelDock - All-in-one AI client"
   },
   "appDesc": {
-    "message": "Use ChatGPT, Bing, Bard, Claude and more chatbots simultaneously"
+    "message": "Use ChatGPT, Claude, Gemini, DeepSeek and more AI models simultaneously"
   }
 }

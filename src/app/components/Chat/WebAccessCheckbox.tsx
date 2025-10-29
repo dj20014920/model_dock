@@ -9,6 +9,7 @@ import { showPremiumModalAtom } from '~app/state'
 import { requestHostPermission } from '~app/utils/permissions'
 import { getUserConfig, updateUserConfig } from '~services/user-config'
 import Toggle from '../Toggle'
+import Tooltip from '../Tooltip'
 
 interface Props {
   botId: BotId
@@ -21,12 +22,16 @@ const WebAccessCheckbox: FC<Props> = (props) => {
   const premiumState = usePremium()
 
   const configKey = useMemo(() => {
-    if (props.botId === 'chatgpt') {
-      return 'chatgptWebAccess'
+    const keyMap: Partial<Record<BotId, string>> = {
+      chatgpt: 'chatgptWebAccess',
+      claude: 'claudeWebAccess',
+      gemini: 'geminiWebAccess',
+      deepseek: 'deepseekWebAccess',
+      perplexity: 'perplexityWebAccess',
+      grok: 'grokWebAccess',
+      qwen: 'qwenWebAccess',
     }
-    if (props.botId === 'claude') {
-      return 'claudeWebAccess'
-    }
+    return keyMap[props.botId]
   }, [props.botId])
 
   useEffect(() => {
@@ -37,7 +42,7 @@ const WebAccessCheckbox: FC<Props> = (props) => {
       setChecked(false)
       updateUserConfig({ [configKey]: false })
     } else if (premiumState.activated) {
-      getUserConfig().then((config) => setChecked(config[configKey]))
+      getUserConfig().then((config) => setChecked((config as any)[configKey]))
     }
   }, [configKey, premiumState.activated])
 
@@ -59,21 +64,23 @@ const WebAccessCheckbox: FC<Props> = (props) => {
     [configKey, premiumState.activated, props.botId, setPremiumModalOpen],
   )
 
-  if (checked === null) {
+  if (checked === null || !configKey) {
     return null
   }
 
   return (
-    <div className="flex flex-row items-center gap-2 shrink-0 cursor-pointer group">
-      <Switch.Group>
-        <div className="flex flex-row items-center gap-2">
-          <Toggle enabled={checked} onChange={onToggle} />
-          <Switch.Label className="text-[13px] whitespace-nowrap text-light-text font-medium select-none">
-            {t('Web Access')}
-          </Switch.Label>
-        </div>
-      </Switch.Group>
-    </div>
+    <Tooltip content={t('Improving accuracy by searching up-to-date information from the internet')}>
+      <div className="flex flex-row items-center gap-2 shrink-0 cursor-pointer group">
+        <Switch.Group>
+          <div className="flex flex-row items-center gap-2">
+            <Toggle enabled={checked} onChange={onToggle} />
+            <Switch.Label className="text-[13px] whitespace-nowrap text-light-text font-medium select-none">
+              {t('Web Access')}
+            </Switch.Label>
+          </div>
+        </Switch.Group>
+      </div>
+    </Tooltip>
   )
 }
 

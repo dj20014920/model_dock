@@ -3,6 +3,7 @@ import baichuanLogo from '~/assets/logos/baichuan.png'
 import bingLogo from '~/assets/logos/bing.svg'
 import chatglmLogo from '~/assets/logos/chatglm.svg'
 import chatgptLogo from '~/assets/logos/chatgpt.svg'
+import deepseekLogo from '~/assets/logos/deepseek.png'
 import falconLogo from '~/assets/logos/falcon.jpeg'
 import geminiLogo from '~/assets/logos/gemini.png'
 import appIcon from '~/assets/icon.png'
@@ -16,6 +17,7 @@ import vicunaLogo from '~/assets/logos/vicuna.jpg'
 import wizardlmLogo from '~/assets/logos/wizardlm.png'
 import xunfeiLogo from '~/assets/logos/xunfei.png'
 import yiLogo from '~/assets/logos/yi.svg'
+import lmarenaLogo from '~/assets/logos/chatgpt.svg' // LMArena uses ChatGPT logo as placeholder
 import { BotId } from './bots'
 
 export const CHATBOTS: Record<BotId, { name: string; avatar: string }> = {
@@ -32,7 +34,7 @@ export const CHATBOTS: Record<BotId, { name: string; avatar: string }> = {
     avatar: grokLogo,
   },
   bing: {
-    name: 'Bing',
+    name: 'Copilot',
     avatar: bingLogo,
   },
   perplexity: {
@@ -49,7 +51,11 @@ export const CHATBOTS: Record<BotId, { name: string; avatar: string }> = {
   },
   deepseek: {
     name: 'DeepSeek',
-    avatar: appIcon,
+    avatar: deepseekLogo,
+  },
+  qwen: {
+    name: 'Qwen',
+    avatar: qianwenLogo,
   },
   mistral: {
     name: 'Mixtral',
@@ -90,6 +96,18 @@ export const CHATBOTS: Record<BotId, { name: string; avatar: string }> = {
   yi: {
     name: 'Yi-Chat',
     avatar: yiLogo,
+  },
+  'lmarena-direct': {
+    name: 'LM Arena (Direct)',
+    avatar: lmarenaLogo,
+  },
+  'lmarena-battle': {
+    name: 'LM Arena (Battle)',
+    avatar: lmarenaLogo,
+  },
+  'lmarena-sidebyside': {
+    name: 'LM Arena (Side-by-Side)',
+    avatar: lmarenaLogo,
   },
 }
 

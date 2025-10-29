@@ -41,6 +41,8 @@ const SLICE_IDS = [
   'sswebtop2cf',
 ]
 
+// Microsoft Copilot bot (formerly Bing Chat)
+// Uses the same backend infrastructure as Bing Chat
 export class BingWebBot extends AbstractBot {
   private conversationContext?: ConversationInfo
 
@@ -242,6 +244,7 @@ export class BingWebBot extends AbstractBot {
       }),
     )
     formData.append('imageBase64', await file2base64(image))
+    // Copilot uses the same image upload endpoint as Bing
     const resp = await ofetch<{ blobId: string }>('https://www.bing.com/images/kblob', {
       method: 'POST',
       body: formData,

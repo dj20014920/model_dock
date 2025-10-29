@@ -24,9 +24,6 @@
   "Chat with more than 2 bots simultaneously": "Discuter avec plus de 2 bots simultanément",
   "Full-text search for chat history": "Recherche de texte intégral pour l'historique des chats",
   "Customize theme": "Personnaliser le thème",
-  "Support the development of ChatHub": "Soutenir le développement de ChatHub",
-  "Enjoy ChatHub? Give us a 5-star rating!": "Aimez-vous ChatHub ? Donnez-nous une note de 5 étoiles !",
-  "Write review": "Écrire un commentaire",
   "Activate license": "Activer la licence",
   "🎉 License activated": "🎉 Licence activée",
   "All-In-One Mode": "Mode Tout-en-un",
@@ -42,7 +39,7 @@
   "Follow Arc browser theme": "Suivre le thème du navigateur Arc",
   "iFlytek Spark": "iFlytek Spark",
   "You need to login to Poe first": "Vous devez d'abord vous connecter à Poe",
-  "Login at bing.com": "Se connecter sur bing.com",
+  "Login at bing.com": "Se connecter sur copilot.microsoft.com",
   "Login at poe.com": "Se connecter sur poe.com",
   "Login at xfyun.cn": "Se connecter à xfyun.cn",
   "Lifetime license": "Licence à vie",
@@ -51,7 +48,6 @@
   "Model used by ChatGPT iOS app, potentially faster": "Modèle utilisé par l'application iOS ChatGPT, potentiellement plus rapide",
   "Poe subscribers only": "Uniquement pour les abonnés Poe",
   "Quick access in Chrome side bar": "Accès rapide dans la barre latérale de Chrome",
-  "You have opened ChatHub {{openTimes}} times, consider unlock all features?": "Vous avez ouvert ChatHub {{openTimes}} fois, envisagez de déverrouiller toutes les fonctionnalités ? 🥺",
   "Open Prompt Library": "Ouvrir la bibliothèque de prompts",
   "Use / to select prompts, Shift+Enter to add new line": "Utilisez / pour sélectionner des invites, Shift+Enter pour ajouter une nouvelle ligne",
   "Your Prompts": "Vos invites",
@@ -87,5 +83,7 @@
   "Display": "Affichage",
   "Display Settings": "Paramètres d'affichage",
   "Auto": "Auto",
-  "Language": "Langue"
+  "Language": "Langue",
+  "Grok security notice": "En raison de la politique de sécurité de X(Twitter), Grok ne peut pas utiliser le champ de saisie unifié. Veuillez nous excuser pour la gêne occasionnée. Veuillez saisir directement dans le panneau Grok ou utiliser le mode Manuel.",
+  "OK": "OK"
 }

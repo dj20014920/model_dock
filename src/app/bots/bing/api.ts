@@ -9,6 +9,7 @@ function randomIP() {
   return `13.${random(104, 107)}.${random(0, 255)}.${random(0, 255)}`
 }
 
+// Copilot uses the same backend as Bing Chat
 const API_ENDPOINT = 'https://www.bing.com/turing/conversation/create'
 
 export async function createConversation(): Promise<ConversationResponse> {

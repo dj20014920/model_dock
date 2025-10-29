@@ -34,6 +34,13 @@ export async function createPerplexityRequest(
     })
 
     if (!response.ok) {
+      if (response.status === 452) {
+        const guidance = await response.text().catch(() => '')
+        throw new ChatError(
+          guidance || 'Chrome blocked this extension on perplexity.ai. Allow site access in chrome://extensions and retry.',
+          ErrorCode.NETWORK_ERROR,
+        )
+      }
       if (response.status === 403) {
         throw new ChatError('Please pass Perplexity security check', ErrorCode.PPLX_FORBIDDEN_ERROR)
       }

@@ -9,6 +9,11 @@ export enum BingConversationStyle {
   Precise = 'precise',
 }
 
+export enum CopilotMode {
+  Webapp = 'webapp',
+  Legacy = 'legacy', // BingWebBot (WebSocket 방식)
+}
+
 export enum ChatGPTMode {
   Webapp = 'webapp',
   API = 'api',
@@ -74,6 +79,10 @@ export enum GrokMode {
   API = 'api',
 }
 
+export enum QwenMode {
+  Webapp = 'webapp',
+}
+
 export enum GrokAPIModel {
   'grok-beta' = 'grok-beta',
   'grok-2-latest' = 'grok-2-latest',
@@ -108,12 +117,13 @@ const userConfigWithDefaultValue = {
   chatgptWebappForceWhenTurnstile: false,
   chatgptPoeModelName: PoeGPTModel['GPT-3.5'],
   startupPage: ALL_IN_ONE_PAGE_ID,
+  copilotMode: CopilotMode.Webapp,
   bingConversationStyle: BingConversationStyle.Balanced,
   poeModel: PoeClaudeModel['claude-instant'],
   azureOpenAIApiKey: '',
   azureOpenAIApiInstanceName: '',
   azureOpenAIApiDeploymentName: '',
-  enabledBots: Object.keys(CHATBOTS).slice(0, 8) as BotId[],
+  enabledBots: Object.keys(CHATBOTS).slice(0, 9) as BotId[],
   claudeApiKey: '',
   claudeMode: ClaudeMode.Webapp,
   claudeApiModel: ClaudeAPIModel['claude-2'],
@@ -140,6 +150,11 @@ const userConfigWithDefaultValue = {
   claudeCalendarEnabled: false, // Google Calendar 연동
   chatgptWebAccess: false,
   claudeWebAccess: false,
+  geminiWebAccess: false,
+  deepseekWebAccess: false,
+  perplexityWebAccess: false,
+  grokWebAccess: false,
+  qwenWebAccess: false,
   openrouterOpenAIModel: CHATGPT_API_MODELS[0] as (typeof CHATGPT_API_MODELS)[number],
   openrouterClaudeModel: OpenRouterClaudeModel['claude-2'],
   openrouterApiKey: '',
@@ -148,7 +163,7 @@ const userConfigWithDefaultValue = {
   // optional: API model name (e.g., pplx-70b-online)
   perplexityApiModel: 'pplx-70b-online',
   geminiApiKey: '',
-  geminiMode: GeminiMode.API,
+  geminiMode: GeminiMode.Webapp,
   geminiApiModel: 'gemini-pro',
   // message dispatch mode: manual copy-paste vs auto routing
   messageDispatchMode: 'manual' as 'manual' | 'auto',
@@ -158,11 +173,14 @@ const userConfigWithDefaultValue = {
   autoRoutingConsent: false,
   usageIncludeResponseTokens: false,
   // DeepSeek (API)
-  deepseekMode: DeepSeekMode.API,
+  deepseekMode: DeepSeekMode.Webapp,
   deepseekApiKey: '',
   deepseekApiModel: 'deepseek-chat',
   deepseekWebappCustomModel: '',
   geminiWebappCustomModel: '',
+  // Qwen (Alibaba Cloud)
+  qwenMode: 'webapp' as 'webapp',
+  qwenWebappCustomModel: '',
   // Grok (xAI API)
   grokMode: GrokMode.Webapp,
   grokApiKey: '',
@@ -204,6 +222,13 @@ export async function getUserConfig(): Promise<UserConfig> {
   // Migration: Add 'grok' to enabledBots if it's missing
   if (result.enabledBots && Array.isArray(result.enabledBots) && !result.enabledBots.includes('grok')) {
     result.enabledBots = [...result.enabledBots, 'grok']
+    // Persist the update immediately
+    await Browser.storage.sync.set({ enabledBots: result.enabledBots })
+  }
+  
+  // Migration: Add 'qwen' to enabledBots if it's missing
+  if (result.enabledBots && Array.isArray(result.enabledBots) && !result.enabledBots.includes('qwen')) {
+    result.enabledBots = [...result.enabledBots, 'qwen']
     // Persist the update immediately
     await Browser.storage.sync.set({ enabledBots: result.enabledBots })
   }

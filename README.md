@@ -24,7 +24,7 @@
 
 ## ✨ Features
 
-- 🤖 Use different chatbots in one app, currently supporting ChatGPT, new Bing Chat, Google Bard, Claude, and open-source models including LLama2, Vicuna, ChatGLM etc
+- 🤖 Use different chatbots in one app, currently supporting ChatGPT, Microsoft Copilot, Google Gemini, Claude, Qwen, DeepSeek, Grok, Perplexity, and open-source models including LLama2, Vicuna, ChatGLM etc
 - 💬 Chat with multiple chatbots at the same time, making it easy to compare their answers
 - 🚀 Support ChatGPT API and GPT-4 Browsing
 - 🔍 Shortcut to quickly activate the app anywhere in the browser
@@ -39,9 +39,13 @@
 ## 🤖 Supported Bots
 
 - ChatGPT (via Webapp/API/Azure/Poe)
-- Bing Chat
-- Google Bard
-- Claude 2 (via Webapp/API/Poe)
+- Microsoft Copilot (formerly Bing Chat)
+- Google Gemini (formerly Bard)
+- Claude (via Webapp/API/Poe)
+- Qwen (Alibaba Cloud)
+- DeepSeek
+- Grok (xAI)
+- Perplexity
 - LLaMA 2
 - ChatGLM
 - Pi by Inflection

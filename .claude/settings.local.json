@@ -6,7 +6,13 @@
       "mcp__firecrawl-mcp__firecrawl_search",
       "mcp__exa__web_search_exa",
       "WebSearch",
-      "mcp__firecrawl-mcp__firecrawl_scrape"
+      "mcp__firecrawl-mcp__firecrawl_scrape",
+      "mcp__server-sequential-thinking__sequentialthinking",
+      "mcp__desktop-commander__edit_block",
+      "mcp__serena__list_memories",
+      "mcp__serena__list_dir",
+      "mcp__serena__find_file",
+      "mcp__desktop-commander__start_search"
     ],
     "deny": [],
     "ask": []

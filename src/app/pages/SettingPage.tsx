@@ -19,10 +19,12 @@ import ClaudePoeSettings from '~app/components/Settings/ClaudePoeSettings'
 import ClaudeWebappSettings from '~app/components/Settings/ClaudeWebappSettings'
 import EnabledBotsSettings from '~app/components/Settings/EnabledBotsSettings'
 import ExportDataPanel from '~app/components/Settings/ExportDataPanel'
+import GrokNoticePanel from '~app/components/Settings/GrokNoticePanel'
 import PerplexityAPISettings from '~app/components/Settings/PerplexityAPISettings'
 import GeminiWebappSettings from '~app/components/Settings/GeminiWebappSettings'
 import DeepSeekWebappSettings from '~app/components/Settings/DeepSeekWebappSettings'
 import DeepSeekAPISettings from '~app/components/Settings/DeepSeekAPISettings'
+import QwenWebappSettings from '~app/components/Settings/QwenWebappSettings'
 import GrokAPISettings from '~app/components/Settings/GrokAPISettings'
 import ShortcutPanel from '~app/components/Settings/ShortcutPanel'
 import { ALL_IN_ONE_PAGE_ID, CHATBOTS } from '~app/consts'
@@ -248,7 +250,7 @@ function SettingPage() {
               )}
             </div>
           </ChatBotSettingPanel>
-          <ChatBotSettingPanel title="Bing">
+          <ChatBotSettingPanel title="Copilot">
             <div className="flex flex-row gap-5 items-center">
               <p className="font-medium">{t('Chat style')}</p>
               <div className="w-[150px]">
@@ -283,6 +285,12 @@ function SettingPage() {
               <DeepSeekWebappSettings userConfig={userConfig} updateConfigValue={updateConfigValue} />
             )}
           </ChatBotSettingPanel>
+          <ChatBotSettingPanel title="Qwen (Alibaba Cloud)">
+            <div className="flex flex-col gap-2">
+              <Blockquote className="mb-1">{t('Webapp mode uses your login session in current browser')}</Blockquote>
+              <QwenWebappSettings userConfig={userConfig} updateConfigValue={updateConfigValue} />
+            </div>
+          </ChatBotSettingPanel>
           <ChatBotSettingPanel title="Grok (xAI)">
             <RadioGroup
               options={Object.entries(GrokMode).map(([k, v]) => ({ label: `${k} ${t('Mode')}`, value: v }))}
@@ -295,6 +303,7 @@ function SettingPage() {
           </ChatBotSettingPanel>
         </div>
         <ShortcutPanel />
+        <GrokNoticePanel />
         <ExportDataPanel />
       </div>
       {dirty && (

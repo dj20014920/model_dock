@@ -47,7 +47,7 @@
 
 ## ✨ 特点
 
-- 🤖 在一个应用中使用不同的聊天机器人，目前支持 ChatGPT、新的 Bing Chat、Google Bard、Claude 以及包括 Alpaca、Vicuna、ChatGLM 等在内的 10 多个开源模型
+- 🤖 在一个应用中使用不同的聊天机器人，目前支持 ChatGPT、Microsoft Copilot、Google Gemini、Claude、Qwen 通义千问、DeepSeek、Grok、Perplexity 以及包括 Alpaca、Vicuna、ChatGLM 等在内的 10 多个开源模型
 - 💬 同时与多个聊天机器人进行对话，方便比较它们的回答
 - 🚀 支持 ChatGPT API 和 GPT-4 浏览
 - 🔍 快捷方式，可在浏览器的任何位置快速激活应用
@@ -57,15 +57,20 @@
 - 📥 导出和导入所有数据
 - 🔗 将对话转为 Markdown 并分享
 - 🌙 暗黑模式
+- 🌐 网页访问
 
 ## 🤖 支持的聊天机器人
 
 * ChatGPT（通过 Web 应用/API/Azure/Poe）
-* Bing Chat
-* Google Bard
-* Claude（通过 Poe）
-* iFlytek Spark
-* ChatGLM
+* Microsoft Copilot（原 Bing Chat）
+* Google Gemini（原 Bard）
+* Claude（通过 Web 应用/API/Poe）
+* Qwen 通义千问（阿里云）
+* DeepSeek 深度求索
+* Grok（xAI）
+* Perplexity
+* iFlytek Spark 讯飞星火
+* ChatGLM 智谱清言
 * Alpaca
 * Vicuna
 * Koala
@@ -74,6 +79,8 @@
 * StableLM
 * OpenAssistant
 * ChatRWKV
+* Tongyi Qianwen 通义千问（旧版）
+* Baichuan 百川
 * ...
 
 ## 🔧 手动安装

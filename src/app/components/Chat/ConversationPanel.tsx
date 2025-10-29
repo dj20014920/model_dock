@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FC, ReactNode, useCallback, useMemo, useState, useEffect } from 'react'
+import { FC, ReactNode, useCallback, useMemo, useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import clearIcon from '~/assets/icons/clear.svg'
 import historyIcon from '~/assets/icons/history.svg'
@@ -24,6 +24,8 @@ import { getUserConfig } from '~services/user-config'
 import { startManualDispatch } from '~app/utils/manual-dispatch'
 import toast from 'react-hot-toast'
 import UsageBadge from '~app/components/Usage/Badge'
+import GrokNoticeModal from '~app/components/Modals/GrokNoticeModal'
+import LMArenaModelSelector from './LMArenaModelSelector'
 
 interface Props {
   botId: BotId
@@ -44,6 +46,7 @@ const ConversationPanel: FC<Props> = (props) => {
   const marginClass = 'mx-5'
   const [showHistory, setShowHistory] = useState(false)
   const [showShareDialog, setShowShareDialog] = useState(false)
+  const [showGrokNotice, setShowGrokNotice] = useState(false)
   const [isMainBrain, setIsMainBrain] = useState(false)
 
   // Grok 전용: 배율 조절 상태 (localStorage에서 불러오기)
@@ -119,8 +122,48 @@ const ConversationPanel: FC<Props> = (props) => {
     )
   }
 
+  // Grok iframe ref for auto-dispatch
+  const grokIframeRef = useRef<HTMLIFrameElement>(null)
+  
   // Grok 전용 렌더링 (모든 hooks 호출 후에 처리)
   if (props.botId === 'grok') {
+    /**
+     * Grok Auto-Dispatch 불가능 이유:
+     *
+     * 1. Cross-Origin Restriction (크로스 오리진 제약)
+     *    - Extension origin: chrome-extension://...
+     *    - iframe origin: https://grok.com
+     *    - 브라우저 보안 정책으로 iframe.contentDocument 접근 차단
+     *
+     * 2. Content Script 미주입
+     *    - Content Script는 브라우저 탭에만 주입됨
+     *    - Extension 내부 iframe에는 주입되지 않음
+     *
+     * 3. Content Security Policy (CSP)
+     *    - Grok.com이 inline script 실행 차단
+     *
+     * 해결책:
+     * - Manual 모드 사용 (클립보드 복사 → 수동 붙여넣기)
+     * - 향후: Chrome Debugger API로 새 탭 제어 가능 (Comet/Atlas 방식)
+     */
+    // 자동 라우팅 모드일 때만 모달 표시
+    useEffect(() => {
+      let mounted = true
+      getUserConfig().then((config) => {
+        if (mounted && config.messageDispatchMode === 'auto') {
+          // 자동 라우팅 모드에서 Grok 사용 시 안내 모달 표시
+          Browser.storage.local.get('grokNoticeShown').then((result) => {
+            if (mounted && !result.grokNoticeShown) {
+              console.log('[GROK-PANEL] ⚠️ Auto routing mode - showing notice modal')
+              setShowGrokNotice(true)
+              Browser.storage.local.set({ grokNoticeShown: true })
+            }
+          })
+        }
+      })
+      return () => { mounted = false }
+    }, [])
+    
     return (
       <ConversationContext.Provider value={context}>
         <div className="flex flex-col overflow-hidden bg-primary-background h-full rounded-[20px]">
@@ -183,9 +226,12 @@ const ConversationPanel: FC<Props> = (props) => {
             </div>
           </div>
 
+
+
           {/* Grok.com iframe 내장 - 동적 배율 조절 */}
           <div className="flex-1 relative overflow-auto">
             <iframe
+              ref={grokIframeRef}
               src="https://grok.com"
               className="w-full h-full border-0"
               style={{
@@ -201,6 +247,14 @@ const ConversationPanel: FC<Props> = (props) => {
               title="Grok Chat"
             />
           </div>
+
+          {/* Grok 안내 모달 */}
+          {showGrokNotice && (
+            <GrokNoticeModal 
+              open={showGrokNotice} 
+              onClose={() => setShowGrokNotice(false)} 
+            />
+          )}
         </div>
       </ConversationContext.Provider>
     )
@@ -215,10 +269,10 @@ const ConversationPanel: FC<Props> = (props) => {
             marginClass,
           )}
         >
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center gap-2">
             <motion.img
               src={botInfo.avatar}
-              className="w-[18px] h-[18px] object-contain rounded-sm mr-2"
+              className="w-[18px] h-[18px] object-contain rounded-sm"
               whileHover={{ rotate: 180 }}
             />
             <ChatbotName
@@ -227,6 +281,10 @@ const ConversationPanel: FC<Props> = (props) => {
               fullName={props.bot.name}
               onSwitchBot={mode === 'compact' ? props.onSwitchBot : undefined}
             />
+            {/* LMArena 모델 선택 드롭다운 */}
+            {(props.botId === 'lmarena-direct' || props.botId === 'lmarena-battle' || props.botId === 'lmarena-sidebyside') && (
+              <LMArenaModelSelector botId={props.botId} bot={props.bot} />
+            )}
           </div>
           <div className="flex flex-row items-center gap-2">
             <MainBrainToggle botId={props.botId} />

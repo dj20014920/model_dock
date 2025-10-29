@@ -24,9 +24,6 @@
   "Chat with more than 2 bots simultaneously": "Gleichzeitiges Chatten mit mehr als 2 Bots",
   "Full-text search for chat history": "Volltextsuche für Chat-Verlauf",
   "Customize theme": "Thema anpassen",
-  "Support the development of ChatHub": "Unterstützen Sie die Entwicklung von ChatHub",
-  "Enjoy ChatHub? Give us a 5-star rating!": "Gefällt Ihnen ChatHub? Geben Sie uns eine 5-Sterne-Bewertung!",
-  "Write review": "Rezension schreiben",
   "Activate license": "Lizenz aktivieren",
   "🎉 License activated": "🎉 Lizenz aktiviert",
   "All-In-One Mode": "All-In-One-Modus",
@@ -42,7 +39,7 @@
   "Follow Arc browser theme": "Folgen Sie dem Arc-Browser-Thema",
   "iFlytek Spark": "iFlytek Spark",
   "You need to login to Poe first": "Sie müssen sich zuerst bei Poe anmelden",
-  "Login at bing.com": "Bei bing.com anmelden",
+  "Login at bing.com": "Bei copilot.microsoft.com anmelden",
   "Login at poe.com": "Bei poe.com anmelden",
   "Login at xfyun.cn": "Bei xfyun.cn anmelden",
   "Lifetime license": "Lebenslange Lizenz",
@@ -51,7 +48,6 @@
   "Model used by ChatGPT iOS app, potentially faster": "Modell, das von der ChatGPT iOS-App verwendet wird, möglicherweise schneller",
   "Poe subscribers only": "Nur Poe-Abonnenten",
   "Quick access in Chrome side bar": "Schneller Zugriff in der Chrome-Seitenleiste",
-  "You have opened ChatHub {{openTimes}} times, consider unlock all features?": "Sie haben ChatHub {{openTimes}} Mal geöffnet. Möchten Sie alle Funktionen freischalten?🥺",
   "Open Prompt Library": "Prompt-Bibliothek öffnen",
   "Use / to select prompts, Shift+Enter to add new line": "Verwenden Sie /, um Prompts auszuwählen, und Shift+Enter, um eine neue Zeile hinzuzufügen",
   "Your Prompts": "Ihre Prompts",
@@ -87,5 +83,7 @@
   "Display": "Anzeige",
   "Display Settings": "Anzeigeeinstellungen",
   "Auto": "Auto",
-  "Language": "Sprache"
+  "Language": "Sprache",
+  "Grok security notice": "Aufgrund der Sicherheitsrichtlinien von X(Twitter) kann Grok das einheitliche Eingabefeld nicht verwenden. Wir entschuldigen uns für die Unannehmlichkeiten. Bitte geben Sie direkt im Grok-Panel ein oder verwenden Sie den manuellen Modus.",
+  "OK": "OK"
 }

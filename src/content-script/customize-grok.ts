@@ -210,4 +210,408 @@ if (!(window as any).__GROK_CUSTOMIZED__) {
 
   // 실행
   initialize()
+
+  /**
+   * ========================================
+   * AUTO DISPATCH: 자동 입력 및 전송 기능
+   * ========================================
+   */
+
+  /**
+   * Grok 입력창 찾기
+   * Grok.com의 DOM 구조에서 입력창을 찾는 다양한 시도
+   * 
+   * 전략:
+   * 1. 구체적인 셀렉터부터 시도
+   * 2. 일반적인 셀렉터로 폴백
+   * 3. 모든 textarea/input을 검사하여 가장 적합한 것 선택
+   */
+  function findGrokInput(): HTMLTextAreaElement | HTMLInputElement | null {
+    console.log('[GROK-AUTO] 🔍 Searching for input field...')
+    
+    // Phase 1: 구체적인 셀렉터
+    const specificSelectors = [
+      'textarea[placeholder*="Ask"]',
+      'textarea[placeholder*="Message"]',
+      'textarea[placeholder*="Type"]',
+      'textarea[placeholder*="grok"]',
+      'textarea[data-testid*="input"]',
+      'textarea[data-testid*="prompt"]',
+      'textarea[aria-label*="input"]',
+      'textarea[aria-label*="message"]',
+      'input[type="text"][placeholder*="Ask"]',
+      'input[type="text"][placeholder*="Message"]',
+    ]
+
+    for (const selector of specificSelectors) {
+      const elements = document.querySelectorAll<HTMLTextAreaElement | HTMLInputElement>(selector)
+      if (elements.length > 0) {
+        // 마지막 요소 (보통 최신/활성 요소)
+        const input = elements[elements.length - 1]
+        if (input.offsetParent !== null && !input.disabled && !input.readOnly) {
+          console.log(`[GROK-AUTO] ✅ Found input via specific selector: ${selector}`)
+          console.log(`[GROK-AUTO] 📝 Input details - Tag: ${input.tagName}, Placeholder: "${input.placeholder}", Class: "${input.className}"`)
+          return input
+        }
+      }
+    }
+
+    // Phase 2: 일반적인 textarea/input 검색 + 휴리스틱
+    console.log('[GROK-AUTO] 🔄 Specific selectors failed, trying heuristic search...')
+    
+    const allTextareas = Array.from(document.querySelectorAll<HTMLTextAreaElement>('textarea'))
+    const allInputs = Array.from(document.querySelectorAll<HTMLInputElement>('input[type="text"]'))
+    const allElements = [...allTextareas, ...allInputs]
+    
+    console.log(`[GROK-AUTO] 📊 Found ${allTextareas.length} textareas and ${allInputs.length} text inputs`)
+    
+    // 휴리스틱: 보이고, 활성화되고, 크기가 있는 요소 찾기
+    const candidates = allElements.filter(el => {
+      const visible = el.offsetParent !== null
+      const enabled = !el.disabled && !el.readOnly
+      const hasSize = el.offsetWidth > 50 && el.offsetHeight > 20
+      
+      if (visible && enabled && hasSize) {
+        console.log(`[GROK-AUTO] 🎯 Candidate found - Tag: ${el.tagName}, Size: ${el.offsetWidth}x${el.offsetHeight}, Placeholder: "${el.placeholder}"`)
+      }
+      
+      return visible && enabled && hasSize
+    })
+    
+    if (candidates.length > 0) {
+      // 가장 큰 요소 선택 (보통 메인 입력창)
+      const best = candidates.reduce((largest, current) => {
+        const currentArea = current.offsetWidth * current.offsetHeight
+        const largestArea = largest.offsetWidth * largest.offsetHeight
+        return currentArea > largestArea ? current : largest
+      })
+      
+      console.log(`[GROK-AUTO] ✅ Selected best candidate - ${best.tagName}, Size: ${best.offsetWidth}x${best.offsetHeight}`)
+      return best
+    }
+
+    console.warn('[GROK-AUTO] ❌ No suitable input field found after exhaustive search')
+    return null
+  }
+
+  /**
+   * Grok 전송 버튼 찾기
+   * 
+   * 전략:
+   * 1. 명시적인 submit 버튼 찾기
+   * 2. aria-label로 찾기
+   * 3. 아이콘(SVG) 기반 버튼 찾기
+   * 4. 입력창 근처 버튼 찾기 (위치 기반)
+   */
+  function findGrokSubmitButton(): HTMLButtonElement | null {
+    console.log('[GROK-AUTO] 🔍 Searching for submit button...')
+    
+    // Phase 1: 명시적 셀렉터
+    const explicitSelectors = [
+      'button[type="submit"]',
+      'button[aria-label*="Send"]',
+      'button[aria-label*="Submit"]',
+      'button[data-testid*="send"]',
+      'button[data-testid*="submit"]',
+    ]
+
+    for (const selector of explicitSelectors) {
+      const elements = document.querySelectorAll<HTMLButtonElement>(selector)
+      for (const btn of elements) {
+        if (btn.offsetParent !== null && !btn.disabled) {
+          console.log(`[GROK-AUTO] ✅ Found submit button via explicit selector: ${selector}`)
+          return btn
+        }
+      }
+    }
+
+    // Phase 2: 클래스 기반 검색
+    console.log('[GROK-AUTO] 🔄 Trying class-based search...')
+    const classCandidates = [
+      'button[class*="send"]',
+      'button[class*="submit"]',
+      'button[class*="Send"]',
+      'button[class*="Submit"]',
+    ]
+
+    for (const selector of classCandidates) {
+      const elements = document.querySelectorAll<HTMLButtonElement>(selector)
+      for (const btn of elements) {
+        if (btn.offsetParent !== null && !btn.disabled) {
+          console.log(`[GROK-AUTO] ✅ Found submit button via class: ${selector}`)
+          return btn
+        }
+      }
+    }
+
+    // Phase 3: SVG 아이콘 버튼 (모든 버튼 검사)
+    console.log('[GROK-AUTO] 🔄 Trying SVG icon search...')
+    const allButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('button'))
+    
+    for (const btn of allButtons) {
+      if (btn.offsetParent === null || btn.disabled) continue
+      
+      // SVG 포함 확인
+      const hasSvg = btn.querySelector('svg') !== null
+      
+      // "Send", "Submit" 텍스트 포함 확인 (대소문자 무시)
+      const text = btn.textContent?.toLowerCase() || ''
+      const isSendButton = text.includes('send') || text.includes('submit')
+      
+      if (hasSvg || isSendButton) {
+        console.log(`[GROK-AUTO] ✅ Found submit button via heuristic - Has SVG: ${hasSvg}, Text: "${btn.textContent?.trim()}"`)
+        return btn
+      }
+    }
+
+    // Phase 4: 입력창 근처 버튼 찾기 (최후의 수단)
+    console.log('[GROK-AUTO] 🔄 Trying proximity-based search...')
+    const input = findGrokInput()
+    if (input) {
+      const inputRect = input.getBoundingClientRect()
+      
+      for (const btn of allButtons) {
+        if (btn.offsetParent === null || btn.disabled) continue
+        
+        const btnRect = btn.getBoundingClientRect()
+        
+        // 입력창과 같은 높이 또는 바로 아래에 있는 버튼
+        const isNearby = Math.abs(btnRect.top - inputRect.top) < 100 &&
+                        Math.abs(btnRect.left - inputRect.right) < 200
+        
+        if (isNearby) {
+          console.log(`[GROK-AUTO] ✅ Found submit button via proximity to input field`)
+          return btn
+        }
+      }
+    }
+
+    console.warn('[GROK-AUTO] ❌ No submit button found after exhaustive search')
+    return null
+  }
+
+  /**
+   * 텍스트 입력 시뮬레이션 (사용자 타이핑처럼)
+   */
+  function simulateUserInput(element: HTMLTextAreaElement | HTMLInputElement, text: string) {
+    // 1. 포커스
+    element.focus()
+
+    // 2. 기존 값 클리어
+    element.value = ''
+
+    // 3. Native setter를 사용하여 React 우회
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLTextAreaElement.prototype,
+      'value'
+    )?.set || Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      'value'
+    )?.set
+
+    if (nativeInputValueSetter) {
+      nativeInputValueSetter.call(element, text)
+    } else {
+      element.value = text
+    }
+
+    // 4. 다양한 이벤트 발생 (React/Vue/Angular 모두 호환)
+    const events = [
+      new Event('input', { bubbles: true }),
+      new Event('change', { bubbles: true }),
+      new KeyboardEvent('keydown', { bubbles: true, key: 'Enter', keyCode: 13 }),
+      new KeyboardEvent('keyup', { bubbles: true, key: 'Enter', keyCode: 13 }),
+      new Event('blur', { bubbles: true }),
+    ]
+
+    events.forEach(event => element.dispatchEvent(event))
+
+    console.log(`[GROK-AUTO] ✅ Simulated user input: "${text.substring(0, 50)}..."`)
+  }
+
+  /**
+   * 전송 버튼 클릭 시뮬레이션
+   */
+  function simulateSubmitClick(button: HTMLButtonElement) {
+    // 마우스 이벤트 시뮬레이션 (가장 자연스러운 방식)
+    const events = [
+      new MouseEvent('mousedown', { bubbles: true, cancelable: true }),
+      new MouseEvent('mouseup', { bubbles: true, cancelable: true }),
+      new MouseEvent('click', { bubbles: true, cancelable: true }),
+    ]
+
+    events.forEach(event => button.dispatchEvent(event))
+    
+    // Fallback: 직접 클릭
+    button.click()
+
+    console.log('[GROK-AUTO] ✅ Simulated submit button click')
+  }
+
+  /**
+   * AUTO DISPATCH 메인 함수
+   * Extension에서 메시지를 받아 자동으로 입력 및 전송
+   * 
+   * 재시도 전략:
+   * - 입력창: 최대 10초 대기 (0.5초 간격, 20회 시도)
+   * - 전송 버튼: 최대 2초 대기 (0.2초 간격, 10회 시도)
+   */
+  async function handleAutoDispatch(text: string) {
+    console.log('[GROK-AUTO] 🚀 Starting auto dispatch...')
+    console.log(`[GROK-AUTO] 📝 Text to send: "${text.substring(0, 100)}${text.length > 100 ? '...' : ''}"`)
+    
+    try {
+      // 1. 입력창 찾기 (최대 10초 대기)
+      console.log('[GROK-AUTO] 🔍 Step 1: Finding input field...')
+      let input = findGrokInput()
+      let retries = 0
+      const MAX_INPUT_RETRIES = 20
+      
+      while (!input && retries < MAX_INPUT_RETRIES) {
+        console.log(`[GROK-AUTO] ⏳ Input not found, retry ${retries + 1}/${MAX_INPUT_RETRIES}...`)
+        await new Promise(resolve => setTimeout(resolve, 500))
+        input = findGrokInput()
+        retries++
+      }
+
+      if (!input) {
+        const errorMsg = `Input field not found after ${MAX_INPUT_RETRIES * 0.5} seconds`
+        console.error(`[GROK-AUTO] ❌ ${errorMsg}`)
+        throw new Error(errorMsg)
+      }
+
+      console.log('[GROK-AUTO] ✅ Step 1 complete: Input field found')
+
+      // 2. 텍스트 입력
+      console.log('[GROK-AUTO] ⌨️ Step 2: Simulating user input...')
+      simulateUserInput(input, text)
+      console.log('[GROK-AUTO] ✅ Step 2 complete: Text input simulated')
+
+      // 3. 입력 후 UI 업데이트 대기
+      console.log('[GROK-AUTO] ⏳ Step 3: Waiting for UI update (500ms)...')
+      await new Promise(resolve => setTimeout(resolve, 500))
+      console.log('[GROK-AUTO] ✅ Step 3 complete: UI should be updated')
+
+      // 4. 전송 버튼 찾기 (최대 2초 대기)
+      console.log('[GROK-AUTO] 🔍 Step 4: Finding submit button...')
+      let submitBtn = findGrokSubmitButton()
+      retries = 0
+      const MAX_BUTTON_RETRIES = 10
+      
+      while (!submitBtn && retries < MAX_BUTTON_RETRIES) {
+        console.log(`[GROK-AUTO] ⏳ Submit button not found, retry ${retries + 1}/${MAX_BUTTON_RETRIES}...`)
+        await new Promise(resolve => setTimeout(resolve, 200))
+        submitBtn = findGrokSubmitButton()
+        retries++
+      }
+
+      if (!submitBtn) {
+        const errorMsg = `Submit button not found after ${MAX_BUTTON_RETRIES * 0.2} seconds`
+        console.error(`[GROK-AUTO] ❌ ${errorMsg}`)
+        throw new Error(errorMsg)
+      }
+
+      console.log('[GROK-AUTO] ✅ Step 4 complete: Submit button found')
+
+      // 5. 전송 버튼 클릭
+      console.log('[GROK-AUTO] 🖱️ Step 5: Clicking submit button...')
+      simulateSubmitClick(submitBtn)
+      console.log('[GROK-AUTO] ✅ Step 5 complete: Submit button clicked')
+
+      console.log('[GROK-AUTO] 🎉 Auto dispatch completed successfully!')
+      return { success: true }
+
+    } catch (error) {
+      console.error('[GROK-AUTO] ❌ Auto dispatch failed:', error)
+      console.error('[GROK-AUTO] 📊 Error details:', {
+        message: (error as Error).message,
+        stack: (error as Error).stack,
+      })
+      return { success: false, error: (error as Error).message }
+    }
+  }
+
+  /**
+   * Extension postMessage 리스너 (iframe 내부에서 실행)
+   * Model Dock 확장 프로그램이 보낸 메시지 수신
+   */
+  window.addEventListener('message', (event) => {
+    console.log('[GROK-AUTO] 📬 Received message event:', {
+      origin: event.origin,
+      type: event.data?.type,
+      source: event.data?.source,
+      hasText: !!event.data?.text
+    })
+
+    // 보안: 신뢰할 수 있는 출처만 허용
+    // Chrome 확장 프로그램은 chrome-extension:// 프로토콜 사용
+    // IMPORTANT: iframe 내부에서는 부모 extension origin도 허용해야 함
+    const isExtensionOrigin = event.origin.startsWith('chrome-extension://')
+    const isTrustedMessage = event.data?.source === 'model-dock-extension'
+    
+    if (!isExtensionOrigin || !isTrustedMessage) {
+      console.log('[GROK-AUTO] 🚫 Ignored message - not from extension or untrusted source')
+      console.log(`[GROK-AUTO]    Origin: ${event.origin}, isExtension: ${isExtensionOrigin}, trusted: ${isTrustedMessage}`)
+      return
+    }
+
+    const message = event.data
+    
+    if (message.type === 'GROK_AUTO_DISPATCH' && message.text) {
+      console.log('[GROK-AUTO] 📨 ✅ Accepted auto dispatch message!')
+      console.log(`[GROK-AUTO] 📝 Text preview: "${message.text.substring(0, 100)}..."`)
+      console.log(`[GROK-AUTO] 🚀 Starting DOM manipulation...`)
+      
+      handleAutoDispatch(message.text).then((result: any) => {
+        console.log('[GROK-AUTO] ✅ Auto dispatch completed successfully, result:', result)
+        
+        // 결과를 부모 window에 다시 전송
+        if (event.source && event.source !== window) {
+          try {
+            (event.source as Window).postMessage(
+              {
+                type: 'GROK_AUTO_DISPATCH_RESULT',
+                result: result,
+                source: 'grok-content-script',
+                timestamp: Date.now()
+              },
+              event.origin
+            )
+            console.log('[GROK-AUTO] 📤 Result sent back to extension')
+          } catch (err) {
+            console.warn('[GROK-AUTO] ⚠️ Could not send result back:', err)
+          }
+        }
+      }).catch((error: any) => {
+        console.error('[GROK-AUTO] ❌ Auto dispatch failed:', error)
+      })
+    } else {
+      console.log('[GROK-AUTO] ⚠️ Message received but invalid type or missing text')
+    }
+  })
+
+  console.log('[GROK-AUTO] 🎧 PostMessage listener registered for auto-dispatch')
+  console.log('[GROK-AUTO] 🌐 Current location:', window.location.href)
+  console.log('[GROK-AUTO] 📍 Ready to receive messages from chrome-extension:// origins')
+
+  /**
+   * Extension chrome.runtime 메시지 리스너 (탭에서 실행될 때 사용)
+   * 이제는 사용되지 않지만 호환성을 위해 유지
+   */
+  if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.onMessage) {
+    chrome.runtime.onMessage.addListener((message: any, sender: any, sendResponse: any) => {
+      if (message.type === 'GROK_AUTO_DISPATCH' && message.text) {
+        console.log('[GROK-AUTO] 📨 Received auto dispatch message via chrome.runtime:', message.text.substring(0, 50))
+        
+        handleAutoDispatch(message.text).then((result: any) => {
+          sendResponse(result)
+        })
+
+        // 비동기 응답을 위해 true 반환
+        return true
+      }
+    })
+
+    console.log('[GROK-AUTO] 🎧 Chrome runtime listener registered (legacy)')
+  }
 }

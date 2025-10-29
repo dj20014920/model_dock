@@ -107,13 +107,49 @@ const ChatMessageInput: FC<Props> = (props) => {
     [activeIndex, getItemProps, handleSelect],
   )
 
-  // Register/unregister this input for manual dispatch focusing
+  // Register/unregister this input for both manual and auto dispatch
   useEffect(() => {
     if (!props.botId) return
+    
     const focusFn = () => inputRef.current?.focus()
-    registerInput(props.botId, focusFn)
+    
+    // setValue: 사용자 입력처럼 보이도록 값 설정 + 이벤트 발생
+    const setValueFn = (text: string) => {
+      if (!inputRef.current) return
+      
+      const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+        window.HTMLTextAreaElement.prototype,
+        'value'
+      )?.set
+      
+      if (nativeInputValueSetter) {
+        // React의 내부 상태를 우회하여 직접 DOM 값 설정
+        nativeInputValueSetter.call(inputRef.current, text)
+        
+        // Input 이벤트 발생 (React가 감지하도록)
+        const inputEvent = new Event('input', { bubbles: true })
+        inputRef.current.dispatchEvent(inputEvent)
+        
+        // Change 이벤트도 발생
+        const changeEvent = new Event('change', { bubbles: true })
+        inputRef.current.dispatchEvent(changeEvent)
+      }
+      
+      // React 상태도 업데이트
+      setValue(text)
+      props.onDraftChange?.(text)
+    }
+    
+    // submit: 폼 전송
+    const submitFn = () => {
+      if (formRef.current) {
+        formRef.current.requestSubmit()
+      }
+    }
+    
+    registerInput(props.botId, focusFn, setValueFn, submitFn)
     return () => unregisterInput(props.botId!)
-  }, [props.botId])
+  }, [props.botId, props.onDraftChange])
 
   const onFormSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {

@@ -47,7 +47,7 @@
 
 ## ✨ Fitur
 
-- 🤖 Gunakan chatbot yang berbeda dalam satu aplikasi, saat ini mendukung ChatGPT, Bing Chat baru, Google Bard, Claude, dan 10+ model open-source termasuk Alpaca, Vicuna, ChatGLM, dll
+- 🤖 Gunakan chatbot yang berbeda dalam satu aplikasi, saat ini mendukung ChatGPT, Microsoft Copilot, Google Gemini, Claude, Qwen, DeepSeek, Grok, Perplexity, dan 10+ model open-source termasuk Alpaca, Vicuna, ChatGLM, dll
 - 💬 Chat dengan beberapa chatbot secara bersamaan, sehingga mudah untuk membandingkan jawaban mereka
 - 🚀 Mendukung API ChatGPT dan Browsing GPT-4
 - 🔍 Pintasan untuk dengan cepat mengaktifkan aplikasi di mana saja di browser
@@ -57,13 +57,18 @@
 - 📥 Ekspor dan Impor semua data Anda
 - 🔗 Bagikan percakapan ke markdown
 - 🌙 Mode gelap
+- 🌐 Akses web
 
 ## 🤖 Bot yang Didukung
 
 * ChatGPT (melalui Webapp/API/Azure/Poe)
-* Bing Chat
-* Google Bard
-* Claude (melalui Poe)
+* Microsoft Copilot (sebelumnya Bing Chat)
+* Google Gemini (sebelumnya Bard)
+* Claude (melalui Webapp/API/Poe)
+* Qwen (Alibaba Cloud)
+* DeepSeek
+* Grok (xAI)
+* Perplexity
 * iFlytek Spark
 * ChatGLM
 * Alpaca
@@ -74,6 +79,8 @@
 * StableLM
 * OpenAssistant
 * ChatRWKV
+* Tongyi Qianwen
+* Baichuan
 * ...
 
 ## 🔧 Instalasi Manual

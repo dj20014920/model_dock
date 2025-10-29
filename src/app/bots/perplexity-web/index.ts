@@ -15,7 +15,7 @@ export class PerplexityLabsBot extends AbstractBot {
   }
 
   async doSendMessage(params: SendMessageParams) {
-    if (!(await requestHostPermissions(['https://*.perplexity.ai/']))) {
+  if (!(await requestHostPermissions(['https://*.perplexity.ai/*']))) {
       throw new ChatError('Missing perplexity.ai permission', ErrorCode.MISSING_HOST_PERMISSION)
     }
 

@@ -57,32 +57,9 @@ export class ChatGPTWebBot extends AbstractBot {
         return custom.trim()
       }
     } catch {}
-    // Auto: pick best available model from session
+    // Auto: 최소 통신 정책. 토큰/모델 목록 조회 없이 'auto'로 고정해 초기 대기/주입을 제거
     if (this.model === ChatGPTWebModel.Auto) {
-      const token = await chatGPTClient.getAccessToken()
-      const models = await chatGPTClient.getModels(token).catch(() => [] as any[])
-      const slugs: string[] = models?.map((m: any) => m.slug) || []
-
-      console.log('[GPT-WEB] 🤖 availableModels', models)
-
-      // 🎯 우선순위 1: OpenAI의 'auto' 모델이 있으면 우선 선택 (GPT-4o, GPT-4o-mini 등을 자동 선택)
-      if (slugs.includes('auto')) {
-        console.log('[GPT-WEB] ✅ Using OpenAI auto model (intelligent routing)')
-        return 'auto'
-      }
-
-      // 🎯 우선순위 2: 최신 모델 우선 선택
-      const priority = ['gpt-5', 'gpt-4.1', 'gpt-4o', 'gpt-4o-mini', 'o3-mini', 'gpt-4', 'gpt-3.5']
-      for (const p of priority) {
-        if (slugs.includes(p)) {
-          console.log(`[GPT-WEB] ✅ Selected model from priority: ${p}`)
-          return p
-        }
-      }
-
-      // 🎯 폴백: 무료 티어 기본값
-      console.log('[GPT-WEB] ⚠️ No preferred model found, falling back to gpt-4o-mini')
-      return 'gpt-4o-mini'
+      return 'auto'
     }
     // Explicit picks
     return this.model
@@ -111,14 +88,8 @@ export class ChatGPTWebBot extends AbstractBot {
 
   async doSendMessage(params: SendMessageParams) {
     console.log('[GPT-WEB] 🚀 doSendMessage started')
-    
-    if (!this.accessToken) {
-      console.log('[GPT-WEB] 🔑 Getting access token...')
-      this.accessToken = await chatGPTClient.getAccessToken()
-      console.log('[GPT-WEB] ✅ Access token obtained')
-    } else {
-      console.log('[GPT-WEB] ♻️ Reusing existing access token')
-    }
+    // 초기 단계에서 accessToken 강제 획득 불필요: 동일 출처 쿠키/센티넬로 우선 진행
+    // 필요한 경우(파일 업로드/제목 생성 등)에 한해 지연 획득
 
     console.log('[GPT-WEB] 🤖 Getting model name...')
     const modelName = await this.getModelName()
@@ -248,12 +219,9 @@ export class ChatGPTWebBot extends AbstractBot {
       requestBody.arkose_token = arkoseToken
     }
 
-    // Turnstile이 필요한데 토큰을 확보하지 못한 경우, 강행하지 않음
+    // Turnstile이 필요한데 토큰을 확보하지 못한 경우에도 시도는 진행(동일 출처 쿠키/클리어런스에 기대)
     if (sentinelTokens.turnstileRequired && !turnstileToken) {
-      throw new ChatError(
-        'Cloudflare Turnstile 검증이 필요합니다.\n\n해결: chatgpt.com 탭을 열어 보안 챌린지를 통과(자동으로 나타남)한 뒤, 다시 시도하세요.',
-        ErrorCode.CHATGPT_CLOUDFLARE,
-      )
+      console.warn('[GPT-WEB] ⚠️ Turnstile required but no token; proceeding with same-origin attempt')
     }
     
     // 우선순위: 탭이 있거나 설정(alwaysProxy) 시 동일 출처 요청을 우선
@@ -272,7 +240,17 @@ export class ChatGPTWebBot extends AbstractBot {
       const tabId = tabIdCandidate || await this.findExistingChatGPTTabId()
       if (tabId) {
         console.log('[GPT-WEB] 🌐 Using existing ChatGPT tab for same-origin request')
-        const url = `https://chatgpt.com/backend-api/conversation`
+        // 열린 탭의 호스트에 맞춰 base 선택 (chat.openai.com 지원)
+        let base = 'https://chatgpt.com'
+        try {
+          const tab = await Browser.tabs.get(tabId)
+          const u = tab?.url || ''
+          if (typeof u === 'string') {
+            if (u.startsWith('https://chat.openai.com')) base = 'https://chat.openai.com'
+            else if (u.startsWith('https://chatgpt.com')) base = 'https://chatgpt.com'
+          }
+        } catch {}
+        const url = `${base}/backend-api/conversation`
         try {
           // 가능하면 페이지 쿠키의 oai-did를 읽어 헤더와 정합을 맞춘다
           let oaiDid: string | undefined
@@ -313,7 +291,17 @@ export class ChatGPTWebBot extends AbstractBot {
           const tabId = turnstileContext.tabId || (await this.findExistingChatGPTTabId())
           if (tabId) {
             console.warn('[GPT-WEB] 🔁 Retrying via same-origin (existing tab) due to Cloudflare 403')
-            const url = `https://chatgpt.com/backend-api/conversation`
+            // 열린 탭의 호스트에 맞춰 base 선택 (chat.openai.com 지원)
+            let base = 'https://chatgpt.com'
+            try {
+              const tab = await Browser.tabs.get(tabId)
+              const u = tab?.url || ''
+              if (typeof u === 'string') {
+                if (u.startsWith('https://chat.openai.com')) base = 'https://chat.openai.com'
+                else if (u.startsWith('https://chatgpt.com')) base = 'https://chatgpt.com'
+              }
+            } catch {}
+            const url = `${base}/backend-api/conversation`
             let oaiDid: string | undefined
             try { oaiDid = await Browser.tabs.sendMessage(tabId, 'read-oai-did') } catch {}
             const deviceId = oaiDid || (chatGPTClient as any).getPersistentDeviceId?.() || '00000000-0000-4000-8000-000000000000'
@@ -401,7 +389,7 @@ export class ChatGPTWebBot extends AbstractBot {
     // auto generate title on first response
     if (isFirstMessage && this.conversationContext) {
       const c = this.conversationContext
-      chatGPTClient.generateChatTitle(this.accessToken, c.conversationId, c.lastMessageId)
+      chatGPTClient.generateChatTitle(this.accessToken as any, c.conversationId, c.lastMessageId)
     }
   }
 

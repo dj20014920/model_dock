@@ -10,8 +10,7 @@ import { FiFileText } from 'react-icons/fi'
 import githubIcon from '~/assets/icons/github.svg'
 import settingIcon from '~/assets/icons/setting.svg'
 import themeIcon from '~/assets/icons/theme.svg'
-import minimalLogo from '~/assets/minimal-logo.svg'
-import logo from '~/assets/santa-logo.png'
+import appIcon from '~/assets/icon.png'
 import { cx } from '~/utils'
 import { useEnabledBots } from '~app/hooks/use-enabled-bots'
 import { releaseNotesAtom, showDiscountModalAtom, showNotesModalAtom, sidebarCollapsedAtom } from '~app/state'
@@ -19,7 +18,6 @@ import { getPremiumActivation } from '~services/premium'
 import { checkReleaseNotes } from '~services/release-notes'
 import * as api from '~services/server-api'
 import { getAppOpenTimes, getPremiumModalOpenTimes } from '~services/storage/open-times'
-import GuideModal from '../GuideModal'
 import ThemeSettingModal from '../ThemeSettingModal'
 import Tooltip from '../Tooltip'
 import NavLink from './NavLink'
@@ -60,7 +58,19 @@ function Sidebar() {
       )}
     >
       <div className={cx('flex mt-8 gap-3 items-center', collapsed ? 'flex-col-reverse' : 'flex-row justify-between')}>
-        {collapsed ? <img src={minimalLogo} className="w-[30px]" /> : <img src={logo} className="w-[100px] ml-2" />}
+        {collapsed ? (
+          <img src={appIcon} className="w-[30px] h-[30px] rounded-lg" />
+        ) : (
+          <div className="flex items-center gap-2 ml-2">
+            <img src={appIcon} className="w-[32px] h-[32px] rounded-lg" />
+            <div className="flex items-baseline">
+              <span className="text-2xl font-bold text-primary-text">M</span>
+              <span className="text-[4.8px] font-normal text-primary-text">odel</span>
+              <span className="text-2xl font-bold text-primary-text">D</span>
+              <span className="text-[4.8px] font-normal text-primary-text">ock</span>
+            </div>
+          </div>
+        )}
         <motion.img
           src={collapseIcon}
           className={cx('w-6 h-6 cursor-pointer')}
@@ -122,7 +132,6 @@ function Sidebar() {
           </Tooltip>
         </div>
       </div>
-      <GuideModal />
       <ThemeSettingModal open={themeSettingModalOpen} onClose={() => setThemeSettingModalOpen(false)} />
     </motion.aside>
   )

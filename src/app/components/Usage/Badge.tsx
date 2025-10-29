@@ -23,7 +23,7 @@ const UsageBadge: FC<{ botIds: BotId[]; text: string }>
   }, [botIds, text])
 
   if (!text.trim()) return null
-  const title = '입력 토큰 기준의 대략적 추정치입니다(응답 토큰 비용 제외). Perplexity/Gemini 등 일부 모델은 비용을 표시하지 않습니다.'
+  const title = '입력 토큰 기준의 대략적 추정치입니다(응답 토큰 비용 제외). Perplexity/Gemini/Qwen 등 일부 모델은 비용을 표시하지 않습니다.'
   return (
     <span
       className="px-2 py-[2px] text-[11px] rounded-lg bg-secondary text-light-text whitespace-nowrap"

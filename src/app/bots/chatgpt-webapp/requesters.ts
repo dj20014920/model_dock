@@ -2,6 +2,8 @@ import Browser, { Runtime } from 'webextension-polyfill'
 import { CHATGPT_HOME_URL } from '~app/consts'
 import { backgroundFetch, proxyFetch } from '~services/proxy-fetch'
 import { RequestInitSubset } from '~types/messaging'
+import { getUserConfig } from '~services/user-config'
+import { requestHostPermissions } from '~app/utils/permissions'
 
 export interface Requester {
   fetch(url: string, options?: RequestInitSubset): Promise<Response>
@@ -15,7 +17,8 @@ class GlobalFetchRequester implements Requester {
 
 class ProxyFetchRequester implements Requester {
   async findExistingProxyTab() {
-    const tabs = await Browser.tabs.query({ pinned: true })
+    // 핀 탭으로 제한하지 않고, 전체 탭 중에서 대상 호스트를 우선 탐색
+    const tabs = await Browser.tabs.query({})
     const results: (string | undefined)[] = await Promise.all(
       tabs.map(async (tab) => {
         if (tab.url) {
@@ -74,9 +77,14 @@ class ProxyFetchRequester implements Requester {
   }
 
   async createProxyTab() {
-    console.log('[GPT-PROXY] 🆕 Creating new pinned ChatGPT tab...')
+    console.log('[GPT-PROXY] 🆕 Creating new ChatGPT tab (unpinned, inactive)...')
+    try {
+      // 동일 출처 통신을 위해 사이트 접근 권한을 먼저 확보
+      await requestHostPermissions(['https://chatgpt.com/*', 'https://chat.openai.com/*']).catch(() => false)
+    } catch {}
     const readyPromise = this.waitForProxyTabReady()
-    await Browser.tabs.create({ url: CHATGPT_HOME_URL, pinned: true })
+    // 활성화하지 않고 일반 탭으로 생성 (핀 해제)
+    await Browser.tabs.create({ url: CHATGPT_HOME_URL, active: false })
     console.log('[GPT-PROXY] ⏳ Waiting for tab to be ready...')
     return readyPromise
   }
@@ -85,8 +93,18 @@ class ProxyFetchRequester implements Requester {
     console.log('[GPT-PROXY] 🔍 Looking for existing proxy tab...')
     const tab = await this.findExistingProxyTab()
     if (!tab) {
-      console.log('[GPT-PROXY] 🚫 No existing tab; proxy tab creation is disabled')
-      throw new Error('NO_PROXY_TAB_AVAILABLE')
+      // 설정에 따라 자동 생성 허용 (기본: 허용)
+      let reuseOnly = false
+      try {
+        const cfg = await getUserConfig()
+        reuseOnly = (cfg as any).chatgptWebappReuseOnly === true
+      } catch {}
+      if (reuseOnly) {
+        console.log('[GPT-PROXY] 🚫 No existing tab; creation disabled by setting (reuseOnly=true)')
+        throw new Error('NO_PROXY_TAB_AVAILABLE')
+      }
+      const created = await this.createProxyTab()
+      return created
     }
     console.log('[GPT-PROXY] ✅ Found existing proxy tab:', tab.id)
     return tab
@@ -95,8 +113,8 @@ class ProxyFetchRequester implements Requester {
   async refreshProxyTab() {
     const tab = await this.findExistingProxyTab()
     if (!tab) {
-      console.log('[GPT-PROXY] 🚫 No existing tab to refresh; proxy tab creation is disabled')
-      throw new Error('NO_PROXY_TAB_AVAILABLE')
+      // 탭이 사라졌다면 재생성 시도(설정이 허용하는 경우)
+      return this.createProxyTab()
     }
     const readyPromise = this.waitForProxyTabReady()
     Browser.tabs.reload(tab.id!)

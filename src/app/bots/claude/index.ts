@@ -1,4 +1,5 @@
 import { ClaudeMode, getUserConfig } from '~/services/user-config'
+import * as agent from '~services/agent'
 import { AsyncAbstractBot, MessageParams } from '../abstract-bot'
 import { ClaudeApiBot } from '../claude-api'
 import { ClaudeWebBot } from '../claude-web'
@@ -31,16 +32,11 @@ export class ClaudeBot extends AsyncAbstractBot {
     return new PoeWebBot(config.poeModel)
   }
 
-  /**
-   * Claude 메시지 전송
-   * 
-   * PRD: Agent/Web Search 기능은 요구사항에 없으므로 비활성화
-   * - 더 안정적이고 예측 가능한 동작
-   * - 복잡한 프롬프트 래핑 제거
-   * - 에러 발생 가능성 감소
-   */
   async sendMessage(params: MessageParams) {
-    // Agent 기능 완전히 비활성화 (PRD 요구사항 없음)
+    const { claudeWebAccess } = await getUserConfig()
+    if (claudeWebAccess) {
+      return agent.execute(params.prompt, (prompt) => this.doSendMessageGenerator({ ...params, prompt }), params.signal)
+    }
     return this.doSendMessageGenerator(params)
   }
 }

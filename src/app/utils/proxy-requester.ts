@@ -54,9 +54,55 @@ export class ProxyRequester {
   }
 
   private async createProxyTab() {
-    const ready = this.waitForProxyTabReady()
-    await Browser.tabs.create({ url: this.opts.homeUrl, pinned: true, active: false })
-    return ready
+    console.log('[ProxyRequester] 🌐 Creating new proxy tab:', this.opts.homeUrl)
+
+    // 탭 생성 및 로딩 완료 대기를 동시에 시작
+    const readyPromise = this.waitForProxyTabReady()
+    const newTab = await Browser.tabs.create({
+      url: this.opts.homeUrl,
+      pinned: true,
+      active: false
+    })
+
+    console.log('[ProxyRequester] ⏳ Waiting for tab to load...', { tabId: newTab.id })
+
+    // 탭 로딩 완료 대기 (최대 15초)
+    await new Promise<void>((resolve, reject) => {
+      let resolved = false
+      const listener = (tabId: number, changeInfo: any, tab: Browser.Tabs.Tab) => {
+        if (tabId === newTab.id && changeInfo.status === 'complete') {
+          resolved = true
+          Browser.tabs.onUpdated.removeListener(listener)
+
+          // 에러 페이지 감지
+          const url = tab.url || ''
+          if (url.startsWith('chrome-error://') || url === '' || !url.startsWith(this.opts.hostStartsWith)) {
+            console.error('[ProxyRequester] ❌ Tab loaded error page or wrong URL:', {
+              tabId: newTab.id,
+              url,
+              expected: this.opts.hostStartsWith
+            })
+            reject(new Error(`Tab loaded error page: ${url || '(empty)'}`))
+          } else {
+            console.log('[ProxyRequester] ✅ Tab loaded successfully:', { tabId: newTab.id, url: url.substring(0, 50) })
+            resolve()
+          }
+        }
+      }
+
+      Browser.tabs.onUpdated.addListener(listener)
+
+      // 타임아웃 (15초)
+      setTimeout(() => {
+        if (!resolved) {
+          Browser.tabs.onUpdated.removeListener(listener)
+          console.warn('[ProxyRequester] ⏱️ Tab loading timeout (15s)')
+          resolve() // 타임아웃이어도 계속 진행 (waitForProxyTabReady가 재시도)
+        }
+      }, 15000)
+    })
+
+    return readyPromise
   }
 
   private async getProxyTab() {
@@ -80,19 +126,49 @@ export class ProxyRequester {
   }
 
   async fetch(url: string, options?: RequestInitSubset) {
-    const tab = await this.getProxyTab()
-    if (!tab) {
-      // 재사용만 허용되고 탭이 없다면 자동 생성 금지 → 401 반환
+    try {
+      const tab = await this.getProxyTab()
+      if (!tab) {
+        // 재사용만 허용되고 탭이 없다면 자동 생성 금지 → 401 반환
+        const empty = new ReadableStream({ start(c) { try { c.close() } catch {} } })
+        return new Response(empty, { status: 401, statusText: 'NO_PROXY_TAB' })
+      }
+      // Webapp 계정 기반 호출은 항상 쿠키 포함(redirect 등에서도 안전)
+      const merged: any = { credentials: 'include', ...(options as any) }
+      const resp = await proxyFetch(tab.id!, url, merged)
+      if (resp.status === 403) {
+        await this.refreshProxyTab()
+        return proxyFetch(tab.id!, url, merged)
+      }
+      return resp
+    } catch (error) {
+      console.error('[ProxyRequester] ❌ Fetch failed:', (error as Error)?.message)
+
+      // 에러 페이지 로드 에러 감지
+      if ((error as Error)?.message?.includes('error page')) {
+        const errorMsg =
+          'DeepSeek 탭 로딩 실패\n\n' +
+          '가능한 원인:\n' +
+          '1. DeepSeek 로그인이 필요합니다\n' +
+          '2. 네트워크 연결 문제\n' +
+          '3. DeepSeek 서비스 장애\n\n' +
+          '해결 방법:\n' +
+          '1. https://chat.deepseek.com을 새 탭에서 열어 로그인하세요\n' +
+          '2. 로그인 후 다시 시도하세요'
+
+        const empty = new ReadableStream({ start(c) { try { c.close() } catch {} } })
+        return new Response(empty, {
+          status: 500,
+          statusText: errorMsg
+        })
+      }
+
+      // 기타 에러
       const empty = new ReadableStream({ start(c) { try { c.close() } catch {} } })
-      return new Response(empty, { status: 401, statusText: 'NO_PROXY_TAB' })
+      return new Response(empty, {
+        status: 500,
+        statusText: `PROXY_TAB_ERROR: ${(error as Error)?.message || 'Unknown error'}`
+      })
     }
-    // Webapp 계정 기반 호출은 항상 쿠키 포함(redirect 등에서도 안전)
-    const merged: any = { credentials: 'include', ...(options as any) }
-    const resp = await proxyFetch(tab.id!, url, merged)
-    if (resp.status === 403) {
-      await this.refreshProxyTab()
-      return proxyFetch(tab.id!, url, merged)
-    }
-    return resp
   }
 }

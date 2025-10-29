@@ -1,23 +1,163 @@
 (function(){
+  // 🔍 CRITICAL: Bridge 로딩 플래그 및 즉시 로그 출력
+  console.log('[INPAGE-BRIDGE] 🚀 Bridge script is loading...', location.href);
+  window.__INPAGE_FETCH_BRIDGE_LOADED__ = true;
+
   function headersToObject(headers){
     const obj = {};
     try{ for(const [k,v] of headers.entries()) obj[k] = v }catch(e){}
     return obj;
   }
   const pending = new Map();
+
+  // DeepSeek WASM solver hook -------------------------------------------------
+  (function installDeepSeekWasmHook(){
+    if (window.__DEEPSEEK_WASM_HOOK_INSTALLED__) return;
+    window.__DEEPSEEK_WASM_HOOK_INSTALLED__ = true;
+
+    const encoder = new TextEncoder();
+    const SOLVER_EXPORT_CANDIDATES = ['wasm_solve', 'wasm_deepseek_hash_v1'];
+
+    const tryAttachSolverFromInstance = (instanceLike) => {
+      if (!instanceLike) return false;
+      if (!location.hostname.includes('deepseek.com')) return false;
+      const exports = instanceLike.exports || (instanceLike.instance && instanceLike.instance.exports);
+      if (!exports || typeof exports !== 'object') return false;
+      if (window.__deepseek_pow_solver) return false;
+
+      const solverExportName = SOLVER_EXPORT_CANDIDATES.find((name) => typeof exports[name] === 'function');
+      if (!solverExportName) return false;
+
+      const wasmSolve = exports[solverExportName];
+      const memory = exports.memory;
+      const addToStackPointer = exports.__wbindgen_add_to_stack_pointer;
+      const allocate = exports.__wbindgen_export_0;
+
+      if (!(memory instanceof WebAssembly.Memory)) return false;
+      if (typeof addToStackPointer !== 'function' || typeof allocate !== 'function') return false;
+
+      const writeString = (text) => {
+        const encoded = encoder.encode(String(text ?? ''));
+        const ptr = allocate(encoded.length, 1) >>> 0;
+        const memView = new Uint8Array(memory.buffer);
+        memView.set(encoded, ptr);
+        return { ptr, len: encoded.length };
+      };
+
+      const solver = async (challenge) => {
+        if (!challenge || typeof challenge.challenge !== 'string' || typeof challenge.salt !== 'string') {
+          throw new Error('INVALID_CHALLENGE_PAYLOAD');
+        }
+        if (typeof challenge.expire_at !== 'number') {
+          throw new Error('MISSING_EXPIRE_AT');
+        }
+        const prefix = `${challenge.salt}_${challenge.expire_at}_`;
+        const difficulty = Number(challenge.difficulty);
+        if (!Number.isFinite(difficulty)) {
+          throw new Error('INVALID_DIFFICULTY');
+        }
+
+        const retptr = addToStackPointer(-16) >>> 0;
+        let challengeBuf, prefixBuf;
+        try {
+          challengeBuf = writeString(challenge.challenge);
+          prefixBuf = writeString(prefix);
+          wasmSolve(
+            retptr,
+            challengeBuf.ptr,
+            challengeBuf.len,
+            prefixBuf.ptr,
+            prefixBuf.len,
+            difficulty
+          );
+          const view = new DataView(memory.buffer);
+          const status = view.getInt32(retptr, true);
+          if (status !== 1) {
+            throw new Error('POW_SOLVER_STATUS_FAIL');
+          }
+          const value = view.getFloat64(retptr + 8, true);
+          if (!Number.isFinite(value)) {
+            throw new Error('POW_SOLVER_INVALID_RESULT');
+          }
+          return Math.trunc(value);
+        } finally {
+          addToStackPointer(16);
+        }
+      };
+
+      window.__deepseek_pow_solver = solver;
+      window.__deepseek_pow_solver_attached__ = {
+        export: solverExportName,
+        attachedAt: new Date().toISOString()
+      };
+      console.log('[DEEPSEEK-POW] ✅ Native WASM solver attached via exports:', solverExportName);
+      return true;
+    };
+
+    const decoratePromiseResult = (promise) => {
+      if (!promise || typeof promise.then !== 'function') return promise;
+      return promise.then((result) => {
+        tryAttachSolverFromInstance(result);
+        return result;
+      });
+    };
+
+    const originalInstantiate = WebAssembly.instantiate;
+    WebAssembly.instantiate = function patchedInstantiate(...args){
+      const maybePromise = originalInstantiate.apply(this, args);
+      if (maybePromise && typeof maybePromise.then === 'function') {
+        return decoratePromiseResult(maybePromise);
+      }
+      tryAttachSolverFromInstance(maybePromise);
+      return maybePromise;
+    };
+
+    const originalInstantiateStreaming = WebAssembly.instantiateStreaming;
+    if (originalInstantiateStreaming) {
+      WebAssembly.instantiateStreaming = function patchedInstantiateStreaming(...args){
+        const maybePromise = originalInstantiateStreaming.apply(this, args);
+        return decoratePromiseResult(maybePromise);
+      };
+    }
+  })();
+
+  // 🔍 CRITICAL: addEventListener 등록 확인
+  console.log('[INPAGE-BRIDGE] 📡 Registering message listener...', location.href);
+
   window.addEventListener('message', async (ev) => {
     const msg = ev.data;
+
+    // 🔍 모든 메시지 로깅 (디버깅용)
+    if (msg && msg.type && msg.type.startsWith('INPAGE')) {
+      console.log('[INPAGE-BRIDGE] 📨 Received message:', msg.type, { requestId: msg.requestId, url: msg.url?.substring(0, 50) });
+    }
+
     if(!msg || msg.type !== 'INPAGE_FETCH') return;
     const { requestId, url, options } = msg;
     try{
+      // 🔍 DEEP DEBUG: 요청 전 상태 로깅
+      console.log('[INPAGE-DEBUG] 📍 Location:', location.href);
+      console.log('[INPAGE-DEBUG] 🍪 Cookies:', document.cookie ? 'EXISTS (length: ' + document.cookie.length + ')' : 'EMPTY');
+      console.log('[INPAGE-DEBUG] 📨 Request URL:', url);
+      console.log('[INPAGE-DEBUG] ⚙️ Original options:', JSON.stringify(options));
+
       // Grok.com 요청 시 자동으로 필수 헤더/옵션 보강
       const mergedOptions = Object.assign({}, options || {}, { credentials: 'include' });
       try {
         // 브라우저 기본 동작과 최대한 일치시키기 위해 referrer/정책/모드/언어를 명시
         if (!('referrer' in mergedOptions)) mergedOptions.referrer = document.referrer || location.href;
         if (!('referrerPolicy' in mergedOptions)) mergedOptions.referrerPolicy = 'strict-origin-when-cross-origin';
-        if (!('mode' in mergedOptions)) mergedOptions.mode = 'same-origin';
+        // CRITICAL: same-origin 모드는 크로스 도메인 요청 차단하므로 제거
+        // credentials: 'include'가 있으면 쿠키 전달됨
+        // if (!('mode' in mergedOptions)) mergedOptions.mode = 'same-origin';
       } catch(e) {}
+
+      console.log('[INPAGE-DEBUG] ✅ Final options:', JSON.stringify({
+        method: mergedOptions.method,
+        credentials: mergedOptions.credentials,
+        mode: mergedOptions.mode,
+        headers: Object.keys(mergedOptions.headers || {})
+      }));
       if(url && url.includes('grok.com')){
         console.log('[INPAGE-GROK] 🔍 Grok request detected, using intercepted headers...');
 
@@ -75,19 +215,84 @@
           console.warn('[INPAGE-GROK] 💡 Tip: Send a message on grok.com first to capture headers!');
         }
       }
-      
+
+      // DeepSeek API 요청 처리 (필수 헤더 + 선택적 PoW)
+      if (url && url.includes('deepseek.com/api/v0/')) {
+        console.log('[INPAGE-DEEPSEEK] 🔐 DeepSeek API request detected:', url);
+
+        // 1) 항상 x-app-* 클라이언트 헤더 부여 (Missing Token 방지)
+        //    PoW 성공 여부와 무관하게 추가해야 chat_session/create가 정상 동작함
+        mergedOptions.headers = mergedOptions.headers || {};
+        if (!('x-app-version' in mergedOptions.headers)) mergedOptions.headers['x-app-version'] = '20241129.1';
+        if (!('x-client-locale' in mergedOptions.headers)) mergedOptions.headers['x-client-locale'] = 'en_US';
+        if (!('x-client-platform' in mergedOptions.headers)) mergedOptions.headers['x-client-platform'] = 'web';
+        if (!('x-client-version' in mergedOptions.headers)) mergedOptions.headers['x-client-version'] = '1.5.0';
+
+        // 2) PoW가 필요한 엔드포인트에만 PoW 수행 (completion)
+        const isCompletion = url.includes('/completion');
+        if (isCompletion) {
+          try {
+            // 2-1. PoW 챌린지 요청 (target_path는 completion 고정)
+            console.log('[INPAGE-DEEPSEEK] 📡 Requesting PoW challenge...');
+            const challengeResp = await fetch('https://chat.deepseek.com/api/v0/chat/create_pow_challenge', {
+              method: 'POST',
+              credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ target_path: '/api/v0/chat/completion' })
+            });
+
+            const challengeData = await challengeResp.json();
+            console.log('[INPAGE-DEEPSEEK] 📦 Challenge response:', JSON.stringify(challengeData).substring(0, 200));
+
+            if (challengeData.code === 0 && challengeData.data?.biz_data?.challenge) {
+              const challenge = challengeData.data.biz_data.challenge;
+              console.log('[INPAGE-DEEPSEEK] 🔍 Challenge received:', challenge.algorithm, 'difficulty:', challenge.difficulty);
+
+              // 2-2. PoW 계산 (DeepSeek 페이지의 네이티브 솔버 우선 사용)
+              const answer = await solveDeepSeekPoW(challenge);
+              console.log('[INPAGE-DEEPSEEK] ✅ PoW solved! Answer:', answer);
+
+              // 2-3. PoW 응답 생성 및 헤더 부여
+              const powResponse = {
+                algorithm: challenge.algorithm,
+                challenge: challenge.challenge,
+                salt: challenge.salt,
+                answer: answer,
+                signature: challenge.signature,
+                target_path: challenge.target_path
+              };
+              const powResponseBase64 = btoa(JSON.stringify(powResponse));
+              console.log('[INPAGE-DEEPSEEK] 📝 PoW response prepared (length:', powResponseBase64.length, ')');
+              mergedOptions.headers['x-ds-pow-response'] = powResponseBase64;
+              console.log('[INPAGE-DEEPSEEK] 🚀 Request with PoW header ready');
+            } else {
+              console.warn('[INPAGE-DEEPSEEK] ⚠️ Challenge request failed or no challenge received');
+            }
+          } catch (e) {
+            console.error('[INPAGE-DEEPSEEK] ❌ PoW challenge/solve failed:', e.message);
+            // 실패해도 계속 진행: 서버에서 자체 처리 가능
+          }
+        }
+      }
+
+      console.log('[INPAGE-DEBUG] 🚀 Sending fetch request...');
       const resp = await fetch(url, mergedOptions);
+      console.log('[INPAGE-DEBUG] 📥 Response received:', resp.status, resp.statusText);
+      console.log('[INPAGE-DEBUG] 📋 Response headers:', JSON.stringify(headersToObject(resp.headers)));
+
       const meta = { status: resp.status, statusText: resp.statusText, headers: headersToObject(resp.headers) };
       window.postMessage({ type: 'INPAGE_FETCH_META', requestId, meta }, location.origin);
       const body = resp.body;
       if(!body){
         const text = await resp.text().catch(()=> '');
+        console.log('[INPAGE-DEBUG] 📄 Response body (no stream):', text.substring(0, 500));
         window.postMessage({ type: 'INPAGE_FETCH_CHUNK', requestId, value: text, done: true }, location.origin);
         return;
       }
       const reader = body.getReader();
       pending.set(requestId, reader);
       const decoder = new TextDecoder();
+      let firstChunk = true;
       while(true){
         const {done, value} = await reader.read();
         if(done){
@@ -95,7 +300,12 @@
           pending.delete(requestId);
           break;
         }
-        window.postMessage({ type: 'INPAGE_FETCH_CHUNK', requestId, value: decoder.decode(value), done: false }, location.origin);
+        const decodedValue = decoder.decode(value);
+        if(firstChunk) {
+          console.log('[INPAGE-DEBUG] 📄 First chunk:', decodedValue.substring(0, 500));
+          firstChunk = false;
+        }
+        window.postMessage({ type: 'INPAGE_FETCH_CHUNK', requestId, value: decodedValue, done: false }, location.origin);
       }
     }catch(e){
       window.postMessage({ type: 'INPAGE_FETCH_ERROR', requestId, message: String(e && e.message || e) }, location.origin);
@@ -228,5 +438,70 @@
     }
   } else {
     console.warn('[GROK-INTERCEPT] ⚠️ Not on Grok site, skipping interceptor');
+  }
+
+  // DeepSeek PoW Solver
+  // DeepSeekHashV1 알고리즘 구현
+  async function solveDeepSeekPoW(challenge) {
+    const { challenge: challengeHash, salt, difficulty } = challenge;
+
+    console.log('[DEEPSEEK-POW] 🔨 Starting PoW calculation...');
+    console.log('[DEEPSEEK-POW] Challenge:', challengeHash);
+    console.log('[DEEPSEEK-POW] Salt:', salt);
+    console.log('[DEEPSEEK-POW] Difficulty:', difficulty);
+
+    // DeepSeek PoW는 브루트포스 방식
+    // challenge + salt + answer를 해시하여 difficulty보다 작은 값을 찾기
+
+    if (window.__deepseek_pow_solver) {
+      console.log('[DEEPSEEK-POW] ✅ Using DeepSeek native solver');
+      return await window.__deepseek_pow_solver(challenge);
+    }
+
+    console.error('[DEEPSEEK-POW] ❌ Native solver unavailable');
+    throw new Error('DEEPSEEK_NATIVE_SOLVER_NOT_AVAILABLE');
+  }
+
+  // DeepSeek 웹사이트의 네이티브 솔버 감지 및 래핑
+  if (location.hostname.includes('deepseek.com')) {
+    console.log('[DEEPSEEK-POW] 🔍 Attempting to detect native PoW solver...');
+
+    // DeepSeek의 실제 PoW 솔버 찾기 (웹사이트에서 사용하는 함수)
+    const checkForSolver = () => {
+      // DeepSeek 웹사이트의 전역 객체에서 PoW 관련 함수 찾기
+      try {
+        // 일반적인 패턴들 시도
+        const possiblePaths = [
+          'window.solvePoW',
+          'window.deepseek.solvePoW',
+          'window.__DEEPSEEK_POW__',
+          'window.DS_POW'
+        ];
+
+        for (const path of possiblePaths) {
+          const solver = eval(path);
+          if (typeof solver === 'function') {
+            console.log('[DEEPSEEK-POW] ✅ Found native solver at:', path);
+            window.__deepseek_pow_solver = solver;
+            return true;
+          }
+        }
+      } catch (e) {
+        // 무시
+      }
+      return false;
+    };
+
+    // 즉시 시도
+    if (!checkForSolver()) {
+      // 페이지 로드 후 재시도
+      setTimeout(() => {
+        if (checkForSolver()) {
+          console.log('[DEEPSEEK-POW] ✅ Native solver detected after delay');
+        } else {
+          console.warn('[DEEPSEEK-POW] ⚠️ Native solver not found, will use fallback');
+        }
+      }, 2000);
+    }
   }
 })();

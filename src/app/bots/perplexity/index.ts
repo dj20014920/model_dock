@@ -1,7 +1,8 @@
 import { PerplexityMode, getUserConfig } from '~/services/user-config'
-import { AsyncAbstractBot } from '../abstract-bot'
+import { AsyncAbstractBot, MessageParams } from '../abstract-bot'
 import { PerplexityApiBot } from '../perplexity-api'
 import { PerplexityLabsBot } from '../perplexity-web'
+import * as agent from '~services/agent'
 
 export class PerplexityBot extends AsyncAbstractBot {
   async initializeBot() {
@@ -14,5 +15,13 @@ export class PerplexityBot extends AsyncAbstractBot {
       return new PerplexityApiBot(config.perplexityApiKey, model)
     }
     return new PerplexityLabsBot('pplx-70b-online')
+  }
+
+  async sendMessage(params: MessageParams) {
+    const { perplexityWebAccess } = await getUserConfig() as any
+    if (perplexityWebAccess) {
+      return agent.execute(params.prompt, (prompt) => this.doSendMessageGenerator({ ...params, prompt }), params.signal)
+    }
+    return this.doSendMessageGenerator(params)
   }
 }

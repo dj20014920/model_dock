@@ -48,7 +48,7 @@
 
 ## ✨ 特徴
 
-- 🤖 アプリ内で異なるチャットボットを使用できます。現在は ChatGPT、新しい Bing Chat、Google Bard、Claude、および Alpaca、Vicuna、ChatGLM などを含む10以上のオープンソースモデルをサポートしています
+- 🤖 アプリ内で異なるチャットボットを使用できます。現在は ChatGPT、Microsoft Copilot、Google Gemini、Claude、Qwen、DeepSeek、Grok、Perplexity、および Alpaca、Vicuna、ChatGLM などを含む10以上のオープンソースモデルをサポートしています
 - 💬 複数のチャットボットと同時にチャットすることで、回答を比較しやすくします
 - 🚀 ChatGPT API および GPT-4 Browsing をサポートします
 - 🔍 ブラウザのどこからでもアプリを素早くアクティブにするためのショートカット
@@ -58,13 +58,18 @@
 - 📥 データのエクスポートとインポート
 - 🔗 マークダウン形式で会話を共有
 - 🌙 ダークモード
+- 🌐 ウェブアクセス
 
 ## 🤖 サポートされているボット
 
 * ChatGPT（Web アプリ/API/Azure/Poe経由）
-* Bing Chat
-* Google Bard
-* Claude（Poe 経由）
+* Microsoft Copilot（旧 Bing Chat）
+* Google Gemini（旧 Bard）
+* Claude（Web アプリ/API/Poe経由）
+* Qwen（Alibaba Cloud）
+* DeepSeek
+* Grok（xAI）
+* Perplexity
 * iFlytek Spark
 * ChatGLM
 * Alpaca
@@ -75,6 +80,8 @@
 * StableLM
 * OpenAssistant
 * ChatRWKV
+* Tongyi Qianwen
+* Baichuan
 * ...
 
 ## 🔧 手動インストール

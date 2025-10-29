@@ -1,0 +1,3714 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [
+      {
+        "startedDateTime": "2025-10-22T07:36:25.313Z",
+        "id": "page_1",
+        "title": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html",
+        "pageTimings": {
+          "onContentLoad": 151.61599998828024,
+          "onLoad": 152.01000001979992
+        }
+      }
+    ],
+    "entries": [
+      {
+        "_connectionId": "540354",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "wse",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137647
+              },
+              {
+                "functionName": "n",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137960
+              },
+              {
+                "functionName": "r",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137994
+              },
+              {
+                "functionName": "enableAutoPageviews",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 138262
+              },
+              {
+                "functionName": "",
+                "scriptId": "38",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                "lineNumber": 249,
+                "columnNumber": 74819
+              },
+              {
+                "functionName": "",
+                "scriptId": "38",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                "lineNumber": 0,
+                "columnNumber": 22
+              },
+              {
+                "functionName": "",
+                "scriptId": "38",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                "lineNumber": 249,
+                "columnNumber": 74858
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "133"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 133,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"pageview\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html#/setting\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1168,\"h\":1}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/22/2025 07:36:25"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.37"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "bab6d837396661ae45d823fa441d2c47"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:25 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHDABd_UCdMMNBZvbZsS"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 524,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-22T07:36:25.465Z",
+        "time": 394.6360000382103,
+        "timings": {
+          "blocked": 2.9790000431016086,
+          "dns": 0.008000000000000007,
+          "ssl": 41.919000000000004,
+          "connect": 80.724,
+          "send": 5.403999999999996,
+          "wait": 305.2420000243485,
+          "receive": 0.27899997076019645,
+          "_blocked_queueing": 1.0300000431016088,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540371",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "wse",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137647
+              },
+              {
+                "functionName": "n",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137960
+              },
+              {
+                "functionName": "r",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137994
+              },
+              {
+                "functionName": "s",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 138086
+              },
+              {
+                "functionName": "history.pushState",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 138177
+              },
+              {
+                "functionName": "C",
+                "scriptId": "38",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                "lineNumber": 0,
+                "columnNumber": 7567
+              },
+              {
+                "functionName": "",
+                "scriptId": "38",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                "lineNumber": 0,
+                "columnNumber": 7781
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "E",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 7772
+                },
+                {
+                  "functionName": "pushState",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 8527
+                },
+                {
+                  "functionName": "task",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5850
+                },
+                {
+                  "functionName": "i",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5660
+                },
+                {
+                  "functionName": "push",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5835
+                },
+                {
+                  "functionName": "commitLocation",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 43945
+                },
+                {
+                  "functionName": "buildAndCommitLocation",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 44470
+                },
+                {
+                  "functionName": "navigate",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 0,
+                  "columnNumber": 44804
+                },
+                {
+                  "functionName": "an",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 8,
+                  "columnNumber": 6055
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "38",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                  "lineNumber": 8,
+                  "columnNumber": 7353
+                },
+                {
+                  "functionName": "RV",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 9863
+                },
+                {
+                  "functionName": "NV",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 10017
+                },
+                {
+                  "functionName": "DV",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 10074
+                },
+                {
+                  "functionName": "L6",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 31481
+                },
+                {
+                  "functionName": "OD",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 31898
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 36811
+                },
+                {
+                  "functionName": "yS",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 47,
+                  "columnNumber": 36955
+                },
+                {
+                  "functionName": "eD",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 8998
+                },
+                {
+                  "functionName": "l1",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 33185
+                },
+                {
+                  "functionName": "WE",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 17375
+                },
+                {
+                  "functionName": "ZV",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 44,
+                  "columnNumber": 17159
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "137"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 137,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"pageview\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html#/chat/claude\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1168,\"h\":1}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/22/2025 07:36:27"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.37"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "6f1c316cb16ab771601d0bd64247593e"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:27 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHDABlPUR6jT9W-Dfk4E"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 524,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-22T07:36:27.339Z",
+        "time": 468.8169999912083,
+        "timings": {
+          "blocked": 24.80299999455735,
+          "dns": 0.006999999999999673,
+          "ssl": 38.708999999999996,
+          "connect": 76.794,
+          "send": 0.2120000000000033,
+          "wait": 365.63199999158087,
+          "receive": 1.36900000507012,
+          "_blocked_queueing": 18.23099999455735,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540371",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "wse",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137647
+              },
+              {
+                "functionName": "n",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137960
+              },
+              {
+                "functionName": "Ra",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 139588
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 645,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "",
+                "scriptId": "38",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                "lineNumber": 236,
+                "columnNumber": 12297
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 627,
+                "columnNumber": 1783
+              },
+              {
+                "functionName": "RV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "NV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "DV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "L6",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "OD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "eD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 8974
+              },
+              {
+                "functionName": "l1",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "WE",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "ZV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 627,
+                "columnNumber": 119
+              },
+              {
+                "functionName": "RV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "NV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "DV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "L6",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "OD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "yS",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 47,
+                "columnNumber": 36955
+              },
+              {
+                "functionName": "eD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 8998
+              },
+              {
+                "functionName": "l1",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "WE",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "ZV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "248"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 248,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html#/chat/claude\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1168,\"h\":1,\"p\":\"{\\\"version\\\":\\\"1.45.24\\\",\\\"botId\\\":\\\"claude\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"Claude (webapp/auto)\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/22/2025 07:36:30"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.37"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "46f646fbf0c2b1fa69210825f87ef018"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:30 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHDABvrS6XQtQB6Df8QE"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 523,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-22T07:36:30.297Z",
+        "time": 313.02099995082244,
+        "timings": {
+          "blocked": 1.6449999752789735,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.6549999999999999,
+          "wait": 310.18200000407546,
+          "receive": 0.5389999714680016,
+          "_blocked_queueing": 1.2809999752789736,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540466",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ia",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 4243
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 6489
+              },
+              {
+                "functionName": "ohe",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 862
+              },
+              {
+                "functionName": "doSendMessage",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 6478
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "doSendMessage",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 159602
+                },
+                {
+                  "functionName": "start",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158896
+                },
+                {
+                  "functionName": "doSendMessageGenerator",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158861
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 645,
+                  "columnNumber": 31819
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "38",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                    "lineNumber": 236,
+                    "columnNumber": 12297
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 1783
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8974
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 119
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "yS",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 47,
+                    "columnNumber": 36955
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8998
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "https://claude.ai/api/organizations",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "claude.ai"
+            },
+            {
+              "name": ":method",
+              "value": "GET"
+            },
+            {
+              "name": ":path",
+              "value": "/api/organizations"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "cache-control",
+              "value": "max-age=0"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "992752f65a282916-ICN"
+            },
+            {
+              "name": "content-encoding",
+              "value": "zstd"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:30 GMT"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "request-id",
+              "value": "req_011CUMrSD7wPScxNYSZzGqor"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "via",
+              "value": "1.1 google"
+            },
+            {
+              "name": "x-envoy-upstream-service-time",
+              "value": "169"
+            },
+            {
+              "name": "x-robots-tag",
+              "value": "none"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2187,
+            "mimeType": "application/json",
+            "text": "[{\"id\":45556527,\"uuid\":\"6a7310cb-ff4c-463d-9318-14f40a422e80\",\"name\":\"vinny4920@gmail.com's Organization\",\"settings\":{\"claude_console_privacy\":\"default_private\",\"allowed_invite_domains\":null,\"workbench_completion_feedback_enabled\":null,\"claude_ai_completion_feedback_enabled\":null,\"claude_code_metrics_logging_enabled\":true,\"claude_ai_integration_sharing_enabled\":null,\"batches_download_ui_visibility\":\"all\",\"batches_download_ui_enabled_workspace_ids\":[],\"default_workspace_settings\":{\"enable_api_keys\":true},\"sampling_restriction\":null,\"is_desktop_extension_allowlist_enabled\":null},\"capabilities\":[\"chat\",\"claude_pro\"],\"parent_organization_uuid\":null,\"rate_limit_tier\":\"default_claude_ai\",\"billing_type\":\"stripe_subscription\",\"free_credits_status\":\"available\",\"data_retention\":\"default\",\"api_disabled_reason\":null,\"api_disabled_until\":null,\"billable_usage_paused_until\":null,\"raven_type\":null,\"merchant_of_record\":\"anthropic\",\"claude_ai_bootstrap_models_config\":null,\"created_at\":\"2025-04-20T08:57:46.396378Z\",\"updated_at\":\"2025-10-21T11:01:51.703690Z\",\"active_flags\":[],\"data_retention_periods\":null},{\"id\":50330691,\"uuid\":\"466fd9ec-c104-4875-b5f9-09ca137cf035\",\"name\":\"DJ’s Individual Org\",\"settings\":{\"claude_console_privacy\":\"default_private\",\"allowed_invite_domains\":null,\"workbench_completion_feedback_enabled\":null,\"claude_ai_completion_feedback_enabled\":null,\"claude_code_metrics_logging_enabled\":true,\"claude_ai_integration_sharing_enabled\":null,\"batches_download_ui_visibility\":\"all\",\"batches_download_ui_enabled_workspace_ids\":[],\"default_workspace_settings\":{\"enable_api_keys\":true},\"sampling_restriction\":null,\"is_desktop_extension_allowlist_enabled\":null},\"capabilities\":[\"api\",\"api_individual\"],\"parent_organization_uuid\":null,\"rate_limit_tier\":\"auto_prepaid_tier_0\",\"billing_type\":\"prepaid\",\"free_credits_status\":\"available\",\"data_retention\":\"default\",\"api_disabled_reason\":null,\"api_disabled_until\":null,\"billable_usage_paused_until\":null,\"raven_type\":null,\"merchant_of_record\":\"anthropic\",\"claude_ai_bootstrap_models_config\":null,\"created_at\":\"2025-05-26T07:45:55.509541Z\",\"updated_at\":\"2025-06-30T03:56:26.180645Z\",\"active_flags\":[],\"data_retention_periods\":null}]"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 1049,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "160.79.104.10",
+        "startedDateTime": "2025-10-22T07:36:30.332Z",
+        "time": 480.3649999780394,
+        "timings": {
+          "blocked": 2.7040000009126963,
+          "dns": 46.82,
+          "ssl": 11.338000000000001,
+          "connect": 58.343,
+          "send": 0,
+          "wait": 371.02999997492134,
+          "receive": 1.4680000022053719,
+          "_blocked_queueing": 1.9800000009126961,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540466",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ia",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 4243
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 6715
+              },
+              {
+                "functionName": "ahe",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 1295
+              },
+              {
+                "functionName": "doSendMessage",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 6684
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "doSendMessage",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 159602
+                },
+                {
+                  "functionName": "start",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158896
+                },
+                {
+                  "functionName": "doSendMessageGenerator",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158861
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 645,
+                  "columnNumber": 31819
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "38",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                    "lineNumber": 236,
+                    "columnNumber": 12297
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 1783
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8974
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 119
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "yS",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 47,
+                    "columnNumber": 36955
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8998
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://claude.ai/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "claude.ai"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "57"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 57,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"name\":\"\",\"uuid\":\"2b73f9a4-4889-414e-8ecf-bea3293ef3a7\"}"
+          }
+        },
+        "response": {
+          "status": 201,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "992752f8a9942916-ICN"
+            },
+            {
+              "name": "content-length",
+              "value": "6783"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:31 GMT"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "request-id",
+              "value": "req_011CUMrSEiRqhKbvD4Ux8MBg"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "via",
+              "value": "1.1 google"
+            },
+            {
+              "name": "x-envoy-upstream-service-time",
+              "value": "129"
+            },
+            {
+              "name": "x-robots-tag",
+              "value": "none"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 6783,
+            "mimeType": "application/json",
+            "text": "{\"uuid\":\"2b73f9a4-4889-414e-8ecf-bea3293ef3a7\",\"name\":\"\",\"summary\":\"\",\"model\":null,\"created_at\":\"2025-10-22T07:36:31.007315Z\",\"updated_at\":\"2025-10-22T07:36:31.007315Z\",\"settings\":{\"enabled_bananagrams\":null,\"enabled_web_search\":true,\"enabled_compass\":null,\"enabled_sourdough\":null,\"enabled_foccacia\":null,\"enabled_mcp_tools\":{\"local:Memory-Tool:add-memory\":true,\"local:Memory-Tool:search-memories\":true,\"local:server-sequential-thinking:sequentialthinking\":true,\"local:serena:list_dir-8307c40c45bf539bcf285c495a2e30c9\":true,\"local:serena:find_file-da2320736381083dfb77d0740e66b526\":true,\"local:obsidian-mcp:fetch-35382b71b509d46e80cff999a06c65d5\":true,\"local:serena:find_symbol-64b293b6715d12fe0a193c5fe17ddd67\":true,\"local:serena:read_memory-977463f90bf6b7d6b6a251a3a7794324\":true,\"local:filesystem:edit_file-27cbf8d0b6283e2e63e9de9a776a3842\":true,\"local:filesystem:move_file-b406130f6ea1e8a7e6c4302e74cf6a10\":true,\"local:filesystem:read_file-89c1f1ef95ec7d575ac2c42ae3b4478c\":true,\"local:filesystem:write_file-0683fe3ad60ce34728a5d49a04e33c8b\":true,\"local:lmstudio:health_check-e924c628b434f96c49b6d8edf47c7804\":true,\"local:Memory-Tool:add-memory-085db309c3b3528a5f0ce53707ed058f\":true,\"local:blender-mcp:set_texture-ea33509a316f5b83f5c1a9264cabfd99\":true,\"local:filesystem:search_files-431f34c3cd30ceda778cb20a053c275e\":true,\"local:serena:activate_project-888635a7868b64be4cfda2ea72f02eff\":true,\"local:filesystem:get_file_info-f0df40b6e3bd3ae75853d600d9525c8a\":true,\"local:lmstudio:chat_completion-d29dd2f6f085723be79df468dd821f60\":true,\"local:filesystem:directory_tree-388931b21a4174fc809d92dbe4c7f479\":true,\"local:filesystem:list_directory-edbc26124fa7f9b2898a4acb557c5043\":true,\"local:obsidian-mcp:search_vault-145be9c804ec562781fcac3742ff22de\":true,\"local:serena:search_for_pattern-8435859e9d684f5215dfc8ae50c1943e\":true,\"local:Control your Mac:osascript-a57cf46c3f6aa6ea8122dab364141a5f\":true,\"local:blender-mcp:get_scene_info-d0abd0c0aee2b01d7dbb2de84d0fae37\":true,\"local:lmstudio:get_current_model-2a780dfe78135a18b5eec93db1bec36c\":true,\"local:blender-mcp:get_object_info-88375eadf22e60940648a20b62f3fa12\":true,\"local:desktop-commander:read_file-f2b9d8983f62312cdf961d9f8b0a166d\":true,\"local:filesystem:create_directory-254a19d9b6d4d5e04bac4165a5595439\":true,\"local:obsidian-mcp:get_vault_file-39401602515eefdd0f3449227688ab84\":true,\"local:serena:get_symbols_overview-cb5dce832569325659a3060841593131\":true,\"local:desktop-commander:edit_block-b9c28e3ea9101d3aacb0ba88146db57e\":true,\"local:desktop-commander:get_config-2ad67cfbe40daadd50f16d56c46ea88e\":true,\"local:desktop-commander:write_file-8d6d310332b25303dd1a65d618ac0e24\":true,\"local:obsidian-mcp:get_active_file-a44855f9d8b14bc849e2259cd3e0e7a4\":true,\"local:obsidian-mcp:get_server_info-28e9a0bb249073e3ccd57a90ea0caf92\":true,\"local:context7-mcp:get-library-docs-e7d859dc7f194bc35df21a1d6a8574bd\":true,\"local:obsidian-mcp:execute_template-bf252326b074e817c1bc70ac97b50d44\":true,\"local:obsidian-mcp:list_vault_files-96349fb681e1675a1ad3f6c293360ccf\":true,\"local:obsidian-mcp:patch_vault_file-74e10421c2837b3c31718615a654ff96\":true,\"local:blender-mcp:get_hyper3d_status-a80ef4cf0932483d2c07a1819db81fa6\":true,\"local:desktop-commander:start_search-8782798eefc2da1a18abf152b88f76fd\":true,\"local:filesystem:read_multiple_files-ae4ea126fb88eb169689544111bb50c5\":true,\"local:firecrawl-mcp:firecrawl_search-6d5ddd04b40403050bbc102a01776f15\":true,\"local:obsidian-mcp:create_vault_file-e0655e7e75f08572a721f10797de8ae6\":true,\"local:obsidian-mcp:delete_vault_file-6cd929ad409fb01c5c3375910952f88a\":true,\"local:obsidian-mcp:patch_active_file-19adc6be334d011cb448083af920b935\":true,\"local:context7-mcp:resolve-library-id-42f79561ba400e82351ae9f47838d66d\":true,\"local:desktop-commander:get_file_info-7e30f9d72eb6029bd7cbcc94d90c443c\":true,\"local:desktop-commander:start_process-2062bd5a760e861571ce3958ec0a0ac9\":true,\"local:obsidian-mcp:delete_active_file-dfd68e908a89cd56a57e23f4ea1a4c7d\":true,\"local:obsidian-mcp:search_vault_smart-fb1c4ceb05cbde2e9843fb23d7284241\":true,\"local:obsidian-mcp:update_active_file-086695fad28f8cef056acc0acde55776\":true,\"local:blender-mcp:execute_blender_code-56d281aacc41c4c907ea48d6243e6872\":true,\"local:blender-mcp:get_polyhaven_status-0fe01ae4d7e5a576788971093874405d\":true,\"local:blender-mcp:get_sketchfab_status-9a97f508d80b667a79521683492a1b2e\":true,\"local:desktop-commander:list_directory-4ff59472c2a8bc5732758779bcf3a0e9\":true,\"local:desktop-commander:list_directory-9865fc5823295538471c42a726619ccc\":true,\"local:obsidian-mcp:search_vault_simple-1c6f5b3d3cb8d10a70e8153f52fdb032\":true,\"local:blender-mcp:poll_rodin_job_status-60017ca114c7c87da126e787f410bbff\":true,\"local:obsidian-mcp:append_to_vault_file-198bac9b6513d63519709f15d6badec2\":true,\"local:blender-mcp:import_generated_asset-d31df82552c8f15b48177d70b69bf546\":true,\"local:desktop-commander:create_directory-c1d8d8a85728942221c6baee3c6b4fbb\":true,\"local:obsidian-mcp:append_to_active_file-9031efc281574ccdc881fccfc1fb1b0a\":true,\"local:obsidian-mcp:show_file_in_obsidian-d09d73c5209f478d8ab3eb74a30bdc1f\":true,\"local:blender-mcp:get_viewport_screenshot-9553081737110e46741b764e77958261\":true,\"local:blender-mcp:search_polyhaven_assets-61d7f915f5b4ca87c0b885c630c29b09\":true,\"local:blender-mcp:search_sketchfab_models-b65dac37cb5f8070042fd6845c1b75dd\":true,\"local:filesystem:list_allowed_directories-0abcee0f197c3e0f23b13c6bfad54883\":true,\"local:blender-mcp:download_polyhaven_asset-09d7b45420d1e2e950502db294f2949c\":true,\"local:blender-mcp:download_sketchfab_model-9b2cd3e4e403866b795d1598cf8d7b9d\":true,\"local:blender-mcp:get_polyhaven_categories-fe399938b405fd280986f3dd8834166c\":true,\"local:filesystem:list_directory_with_sizes-e3c94b362ad763c96abc370c99be3cb6\":true,\"local:desktop-commander:read_multiple_files-9e2ff12824b613ff22c664daa23c2450\":true,\"local:desktop-commander:read_process_output-0d99b8333e51e1ecb3eade98181500da\":true,\"local:sequential-thinking:sequentialthinking-3f90ee15c2a57f7a9da72a9da8261cdf\":true,\"local:desktop-commander:get_more_search_results-d1904716b8880d64ffdac626c6e9345d\":true,\"local:blender-mcp:generate_hyper3d_model_via_text-94507b2b1dd521c4142a9e16ec5abe6c\":true,\"local:blender-mcp:generate_hyper3d_model_via_images-9d5d27e8d891af4deaff217d738de0d8\":true,\"local:server-sequential-thinking:sequentialthinking-3f90ee15c2a57f7a9da72a9da8261cdf\":true},\"compass_mode\":null,\"paprika_mode\":null,\"enabled_monkeys_in_a_barrel\":true,\"enabled_saffron\":null,\"create_mode\":null,\"preview_feature_uses_artifacts\":true,\"preview_feature_uses_latex\":null,\"preview_feature_uses_citations\":null,\"enabled_drive_search\":null,\"enabled_artifacts_attachments\":null,\"enabled_turmeric\":true},\"is_starred\":false,\"is_temporary\":false,\"project_uuid\":null,\"session_id\":null,\"current_leaf_message_uuid\":null,\"user_uuid\":null}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 7223,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "160.79.104.10",
+        "startedDateTime": "2025-10-22T07:36:30.769Z",
+        "time": 353.7709999945946,
+        "timings": {
+          "blocked": 1.230999979633838,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.287,
+          "wait": 351.3670000206083,
+          "receive": 0.8859999943524599,
+          "_blocked_queueing": 0.9069999796338379,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540466",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ia",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 4243
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 6936
+              },
+              {
+                "functionName": "she",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 1872
+              },
+              {
+                "functionName": "doSendMessage",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 6894
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "doSendMessage",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 159602
+                },
+                {
+                  "functionName": "start",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158896
+                },
+                {
+                  "functionName": "doSendMessageGenerator",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158861
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 645,
+                  "columnNumber": 31819
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "38",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                    "lineNumber": 236,
+                    "columnNumber": 12297
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 1783
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8974
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 119
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "yS",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 47,
+                    "columnNumber": 36955
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8998
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://claude.ai/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations/2b73f9a4-4889-414e-8ecf-bea3293ef3a7/title",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "claude.ai"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations/2b73f9a4-4889-414e-8ecf-bea3293ef3a7/title"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "47"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 47,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"message_content\":\"ㅎㅎ\",\"recent_titles\":[]}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "992752faefc22916-ICN"
+            },
+            {
+              "name": "content-length",
+              "value": "20"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:32 GMT"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "request-id",
+              "value": "req_011CUMrSGDyFavBDgkcvSCUW"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "via",
+              "value": "1.1 google"
+            },
+            {
+              "name": "x-envoy-upstream-service-time",
+              "value": "957"
+            },
+            {
+              "name": "x-robots-tag",
+              "value": "none"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 20,
+            "mimeType": "application/json",
+            "text": "{\"title\":\"Greeting\"}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 292,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "160.79.104.10",
+        "startedDateTime": "2025-10-22T07:36:31.125Z",
+        "time": 1167.7260000142269,
+        "timings": {
+          "blocked": 0.9350000234358012,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.164,
+          "wait": 1155.6920000214689,
+          "receive": 10.934999969322234,
+          "_blocked_queueing": 0.7140000234358013,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540466",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ia",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 4243
+              },
+              {
+                "functionName": "doSendMessage",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 7674
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "doSendMessage",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 159602
+                },
+                {
+                  "functionName": "start",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158896
+                },
+                {
+                  "functionName": "doSendMessageGenerator",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158861
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 645,
+                  "columnNumber": 31819
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "38",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                    "lineNumber": 236,
+                    "columnNumber": 12297
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 1783
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8974
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 119
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "yS",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 47,
+                    "columnNumber": 36955
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8998
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://claude.ai/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations/2b73f9a4-4889-414e-8ecf-bea3293ef3a7/completion",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "claude.ai"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations/2b73f9a4-4889-414e-8ecf-bea3293ef3a7/completion"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "127"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 127,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"prompt\":\"ㅎㅎ\",\"timezone\":\"Asia/Seoul\",\"model\":\"claude-sonnet-4-5\",\"rendering_mode\":\"messages\",\"attachments\":[],\"files\":[]}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "992752faefc52916-ICN"
+            },
+            {
+              "name": "content-encoding",
+              "value": "br"
+            },
+            {
+              "name": "content-type",
+              "value": "text/event-stream; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:38 GMT"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "request-id",
+              "value": "req_011CUMrSGEiFGBufxLUfZoge"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "via",
+              "value": "1.1 google"
+            },
+            {
+              "name": "x-envoy-upstream-service-time",
+              "value": "7589"
+            },
+            {
+              "name": "x-robots-tag",
+              "value": "none"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 1759,
+            "mimeType": "text/event-stream",
+            "text": "ZXZlbnQ6IG1lc3NhZ2Vfc3RhcnQKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9zdGFydCIsIm1lc3NhZ2UiOnsiaWQiOiJjaGF0Y29tcGxfMDFKM3BaOFhONkV0TXRlaUJvWTFvenpzIiwidHlwZSI6Im1lc3NhZ2UiLCJyb2xlIjoiYXNzaXN0YW50IiwibW9kZWwiOiIiLCJwYXJlbnRfdXVpZCI6IjcwYWQ2NWUyLThkYTgtNGQwYy05MDNiLTI0ZjZiYzFlNTU4MSIsInV1aWQiOiI1ZDEyNWI3MS0wYmI0LTQxNjUtOTgyMy1mYWE0NWJkODcxZjkiLCJjb250ZW50IjpbXSwic3RvcF9yZWFzb24iOm51bGwsInN0b3Bfc2VxdWVuY2UiOm51bGx9ICAgICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfc3RhcnQKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19zdGFydCIsImluZGV4IjowLCJjb250ZW50X2Jsb2NrIjp7InN0YXJ0X3RpbWVzdGFtcCI6IjIwMjUtMTAtMjJUMDc6MzY6MzguNzc2NDk0WiIsInN0b3BfdGltZXN0YW1wIjpudWxsLCJmbGFncyI6bnVsbCwidHlwZSI6InRleHQiLCJ0ZXh0IjoiIiwiY2l0YXRpb25zIjpbXX0gICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiIgIn0gICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6IuyViOuFle2VmOyEuOyalCEgIn0gICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLwn5iKIOustOyXh+ydhCDrj4TsmYDrk5wifSAgICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLrprTquYzsmpQ/In0gICAgICAgICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfc3RvcApkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX3N0b3AiLCJpbmRleCI6MCwic3RvcF90aW1lc3RhbXAiOiIyMDI1LTEwLTIyVDA3OjM2OjM5LjE0OTE2NFoiICAgICAgICAgICAgfQoKZXZlbnQ6IG1lc3NhZ2VfZGVsdGEKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9kZWx0YSIsImRlbHRhIjp7InN0b3BfcmVhc29uIjoiZW5kX3R1cm4iLCJzdG9wX3NlcXVlbmNlIjpudWxsfSAgICAgICAgICAgfQoKZXZlbnQ6IG1lc3NhZ2VfbGltaXQKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9saW1pdCIsIm1lc3NhZ2VfbGltaXQiOnsidHlwZSI6IndpdGhpbl9saW1pdCIsInJlc2V0c0F0IjpudWxsLCJyZW1haW5pbmciOm51bGwsInBlck1vZGVsTGltaXQiOm51bGwsInJlcHJlc2VudGF0aXZlQ2xhaW0iOiJmaXZlX2hvdXIiLCJvdmVyYWdlRGlzYWJsZWRSZWFzb24iOiJvdmVyYWdlX25vdF9wcm92aXNpb25lZCIsIndpbmRvd3MiOnsiNWgiOnsic3RhdHVzIjoid2l0aGluX2xpbWl0IiwicmVzZXRzX2F0IjoxNzYxMTI3MjAwfSwiN2QiOnsic3RhdHVzIjoid2l0aGluX2xpbWl0IiwicmVzZXRzX2F0IjoxNzYxNjQ5MjAwfX19ICAgICAgICAgICAgICAgfQoKZXZlbnQ6IG1lc3NhZ2Vfc3RvcApkYXRhOiB7InR5cGUiOiJtZXNzYWdlX3N0b3AiICAgICAgIH0KCg==",
+            "encoding": "base64"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 1129,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "160.79.104.10",
+        "startedDateTime": "2025-10-22T07:36:31.127Z",
+        "time": 8400.281000009272,
+        "timings": {
+          "blocked": 0.7019999932907521,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.11900000000000002,
+          "wait": 7792.557999987342,
+          "receive": 606.90200002864,
+          "_blocked_queueing": 0.4959999932907522,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540578",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "wse",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137647
+              },
+              {
+                "functionName": "n",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 137960
+              },
+              {
+                "functionName": "Ra",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 65,
+                "columnNumber": 139588
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 645,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "",
+                "scriptId": "38",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                "lineNumber": 236,
+                "columnNumber": 12297
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 627,
+                "columnNumber": 1783
+              },
+              {
+                "functionName": "RV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "NV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "DV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "L6",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "OD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "eD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 8974
+              },
+              {
+                "functionName": "l1",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "WE",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "ZV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 627,
+                "columnNumber": 119
+              },
+              {
+                "functionName": "RV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 9863
+              },
+              {
+                "functionName": "NV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10017
+              },
+              {
+                "functionName": "DV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 10074
+              },
+              {
+                "functionName": "L6",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31481
+              },
+              {
+                "functionName": "OD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 31898
+              },
+              {
+                "functionName": "",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 36811
+              },
+              {
+                "functionName": "yS",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 47,
+                "columnNumber": 36955
+              },
+              {
+                "functionName": "eD",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 8998
+              },
+              {
+                "functionName": "l1",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 33185
+              },
+              {
+                "functionName": "WE",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17375
+              },
+              {
+                "functionName": "ZV",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 44,
+                "columnNumber": 17159
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "261"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 261,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html#/chat/claude\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1168,\"h\":1,\"p\":\"{\\\"version\\\":\\\"1.45.24\\\",\\\"botId\\\":\\\"claude\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"Claude (webapp/claude-sonnet-4-5)\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/22/2025 07:36:46"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.37"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "e9d1bf8289d8e3d43e4877faad8f154f"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:46 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHDACp1qygXUBC4Nj7ie"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 524,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-22T07:36:45.830Z",
+        "time": 362.4239999890253,
+        "timings": {
+          "blocked": 2.029999956715852,
+          "dns": 0.008000000000000007,
+          "ssl": 7.402999999999999,
+          "connect": 16.185,
+          "send": 0.48100000000000165,
+          "wait": 342.86599999058245,
+          "receive": 0.8540000417269766,
+          "_blocked_queueing": 1.698999956715852,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_connectionId": "540466",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "Ia",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 4243
+              },
+              {
+                "functionName": "doSendMessage",
+                "scriptId": "39",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                "lineNumber": 361,
+                "columnNumber": 7674
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "doSendMessage",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 159602
+                },
+                {
+                  "functionName": "start",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158896
+                },
+                {
+                  "functionName": "doSendMessageGenerator",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 65,
+                  "columnNumber": 158861
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "39",
+                  "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                  "lineNumber": 645,
+                  "columnNumber": 31819
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "38",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-6155ebbb.js",
+                    "lineNumber": 236,
+                    "columnNumber": 12297
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 1783
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8974
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 627,
+                    "columnNumber": 119
+                  },
+                  {
+                    "functionName": "RV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 9863
+                  },
+                  {
+                    "functionName": "NV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10017
+                  },
+                  {
+                    "functionName": "DV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 10074
+                  },
+                  {
+                    "functionName": "L6",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31481
+                  },
+                  {
+                    "functionName": "OD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 31898
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 36811
+                  },
+                  {
+                    "functionName": "yS",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 47,
+                    "columnNumber": 36955
+                  },
+                  {
+                    "functionName": "eD",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 8998
+                  },
+                  {
+                    "functionName": "l1",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 33185
+                  },
+                  {
+                    "functionName": "WE",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17375
+                  },
+                  {
+                    "functionName": "ZV",
+                    "scriptId": "39",
+                    "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/ChatbotName-8b8af92d.js",
+                    "lineNumber": 44,
+                    "columnNumber": 17159
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://claude.ai/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations/2b73f9a4-4889-414e-8ecf-bea3293ef3a7/completion",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "claude.ai"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/organizations/6a7310cb-ff4c-463d-9318-14f40a422e80/chat_conversations/2b73f9a4-4889-414e-8ecf-bea3293ef3a7/completion"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "144"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "none"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 144,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"prompt\":\"무슨 이야기할까 \",\"timezone\":\"Asia/Seoul\",\"model\":\"claude-sonnet-4-5\",\"rendering_mode\":\"messages\",\"attachments\":[],\"files\":[]}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "h3",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "name": "cf-ray",
+              "value": "99275356edd42916-ICN"
+            },
+            {
+              "name": "content-encoding",
+              "value": "br"
+            },
+            {
+              "name": "content-type",
+              "value": "text/event-stream; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 22 Oct 2025 07:36:54 GMT"
+            },
+            {
+              "name": "priority",
+              "value": "u=1,i"
+            },
+            {
+              "name": "request-id",
+              "value": "req_011CUMrTM9ucCJpxJ5isp6Eb"
+            },
+            {
+              "name": "server",
+              "value": "cloudflare"
+            },
+            {
+              "name": "server-timing",
+              "value": "cfExtPri"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "via",
+              "value": "1.1 google"
+            },
+            {
+              "name": "x-envoy-upstream-service-time",
+              "value": "8439"
+            },
+            {
+              "name": "x-robots-tag",
+              "value": "none"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 4623,
+            "mimeType": "text/event-stream",
+            "text": "ZXZlbnQ6IG1lc3NhZ2Vfc3RhcnQKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9zdGFydCIsIm1lc3NhZ2UiOnsiaWQiOiJjaGF0Y29tcGxfMDE1VnBFYjIyTWNQZUpGc1NjM2RMd2VEIiwidHlwZSI6Im1lc3NhZ2UiLCJyb2xlIjoiYXNzaXN0YW50IiwibW9kZWwiOiIiLCJwYXJlbnRfdXVpZCI6ImNmMzk3ZTlmLWFkNTUtNDU0MC04MzcwLTA3OTMwNWM0MjMxNyIsInV1aWQiOiIwZjQ1MzFkYS02MWQwLTQyMzEtOWIwYy1lM2U1YmMyZWQ2NjQiLCJjb250ZW50IjpbXSwic3RvcF9yZWFzb24iOm51bGwsInN0b3Bfc2VxdWVuY2UiOm51bGx9ICAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX3N0YXJ0CmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfc3RhcnQiLCJpbmRleCI6MCwiY29udGVudF9ibG9jayI6eyJzdGFydF90aW1lc3RhbXAiOiIyMDI1LTEwLTIyVDA3OjM2OjU0LjMzODExOFoiLCJzdG9wX3RpbWVzdGFtcCI6bnVsbCwiZmxhZ3MiOm51bGwsInR5cGUiOiJ0ZXh0IiwidGV4dCI6IiIsImNpdGF0aW9ucyI6W119ICAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0IjoiICJ9ICAgICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6Iuyii+yVhOyalCEg7Jes65+sIOqwgCJ9fQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLsp4Ag7J207JW86riw66W8IOuCmCJ9ICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLriIwg7IiYIOyeiOyWtOyalC4gIn0gICAgICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6IuyYiOulvCDrk6TrqbQifSAgICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6IjpcblxuLSDsmpTsppgg6rSAIn0gICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6IuyLrCDsnojripQg7Leo66+464KYIn0gICAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0IjoiIO2ZnOuPmeydtCDsnojsnLzsi6DqsIDsmpQ/XG4tICJ9ICAgICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6Iuy1nOq3vOyXkCDsnqwifSAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi66+47J6I6rKMIOuzuCDsmIEifSAgICAgICAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi7ZmU64KYIOuTnOudvOuniCwgIn0gICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLsnb3snYAg7LGF7J20IOyeiOuCmCJ9ICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLsmpQ/XG4tIOq2geq4iO2VnCDso7wifSAgICAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi7KCc6rCAIOyeiOycvOuptCJ9ICAgICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiIg7ZWo6ruYIOydtOyVvOq4sCAifSAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi64KY64ig67O8IOyImCDsnogifSB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6IuyWtOyalFxuLSDslYQifSAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi64uI66m0IOq3uOuDpSDtjrgifSAgICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLtlZjqsowg7J28In0gICAgICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi7IOBIOydtOyVvOq4sOulvCDrgpgifX0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi64ig64+EIOyii+qzoCJ9ICAgICAgICAgICB9CgpldmVudDogY29udGVudF9ibG9ja19kZWx0YQpkYXRhOiB7InR5cGUiOiJjb250ZW50X2Jsb2NrX2RlbHRhIiwiaW5kZXgiOjAsImRlbHRhIjp7InR5cGUiOiJ0ZXh0X2RlbHRhIiwidGV4dCI6IuyalFxuXG7slrTrlqQg7J207JW8In0gICAgIH0KCmV2ZW50OiBjb250ZW50X2Jsb2NrX2RlbHRhCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfZGVsdGEiLCJpbmRleCI6MCwiZGVsdGEiOnsidHlwZSI6InRleHRfZGVsdGEiLCJ0ZXh0Ijoi6riw6rCAIO2VmCJ9ICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLqs6Ag7Iu27Jy87IS47JqUPyAifSAgICAgICAgICAgICAgfQoKZXZlbnQ6IGNvbnRlbnRfYmxvY2tfZGVsdGEKZGF0YTogeyJ0eXBlIjoiY29udGVudF9ibG9ja19kZWx0YSIsImluZGV4IjowLCJkZWx0YSI6eyJ0eXBlIjoidGV4dF9kZWx0YSIsInRleHQiOiLwn5iKIn0gICB9CgpldmVudDogY29udGVudF9ibG9ja19zdG9wCmRhdGE6IHsidHlwZSI6ImNvbnRlbnRfYmxvY2tfc3RvcCIsImluZGV4IjowLCJzdG9wX3RpbWVzdGFtcCI6IjIwMjUtMTAtMjJUMDc6MzY6NTcuNzc3ODkzWiIgICAgICAgICAgICAgIH0KCmV2ZW50OiBtZXNzYWdlX2RlbHRhCmRhdGE6IHsidHlwZSI6Im1lc3NhZ2VfZGVsdGEiLCJkZWx0YSI6eyJzdG9wX3JlYXNvbiI6ImVuZF90dXJuIiwic3RvcF9zZXF1ZW5jZSI6bnVsbH0gIH0KCmV2ZW50OiBtZXNzYWdlX2xpbWl0CmRhdGE6IHsidHlwZSI6Im1lc3NhZ2VfbGltaXQiLCJtZXNzYWdlX2xpbWl0Ijp7InR5cGUiOiJ3aXRoaW5fbGltaXQiLCJyZXNldHNBdCI6bnVsbCwicmVtYWluaW5nIjpudWxsLCJwZXJNb2RlbExpbWl0IjpudWxsLCJyZXByZXNlbnRhdGl2ZUNsYWltIjoiZml2ZV9ob3VyIiwib3ZlcmFnZURpc2FibGVkUmVhc29uIjoib3ZlcmFnZV9ub3RfcHJvdmlzaW9uZWQiLCJ3aW5kb3dzIjp7IjVoIjp7InN0YXR1cyI6IndpdGhpbl9saW1pdCIsInJlc2V0c19hdCI6MTc2MTEyNzIwMH0sIjdkIjp7InN0YXR1cyI6IndpdGhpbl9saW1pdCIsInJlc2V0c19hdCI6MTc2MTY0OTIwMH19fX0KCmV2ZW50OiBtZXNzYWdlX3N0b3AKZGF0YTogeyJ0eXBlIjoibWVzc2FnZV9zdG9wIiAgICAgfQoK",
+            "encoding": "base64"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 1926,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "160.79.104.10",
+        "startedDateTime": "2025-10-22T07:36:45.843Z",
+        "time": 12456.89199998742,
+        "timings": {
+          "blocked": 1.9540000218302012,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.5249999999999999,
+          "wait": 8635.025000020269,
+          "receive": 3819.38799994532,
+          "_blocked_queueing": 1.4400000218302011,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

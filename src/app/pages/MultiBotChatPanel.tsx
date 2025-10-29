@@ -15,11 +15,13 @@ import { showPremiumModalAtom } from '~app/state'
 import { BotId } from '../bots'
 import ConversationPanel from '../components/Chat/ConversationPanel'
 import { getUserConfig, updateUserConfig } from '~services/user-config'
-import { startManualDispatch } from '~app/utils/manual-dispatch'
+import { startManualDispatch, startAutoDispatch } from '~app/utils/manual-dispatch'
 import RiskConsentModal from '~app/components/Modals/RiskConsentModal'
+import GrokNoticeModal from '~app/components/Modals/GrokNoticeModal'
 import MainBrainPanel from '~app/components/MainBrain/Panel'
 import UsageBadge from '~app/components/Usage/Badge'
 import toast from 'react-hot-toast'
+import Browser from 'webextension-polyfill'
 
 const DEFAULT_BOTS: BotId[] = Object.keys(CHATBOTS).slice(0, 6) as BotId[]
 
@@ -48,6 +50,7 @@ const GeneralChatPanel: FC<{
   const [layout, setLayout] = useAtom(layoutAtom)
 
   const [riskOpen, setRiskOpen] = useState(false)
+  const [grokNoticeOpen, setGrokNoticeOpen] = useState(false)
   const [draft, setDraft] = useState('')
 
   const setPremiumModalOpen = useSetAtom(showPremiumModalAtom)
@@ -76,17 +79,93 @@ const GeneralChatPanel: FC<{
       }
       const config = await getUserConfig()
       const botIds = uniqBy(chats, (c) => c.botId).map((c) => c.botId)
+      
+      // Grok 첫 사용 시 안내 모달 표시
+      const hasGrok = botIds.includes('grok')
+      if (hasGrok) {
+        const grokNoticeShown = await Browser.storage.local.get('grokNoticeShown')
+        console.log('🔍 Grok 안내 체크:', { 
+          hasGrok, 
+          alreadyShown: grokNoticeShown.grokNoticeShown,
+          willShow: !grokNoticeShown.grokNoticeShown 
+        })
+        
+        if (!grokNoticeShown.grokNoticeShown) {
+          console.log('✅ Grok 안내 모달 표시!')
+          setGrokNoticeOpen(true)
+          await Browser.storage.local.set({ grokNoticeShown: true })
+        } else {
+          console.log('⏭️ Grok 안내 이미 표시됨 - 건너뜀')
+        }
+      }
+      
       if (config.messageDispatchMode === 'manual') {
-        // manual copy-paste sequence (exclude main brain if set)
+        // Manual 모드: 클립보드 복사 후 사용자가 직접 붙여넣기
         await startManualDispatch(input, botIds, config.mainBrainBotId)
-        toast.success('프롬프트가 복사되었습니다. 각 패널 입력창에 붙여넣고 Enter를 눌러주세요.')
+
+        // Grok이 포함되어 있는지 확인
+        const hasGrok = botIds.includes('grok')
+
+        if (hasGrok) {
+          toast.success(
+            '📋 프롬프트가 클립보드에 복사되었습니다!\n\n' +
+            '각 패널 입력창에 Ctrl+V로 붙여넣고 Enter를 눌러주세요.\n' +
+            '(Grok은 iframe 내부를 클릭 후 붙여넣기)',
+            { duration: 5000 }
+          )
+        } else {
+          toast.success(
+            '📋 프롬프트가 클립보드에 복사되었습니다!\n' +
+            '각 패널 입력창에 붙여넣고 Enter를 눌러주세요.',
+            { duration: 4000 }
+          )
+        }
       } else {
+        // Auto 모드
         if (!config.autoRoutingConsent) {
           setRiskOpen(true)
           return
         }
-        uniqBy(chats, (c) => c.botId).forEach((c) => c.sendMessage(input, image))
-        trackEvent('send_messages', { layout, disabled })
+        
+        // 개선된 Auto Routing: 사용자 입력처럼 보이도록 텍스트 복사-붙여넣기 시뮬레이션
+        // 봇 감지 우회를 위해 실제 DOM에 값을 설정하고 이벤트를 발생시킴
+        const result = await startAutoDispatch(input, botIds, config.mainBrainBotId, image)
+        trackEvent('send_messages', { 
+          layout, 
+          disabled, 
+          mode: 'auto_simulation',
+          successCount: result.successCount,
+          skippedCount: result.skippedBots.length,
+        })
+        
+        // 결과 메시지 표시
+        if (result.skippedBots.length > 0) {
+          const skippedNames = result.skippedBots.map(id => CHATBOTS[id]?.name || id).join(', ')
+
+          // Grok이 포함되어 있는지 확인
+          const hasGrok = result.skippedBots.includes('grok')
+
+          if (hasGrok) {
+            toast(
+              `✅ ${result.successCount}개 봇 전송 완료\n\n` +
+              `📋 ${skippedNames}는 Manual 모드를 사용하세요\n` +
+              `   (X/Twitter 보안 정책으로 통합 입력창 사용 불가)\n\n` +
+              `💡 Tip: Manual 모드를 선택하면 자동으로 클립보드에 복사됩니다`,
+              {
+                duration: 6000,
+                icon: 'ℹ️'
+              }
+            )
+          } else {
+            toast.success(
+              `${result.successCount}개 봇에 전송 완료\n` +
+              `(${skippedNames}는 건너뜀)`,
+              { duration: 4000 }
+            )
+          }
+        } else {
+          toast.success(`${result.successCount}개 봇에 메시지가 전송되었습니다.`)
+        }
       }
     },
     [chats, disabled, layout, setPremiumModalOpen],
@@ -149,6 +228,7 @@ const GeneralChatPanel: FC<{
           }}
         />
       )}
+      <GrokNoticeModal open={grokNoticeOpen} onClose={() => setGrokNoticeOpen(false)} />
       <MainBrainPanel />
       <div className="flex flex-row gap-3">
         <LayoutSwitch layout={layout} onChange={onLayoutChange} />

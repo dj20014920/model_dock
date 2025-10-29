@@ -44,7 +44,7 @@ export default defineManifest(async () => {
     permissions: ['storage', 'unlimitedStorage', 'sidePanel', 'declarativeNetRequestWithHostAccess', 'scripting', 'tabs', 'cookies'],
     content_scripts: [
       {
-        // 기존 proxy-fetch 관련 (ChatGPT, Claude, Gemini, DeepSeek 등)
+        // 기존 proxy-fetch 관련 (ChatGPT, Claude, Gemini, DeepSeek, LM Arena 등)
         matches: [
           'https://chat.openai.com/*',
           'https://chatgpt.com/*',
@@ -53,6 +53,8 @@ export default defineManifest(async () => {
           'https://chat.deepseek.com/*',
           'https://perplexity.ai/*',
           'https://www.perplexity.ai/*',
+          'https://lmarena.ai/*',
+          'https://*.lmarena.ai/*',
         ],
         js: ['src/content-script/chatgpt-inpage-proxy.ts'],
         run_at: 'document_start',
@@ -120,6 +122,11 @@ export default defineManifest(async () => {
           enabled: true,
           path: 'src/rules/grok-iframe.json',
         },
+        {
+          id: 'ruleset_lmarena_iframe',
+          enabled: true,
+          path: 'src/rules/lmarena-iframe.json',
+        },
       ],
     },
     web_accessible_resources: [
@@ -148,6 +155,8 @@ export default defineManifest(async () => {
           'https://perplexity.ai/*',
           'https://www.perplexity.ai/*',
           'https://copilot.microsoft.com/*',
+          'https://lmarena.ai/*',
+          'https://*.lmarena.ai/*',
         ],
         use_dynamic_url: false,
       },

@@ -125,6 +125,105 @@ const ConversationPanel: FC<Props> = (props) => {
   // Grok iframe ref for auto-dispatch
   const grokIframeRef = useRef<HTMLIFrameElement>(null)
   
+  // LM Arena iframe ref
+  const lmarenaIframeRef = useRef<HTMLIFrameElement>(null)
+  
+  // LM Arena 전용: 배율 조절 상태
+  const [lmarenaZoom, setLmarenaZoom] = useState(() => {
+    try {
+      const saved = localStorage.getItem('lmarena-zoom')
+      return saved ? Number(saved) : 1.0
+    } catch {
+      return 1.0
+    }
+  })
+  
+  // LM Arena 전용 렌더링
+  if ((props.botId as string) === 'lmarena') {
+    // 기본 Direct 모드
+    const iframeUrl = 'https://lmarena.ai/c/new?mode=direct'
+    
+    return (
+      <ConversationContext.Provider value={context}>
+        <div className="flex flex-col overflow-hidden bg-primary-background h-full rounded-[20px]">
+          {/* 헤더 */}
+          <div className={cx('flex flex-row items-center justify-between border-b border-solid border-primary-border', mode === 'full' ? 'py-3 mx-5' : 'py-[10px] mx-3')}>
+            {/* 왼쪽: 타이틀 */}
+            <div className="flex flex-row items-center gap-2">
+              <img src={botInfo.avatar} className="w-5 h-5 object-contain rounded-full" />
+              <ChatbotName botId={props.botId} name={botInfo.name} onSwitchBot={props.onSwitchBot} />
+            </div>
+
+            {/* 오른쪽: 배율 조절 */}
+            <div className="flex flex-row items-center gap-2">
+              <span className="text-[10px] text-light-text whitespace-nowrap">배율</span>
+              <input
+                type="range"
+                min="0.5"
+                max="2.0"
+                step="0.05"
+                value={lmarenaZoom}
+                onChange={(e) => {
+                  const newZoom = Number(e.target.value)
+                  setLmarenaZoom(newZoom)
+                  localStorage.setItem('lmarena-zoom', String(newZoom))
+                }}
+                className="w-20 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                style={{ accentColor: '#10a37f' }}
+                title="드래그하여 배율 조절"
+              />
+              <input
+                type="text"
+                value={Math.round(lmarenaZoom * 100)}
+                onChange={(e) => {
+                  const sanitized = e.target.value.replace(/[^\d]/g, '')
+                  if (sanitized === '') return
+                  const numValue = Math.max(50, Math.min(200, parseInt(sanitized, 10)))
+                  const newZoom = numValue / 100
+                  setLmarenaZoom(newZoom)
+                  localStorage.setItem('lmarena-zoom', String(newZoom))
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value.trim()) {
+                    setLmarenaZoom(1.0)
+                    localStorage.setItem('lmarena-zoom', '1.0')
+                  }
+                }}
+                className="w-12 px-1.5 py-0.5 text-[10px] text-center border border-primary-border rounded bg-secondary text-primary-text focus:outline-none focus:ring-1 focus:ring-blue-500"
+                placeholder="100"
+                title="직접 입력 (50-200)"
+                maxLength={3}
+                pattern="[0-9]*"
+                inputMode="numeric"
+              />
+              <span className="text-[10px] text-light-text">%</span>
+            </div>
+          </div>
+
+          {/* LM Arena iframe 내장 */}
+          <div className="flex-1 relative overflow-auto">
+            <iframe
+              ref={lmarenaIframeRef}
+              src={iframeUrl}
+              className="w-full h-full border-0"
+              style={{
+                minHeight: '100%',
+                minWidth: '100%',
+                transform: `scale(${lmarenaZoom})`,
+                transformOrigin: 'top left',
+                width: `${100 / lmarenaZoom}%`,
+                height: `${100 / lmarenaZoom}%`
+              }}
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
+              allow="clipboard-read; clipboard-write"
+              title="LM Arena Chat"
+            />
+          </div>
+        </div>
+      </ConversationContext.Provider>
+    )
+  }
+  
   // Grok 전용 렌더링 (모든 hooks 호출 후에 처리)
   if (props.botId === 'grok') {
     /**
@@ -282,7 +381,7 @@ const ConversationPanel: FC<Props> = (props) => {
               onSwitchBot={mode === 'compact' ? props.onSwitchBot : undefined}
             />
             {/* LMArena 모델 선택 드롭다운 */}
-            {(props.botId === 'lmarena-direct' || props.botId === 'lmarena-battle' || props.botId === 'lmarena-sidebyside') && (
+            {props.botId === 'lmarena' && (
               <LMArenaModelSelector botId={props.botId} bot={props.bot} />
             )}
           </div>

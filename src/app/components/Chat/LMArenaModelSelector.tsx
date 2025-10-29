@@ -28,12 +28,8 @@ export const LMArenaModelSelector: FC<Props> = ({ botId, bot }) => {
   useEffect(() => {
     if (bot instanceof LMArenaBot) {
       const config = (bot as any).config
-      if (config) {
-        if (botId === 'lmarena-direct' && config.model) {
-          setCurrentModel(config.model)
-        } else if (botId === 'lmarena-sidebyside' && config.modelA) {
-          setCurrentModel(config.modelA)
-        }
+      if (config && config.model) {
+        setCurrentModel(config.model)
       }
     }
   }, [bot, botId])
@@ -69,22 +65,9 @@ export const LMArenaModelSelector: FC<Props> = ({ botId, bot }) => {
     if (bot instanceof LMArenaBot) {
       const config = (bot as any).config
       if (config) {
-        if (botId === 'lmarena-direct') {
-          config.model = newModel
-        } else if (botId === 'lmarena-sidebyside') {
-          config.modelA = newModel
-        }
+        config.model = newModel
       }
     }
-  }
-
-  // Battle 모드는 모델 선택 불가
-  if (botId === 'lmarena-battle') {
-    return (
-      <span className="text-xs text-light-text px-2 py-1 bg-secondary rounded">
-        🎲 Random
-      </span>
-    )
   }
 
   const groupedModels = groupModelsByOrganization(models)

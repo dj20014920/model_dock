@@ -373,162 +373,19 @@ export class LMArenaBot extends AbstractBot {
   }
 
   async doSendMessage(params: SendMessageParams): Promise<void> {
-    try {
-      // 권한 확인
-      const { requestHostPermission } = await import('~app/utils/permissions')
-      if (!(await requestHostPermission('https://*.lmarena.ai/*'))) {
-        throw new ChatError('Missing lmarena.ai permission', ErrorCode.MISSING_HOST_PERMISSION)
+    // iframe 내에서 직접 동작하므로 여기는 도달하지 않음
+    // 혹시 도달하면 안내 메시지
+    params.onEvent({
+      type: 'UPDATE_ANSWER',
+      data: {
+        text: '💬 LM Arena는 위의 내장된 화면에서 직접 사용하세요.\n\n' +
+              '💡 문제가 있다면 lmarena.ai에 로그인 후 다시 시도해주세요.'
       }
-
-      // 대화 ID 생성 (필요시)
-      if (!this.conversationId) {
-        this.conversationId = await this.createConversation(params.signal)
-      }
-
-      // 메시지 전송 및 스트리밍 응답 처리
-      await this.streamMessage(params)
-    } catch (error) {
-      console.error('[LMArena] Error:', error)
-      params.onEvent({
-        type: 'ERROR',
-        error: error instanceof ChatError ? error : new ChatError(
-          error instanceof Error ? error.message : 'Unknown error',
-          ErrorCode.UNKOWN_ERROR
-        ),
-      })
-    }
+    })
+    params.onEvent({ type: 'DONE' })
   }
 
-  private async createConversation(signal?: AbortSignal): Promise<string> {
-    // 대화 ID 생성 (UUID 형식)
-    const conversationId = `019a${uuidv4().slice(4)}`
-    
-    // hybridFetch를 사용하여 쿠키 자동 포함
-    const { hybridFetch } = await import('~app/utils/hybrid-requester')
-    const response = await hybridFetch(
-      `${this.baseUrl}/c/${conversationId}`,
-      {
-        method: 'GET',
-        signal,
-      },
-      {
-        homeUrl: 'https://lmarena.ai',
-        hostStartsWith: 'https://lmarena.ai',
-      },
-    )
 
-    if (!response.ok) {
-      throw new ChatError('Failed to create conversation', ErrorCode.NETWORK_ERROR)
-    }
-
-    return conversationId
-  }
-
-  private async streamMessage(params: SendMessageParams): Promise<void> {
-    const { prompt, signal, onEvent } = params
-
-    // hybridFetch를 사용하여 쿠키 자동 포함
-    const { hybridFetch } = await import('~app/utils/hybrid-requester')
-    const response = await hybridFetch(
-      `${this.baseUrl}/nextjs-api/stream/create-evaluation`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain;charset=UTF-8',
-        },
-        body: this.buildRequestBody(prompt),
-        signal,
-      },
-      {
-        homeUrl: 'https://lmarena.ai',
-        hostStartsWith: 'https://lmarena.ai',
-      },
-    )
-
-    if (!response.ok) {
-      throw new ChatError(`HTTP ${response.status}: ${response.statusText}`, ErrorCode.NETWORK_ERROR)
-    }
-
-    if (!response.body) {
-      throw new ChatError('No response body', ErrorCode.NETWORK_ERROR)
-    }
-
-    // Server-Sent Events 스트림 파싱
-    await this.parseSSEStream(response.body, onEvent, signal)
-  }
-
-  private buildRequestBody(prompt: string): string {
-    const payload = {
-      conversationId: this.conversationId,
-      message: prompt,
-      mode: this.config.mode,
-      ...(this.config.mode === 'direct' && { model: this.config.model }),
-      ...(this.config.mode === 'side-by-side' && {
-        modelA: this.config.modelA,
-        modelB: this.config.modelB,
-      }),
-    }
-    return JSON.stringify(payload)
-  }
-
-  private async parseSSEStream(
-    body: ReadableStream<Uint8Array>,
-    onEvent: SendMessageParams['onEvent'],
-    signal?: AbortSignal,
-  ): Promise<void> {
-    const reader = body.getReader()
-    const decoder = new TextDecoder()
-    let buffer = ''
-    let fullText = ''
-
-    try {
-      while (true) {
-        if (signal?.aborted) {
-          reader.cancel()
-          break
-        }
-
-        const { done, value } = await reader.read()
-        if (done) break
-
-        buffer += decoder.decode(value, { stream: true })
-        const lines = buffer.split('\n')
-        buffer = lines.pop() || ''
-
-        for (const line of lines) {
-          if (!line.trim() || !line.startsWith('a0:')) continue
-
-          // SSE 형식: a0:"텍스트"
-          const match = line.match(/^a0:"(.+)"$/)
-          if (match) {
-            const text = match[1]
-            fullText += text
-            
-            onEvent({
-              type: 'UPDATE_ANSWER',
-              data: { text: fullText },
-            })
-          }
-
-          // 완료 신호: ad:{"finishReason":"stop"}
-          if (line.startsWith('ad:')) {
-            onEvent({ type: 'DONE' })
-            return
-          }
-        }
-      }
-
-      // 스트림 종료
-      onEvent({ type: 'DONE' })
-    } catch (error) {
-      if (signal?.aborted) {
-        return
-      }
-      throw error
-    } finally {
-      reader.releaseLock()
-    }
-  }
 
   resetConversation(): void {
     this.conversationId = null

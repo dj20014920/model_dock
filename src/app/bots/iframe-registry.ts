@@ -32,6 +32,12 @@ const REGISTRY: Record<string, IframeConfig> = {
     allow: 'clipboard-read; clipboard-write',
     title: 'Grok Chat',
   },
+  claude: {
+    src: 'https://claude.ai',
+    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals',
+    allow: 'clipboard-read; clipboard-write',
+    title: 'Claude',
+  },
 }
 
 export function getIframeConfig(botId: BotId | string): IframeConfig | null {

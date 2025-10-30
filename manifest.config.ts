@@ -137,6 +137,11 @@ export default defineManifest(async () => {
           enabled: true,
           path: 'src/rules/chatgpt-iframe.json',
         },
+        {
+          id: 'ruleset_claude_iframe',
+          enabled: true,
+          path: 'src/rules/claude-iframe.json',
+        },
       ],
     },
     web_accessible_resources: [

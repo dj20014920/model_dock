@@ -129,16 +129,24 @@ export class ProxyRequester {
     try {
       const tab = await this.getProxyTab()
       if (!tab) {
-        // 재사용만 허용되고 탭이 없다면 자동 생성 금지 → 401 반환
         const empty = new ReadableStream({ start(c) { try { c.close() } catch {} } })
         return new Response(empty, { status: 401, statusText: 'NO_PROXY_TAB' })
       }
-      // Webapp 계정 기반 호출은 항상 쿠키 포함(redirect 등에서도 안전)
+
       const merged: any = { credentials: 'include', ...(options as any) }
-      const resp = await proxyFetch(tab.id!, url, merged)
-      if (resp.status === 403) {
+      let resp = await proxyFetch(tab.id!, url, merged)
+
+      // 403/499: 탭 리프레시 후 재시도
+      if (resp.status === 403 || resp.status === 499) {
+        console.log('[ProxyRequester] 🔄 Refreshing proxy tab due to:', resp.status, resp.statusText)
         await this.refreshProxyTab()
-        return proxyFetch(tab.id!, url, merged)
+        
+        // 재시도
+        const retryTab = await this.findExistingProxyTab()
+        if (retryTab) {
+          resp = await proxyFetch(retryTab.id!, url, merged)
+          console.log('[ProxyRequester] ✅ Retry result:', resp.status, resp.statusText)
+        }
       }
       return resp
     } catch (error) {

@@ -196,6 +196,7 @@ const GeneralChatPanel: FC<{
 
   // 메인 브레인 상태 추적
   const [mainBrainBotId, setMainBrainBotId] = useState<BotId | ''>('')
+  const [previousMainBrainId, setPreviousMainBrainId] = useState<BotId | ''>('')
 
   useEffect(() => {
     let mounted = true
@@ -203,15 +204,61 @@ const GeneralChatPanel: FC<{
       if (mounted) {
         const brainId = (c.mainBrainBotId as BotId | '') || ''
         setMainBrainBotId(brainId)
+        setPreviousMainBrainId(brainId)
         console.log('[MultiBotPanel] 🧠 Main Brain loaded:', brainId)
       }
     })
     const onChanged = (changes: Record<string, Browser.Storage.StorageChange>, area: string) => {
       if (area !== 'sync') return
       if (Object.prototype.hasOwnProperty.call(changes, 'mainBrainBotId')) {
+        const oldBrainId = (changes['mainBrainBotId'].oldValue as BotId | '') || ''
         const newBrainId = (changes['mainBrainBotId'].newValue as BotId | '') || ''
+        
+        console.log('[MultiBotPanel] 🔄 Main Brain swap:', { from: oldBrainId, to: newBrainId })
+        
+        // 봇 스왑 로직 (완전 동기화)
+        if (setBots && newBrainId) {
+          setBots((currentBots) => {
+            const newBots = [...currentBots]
+            const newBrainIndex = newBots.indexOf(newBrainId)
+            
+            console.log('[MultiBotPanel] 📊 Swap state:', {
+              currentBots,
+              oldBrainId,
+              newBrainId,
+              newBrainIndex,
+              hasOldBrain: !!oldBrainId,
+            })
+            
+            // Case 1: 이전 메인 브레인이 있고, 새 메인 브레인이 그리드에 있음 → 스왑
+            if (oldBrainId && newBrainIndex !== -1) {
+              console.log('[MultiBotPanel] ↔️ Swapping bots at index:', newBrainIndex)
+              newBots[newBrainIndex] = oldBrainId
+            }
+            // Case 2: 이전 메인 브레인이 없고, 새 메인 브레인이 그리드에 있음 → 그리드에서 제거
+            else if (!oldBrainId && newBrainIndex !== -1) {
+              console.log('[MultiBotPanel] 🎯 First time main brain from grid')
+              // 그리드에서 제거하고 랜덤 봇으로 교체
+              const availableBots = (Object.keys(CHATBOTS) as BotId[]).filter(
+                (id) => !newBots.includes(id) && id !== newBrainId
+              )
+              const randomBot = availableBots.length > 0 ? availableBots[0] : 'bing'
+              newBots[newBrainIndex] = randomBot
+              console.log('[MultiBotPanel] 🔄 Replaced with:', randomBot)
+            }
+            // Case 3: 새 메인 브레인이 그리드에 없음 → 그리드 유지
+            else {
+              console.log('[MultiBotPanel] ✨ New brain not in grid, keeping grid unchanged')
+            }
+            
+            console.log('[MultiBotPanel] ✅ Final bots:', newBots)
+            return newBots
+          })
+        }
+        
+        setPreviousMainBrainId(oldBrainId)
         setMainBrainBotId(newBrainId)
-        console.log('[MultiBotPanel] 🧠 Main Brain changed:', newBrainId)
+        console.log('[MultiBotPanel] ✅ Main Brain changed:', newBrainId)
       }
     }
     Browser.storage.onChanged.addListener(onChanged)
@@ -219,7 +266,7 @@ const GeneralChatPanel: FC<{
       mounted = false
       Browser.storage.onChanged.removeListener(onChanged)
     }
-  }, [])
+  }, [setBots])
 
   // 메인 브레인이 현재 chats에 포함되어 있는지 확인
   const mainBrainChat = useMemo(

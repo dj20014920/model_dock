@@ -10,17 +10,42 @@ export async function fetchOrganizationId(doFetch: DoFetch = fetch): Promise<str
     resp = await doFetch('https://claude.ai/api/organizations', {
       redirect: 'error',
       cache: 'no-cache',
-      // Ensure logged-in cookies are sent from the browser session
       credentials: 'include',
     })
   } catch (err) {
-    console.error(err)
-    throw new ChatError('Claude webapp not avaiable in your country', ErrorCode.CLAUDE_WEB_UNAVAILABLE)
+    console.error('[Claude API] ❌ Network error:', err)
+    throw new ChatError('Claude webapp network error', ErrorCode.NETWORK_ERROR)
   }
+
+  // 401/403: 로그인 필요
   if (resp.status === 401 || resp.status === 403) {
     throw new ChatError('There is no logged-in Claude account in this browser.', ErrorCode.CLAUDE_WEB_UNAUTHORIZED)
   }
-  const orgs = await resp.json()
+
+  // 2xx가 아닌 경우: JSON 파싱 시도하지 않음
+  if (!resp.ok) {
+    console.error('[Claude API] ❌ Non-OK response:', resp.status, resp.statusText)
+    throw new ChatError(`Claude API error: ${resp.status} ${resp.statusText}`.trim(), ErrorCode.NETWORK_ERROR)
+  }
+
+  // 정상 응답: JSON 파싱
+  const text = await resp.text()
+  if (!text || !text.trim()) {
+    throw new ChatError('Empty response from Claude API', ErrorCode.NETWORK_ERROR)
+  }
+
+  let orgs: any
+  try {
+    orgs = JSON.parse(text)
+  } catch (e) {
+    console.error('[Claude API] ❌ JSON parse error:', e)
+    throw new ChatError('Invalid JSON from Claude API', ErrorCode.NETWORK_ERROR)
+  }
+
+  if (!orgs || !Array.isArray(orgs) || !orgs[0]?.uuid) {
+    throw new ChatError('Invalid organizations data from Claude API', ErrorCode.NETWORK_ERROR)
+  }
+
   return orgs[0].uuid
 }
 

@@ -66,20 +66,23 @@ export class ClaudeWebBot extends AbstractBot {
     }
 
     if (!this.organizationId) {
+      // hybridFetch가 자동으로 처리:
+      // 1. 먼저 background context에서 쿠키로 시도
+      // 2. 401/403이면 프록시 탭 생성하여 로그인 유도
       this.organizationId = await fetchOrganizationId((i, init) =>
-        hybridFetch(i as string, init as any, { homeUrl: 'https://claude.ai', hostStartsWith: 'https://claude.ai' }, { reuseOnly: true }),
+        hybridFetch(i as string, init as any, { homeUrl: 'https://claude.ai', hostStartsWith: 'https://claude.ai' }),
       )
       console.log('[Claude] 🏢 Organization ID:', this.organizationId)
     }
 
     if (!this.conversationContext) {
       const conversationId = await createConversation(this.organizationId, (i, init) =>
-        hybridFetch(i as string, init as any, { homeUrl: 'https://claude.ai', hostStartsWith: 'https://claude.ai' }, { reuseOnly: true }),
+        hybridFetch(i as string, init as any, { homeUrl: 'https://claude.ai', hostStartsWith: 'https://claude.ai' }),
       )
       this.conversationContext = { conversationId }
       console.log('[Claude] 💬 Conversation ID:', conversationId)
       generateChatTitle(this.organizationId, conversationId, params.prompt, (i, init) =>
-        hybridFetch(i as string, init as any, { homeUrl: 'https://claude.ai', hostStartsWith: 'https://claude.ai' }, { reuseOnly: true }),
+        hybridFetch(i as string, init as any, { homeUrl: 'https://claude.ai', hostStartsWith: 'https://claude.ai' }),
       ).catch(console.error)
     }
 
@@ -126,7 +129,6 @@ export class ClaudeWebBot extends AbstractBot {
           body: JSON.stringify(requestBody),
         },
         { homeUrl: 'https://claude.ai', hostStartsWith: 'https://claude.ai' },
-        { reuseOnly: true },
       )
       if (resp.ok) {
         this.model = model

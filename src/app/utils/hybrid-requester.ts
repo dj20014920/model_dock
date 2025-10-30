@@ -18,23 +18,27 @@ export async function hybridFetch(
   opts: { homeUrl: string; hostStartsWith: string },
   extra?: { reuseOnly?: boolean },
 ): Promise<Response> {
-  // Copilot은 엄격한 CSP/nonce 정책이므로 배경 경로를 우선 시도
-  if (opts.hostStartsWith.includes('copilot.microsoft.com')) {
-    try {
-      console.log('[HYBRID-FETCH] 🚀 Background-first for Copilot:', url)
-      const bg = await backgroundFetch(url, options)
-      console.log('[HYBRID-FETCH] 📡 Background result:', bg.status, bg.statusText)
-      if (bg.ok) return bg
-      if (bg.status !== 401 && bg.status !== 403) return bg
-      // 401/403이면 동일 출처로 폴백
-    } catch (e) {
-      console.warn('[HYBRID-FETCH] ⚠️ Background path failed, falling back to proxy:', (e as Error)?.message)
-    }
+  // 1단계: Background context에서 쿠키 기반 직접 요청 시도
+  // (Copilot 외에도 Claude, Gemini, Perplexity 등 모든 사용자 계정 기반 봇에 적용)
+  try {
+    console.log('[HYBRID-FETCH] 🚀 Trying background fetch first:', url)
+    const bg = await backgroundFetch(url, options)
+    console.log('[HYBRID-FETCH] 📡 Background result:', bg.status, bg.statusText)
+    
+    // 성공하면 바로 반환
+    if (bg.ok) return bg
+    
+    // 401/403이 아닌 다른 오류도 반환 (네트워크 오류 등)
+    if (bg.status !== 401 && bg.status !== 403) return bg
+    
+    // 401/403: 로그인 필요 → 프록시 탭으로 폴백
+    console.log('[HYBRID-FETCH] 🔑 Authentication required, falling back to proxy tab')
+  } catch (e) {
+    console.warn('[HYBRID-FETCH] ⚠️ Background fetch failed, falling back to proxy:', (e as Error)?.message)
   }
 
+  // 2단계: 프록시 탭을 통한 요청 (쿠키 자동 포함)
   console.log('[HYBRID-FETCH] 🔄 Using ProxyRequester for:', url)
-
-  // ProxyRequester를 통해 동일 출처 탭에서 요청 실행 (쿠키 자동 포함)
   const requester = new ProxyRequester({ ...opts, reuseOnly: !!extra?.reuseOnly })
   const proxyResp = await requester.fetch(url, options as any)
 

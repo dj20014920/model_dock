@@ -5,6 +5,7 @@ import { CHATBOTS } from '~app/consts'
 import Button from '~app/components/Button'
 import { BotId } from '~app/bots'
 import { useMainBrain } from '~app/hooks/use-main-brain'
+import { getUserConfig } from '~services/user-config'
 
 // LM Arena 리더보드 기반 실제 사용자 평가 순위 (2025년 최신)
 // 사용 빈도가 높은 순서: 범용성 > 정보탐색 > 코딩 > 추론 > 속도 > 팩트체크 > 학술연구 > 창작 > 비용효율
@@ -42,6 +43,11 @@ const MainBrainPanel: FC = () => {
   const [hasMoved, setHasMoved] = useState(false)
 
   const bot = useMemo(() => (mainBrainBotId ? CHATBOTS[mainBrainBotId] : null), [mainBrainBotId])
+
+  // 메인 브레인 변경 시 로그
+  React.useEffect(() => {
+    console.log('[MainBrainPanel] 🔄 Main Brain state updated:', mainBrainBotId)
+  }, [mainBrainBotId])
 
   // 드래그 시작 (클릭과 구분하기 위한 로직)
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent, isCollapsedButton = false) => {
@@ -267,7 +273,22 @@ const MainBrainPanel: FC = () => {
                 {mainBrainBotId === id ? (
                   <span className="text-[10px] text-amber-600 font-semibold">✓ 선택됨</span>
                 ) : (
-                  <Button text="선택" size="tiny" color="primary" onClick={() => setMainBrain(id)} />
+                  <Button
+                    text="선택"
+                    size="tiny"
+                    color="primary"
+                    onClick={async () => {
+                      console.log('[MainBrainPanel] 🎯 Selecting new main brain:', {
+                        current: mainBrainBotId,
+                        new: id,
+                      })
+                      
+                      // 메인 브레인 변경 (storage 이벤트가 자동으로 발생)
+                      await setMainBrain(id)
+                      
+                      console.log('[MainBrainPanel] ✅ Main Brain selection complete')
+                    }}
+                  />
                 )}
               </div>
             ))}

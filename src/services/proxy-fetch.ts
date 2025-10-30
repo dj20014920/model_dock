@@ -291,7 +291,7 @@ export async function proxyFetch(tabId: number, url: string, options?: RequestIn
         resolve(new Response(empty, { status: 499, statusText: 'CONNECTION_TIMEOUT' }))
         try { port.disconnect() } catch {}
       }
-    }, 12000) // 타임아웃 12초로 단축 (불필요한 대기 감소)
+    }, 20000) // 타임아웃 20초로 증가 (Claude.ai 로딩 시간 고려)
     
     port.onDisconnect.addListener(() => {
       clearTimeout(connectionTimeout)

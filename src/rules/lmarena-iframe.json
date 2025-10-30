@@ -16,6 +16,18 @@
         {
           "header": "x-content-type-options",
           "operation": "remove"
+        },
+        {
+          "header": "cross-origin-embedder-policy",
+          "operation": "remove"
+        },
+        {
+          "header": "cross-origin-opener-policy",
+          "operation": "remove"
+        },
+        {
+          "header": "cross-origin-resource-policy",
+          "operation": "remove"
         }
       ]
     },

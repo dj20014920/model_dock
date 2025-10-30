@@ -105,5 +105,8 @@
   "Keep the pinned tab open to keep session active": "保持固定标签页打开以维持会话",
   "Login required for first use": "首次使用需要登录",
   "Custom model slug (optional)": "自定义模型标识（可选）",
-  "Webapp mode uses your login session in current browser": "网页应用模式使用当前浏览器的登录会话"
+  "Webapp mode uses your login session in current browser": "网页应用模式使用当前浏览器的登录会话",
+  "Select": "选择",
+  "Unset Main Brain": "取消主脑",
+  "Set as Main Brain": "设为主脑"
 }

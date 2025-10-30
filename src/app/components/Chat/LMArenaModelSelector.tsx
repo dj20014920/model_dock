@@ -19,6 +19,12 @@ export const LMArenaModelSelector: FC<Props> = ({ botId, bot }) => {
   const [currentModel, setCurrentModel] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
 
+  // 🛡️ 안전성 검증: bot이 LMArenaBot이 아니면 렌더링하지 않음
+  if (!(bot instanceof LMArenaBot)) {
+    console.warn('[LMArenaModelSelector] ⚠️ Bot is not LMArenaBot instance')
+    return null
+  }
+
   // 모델 목록 로드
   useEffect(() => {
     loadModels()

@@ -118,6 +118,26 @@ export abstract class AsyncAbstractBot extends AbstractBot {
 
   abstract initializeBot(): Promise<AbstractBot>
 
+  /**
+   * 🔄 봇 인스턴스 재초기화
+   * 로그인 후 세션을 다시 불러와야 할 때 사용
+   */
+  async reinitialize(): Promise<void> {
+    console.log('[BOT] 🔄 Reinitializing bot...')
+    this.#bot = new DummyBot()
+    this.#initializeError = undefined
+
+    try {
+      const bot = await this.initializeBot()
+      this.#bot = bot
+      console.log('[BOT] ✅ Bot reinitialized successfully')
+    } catch (err) {
+      this.#initializeError = err as Error
+      console.error('[BOT] ❌ Bot reinitialization failed:', err)
+      throw err
+    }
+  }
+
   doSendMessage(params: SendMessageParams) {
     if (this.#bot instanceof DummyBot && this.#initializeError) {
       throw this.#initializeError

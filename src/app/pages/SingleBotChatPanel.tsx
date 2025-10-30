@@ -21,6 +21,8 @@ const SingleBotChatPanel: FC<Props> = ({ botId }) => {
         generating={chat.generating}
         stopGenerating={chat.stopGenerating}
         resetConversation={chat.resetConversation}
+        reloadBot={chat.reloadBot}
+        mode="full"
       />
     </div>
   )

@@ -1,0 +1,1195 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [
+      {
+        "startedDateTime": "2025-10-29T12:40:12.996Z",
+        "id": "page_1",
+        "title": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html",
+        "pageTimings": {
+          "onContentLoad": 175.59899999469053,
+          "onLoad": 176.25099999713711
+        }
+      }
+    ],
+    "entries": [
+      {
+        "_connectionId": "1158993",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "qae",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 65,
+                "columnNumber": 139905
+              },
+              {
+                "functionName": "n",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 65,
+                "columnNumber": 140218
+              },
+              {
+                "functionName": "r",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 65,
+                "columnNumber": 140252
+              },
+              {
+                "functionName": "enableAutoPageviews",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 65,
+                "columnNumber": 140520
+              },
+              {
+                "functionName": "",
+                "scriptId": "41",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-28b6a123.js",
+                "lineNumber": 73,
+                "columnNumber": 76957
+              },
+              {
+                "functionName": "",
+                "scriptId": "41",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-28b6a123.js",
+                "lineNumber": 0,
+                "columnNumber": 22
+              },
+              {
+                "functionName": "",
+                "scriptId": "41",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-28b6a123.js",
+                "lineNumber": 73,
+                "columnNumber": 76996
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "124"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 124,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"pageview\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1133,\"h\":1}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/29/2025 12:40:13"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.39"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "03bdd88e4345a5933e86ac099dd7c140"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 29 Oct 2025 12:40:13 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHL2qcJu8if-D0AK1bcN"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 523,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-29T12:40:13.172Z",
+        "time": 311.8729999953555,
+        "timings": {
+          "blocked": 2.7509999935291707,
+          "dns": 0.010000000000000009,
+          "ssl": 10.703,
+          "connect": 28.169,
+          "send": 0.7310000000000016,
+          "wait": 279.9529999941811,
+          "receive": 0.259000007645227,
+          "_blocked_queueing": 1.0769999935291708,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25343
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "KE",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 25466
+              },
+              {
+                "functionName": "ei",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 30881
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27649
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27776
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27641
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 30578
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27641
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 29223
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 28981
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27641
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 30578
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27641
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27641
+              },
+              {
+                "functionName": "Cr",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 27528
+              },
+              {
+                "functionName": "sB",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 28832
+              },
+              {
+                "functionName": "aK",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 40844
+              },
+              {
+                "functionName": "La",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 40250
+              },
+              {
+                "functionName": "Gk",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 36862
+              },
+              {
+                "functionName": "ba",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 45,
+                "columnNumber": 3273
+              },
+              {
+                "functionName": "",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 34245
+              }
+            ],
+            "parentId": {
+              "id": "17",
+              "debuggerId": "3253907051398273776.2431912654346385063"
+            }
+          }
+        },
+        "_priority": "VeryHigh",
+        "_resourceType": "document",
+        "cache": {},
+        "pageref": "page_1",
+        "request": {
+          "method": "GET",
+          "url": "https://grok.com/",
+          "httpVersion": "",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "grok.com"
+            },
+            {
+              "name": ":method",
+              "value": "GET"
+            },
+            {
+              "name": ":path",
+              "value": "/"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "priority",
+              "value": "u=0, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "iframe"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "navigate"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "sec-fetch-storage-access",
+              "value": "active"
+            },
+            {
+              "name": "upgrade-insecure-requests",
+              "value": "1"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 0,
+          "statusText": "",
+          "httpVersion": "",
+          "headers": [],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": "net::ERR_ABORTED",
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "",
+        "startedDateTime": "2025-10-29T12:40:13.209Z",
+        "time": 93.01300000515766,
+        "timings": {
+          "blocked": 93.01300000515766,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0,
+          "receive": 0,
+          "_blocked_queueing": 3.2550000032642856
+        }
+      },
+      {
+        "_connectionId": "1158993",
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "qae",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 65,
+                "columnNumber": 139905
+              },
+              {
+                "functionName": "n",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 65,
+                "columnNumber": 140218
+              },
+              {
+                "functionName": "qn",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 65,
+                "columnNumber": 141846
+              },
+              {
+                "functionName": "",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 763,
+                "columnNumber": 31413
+              },
+              {
+                "functionName": "",
+                "scriptId": "41",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-28b6a123.js",
+                "lineNumber": 50,
+                "columnNumber": 84157
+              },
+              {
+                "functionName": "onUserSendMessage",
+                "scriptId": "41",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/app-28b6a123.js",
+                "lineNumber": 60,
+                "columnNumber": 620
+              },
+              {
+                "functionName": "",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 831,
+                "columnNumber": 6910
+              },
+              {
+                "functionName": "",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 745,
+                "columnNumber": 2198
+              },
+              {
+                "functionName": "T9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 9854
+              },
+              {
+                "functionName": "A9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 10008
+              },
+              {
+                "functionName": "k9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 10065
+              },
+              {
+                "functionName": "pk",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "gF",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 31882
+              },
+              {
+                "functionName": "",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 36795
+              },
+              {
+                "functionName": "B2",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 8966
+              },
+              {
+                "functionName": "Wv",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 33169
+              },
+              {
+                "functionName": "zx",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 17359
+              },
+              {
+                "functionName": "G9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 17143
+              },
+              {
+                "functionName": "",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 745,
+                "columnNumber": 119
+              },
+              {
+                "functionName": "T9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 9854
+              },
+              {
+                "functionName": "A9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 10008
+              },
+              {
+                "functionName": "k9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 10065
+              },
+              {
+                "functionName": "pk",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 31465
+              },
+              {
+                "functionName": "gF",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 31882
+              },
+              {
+                "functionName": "",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 36795
+              },
+              {
+                "functionName": "p_",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 47,
+                "columnNumber": 36933
+              },
+              {
+                "functionName": "B2",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 8990
+              },
+              {
+                "functionName": "Wv",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 33169
+              },
+              {
+                "functionName": "zx",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 17359
+              },
+              {
+                "functionName": "G9",
+                "scriptId": "40",
+                "url": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/assets/RiskConsentModal-45257790.js",
+                "lineNumber": 44,
+                "columnNumber": 17143
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "pageref": "page_1",
+        "request": {
+          "method": "POST",
+          "url": "https://plausible.io/api/event",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "plausible.io"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/event"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "name": "content-length",
+              "value": "217"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain"
+            },
+            {
+              "name": "origin",
+              "value": "chrome-extension://dfggekbfidjflnakchdeglldplmgdoep"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "cross-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 217,
+          "postData": {
+            "mimeType": "text/plain",
+            "text": "{\"n\":\"send_message\",\"u\":\"chrome-extension://dfggekbfidjflnakchdeglldplmgdoep/app.html\",\"d\":\"chathub.gg\",\"r\":null,\"w\":1133,\"h\":1,\"p\":\"{\\\"version\\\":\\\"1.45.24\\\",\\\"botId\\\":\\\"qwen\\\",\\\"withImage\\\":false,\\\"name\\\":\\\"Qwen\\\"}\"}"
+          }
+        },
+        "response": {
+          "status": 202,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "application",
+              "value": "127.0.0.1"
+            },
+            {
+              "name": "cache-control",
+              "value": "must-revalidate, max-age=0, private"
+            },
+            {
+              "name": "cdn-cachedat",
+              "value": "10/29/2025 12:40:14"
+            },
+            {
+              "name": "cdn-edgestorageid",
+              "value": "1192"
+            },
+            {
+              "name": "cdn-proxyver",
+              "value": "1.39"
+            },
+            {
+              "name": "cdn-pullzone",
+              "value": "682664"
+            },
+            {
+              "name": "cdn-requestcountrycode",
+              "value": "KR"
+            },
+            {
+              "name": "cdn-requestid",
+              "value": "b793ddf42212cfb3aa0c66d4bad889fb"
+            },
+            {
+              "name": "cdn-requestpullcode",
+              "value": "202"
+            },
+            {
+              "name": "cdn-requestpullsuccess",
+              "value": "True"
+            },
+            {
+              "name": "cdn-requesttime",
+              "value": "0"
+            },
+            {
+              "name": "cdn-uid",
+              "value": "153cb5b1-399a-48ef-b5bf-098c03770254"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Wed, 29 Oct 2025 12:40:14 GMT"
+            },
+            {
+              "name": "permissions-policy",
+              "value": "interest-cohort=()"
+            },
+            {
+              "name": "server",
+              "value": "BunnyCDN-KR1-1192"
+            },
+            {
+              "name": "via",
+              "value": "1.1 Caddy"
+            },
+            {
+              "name": "x-plausible-dropped",
+              "value": "1"
+            },
+            {
+              "name": "x-request-id",
+              "value": "GHL2qh7Klc7-uvMK2K4L"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain",
+            "text": "ok"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 522,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "141.164.35.160",
+        "startedDateTime": "2025-10-29T12:40:14.754Z",
+        "time": 280.22499999497086,
+        "timings": {
+          "blocked": 1.5429999935291707,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.524,
+          "wait": 277.6210000015469,
+          "receive": 0.5369999998947605,
+          "_blocked_queueing": 1.0769999935291708,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        }
+      }
+    ]
+  }
+}

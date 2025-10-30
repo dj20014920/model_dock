@@ -103,5 +103,8 @@
   "Keep the pinned tab open to keep session active": "セッションを維持するため、固定タブを開いたままにしてください",
   "Login required for first use": "初回使用時にログインが必要です",
   "Custom model slug (optional)": "カスタムモデルスラッグ（オプション）",
-  "Webapp mode uses your login session in current browser": "Webアプリモードは現在のブラウザのログインセッションを使用します"
+  "Webapp mode uses your login session in current browser": "Webアプリモードは現在のブラウザのログインセッションを使用します",
+  "Select": "選択",
+  "Unset Main Brain": "メインブレインを解除",
+  "Set as Main Brain": "メインブレインに設定"
 }

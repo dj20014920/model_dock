@@ -162,20 +162,29 @@ function SidePanelMultiBotPanel({
           chats.length === 2 ? 'grid-cols-1' : chats.length === 3 ? 'grid-cols-1' : 'grid-cols-2',
         )}
       >
-        {chats.map((chat, index) => (
-          <ConversationPanel
-            key={`${chat.botId}-${index}`}
-            botId={chat.botId}
-            bot={chat.bot}
-            messages={chat.messages}
-            onUserSendMessage={(input) => sendSingleMessage(input, chat.botId)}
-            generating={chat.generating}
-            stopGenerating={chat.stopGenerating}
-            mode="compact"
-            resetConversation={chat.resetConversation}
-            onSwitchBot={setBots ? (botId) => onSwitchBot(botId, index) : undefined}
-          />
-        ))}
+        {chats.map((chat, index) => {
+          // 🛡️ 안전성 검증: chat 객체가 유효한지 확인
+          if (!chat || !chat.botId || !chat.bot) {
+            console.error('[SidePanelPage] ❌ Invalid chat object at index', index, chat)
+            return null
+          }
+
+          return (
+            <ConversationPanel
+              key={`${chat.botId}-${index}`}
+              botId={chat.botId}
+              bot={chat.bot}
+              messages={chat.messages || []}
+              onUserSendMessage={(input) => sendSingleMessage(input, chat.botId)}
+              generating={chat.generating || false}
+              stopGenerating={chat.stopGenerating}
+              mode="compact"
+              resetConversation={chat.resetConversation}
+              reloadBot={chat.reloadBot}
+              onSwitchBot={setBots ? (botId) => onSwitchBot(botId, index) : undefined}
+            />
+          )
+        })}
       </div>
 
       {riskOpen && (

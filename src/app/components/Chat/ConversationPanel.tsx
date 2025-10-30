@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
-import { FC, ReactNode, useCallback, useMemo, useState, useEffect, useRef } from 'react'
+import { FC, ReactNode, useCallback, useMemo, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import clearIcon from '~/assets/icons/clear.svg'
 import historyIcon from '~/assets/icons/history.svg'
 import shareIcon from '~/assets/icons/share.svg'
+import refreshIcon from '~/assets/icons/refresh.svg'
 import { cx } from '~/utils'
 import { CHATBOTS } from '~app/consts'
 import { ConversationContext, ConversationContextValue } from '~app/context'
@@ -21,11 +22,10 @@ import WebAccessCheckbox from './WebAccessCheckbox'
 import MainBrainToggle from '~app/components/MainBrain/Toggle'
 import Browser from 'webextension-polyfill'
 import { getUserConfig } from '~services/user-config'
-import { startManualDispatch } from '~app/utils/manual-dispatch'
-import toast from 'react-hot-toast'
 import UsageBadge from '~app/components/Usage/Badge'
 import GrokNoticeModal from '~app/components/Modals/GrokNoticeModal'
 import LMArenaModelSelector from './LMArenaModelSelector'
+import PersistentIframe from '~app/components/PersistentIframe'
 
 interface Props {
   botId: BotId
@@ -33,10 +33,12 @@ interface Props {
   messages: ChatMessageModel[]
   onUserSendMessage: (input: string, image?: File) => void
   resetConversation: () => void
+  reloadBot?: () => Promise<boolean>
   generating: boolean
   stopGenerating: () => void
   mode?: 'full' | 'compact'
   onSwitchBot?: (botId: BotId) => void
+  className?: string
 }
 
 const ConversationPanel: FC<Props> = (props) => {
@@ -44,6 +46,20 @@ const ConversationPanel: FC<Props> = (props) => {
   const botInfo = CHATBOTS[props.botId]
   const mode = props.mode || 'full'
   const marginClass = 'mx-5'
+
+  // 🎨 mode에 따라 아이콘 크기 동적 설정
+  const iconSize = mode === 'full' ? 'w-5 h-5' : 'w-4 h-4'
+  const avatarSize = mode === 'full' ? 'w-5 h-5' : 'w-4 h-4'
+
+  // 🛡️ 안전성 검증: botInfo가 없으면 에러 방지
+  if (!botInfo) {
+    console.error(`[ConversationPanel] ❌ Invalid botId: ${props.botId}`)
+    return (
+      <div className="flex items-center justify-center h-full text-red-500">
+        Error: Invalid bot configuration
+      </div>
+    )
+  }
   const [showHistory, setShowHistory] = useState(false)
   const [showShareDialog, setShowShareDialog] = useState(false)
   const [showGrokNotice, setShowGrokNotice] = useState(false)
@@ -122,12 +138,6 @@ const ConversationPanel: FC<Props> = (props) => {
     )
   }
 
-  // Grok iframe ref for auto-dispatch
-  const grokIframeRef = useRef<HTMLIFrameElement>(null)
-  
-  // LM Arena iframe ref
-  const lmarenaIframeRef = useRef<HTMLIFrameElement>(null)
-  
   // LM Arena 전용: 배율 조절 상태
   const [lmarenaZoom, setLmarenaZoom] = useState(() => {
     try {
@@ -137,22 +147,127 @@ const ConversationPanel: FC<Props> = (props) => {
       return 1.0
     }
   })
-  
-  // LM Arena 전용 렌더링
-  if ((props.botId as string) === 'lmarena') {
-    // 기본 Direct 모드
-    const iframeUrl = 'https://lmarena.ai/c/new?mode=direct'
+
+  // Qwen 전용: 배율 조절 상태 (localStorage에서 불러오기)
+  const [qwenZoom, setQwenZoom] = useState(() => {
+    try {
+      const saved = localStorage.getItem('qwen-zoom')
+      return saved ? Number(saved) : 1.0
+    } catch {
+      return 1.0
+    }
+  })
+
+  // ChatGPT 전용: 배율 조절 상태
+  const [chatgptZoom, setChatgptZoom] = useState(() => {
+    try {
+      const saved = localStorage.getItem('chatgpt-zoom')
+      return saved ? Number(saved) : 1.0
+    } catch {
+      return 1.0
+    }
+  })
+
+  // Grok 전용: 자동 라우팅 모드일 때만 모달 표시
+  useEffect(() => {
+    if (props.botId !== 'grok') return
     
+    let mounted = true
+    getUserConfig().then((config) => {
+      if (mounted && config.messageDispatchMode === 'auto') {
+        // 자동 라우팅 모드에서 Grok 사용 시 안내 모달 표시
+        Browser.storage.local.get('grokNoticeShown').then((result) => {
+          if (mounted && !result.grokNoticeShown) {
+            console.log('[GROK-PANEL] ⚠️ Auto routing mode - showing notice modal')
+            setShowGrokNotice(true)
+            Browser.storage.local.set({ grokNoticeShown: true })
+          }
+        })
+      }
+    })
+    return () => { mounted = false }
+  }, [props.botId])
+  
+  // iframe 기반 모델 여부 확인
+  const isIframeBot = ['chatgpt', 'qwen', 'grok', 'lmarena'].includes(props.botId)
+  
+  // 디버깅 로그
+  useEffect(() => {
+    console.log('[ConversationPanel] 🎯 Render State:', {
+      botId: props.botId,
+      mode,
+      isIframeBot,
+      isMainBrain,
+    })
+  }, [props.botId, mode, isIframeBot, isMainBrain])
+  
+  // iframe URL 결정
+  const getIframeUrl = () => {
+    switch (props.botId) {
+      case 'chatgpt':
+        return 'https://chat.openai.com'
+      case 'qwen':
+        return 'https://chat.qwen.ai'
+      case 'grok':
+        return 'https://grok.com'
+      case 'lmarena':
+        return 'https://lmarena.ai/c/new?mode=direct'
+      default:
+        return ''
+    }
+  }
+
+  // iframe 배율 상태
+  const getZoomState = () => {
+    switch (props.botId) {
+      case 'chatgpt':
+        return [chatgptZoom, setChatgptZoom, 'chatgpt-zoom', 1.0] as const
+      case 'qwen':
+        return [qwenZoom, setQwenZoom, 'qwen-zoom', 1.0] as const
+      case 'grok':
+        return [grokZoom, setGrokZoom, 'grok-zoom', 1.25] as const
+      case 'lmarena':
+        return [lmarenaZoom, setLmarenaZoom, 'lmarena-zoom', 1.0] as const
+      default:
+        return [1.0, () => {}, '', 1.0] as const
+    }
+  }
+
+  // iframe 렌더링
+  if (isIframeBot) {
+    const [zoom, setZoom, storageKey, defaultZoom] = getZoomState()
+    const iframeUrl = getIframeUrl()
+    const maxZoom = props.botId === 'grok' ? 3.0 : 2.0
+
+    console.log('[ConversationPanel] 👑 Rendering iframe bot:', {
+      botId: props.botId,
+      mode,
+      isMainBrain,
+      hasToggle: true,
+    })
+
     return (
       <ConversationContext.Provider value={context}>
-        <div className="flex flex-col overflow-hidden bg-primary-background h-full rounded-[20px]">
+        <div className={cx('flex flex-col overflow-hidden bg-primary-background h-full rounded-[20px]', isMainBrain && 'ring-2 ring-amber-400', props.className)}>
           {/* 헤더 */}
           <div className={cx('flex flex-row items-center justify-between border-b border-solid border-primary-border', mode === 'full' ? 'py-3 mx-5' : 'py-[10px] mx-3')}>
-            {/* 왼쪽: 타이틀 */}
+            {/* 왼쪽: 타이틀 + 왕관 */}
             <div className="flex flex-row items-center gap-2">
-              <img src={botInfo.avatar} className="w-5 h-5 object-contain rounded-full" />
+              <img src={botInfo.avatar} className={cx(avatarSize, 'object-contain rounded-full')} />
               <ChatbotName botId={props.botId} name={botInfo.name} onSwitchBot={props.onSwitchBot} />
+              {mode === 'compact' && (
+                <div className="inline-block">
+                  <MainBrainToggle botId={props.botId} />
+                </div>
+              )}
             </div>
+
+            {/* 중앙: full 모드일 때 왕관 */}
+            {mode === 'full' && (
+              <div className="flex flex-row items-center gap-2">
+                <MainBrainToggle botId={props.botId} />
+              </div>
+            )}
 
             {/* 오른쪽: 배율 조절 */}
             <div className="flex flex-row items-center gap-2">
@@ -160,13 +275,13 @@ const ConversationPanel: FC<Props> = (props) => {
               <input
                 type="range"
                 min="0.5"
-                max="2.0"
+                max={maxZoom}
                 step="0.05"
-                value={lmarenaZoom}
+                value={zoom}
                 onChange={(e) => {
                   const newZoom = Number(e.target.value)
-                  setLmarenaZoom(newZoom)
-                  localStorage.setItem('lmarena-zoom', String(newZoom))
+                  setZoom(newZoom)
+                  localStorage.setItem(storageKey, String(newZoom))
                 }}
                 className="w-20 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 style={{ accentColor: '#10a37f' }}
@@ -174,24 +289,24 @@ const ConversationPanel: FC<Props> = (props) => {
               />
               <input
                 type="text"
-                value={Math.round(lmarenaZoom * 100)}
+                value={Math.round(zoom * 100)}
                 onChange={(e) => {
                   const sanitized = e.target.value.replace(/[^\d]/g, '')
                   if (sanitized === '') return
-                  const numValue = Math.max(50, Math.min(200, parseInt(sanitized, 10)))
+                  const numValue = Math.max(50, Math.min(maxZoom * 100, parseInt(sanitized, 10)))
                   const newZoom = numValue / 100
-                  setLmarenaZoom(newZoom)
-                  localStorage.setItem('lmarena-zoom', String(newZoom))
+                  setZoom(newZoom)
+                  localStorage.setItem(storageKey, String(newZoom))
                 }}
                 onBlur={(e) => {
                   if (!e.target.value.trim()) {
-                    setLmarenaZoom(1.0)
-                    localStorage.setItem('lmarena-zoom', '1.0')
+                    setZoom(defaultZoom)
+                    localStorage.setItem(storageKey, String(defaultZoom))
                   }
                 }}
                 className="w-12 px-1.5 py-0.5 text-[10px] text-center border border-primary-border rounded bg-secondary text-primary-text focus:outline-none focus:ring-1 focus:ring-blue-500"
                 placeholder="100"
-                title="직접 입력 (50-200)"
+                title={`직접 입력 (50-${maxZoom * 100})`}
                 maxLength={3}
                 pattern="[0-9]*"
                 inputMode="numeric"
@@ -200,168 +315,32 @@ const ConversationPanel: FC<Props> = (props) => {
             </div>
           </div>
 
-          {/* LM Arena iframe 내장 */}
+          {/* iframe 내장 */}
           <div className="flex-1 relative overflow-auto">
-            <iframe
-              ref={lmarenaIframeRef}
+            <PersistentIframe
+              botId={props.botId}
               src={iframeUrl}
+              zoom={zoom}
               className="w-full h-full border-0"
-              style={{
-                minHeight: '100%',
-                minWidth: '100%',
-                transform: `scale(${lmarenaZoom})`,
-                transformOrigin: 'top left',
-                width: `${100 / lmarenaZoom}%`,
-                height: `${100 / lmarenaZoom}%`
-              }}
               sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
               allow="clipboard-read; clipboard-write"
-              title="LM Arena Chat"
-            />
-          </div>
-        </div>
-      </ConversationContext.Provider>
-    )
-  }
-  
-  // Grok 전용 렌더링 (모든 hooks 호출 후에 처리)
-  if (props.botId === 'grok') {
-    /**
-     * Grok Auto-Dispatch 불가능 이유:
-     *
-     * 1. Cross-Origin Restriction (크로스 오리진 제약)
-     *    - Extension origin: chrome-extension://...
-     *    - iframe origin: https://grok.com
-     *    - 브라우저 보안 정책으로 iframe.contentDocument 접근 차단
-     *
-     * 2. Content Script 미주입
-     *    - Content Script는 브라우저 탭에만 주입됨
-     *    - Extension 내부 iframe에는 주입되지 않음
-     *
-     * 3. Content Security Policy (CSP)
-     *    - Grok.com이 inline script 실행 차단
-     *
-     * 해결책:
-     * - Manual 모드 사용 (클립보드 복사 → 수동 붙여넣기)
-     * - 향후: Chrome Debugger API로 새 탭 제어 가능 (Comet/Atlas 방식)
-     */
-    // 자동 라우팅 모드일 때만 모달 표시
-    useEffect(() => {
-      let mounted = true
-      getUserConfig().then((config) => {
-        if (mounted && config.messageDispatchMode === 'auto') {
-          // 자동 라우팅 모드에서 Grok 사용 시 안내 모달 표시
-          Browser.storage.local.get('grokNoticeShown').then((result) => {
-            if (mounted && !result.grokNoticeShown) {
-              console.log('[GROK-PANEL] ⚠️ Auto routing mode - showing notice modal')
-              setShowGrokNotice(true)
-              Browser.storage.local.set({ grokNoticeShown: true })
-            }
-          })
-        }
-      })
-      return () => { mounted = false }
-    }, [])
-    
-    return (
-      <ConversationContext.Provider value={context}>
-        <div className="flex flex-col overflow-hidden bg-primary-background h-full rounded-[20px]">
-          {/* 헤더 */}
-          <div className={cx('flex flex-row items-center justify-between border-b border-solid border-primary-border', mode === 'full' ? 'py-3 mx-5' : 'py-[10px] mx-3')}>
-            {/* 왼쪽: 타이틀 */}
-            <div className="flex flex-row items-center gap-2">
-              <img src={botInfo.avatar} className="w-5 h-5 object-contain rounded-full" />
-              <ChatbotName botId={props.botId} name={botInfo.name} onSwitchBot={props.onSwitchBot} />
-            </div>
-
-            {/* 오른쪽: 배율 조절 (슬라이더 + 텍스트 입력) */}
-            <div className="flex flex-row items-center gap-2">
-              <span className="text-[10px] text-light-text whitespace-nowrap">배율</span>
-              <input
-                type="range"
-                min="0.5"
-                max="3.0"
-                step="0.05"
-                value={grokZoom}
-                onChange={(e) => {
-                  const newZoom = Number(e.target.value)
-                  setGrokZoom(newZoom)
-                  localStorage.setItem('grok-zoom', String(newZoom))
-                }}
-                className="w-20 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                style={{ accentColor: '#10a37f' }}
-                title="드래그하여 배율 조절"
-              />
-              <input
-                type="text"
-                value={Math.round(grokZoom * 100)}
-                onChange={(e) => {
-                  // 입력값 정제: 숫자만 허용
-                  const sanitized = e.target.value.replace(/[^\d]/g, '')
-                  if (sanitized === '') return
-
-                  // 범위 제한: 50 ~ 300
-                  const numValue = Math.max(50, Math.min(300, parseInt(sanitized, 10)))
-                  const newZoom = numValue / 100
-
-                  setGrokZoom(newZoom)
-                  localStorage.setItem('grok-zoom', String(newZoom))
-                }}
-                onBlur={(e) => {
-                  // blur 시 빈 값이면 기본값으로 복원
-                  if (!e.target.value.trim()) {
-                    setGrokZoom(1.25)
-                    localStorage.setItem('grok-zoom', '1.25')
-                  }
-                }}
-                className="w-12 px-1.5 py-0.5 text-[10px] text-center border border-primary-border rounded bg-secondary text-primary-text focus:outline-none focus:ring-1 focus:ring-blue-500"
-                placeholder="100"
-                title="직접 입력 (50-300)"
-                maxLength={3}
-                pattern="[0-9]*"
-                inputMode="numeric"
-              />
-              <span className="text-[10px] text-light-text">%</span>
-            </div>
-          </div>
-
-
-
-          {/* Grok.com iframe 내장 - 동적 배율 조절 */}
-          <div className="flex-1 relative overflow-auto">
-            <iframe
-              ref={grokIframeRef}
-              src="https://grok.com"
-              className="w-full h-full border-0"
-              style={{
-                minHeight: '100%',
-                minWidth: '100%',
-                transform: `scale(${grokZoom})`,
-                transformOrigin: 'top left',
-                width: `${100 / grokZoom}%`,
-                height: `${100 / grokZoom}%`
-              }}
-              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
-              allow="clipboard-read; clipboard-write"
-              title="Grok Chat"
+              title={`${botInfo.name} Chat`}
             />
           </div>
 
           {/* Grok 안내 모달 */}
-          {showGrokNotice && (
-            <GrokNoticeModal 
-              open={showGrokNotice} 
-              onClose={() => setShowGrokNotice(false)} 
-            />
+          {props.botId === 'grok' && showGrokNotice && (
+            <GrokNoticeModal open={showGrokNotice} onClose={() => setShowGrokNotice(false)} />
           )}
         </div>
       </ConversationContext.Provider>
     )
   }
 
+
   return (
     <ConversationContext.Provider value={context}>
-      <div className={cx('flex flex-col overflow-hidden bg-primary-background h-full rounded-2xl', isMainBrain && 'ring-2 ring-amber-400')}>
+      <div className={cx('flex flex-col overflow-hidden bg-primary-background h-full rounded-2xl', isMainBrain && 'ring-2 ring-amber-400', props.className)}>
         <div
           className={cx(
             'border-b border-solid border-primary-border flex flex-row items-center justify-between gap-2 py-[10px]',
@@ -371,7 +350,7 @@ const ConversationPanel: FC<Props> = (props) => {
           <div className="flex flex-row items-center gap-2">
             <motion.img
               src={botInfo.avatar}
-              className="w-[18px] h-[18px] object-contain rounded-sm"
+              className={cx(avatarSize, 'object-contain rounded-sm')}
               whileHover={{ rotate: 180 }}
             />
             <ChatbotName
@@ -380,37 +359,63 @@ const ConversationPanel: FC<Props> = (props) => {
               fullName={props.bot.name}
               onSwitchBot={mode === 'compact' ? props.onSwitchBot : undefined}
             />
+            {/* 올인원 모드에서만 왕관 이모지 표시 */}
+            {mode === 'compact' && <MainBrainToggle botId={props.botId} />}
             {/* LMArena 모델 선택 드롭다운 */}
             {props.botId === 'lmarena' && (
               <LMArenaModelSelector botId={props.botId} bot={props.bot} />
             )}
           </div>
           <div className="flex flex-row items-center gap-2">
-            <MainBrainToggle botId={props.botId} />
+            {mode === 'full' && <MainBrainToggle botId={props.botId} />}
           <WebAccessCheckbox botId={props.botId} />
           </div>
-          <div className="flex flex-row items-center gap-3">
-            <Tooltip content={t('Share conversation')}>
-              <motion.img
-                src={shareIcon}
-                className="w-5 h-5 cursor-pointer"
-                onClick={openShareDialog}
-                whileHover={{ scale: 1.1 }}
-              />
-            </Tooltip>
+          <div className="flex flex-row items-center gap-2">
+            {/* 초기화 버튼 - 가장 자주 사용 */}
             <Tooltip content={t('Clear conversation')}>
               <motion.img
                 src={clearIcon}
-                className={cx('w-5 h-5', props.generating ? 'cursor-not-allowed' : 'cursor-pointer')}
+                className={cx(iconSize, props.generating ? 'cursor-not-allowed' : 'cursor-pointer')}
                 onClick={resetConversation}
                 whileHover={{ scale: 1.1 }}
               />
             </Tooltip>
+            {/* 🔄 새로고침 버튼 (로그인 후 세션 갱신용) */}
+            {props.reloadBot && (
+              <Tooltip content="세션 새로고침 (로그인 후 사용)">
+                <motion.img
+                  src={refreshIcon}
+                  className={cx(iconSize, props.generating ? 'cursor-not-allowed' : 'cursor-pointer')}
+                  onClick={async () => {
+                    if (!props.generating && props.reloadBot) {
+                      try {
+                        await props.reloadBot()
+                        console.log('[ConversationPanel] ✅ Bot reloaded')
+                      } catch (error) {
+                        console.error('[ConversationPanel] ❌ Reload failed:', error)
+                      }
+                    }
+                  }}
+                  whileHover={{ scale: 1.15, rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                />
+              </Tooltip>
+            )}
+            {/* 히스토리 버튼 */}
             <Tooltip content={t('View history')}>
               <motion.img
                 src={historyIcon}
-                className="w-5 h-5 cursor-pointer"
+                className={cx(iconSize, 'cursor-pointer')}
                 onClick={openHistoryDialog}
+                whileHover={{ scale: 1.1 }}
+              />
+            </Tooltip>
+            {/* 공유 버튼 - 마지막 */}
+            <Tooltip content={t('Share conversation')}>
+              <motion.img
+                src={shareIcon}
+                className={cx(iconSize, 'cursor-pointer')}
+                onClick={openShareDialog}
                 whileHover={{ scale: 1.1 }}
               />
             </Tooltip>

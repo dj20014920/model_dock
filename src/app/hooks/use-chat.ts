@@ -93,6 +93,43 @@ export function useChat(botId: BotId) {
     })
   }, [chatState.bot, setChatState])
 
+  /**
+   * 🔄 봇 인스턴스 재초기화 (로그인 후 세션 갱신)
+   */
+  const reloadBot = useCallback(async () => {
+    console.log('[useChat] 🔄 Reloading bot:', botId)
+
+    // 진행 중인 메시지 중단
+    chatState.abortController?.abort()
+
+    try {
+      // AsyncAbstractBot의 reinitialize 메서드 호출
+      if ('reinitialize' in chatState.bot && typeof chatState.bot.reinitialize === 'function') {
+        await chatState.bot.reinitialize()
+
+        // 대화 내역 초기화
+        setChatState((draft) => {
+          draft.abortController = undefined
+          draft.generatingMessageId = ''
+          draft.messages = []
+          draft.conversationId = uuid()
+        })
+
+        console.log('[useChat] ✅ Bot reloaded successfully')
+        return true
+      } else {
+        // reinitialize를 지원하지 않는 봇 (iframe 봇 등)
+        // 일반 reset만 수행
+        resetConversation()
+        console.log('[useChat] ⚠️ Bot does not support reinitialize, using resetConversation')
+        return false
+      }
+    } catch (error) {
+      console.error('[useChat] ❌ Bot reload failed:', error)
+      throw error
+    }
+  }, [botId, chatState.bot, chatState.abortController, setChatState, resetConversation])
+
   const stopGenerating = useCallback(() => {
     chatState.abortController?.abort()
     if (chatState.generatingMessageId) {
@@ -120,6 +157,7 @@ export function useChat(botId: BotId) {
       messages: chatState.messages,
       sendMessage,
       resetConversation,
+      reloadBot,
       generating: !!chatState.generatingMessageId,
       stopGenerating,
     }),
@@ -129,6 +167,7 @@ export function useChat(botId: BotId) {
       chatState.generatingMessageId,
       chatState.messages,
       resetConversation,
+      reloadBot,
       sendMessage,
       stopGenerating,
     ],

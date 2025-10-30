@@ -98,5 +98,8 @@
   "Keep the pinned tab open to keep session active": "保持固定標籤頁打開以維持會話",
   "Login required for first use": "首次使用需要登錄",
   "Custom model slug (optional)": "自定義模型標識（可選）",
-  "Webapp mode uses your login session in current browser": "網頁應用模式使用當前瀏覽器的登錄會話"
+  "Webapp mode uses your login session in current browser": "網頁應用模式使用當前瀏覽器的登錄會話",
+  "Select": "選擇",
+  "Unset Main Brain": "取消主腦",
+  "Set as Main Brain": "設為主腦"
 }

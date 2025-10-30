@@ -43,7 +43,7 @@ export class ChatGPTBot extends AsyncAbstractBot {
       const model = `openai/${config.openrouterOpenAIModel}`
       return new OpenRouterBot({ apiKey: config.openrouterApiKey, model })
     }
-    return new ChatGPTWebBot(config.chatgptWebappModelName)
+    return new ChatGPTWebBot()
   }
 
   async sendMessage(params: MessageParams) {

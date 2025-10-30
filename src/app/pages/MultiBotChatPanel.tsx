@@ -194,29 +194,160 @@ const GeneralChatPanel: FC<{
     [setLayout],
   )
 
+  // 메인 브레인 상태 추적
+  const [mainBrainBotId, setMainBrainBotId] = useState<BotId | ''>('')
+
+  useEffect(() => {
+    let mounted = true
+    getUserConfig().then((c) => {
+      if (mounted) {
+        const brainId = (c.mainBrainBotId as BotId | '') || ''
+        setMainBrainBotId(brainId)
+        console.log('[MultiBotPanel] 🧠 Main Brain loaded:', brainId)
+      }
+    })
+    const onChanged = (changes: Record<string, Browser.Storage.StorageChange>, area: string) => {
+      if (area !== 'sync') return
+      if (Object.prototype.hasOwnProperty.call(changes, 'mainBrainBotId')) {
+        const newBrainId = (changes['mainBrainBotId'].newValue as BotId | '') || ''
+        setMainBrainBotId(newBrainId)
+        console.log('[MultiBotPanel] 🧠 Main Brain changed:', newBrainId)
+      }
+    }
+    Browser.storage.onChanged.addListener(onChanged)
+    return () => {
+      mounted = false
+      Browser.storage.onChanged.removeListener(onChanged)
+    }
+  }, [])
+
+  // 메인 브레인이 현재 chats에 포함되어 있는지 확인
+  const mainBrainChat = useMemo(
+    () => chats.find((c) => c.botId === mainBrainBotId),
+    [chats, mainBrainBotId],
+  )
+  const otherChats = useMemo(
+    () => chats.filter((c) => c.botId !== mainBrainBotId),
+    [chats, mainBrainBotId],
+  )
+
+  // 메인 브레인이 있을 때 레이아웃 변경
+  const hasMainBrain = !!mainBrainChat
+
+  // 디버깅 로그
+  useEffect(() => {
+    console.log('[MultiBotPanel] 📊 Layout State:', {
+      mainBrainBotId,
+      hasMainBrain,
+      mainBrainChat: mainBrainChat?.botId,
+      otherChatsCount: otherChats.length,
+      totalChats: chats.length,
+    })
+  }, [mainBrainBotId, hasMainBrain, mainBrainChat, otherChats.length, chats.length])
+
   return (
     <div className="flex flex-col overflow-hidden h-full">
       <div
         className={cx(
-          'grid overflow-hidden grow auto-rows-fr',
-          chats.length % 3 === 0 ? 'grid-cols-3' : 'grid-cols-2',
-          chats.length > 3 ? 'gap-2 mb-2' : 'gap-3 mb-3',
+          'overflow-hidden grow',
+          hasMainBrain ? 'flex flex-row gap-3 mb-3' : 'grid auto-rows-fr',
+          !hasMainBrain && (chats.length % 3 === 0 ? 'grid-cols-3' : 'grid-cols-2'),
+          !hasMainBrain && (chats.length > 3 ? 'gap-2 mb-2' : 'gap-3 mb-3'),
         )}
       >
-        {chats.map((chat, index) => (
-          <ConversationPanel
-            key={`${chat.botId}-${index}`}
-            botId={chat.botId}
-            bot={chat.bot}
-            messages={chat.messages}
-            onUserSendMessage={(input) => sendSingleMessage(input, chat.botId)}
-            generating={chat.generating}
-            stopGenerating={chat.stopGenerating}
-            mode="compact"
-            resetConversation={chat.resetConversation}
-            onSwitchBot={setBots ? (botId) => onSwitchBot(botId, index) : undefined}
-          />
-        ))}
+        {/* 메인 브레인이 없을 때: 기존 그리드 레이아웃 */}
+        {!hasMainBrain &&
+          chats.map((chat, index) => (
+            <ConversationPanel
+              key={`${chat.botId}-${index}`}
+              botId={chat.botId}
+              bot={chat.bot}
+              messages={chat.messages}
+              onUserSendMessage={(input) => sendSingleMessage(input, chat.botId)}
+              generating={chat.generating}
+              stopGenerating={chat.stopGenerating}
+              mode="compact"
+              resetConversation={chat.resetConversation}
+              reloadBot={chat.reloadBot}
+              onSwitchBot={setBots ? (botId) => onSwitchBot(botId, index) : undefined}
+            />
+          ))}
+
+        {/* 메인 브레인이 있을 때: 좌측 그리드 + 우측 메인 브레인 */}
+        {hasMainBrain && (
+          <>
+            {/* 좌측: 나머지 모델들 */}
+            <div
+              className={cx(
+                'grid gap-2 flex-1',
+                // 5개 남은 경우 (6개 중 1개가 메인 브레인): 2열 자동 배치 + dense로 빈 공간 채우기
+                otherChats.length === 5
+                  ? 'grid-cols-2 auto-rows-fr'
+                  : otherChats.length === 1
+                    ? 'grid-cols-1 auto-rows-fr'
+                    : otherChats.length === 2
+                      ? 'grid-cols-2 auto-rows-fr'
+                      : otherChats.length === 3
+                        ? 'grid-cols-3 auto-rows-fr'
+                        : otherChats.length === 4
+                          ? 'grid-cols-2 auto-rows-fr'
+                          : 'grid-cols-2 auto-rows-fr',
+              )}
+              style={otherChats.length === 5 ? { gridAutoFlow: 'dense' } : undefined}
+            >
+              {otherChats.map((chat, index) => (
+                <ConversationPanel
+                  key={`${chat.botId}-${index}`}
+                  botId={chat.botId}
+                  bot={chat.bot}
+                  messages={chat.messages}
+                  onUserSendMessage={(input) => sendSingleMessage(input, chat.botId)}
+                  generating={chat.generating}
+                  stopGenerating={chat.stopGenerating}
+                  mode="compact"
+                  resetConversation={chat.resetConversation}
+                  reloadBot={chat.reloadBot}
+                  onSwitchBot={
+                    setBots
+                      ? (botId) => {
+                          const originalIndex = chats.findIndex((c) => c.botId === chat.botId)
+                          onSwitchBot(botId, originalIndex)
+                        }
+                      : undefined
+                  }
+                  // 5개 남은 경우: 첫 번째 아이템만 row-span-2로 세로 전체 차지
+                  className={
+                    otherChats.length === 5 && index === 0 ? 'row-span-2' : undefined
+                  }
+                />
+              ))}
+            </div>
+
+            {/* 우측: 메인 브레인 (세로 전체) */}
+            <div className="w-[400px] flex-shrink-0">
+              <ConversationPanel
+                key={`main-brain-${mainBrainChat.botId}`}
+                botId={mainBrainChat.botId}
+                bot={mainBrainChat.bot}
+                messages={mainBrainChat.messages}
+                onUserSendMessage={(input) => sendSingleMessage(input, mainBrainChat.botId)}
+                generating={mainBrainChat.generating}
+                stopGenerating={mainBrainChat.stopGenerating}
+                mode="full"
+                resetConversation={mainBrainChat.resetConversation}
+                reloadBot={mainBrainChat.reloadBot}
+                onSwitchBot={
+                  setBots
+                    ? (botId) => {
+                        const originalIndex = chats.findIndex((c) => c.botId === mainBrainChat.botId)
+                        onSwitchBot(botId, originalIndex)
+                      }
+                    : undefined
+                }
+              />
+            </div>
+          </>
+        )}
       </div>
       {riskOpen && (
         <RiskConsentModal

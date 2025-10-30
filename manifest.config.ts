@@ -127,6 +127,16 @@ export default defineManifest(async () => {
           enabled: true,
           path: 'src/rules/lmarena-iframe.json',
         },
+        {
+          id: 'ruleset_qwen_iframe',
+          enabled: true,
+          path: 'src/rules/qwen-iframe.json',
+        },
+        {
+          id: 'ruleset_chatgpt_iframe',
+          enabled: true,
+          path: 'src/rules/chatgpt-iframe.json',
+        },
       ],
     },
     web_accessible_resources: [

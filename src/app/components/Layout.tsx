@@ -1,6 +1,8 @@
 import { Outlet } from '@tanstack/react-router'
 import { useAtom, useAtomValue } from 'jotai'
+import { useEffect } from 'react'
 import { followArcThemeAtom, showNotesModalAtom, themeColorAtom } from '~app/state'
+import { iframeManager } from '~app/services/iframe-manager'
 import ReleaseNotesModal from './Modals/ReleaseNotesModal'
 // Discount modal disabled
 import PremiumModal from './Premium/Modal'
@@ -12,6 +14,13 @@ function Layout() {
   const themeColor = useAtomValue(themeColorAtom)
   const followArcTheme = useAtomValue(followArcThemeAtom)
   const [notesOpen, setNotesOpen] = useAtom(showNotesModalAtom)
+
+  // 🚀 앱 시작 시 iframe 봇들을 미리 생성 (비iframe 방식의 Jotai atom처럼 항상 메모리에 유지)
+  useEffect(() => {
+    const iframeBots = ['chatgpt', 'grok', 'qwen', 'lmarena']
+    console.log('[Layout] 🚀 iframe 봇 프리로드:', iframeBots)
+    iframeManager.preload(iframeBots)
+  }, [])
   return (
     <main
       className="h-screen grid grid-cols-[auto_1fr]"

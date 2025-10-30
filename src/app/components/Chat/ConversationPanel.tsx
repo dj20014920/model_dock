@@ -26,6 +26,7 @@ import UsageBadge from '~app/components/Usage/Badge'
 import GrokNoticeModal from '~app/components/Modals/GrokNoticeModal'
 import LMArenaModelSelector from './LMArenaModelSelector'
 import PersistentIframe from '~app/components/PersistentIframe'
+import { isIframeBot as isIframeBotUtil } from '~app/bots/iframe-registry'
 
 interface Props {
   botId: BotId
@@ -188,8 +189,22 @@ const ConversationPanel: FC<Props> = (props) => {
     return () => { mounted = false }
   }, [props.botId])
   
-  // iframe 기반 모델 여부 확인
-  const isIframeBot = ['chatgpt', 'qwen', 'grok', 'lmarena'].includes(props.botId)
+  // iframe 기반 모델 여부 확인 (레지스트리 기반 단일 소스)
+  const isIframeBot = isIframeBotUtil(props.botId)
+
+  // 모델 변경 시: 메인브레인 패널이면 승계, 항상 그리드 교체 동작과 함께 수행
+  const handleSwitchBot = useCallback(
+    async (newBotId: BotId) => {
+      try {
+        if (isMainBrain) {
+          await Browser.storage.sync.set({ mainBrainBotId: newBotId })
+        }
+      } finally {
+        props.onSwitchBot?.(newBotId)
+      }
+    },
+    [isMainBrain, props.onSwitchBot],
+  )
   
   // 디버깅 로그
   useEffect(() => {
@@ -254,7 +269,7 @@ const ConversationPanel: FC<Props> = (props) => {
             {/* 왼쪽: 타이틀 + 왕관 */}
             <div className="flex flex-row items-center gap-2">
               <img src={botInfo.avatar} className={cx(avatarSize, 'object-contain rounded-full')} />
-              <ChatbotName botId={props.botId} name={botInfo.name} onSwitchBot={props.onSwitchBot} />
+              <ChatbotName botId={props.botId} name={botInfo.name} onSwitchBot={handleSwitchBot} />
               {mode === 'compact' && (
                 <div className="inline-block">
                   <MainBrainToggle botId={props.botId} />
@@ -357,7 +372,7 @@ const ConversationPanel: FC<Props> = (props) => {
               botId={props.botId}
               name={botInfo.name}
               fullName={props.bot.name}
-              onSwitchBot={mode === 'compact' ? props.onSwitchBot : undefined}
+              onSwitchBot={mode === 'compact' ? handleSwitchBot : undefined}
             />
             {/* 올인원 모드에서만 왕관 이모지 표시 */}
             {mode === 'compact' && <MainBrainToggle botId={props.botId} />}

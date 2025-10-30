@@ -13,6 +13,8 @@ import RiskConsentModal from '~app/components/Modals/RiskConsentModal'
 import GrokNoticeModal from '~app/components/Modals/GrokNoticeModal'
 import UsageBadge from '~app/components/Usage/Badge'
 import Browser from 'webextension-polyfill'
+import { iframeManager } from '~app/services/iframe-manager'
+import { isIframeBot } from '~app/bots/iframe-registry'
 import { CHATBOTS, Layout } from '~app/consts'
 import { useChat } from '~app/hooks/use-chat'
 import { BotId } from '~app/bots'
@@ -262,14 +264,50 @@ function FourBotPanel() {
 
 function SidePanelPage() {
   const layout = useAtomValue(sidePanelLayoutAtom)
+  const [bots2, setBots2] = useAtom(sidePanelTwoBotsAtom)
+  const [bots3, setBots3] = useAtom(sidePanelThreeBotsAtom)
+  const [bots4, setBots4] = useAtom(sidePanelFourBotsAtom)
 
-  if (layout === 4) {
-    return <FourBotPanel />
-  }
-  if (layout === 3) {
-    return <ThreeBotPanel />
-  }
-  return <TwoBotPanel />
+  // 프리로드: 사이드패널에서도 현재 저장된 모든 레이아웃의 iframe 봇 미리 생성
+  useEffect(() => {
+    const union = Array.from(new Set([...(bots2||[]), ...(bots3||[]), ...(bots4||[])]))
+      .filter((b): b is BotId => Boolean(b))
+      .filter(isIframeBot)
+    if (union.length) {
+      try {
+        iframeManager.preload(union)
+        console.log('[SidePanel] 🚀 Preloaded iframe bots:', union)
+      } catch (e) {
+        console.warn('[SidePanel] Preload skipped:', e)
+      }
+    }
+  }, [bots2, bots3, bots4])
+
+  // 모든 지원 봇에 대해 고정 순서로 훅 호출하여 Hooks 규칙 보장
+  const allBotIds = useMemo(() => Object.keys(CHATBOTS) as BotId[], [])
+  const allChats = allBotIds.map((id) => ({ id, chat: useChat(id) }))
+
+  const { activeBotIds, setBots } = useMemo(() => {
+    if (layout === 4) {
+      return { activeBotIds: bots4, setBots: (fn: (prev: BotId[]) => BotId[]) => setBots4(fn) }
+    }
+    if (layout === 3) {
+      return { activeBotIds: bots3, setBots: (fn: (prev: BotId[]) => BotId[]) => setBots3(fn) }
+    }
+    return { activeBotIds: bots2, setBots: (fn: (prev: BotId[]) => BotId[]) => setBots2(fn) }
+  }, [layout, bots2, bots3, bots4, setBots2, setBots3, setBots4])
+
+  const chatMap = useMemo(() => {
+    const m = new Map<BotId, ReturnType<typeof useChat>>()
+    for (const { id, chat } of allChats) {
+      m.set(id as BotId, chat)
+    }
+    return m
+  }, [allChats])
+
+  const chats = useMemo(() => activeBotIds.map((id) => chatMap.get(id)!).filter(Boolean), [activeBotIds, chatMap])
+
+  return <SidePanelMultiBotPanel chats={chats} setBots={setBots} />
 }
 
 export default SidePanelPage

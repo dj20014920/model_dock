@@ -52,7 +52,8 @@ export default function PersistentIframe({
 
     // 🔗 IframeManager에서 iframe 가져와서 부착
     // ✅ appendChild는 같은 document 내 이동이므로 reload 없음!
-    const success = iframeManager.attach(botId, container)
+    console.log('[PersistentIframe] 🔧 attachOverlay begin', { botId, containerId: (container as any).id })
+    const success = iframeManager.attachOverlay(botId, container)
 
     if (!success) {
       console.error('[PersistentIframe] ❌ iframe 부착 실패:', botId)
@@ -62,13 +63,14 @@ export default function PersistentIframe({
     // 🎨 zoom 스타일 적용
     iframeManager.applyZoom(botId, zoom)
 
-    console.log(`[PersistentIframe] ✅ 마운트: ${botId} (zoom: ${zoom})`)
+    console.log('[PersistentIframe] ✅ 마운트 완료', { botId, zoom })
 
     // 🧹 cleanup: unmount 시 iframe을 stash로 이동하여 세션 보존
     // ✅ appendChild로 stash 이동도 reload 없음!
     return () => {
-      iframeManager.detach(botId)
-      console.log(`[PersistentIframe] 📦 언마운트: ${botId} → stash (세션 보존)`)
+      console.log('[PersistentIframe] 🧹 hide begin', { botId })
+      iframeManager.hide(botId)
+      console.log('[PersistentIframe] 📦 언마운트 → overlay hidden (세션 보존)', { botId })
     }
   }, [botId]) // botId 변경 시에만 재부착
 

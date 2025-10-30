@@ -150,10 +150,11 @@ function SidePanelMultiBotPanel({
       // 사이드패널은 2, 3, 4 레이아웃만 지원
       if (v === 2 || v === 3 || v === 4) {
         trackEvent('switch_sidepanel_layout', { layout: v })
+        console.log('[SidePanel] 🔁 switch_sidepanel_layout', { prev: layout, next: v })
         setLayout(v)
       }
     },
-    [setLayout],
+    [layout, setLayout],
   )
 
   return (
@@ -306,6 +307,11 @@ function SidePanelPage() {
   }, [allChats])
 
   const chats = useMemo(() => activeBotIds.map((id) => chatMap.get(id)!).filter(Boolean), [activeBotIds, chatMap])
+
+  // 활성 봇 목록 변동 로깅(사이드패널)
+  useEffect(() => {
+    console.log('[SidePanel] 📋 active bots', { layout, activeBotIds })
+  }, [layout, activeBotIds])
 
   return <SidePanelMultiBotPanel chats={chats} setBots={setBots} />
 }

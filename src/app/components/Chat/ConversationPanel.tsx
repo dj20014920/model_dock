@@ -85,6 +85,10 @@ const ConversationPanel: FC<Props> = (props) => {
       if (area !== 'sync') return
       if (Object.prototype.hasOwnProperty.call(changes, 'mainBrainBotId')) {
         setIsMainBrain(changes['mainBrainBotId'].newValue === props.botId)
+        console.log('[ConversationPanel] 👑 mainBrain changed (panel)', {
+          panelBotId: props.botId,
+          newMain: changes['mainBrainBotId'].newValue,
+        })
       }
     }
     Browser.storage.onChanged.addListener(onChanged)
@@ -111,6 +115,7 @@ const ConversationPanel: FC<Props> = (props) => {
   const resetConversation = useCallback(() => {
     if (!props.generating) {
       props.resetConversation()
+      console.log('[ConversationPanel] 🧹 resetConversation', { botId: props.botId })
     }
   }, [props])
 
@@ -259,6 +264,7 @@ const ConversationPanel: FC<Props> = (props) => {
       mode,
       isMainBrain,
       hasToggle: true,
+      iframeUrl,
     })
 
     return (

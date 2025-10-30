@@ -177,18 +177,19 @@ const GeneralChatPanel: FC<{
     (botId: BotId, index: number) => {
       if (!setBots) return
       trackEvent('switch_bot', { botId, panel: chats.length })
-      setBots((bots) => {
-        const newBots = [...bots]
-        const existsAt = newBots.indexOf(botId)
+      setBots((prev) => {
+        const before = [...prev]
+        const next = [...prev]
+        const existsAt = next.indexOf(botId)
         if (existsAt !== -1 && existsAt !== index) {
-          // 스왑: 중복 방지, 위치 교환
-          const tmp = newBots[index]
-          newBots[index] = newBots[existsAt]
-          newBots[existsAt] = tmp
+          const tmp = next[index]
+          next[index] = next[existsAt]
+          next[existsAt] = tmp
         } else {
-          newBots[index] = botId
+          next[index] = botId
         }
-        return newBots
+        console.log('[MultiBotPanel] 🔁 switch_bot', { index, botId, before, after: next })
+        return next
       })
     },
     [chats.length, setBots],
@@ -197,9 +198,10 @@ const GeneralChatPanel: FC<{
   const onLayoutChange = useCallback(
     (v: Layout) => {
       trackEvent('switch_all_in_one_layout', { layout: v })
+      console.log('[Layout] 🔁 switch_all_in_one_layout', { prev: layout, next: v })
       setLayout(v)
     },
-    [setLayout],
+    [layout, setLayout],
   )
 
   // 메인 브레인 상태 추적
@@ -217,12 +219,12 @@ const GeneralChatPanel: FC<{
         // 초기 로드 시에도 메인브레인이 그리드에 없으면 포함시켜 우측 고정 패널이 항상 표시되도록 보장
         if (setBots && brainId) {
           setBots((currentBots) => {
+            const before = [...currentBots]
             const newBots = [...currentBots]
             if (!newBots.includes(brainId)) {
-              // 마지막 슬롯을 메인브레인으로 교체하여 포함 (가이드 준수)
               const replaceIndex = newBots.length - 1
               newBots[replaceIndex] = brainId
-              console.log('[MultiBotPanel] 🧠 Inject main brain into grid at', replaceIndex)
+              console.log('[MultiBotPanel] 🧠 Inject main brain into grid', { replaceIndex, before, after: newBots })
             }
             return newBots
           })
@@ -239,20 +241,20 @@ const GeneralChatPanel: FC<{
         
         if (setBots) {
           setBots((currentBots) => {
+            const before = [...currentBots]
             const newBots = [...currentBots]
             if (newBrainId) {
               const newIdx = newBots.indexOf(newBrainId)
               if (newIdx === -1) {
-                // 이전 메인브레인이 그리드에 있으면 그 위치를 교체, 없으면 마지막 슬롯 교체
                 const oldIdx = oldBrainId ? newBots.indexOf(oldBrainId) : -1
                 const replaceIndex = oldIdx !== -1 ? oldIdx : newBots.length - 1
                 if (replaceIndex >= 0) {
                   newBots[replaceIndex] = newBrainId
-                  console.log('[MultiBotPanel] 🧠 Inserted main brain at', replaceIndex)
+                  console.log('[MultiBotPanel] 🧠 Inserted main brain', { replaceIndex, before, after: newBots })
                 }
-              } // 이미 포함되어 있으면 변경 없음 (그리드는 유지)
+              }
             }
-            console.log('[MultiBotPanel] ✅ Grid after main brain update:', newBots)
+            console.log('[MultiBotPanel] ✅ Grid after main brain update:', { before, after: newBots })
             return newBots
           })
         }
@@ -543,6 +545,11 @@ const MultiBotChatPanel: FC = () => {
   }, [allChats])
 
   const chats = useMemo(() => activeBotIds.map((id) => chatMap.get(id)!).filter(Boolean), [activeBotIds, chatMap])
+
+  // 활성 봇 목록 변동 로깅
+  useEffect(() => {
+    console.log('[Layout] 📋 active bots', { layout, activeBotIds })
+  }, [layout, activeBotIds])
 
   return <GeneralChatPanel chats={chats} setBots={setBots as any} supportImageInput={supportImageInput} />
 }

@@ -21,7 +21,7 @@ import { getIframeConfig } from '~app/bots/iframe-registry'
 interface GlobalIframeCache {
   __mdIframeCache?: Map<string, HTMLIFrameElement>
   __mdIframeStash?: HTMLDivElement
-  __mdIframeOverlay?: HTMLDivElement
+  __mdIframeOverlayMap?: WeakMap<HTMLElement, HTMLDivElement>
 }
 
 // 📦 iframe 메타데이터
@@ -41,18 +41,21 @@ interface IframeMetadata {
   containerEl?: HTMLElement
   positionUpdater?: () => void
   resizeObserver?: ResizeObserver
+  scrollParents?: (Element | Window)[]
+  rafId?: number
+  overlayRoot?: HTMLElement
 }
 
 class IframeManager {
   private cache: Map<string, HTMLIFrameElement>
   private metadata: Map<string, IframeMetadata> = new Map()
   private stash: HTMLDivElement
-  private overlay: HTMLDivElement
+  private overlayMap: WeakMap<HTMLElement, HTMLDivElement>
 
   constructor() {
     this.cache = this.ensureCache()
     this.stash = this.ensureStash()
-    this.overlay = this.ensureOverlay()
+    this.overlayMap = this.ensureOverlayMap()
 
     console.log('[IframeManager] 🚀 초기화 완료')
   }
@@ -93,22 +96,33 @@ class IframeManager {
    * - iframe을 실제 컨테이너에 reparent하지 않고, viewport 좌표에 맞춰 고정 배치
    * - 장점: reparent로 인한 reload 가능성 최소화
    */
-  private ensureOverlay(): HTMLDivElement {
+  private ensureOverlayMap(): WeakMap<HTMLElement, HTMLDivElement> {
     const w = window as any as GlobalIframeCache
-    let root = w.__mdIframeOverlay as HTMLDivElement | undefined
-    if (!root) {
-      root = document.createElement('div')
-      root.id = 'md-iframe-overlay'
-      root.style.cssText = 'position:fixed; inset:0; pointer-events:none; z-index:100;'
-      document.body.appendChild(root)
-      w.__mdIframeOverlay = root
-      console.log('[IframeManager] 🧪 Overlay 컨테이너 생성')
+    if (!w.__mdIframeOverlayMap) {
+      w.__mdIframeOverlayMap = new WeakMap()
     }
-    return root!
+    return w.__mdIframeOverlayMap
+  }
+
+  private ensureOverlayForRoot(rootEl: HTMLElement): HTMLDivElement {
+    let overlay = this.overlayMap.get(rootEl)
+    if (!overlay) {
+      overlay = document.createElement('div')
+      overlay.style.cssText = 'position:absolute; left:0; top:0; pointer-events:none; z-index:100;'
+      // root 기준 배치가 가능하도록 root가 static이면 relative 지정
+      const cs = getComputedStyle(rootEl)
+      if (cs.position === 'static') {
+        rootEl.style.position = 'relative'
+      }
+      rootEl.appendChild(overlay)
+      this.overlayMap.set(rootEl, overlay)
+      console.log('[IframeManager] 🧪 Overlay 컨테이너 생성(for root)')
+    }
+    return overlay
   }
 
   private isOverlayMode(iframe: HTMLIFrameElement): boolean {
-    return iframe.parentElement === this.overlay
+    return !!iframe.parentElement && (iframe.parentElement as HTMLElement).style.pointerEvents === 'none'
   }
 
   private updateOverlayFrame(key: string): void {
@@ -116,13 +130,64 @@ class IframeManager {
     const iframe = this.cache.get(key)
     if (!meta || !iframe || !meta.containerEl) return
     const rect = meta.containerEl.getBoundingClientRect()
+    const overlayRoot = meta.overlayRoot || meta.containerEl.offsetParent || document.body
+    const baseRect = (overlayRoot as HTMLElement).getBoundingClientRect()
     const z = meta.zoom || 1
-    iframe.style.left = rect.left + 'px'
-    iframe.style.top = rect.top + 'px'
+    iframe.style.left = rect.left - baseRect.left + 'px'
+    iframe.style.top = rect.top - baseRect.top + 'px'
     iframe.style.width = rect.width / z + 'px'
     iframe.style.height = rect.height / z + 'px'
     iframe.style.transform = `scale(${z})`
     iframe.style.transformOrigin = 'top left'
+  }
+
+  private getScrollParents(el: HTMLElement): (Element | Window)[] {
+    const res: (Element | Window)[] = []
+    let node: HTMLElement | null = el
+    while (node && node !== document.body) {
+      try {
+        const cs = getComputedStyle(node)
+        const overflowY = cs.overflowY
+        const overflowX = cs.overflowX
+        if (/(auto|scroll|overlay)/.test(overflowY) || /(auto|scroll|overlay)/.test(overflowX)) {
+          res.push(node)
+        }
+      } catch {}
+      node = node.parentElement
+    }
+    res.push(window)
+    return res
+  }
+
+  private attachScrollSync(key: string) {
+    const meta = this.metadata.get(key)
+    if (!meta || !meta.containerEl) return
+    const parents = this.getScrollParents(meta.containerEl)
+    const onScroll = () => {
+      if (meta!.rafId) return
+      meta!.rafId = requestAnimationFrame(() => {
+        meta!.rafId = undefined
+        this.updateOverlayFrame(key)
+      })
+    }
+    parents.forEach((p) => p.addEventListener('scroll', onScroll, { passive: true, capture: true }))
+    window.addEventListener('resize', onScroll, { passive: true })
+    meta.scrollParents = parents
+    meta.positionUpdater = onScroll
+  }
+
+  private detachScrollSync(key: string) {
+    const meta = this.metadata.get(key)
+    if (!meta) return
+    const onScroll = meta.positionUpdater
+    if (onScroll) {
+      window.removeEventListener('resize', onScroll as any)
+      meta.scrollParents?.forEach((p) => p.removeEventListener('scroll', onScroll as any, true))
+    }
+    if (meta.rafId) cancelAnimationFrame(meta.rafId)
+    meta.rafId = undefined
+    meta.scrollParents = undefined
+    meta.positionUpdater = undefined
   }
 
   /**
@@ -255,9 +320,14 @@ class IframeManager {
     const iframe = this.getOrCreateIframe(botId)
     if (!iframe) return false
 
-    // 부모가 overlay가 아니면 1회만 이동
-    if (iframe.parentElement !== this.overlay) {
-      this.overlay.appendChild(iframe)
+    // overlay root를 컨테이너의 스크롤 루트(첫 번째 스크롤 부모)로 지정
+    const parents = this.getScrollParents(container)
+    const rootEl = (parents.find((p) => p instanceof Element) as HTMLElement) || container
+    const overlayRoot = this.ensureOverlayForRoot(rootEl)
+
+    // 부모가 현재 overlayRoot가 아니면 이동
+    if (iframe.parentElement !== overlayRoot) {
+      overlayRoot.appendChild(iframe)
     }
 
     // 포인터 이벤트 허용(오버레이 루트는 none)
@@ -285,18 +355,20 @@ class IframeManager {
     if (meta2) {
       meta2.containerEl = container
       if (typeof meta2.zoom !== 'number') meta2.zoom = 1
+      ;(meta2 as any).overlayRoot = overlayRoot
       this.updateOverlayFrame(key)
+      this.detachScrollSync(key)
+      this.attachScrollSync(key)
     }
 
     // 리사이즈/스크롤 동기화
     const boundUpdate = () => this.updateOverlayFrame(key)
-    window.addEventListener('resize', boundUpdate)
-    window.addEventListener('scroll', boundUpdate, true) // 캡처 단계에서 다양한 스크롤 컨테이너 감지
+    // resize/scroll 동기화는 attachScrollSync에서 처리
 
     // ResizeObserver로 컨테이너 크기 변화 추적
     let ro: ResizeObserver | null = null
     if ('ResizeObserver' in window) {
-      ro = new ResizeObserver(boundUpdate)
+      ro = new ResizeObserver(() => this.updateOverlayFrame(key))
       ro.observe(container)
     }
 
@@ -326,13 +398,8 @@ class IframeManager {
     iframe.style.pointerEvents = 'none'
     const meta = this.metadata.get(key)
     if (meta) {
-      const updater = meta.positionUpdater
       const ro = meta.resizeObserver
-      if (updater) {
-        window.removeEventListener('resize', updater)
-        window.removeEventListener('scroll', updater, true)
-        meta.positionUpdater = undefined
-      }
+      this.detachScrollSync(key)
       if (ro) {
         try { ro.disconnect() } catch {}
         meta.resizeObserver = undefined
@@ -354,6 +421,12 @@ class IframeManager {
     const iframe = this.cache.get(key)
 
     if (!iframe) return
+
+    // overlay 모드였으면 스크롤 동기화 해제
+    const metaBefore = this.metadata.get(key)
+    if (metaBefore && this.isOverlayMode(iframe)) {
+      this.detachScrollSync(key)
+    }
 
     // 🗄️ stash로 이동 (appendChild는 reload 안 일으킴)
     const prevParent = iframe.parentElement?.id || iframe.parentElement?.tagName
@@ -389,13 +462,14 @@ class IframeManager {
       this.updateOverlayFrame(key)
       console.log('[IframeManager] 🔍 applyZoom(overlay)', { botId, zoom: z })
     } else {
+      // Embedded: scale 대신 100% 고정(부모 컨테이너에 꽉 차게 표현)
       iframe.style.minHeight = '100%'
       iframe.style.minWidth = '100%'
-      iframe.style.transform = `scale(${z})`
-      iframe.style.transformOrigin = 'top left'
-      iframe.style.width = `${100 / z}%`
-      iframe.style.height = `${100 / z}%`
-      console.log('[IframeManager] 🔍 applyZoom', { botId, zoom: z })
+      iframe.style.transform = ''
+      iframe.style.transformOrigin = ''
+      iframe.style.width = '100%'
+      iframe.style.height = '100%'
+      console.log('[IframeManager] 🔍 applyZoom(embedded passthrough)', { botId, zoom: z })
     }
     // PERF-NOTE: transform: scale()은 GPU 가속 활용
     // Instruments > Core Animation으로 확인 가능

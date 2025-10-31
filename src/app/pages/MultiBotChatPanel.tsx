@@ -337,7 +337,7 @@ const GeneralChatPanel: FC<{
             {/* 좌측: 나머지 모델들 */}
             <div
               className={cx(
-                'grid gap-2 flex-1 min-w-0',
+                'grid gap-2 flex-1',
                 // 5개 남은 경우 (6개 중 1개가 메인 브레인): 2열 자동 배치 + dense로 빈 공간 채우기
                 otherChats.length === 5
                   ? 'grid-cols-2 auto-rows-fr'
@@ -374,9 +374,7 @@ const GeneralChatPanel: FC<{
                       : undefined
                   }
                   // 5개 남은 경우: 첫 번째 아이템만 row-span-2로 세로 전체 차지
-                  className={
-                    otherChats.length === 5 && index === 0 ? 'row-span-2' : undefined
-                  }
+                  className={otherChats.length === 5 && index === 0 ? 'row-span-2' : undefined}
                 />
               ))}
             </div>

@@ -10,27 +10,33 @@ type IframeConfig = {
 const REGISTRY: Record<string, IframeConfig> = {
   chatgpt: {
     src: 'https://chat.openai.com',
-    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals',
+    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals',
     allow: 'clipboard-read; clipboard-write',
     title: 'ChatGPT',
   },
   lmarena: {
     src: 'https://lmarena.ai/c/new?mode=direct',
-    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals',
+    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals',
     allow: 'clipboard-read; clipboard-write',
     title: 'LM Arena Chat',
   },
   qwen: {
     src: 'https://chat.qwen.ai',
-    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals',
+    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals',
     allow: 'clipboard-read; clipboard-write',
     title: 'Qwen Chat',
   },
   grok: {
     src: 'https://grok.com',
-    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals',
+    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals',
     allow: 'clipboard-read; clipboard-write',
     title: 'Grok Chat',
+  },
+  deepseek: {
+    src: 'https://chat.deepseek.com',
+    sandbox: 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals',
+    allow: 'clipboard-read; clipboard-write',
+    title: 'DeepSeek Chat',
   },
 }
 

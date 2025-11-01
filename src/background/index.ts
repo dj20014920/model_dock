@@ -129,9 +129,6 @@ Browser.runtime.onConnect.addListener((port) => {
       } else if (url.includes('gemini.google.com')) {
         originUrl = 'https://gemini.google.com'
         refererUrl = 'https://gemini.google.com/'
-      } else if (url.includes('deepseek.com')) {
-        originUrl = 'https://chat.deepseek.com'
-        refererUrl = 'https://chat.deepseek.com/'
       } else if (url.includes('copilot.microsoft.com')) {
         originUrl = 'https://copilot.microsoft.com'
         refererUrl = 'https://copilot.microsoft.com/'

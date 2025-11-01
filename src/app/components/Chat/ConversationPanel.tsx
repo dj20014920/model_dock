@@ -27,6 +27,7 @@ import GrokNoticeModal from '~app/components/Modals/GrokNoticeModal'
 import LMArenaModelSelector from './LMArenaModelSelector'
 import PersistentIframe from '~app/components/PersistentIframe'
 import { isIframeBot as isIframeBotUtil } from '~app/bots/iframe-registry'
+import { requestHostPermission } from '~app/utils/permissions'
 
 interface Props {
   botId: BotId
@@ -47,6 +48,56 @@ const ConversationPanel: FC<Props> = (props) => {
   const botInfo = CHATBOTS[props.botId]
   const mode = props.mode || 'full'
   const marginClass = 'mx-5'
+  const isDeepseekBot = props.botId === 'deepseek'
+  const [openingDeepseekLogin, setOpeningDeepseekLogin] = useState(false)
+  
+  // 🔍 iframe 생명주기 추적
+  useEffect(() => {
+    const timestamp = new Date().toISOString()
+    const isIframe = isIframeBotUtil(props.botId)
+    
+    console.log(
+      `%c[ConversationPanel] 🎬 MOUNTED: ${props.botId}`,
+      isIframe ? 'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 6px' : 'color: #00ff00',
+      {
+        botId: props.botId,
+        mode,
+        isIframeBot: isIframe,
+        messagesCount: props.messages.length,
+        generating: props.generating,
+        timestamp
+      }
+    )
+    
+    return () => {
+      const isIframe = isIframeBotUtil(props.botId)
+      console.log(
+        `%c[ConversationPanel] 💀 UNMOUNTED: ${props.botId}`,
+        isIframe ? 'color: #ff0000; font-weight: bold; background: #330000; padding: 2px 6px' : 'color: #ff0000',
+        {
+          botId: props.botId,
+          isIframeBot: isIframe,
+          timestamp: new Date().toISOString(),
+          WARNING: isIframe ? '⚠️ IFRAME UNMOUNT = SESSION LOSS!' : ''
+        }
+      )
+    }
+  }, [props.botId, mode]) // botId 변경 시에만 mount/unmount
+  
+  // 🔍 메시지 변경 추적
+  useEffect(() => {
+    if (props.messages.length > 0) {
+      console.log(
+        `%c[ConversationPanel] 💬 Messages updated: ${props.botId}`,
+        'color: #00d4ff; font-size: 10px',
+        {
+          botId: props.botId,
+          count: props.messages.length,
+          lastMessage: props.messages[props.messages.length - 1]?.text?.substring(0, 50)
+        }
+      )
+    }
+  }, [props.messages.length, props.botId])
 
   // 🎨 mode에 따라 아이콘 크기 동적 설정
   const iconSize = mode === 'full' ? 'w-5 h-5' : 'w-4 h-4'
@@ -129,6 +180,24 @@ const ConversationPanel: FC<Props> = (props) => {
     trackEvent('open_share_dialog', { botId: props.botId })
   }, [props.botId])
 
+  const handleOpenDeepseekLoginTab = useCallback(async () => {
+    if (!isDeepseekBot || openingDeepseekLogin) return
+    setOpeningDeepseekLogin(true)
+    try {
+      try {
+        await requestHostPermission('https://chat.deepseek.com/*')
+      } catch (permissionError) {
+        console.error('[DeepSeek] ⚠️ Host permission request failed', permissionError)
+      }
+      await Browser.tabs.create({ url: 'https://chat.deepseek.com/' })
+      console.log('[DeepSeek] 🔐 Login tab opened (new tab)')
+    } catch (tabError) {
+      console.error('[DeepSeek] ❌ Failed to open login tab', tabError)
+    } finally {
+      setOpeningDeepseekLogin(false)
+    }
+  }, [isDeepseekBot, openingDeepseekLogin])
+
   const [draft, setDraft] = useState('')
   let inputActionButton: ReactNode = null
   if (props.generating) {
@@ -148,6 +217,16 @@ const ConversationPanel: FC<Props> = (props) => {
   const [lmarenaZoom, setLmarenaZoom] = useState(() => {
     try {
       const saved = localStorage.getItem('lmarena-zoom')
+      return saved ? Number(saved) : 1.0
+    } catch {
+      return 1.0
+    }
+  })
+
+  // DeepSeek 전용: 배율 조절 상태 (localStorage에서 불러오기)
+  const [deepseekZoom, setDeepseekZoom] = useState(() => {
+    try {
+      const saved = localStorage.getItem('deepseek-zoom')
       return saved ? Number(saved) : 1.0
     } catch {
       return 1.0
@@ -232,6 +311,8 @@ const ConversationPanel: FC<Props> = (props) => {
         return 'https://grok.com'
       case 'lmarena':
         return 'https://lmarena.ai/c/new?mode=direct'
+      case 'deepseek':
+        return 'https://chat.deepseek.com'
       default:
         return ''
     }
@@ -248,6 +329,8 @@ const ConversationPanel: FC<Props> = (props) => {
         return [grokZoom, setGrokZoom, 'grok-zoom', 1.25] as const
       case 'lmarena':
         return [lmarenaZoom, setLmarenaZoom, 'lmarena-zoom', 1.0] as const
+      case 'deepseek':
+        return [deepseekZoom, setDeepseekZoom, 'deepseek-zoom', 1.0] as const
       default:
         return [1.0, () => {}, '', 1.0] as const
     }
@@ -290,8 +373,23 @@ const ConversationPanel: FC<Props> = (props) => {
               </div>
             )}
 
-            {/* 오른쪽: 배율 조절 */}
+            {/* 오른쪽: 배율 조절 + 로그인 헬퍼 */}
             <div className="flex flex-row items-center gap-2">
+              {isDeepseekBot && (
+                <Tooltip content="새 탭에서 DeepSeek 로그인 페이지를 엽니다 (Google 로그인 지원)">
+                  <button
+                    type="button"
+                    className={cx(
+                      'px-2 py-1 text-[10px] font-medium rounded border border-primary-border bg-secondary text-primary-text transition-all',
+                      openingDeepseekLogin && 'opacity-70 cursor-not-allowed'
+                    )}
+                    onClick={handleOpenDeepseekLoginTab}
+                    disabled={openingDeepseekLogin}
+                  >
+                    {openingDeepseekLogin ? '탭 여는 중…' : '로그인 탭 열기'}
+                  </button>
+                </Tooltip>
+              )}
               <span className="text-[10px] text-light-text whitespace-nowrap">배율</span>
               <input
                 type="range"
@@ -343,7 +441,7 @@ const ConversationPanel: FC<Props> = (props) => {
               src={iframeUrl}
               zoom={zoom}
               className="w-full h-full border-0"
-              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals"
               allow="clipboard-read; clipboard-write"
               title={`${botInfo.name} Chat`}
             />

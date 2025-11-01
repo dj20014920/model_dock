@@ -16,7 +16,7 @@ if (!(window as any).__GROK_CUSTOMIZED__) {
   /**
    * CSS 스타일 주입
    */
-  function injectStyles() {
+  function injectGrokStyles() {
     const style = document.createElement('style')
     style.id = 'model-dock-grok-theme'
     style.textContent = `
@@ -158,7 +158,7 @@ if (!(window as any).__GROK_CUSTOMIZED__) {
   /**
    * 워터마크 추가
    */
-  function addWatermark() {
+  function addGrokWatermark() {
     // 기존 워터마크 제거
     const existing = document.querySelector('.model-dock-watermark')
     if (existing) existing.remove()
@@ -181,17 +181,17 @@ if (!(window as any).__GROK_CUSTOMIZED__) {
   /**
    * 초기화 - DOM이 준비되면 실행
    */
-  function initialize() {
+  function initializeGrokCustomization() {
     // 스타일 즉시 주입 (깜빡임 방지)
-    injectStyles()
+    injectGrokStyles()
 
     // DOM 로드 후 워터마크 추가
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(addWatermark, 500) // 약간의 지연으로 페이지 안정화 대기
+        setTimeout(addGrokWatermark, 500) // 약간의 지연으로 페이지 안정화 대기
       })
     } else {
-      setTimeout(addWatermark, 500)
+      setTimeout(addGrokWatermark, 500)
     }
 
     // SPA 네비게이션 감지 (URL 변경 시 워터마크 재추가)
@@ -201,7 +201,7 @@ if (!(window as any).__GROK_CUSTOMIZED__) {
       if (currentUrl !== lastUrl) {
         lastUrl = currentUrl
         console.log('[GROK-CUSTOMIZE] 🔄 URL changed, re-applying watermark...')
-        setTimeout(addWatermark, 1000)
+        setTimeout(addGrokWatermark, 1000)
       }
     }).observe(document.body, { childList: true, subtree: true })
 
@@ -209,7 +209,7 @@ if (!(window as any).__GROK_CUSTOMIZED__) {
   }
 
   // 실행
-  initialize()
+  initializeGrokCustomization()
 
   /**
    * ========================================

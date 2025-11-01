@@ -50,7 +50,6 @@ export default defineManifest(async () => {
           'https://chatgpt.com/*',
           'https://claude.ai/*',
           'https://gemini.google.com/*',
-          'https://chat.deepseek.com/*',
           'https://perplexity.ai/*',
           'https://www.perplexity.ai/*',
           'https://lmarena.ai/*',
@@ -73,6 +72,12 @@ export default defineManifest(async () => {
         // Grok.com UI 테마링 (DOM 기반 커스터마이징)
         matches: ['https://grok.com/*'],
         js: ['src/content-script/customize-grok.ts'],
+        run_at: 'document_start',
+      },
+      {
+        // DeepSeek UI 커스터마이징 (SQLD 방식 적용)
+        matches: ['https://chat.deepseek.com/*'],
+        js: ['src/content-script/customize-deepseek.ts'],
         run_at: 'document_start',
       },
     ],
@@ -142,6 +147,11 @@ export default defineManifest(async () => {
           enabled: true,
           path: 'src/rules/claude-iframe.json',
         },
+        {
+          id: 'ruleset_deepseek_iframe',
+          enabled: true,
+          path: 'src/rules/deepseek-iframe.json',
+        },
       ],
     },
     web_accessible_resources: [
@@ -166,7 +176,6 @@ export default defineManifest(async () => {
           'https://chat.openai.com/*',
           'https://claude.ai/*',
           'https://gemini.google.com/*',
-          'https://chat.deepseek.com/*',
           'https://perplexity.ai/*',
           'https://www.perplexity.ai/*',
           'https://copilot.microsoft.com/*',

@@ -45,34 +45,85 @@ export default function PersistentIframe({
   // iframe 부착 및 스타일 적용
   useEffect(() => {
     const container = containerRef.current
+    const timestamp = new Date().toISOString()
+    
+    console.log(
+      `%c[PersistentIframe] 🔌 MOUNT EFFECT START: ${botId}`,
+      'color: #00ffff; font-weight: bold; background: #003333; padding: 2px 8px',
+      { botId, timestamp, containerExists: !!container }
+    )
+    
     if (!container) {
-      console.warn('[PersistentIframe] ⚠️ 컨테이너 없음:', botId)
+      console.warn(
+        `%c[PersistentIframe] ⚠️ Container missing for ${botId}`,
+        'color: #ff9500; font-weight: bold',
+        { botId, timestamp }
+      )
       return
     }
 
     // 🔗 IframeManager에서 iframe 가져와서 부착
     // ✅ appendChild는 같은 document 내 이동이므로 reload 없음!
-    console.log('[PersistentIframe] 🔧 attach (embedded) begin', { botId, containerId: (container as any).id })
+    console.log(
+      `%c[PersistentIframe] 🔧 Attaching iframe: ${botId}`,
+      'color: #00ffff; font-weight: bold',
+      { 
+        botId,
+        src,
+        containerElement: container.tagName,
+        timestamp
+      }
+    )
+    
     const success = iframeManager.attach(botId, container)
 
     if (!success) {
-      console.error('[PersistentIframe] ❌ iframe 부착 실패:', botId)
+      console.error(
+        `%c[PersistentIframe] ❌ ATTACH FAILED: ${botId}`,
+        'color: #ff0000; font-weight: bold; font-size: 14px',
+        { botId, timestamp }
+      )
       return
     }
 
     // 🎨 zoom 스타일 적용
     iframeManager.applyZoom(botId, zoom)
 
-    console.log('[PersistentIframe] ✅ 마운트 완료', { botId, zoom })
+    console.log(
+      `%c[PersistentIframe] ✅ ATTACHED & READY: ${botId}`,
+      'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px',
+      { 
+        botId, 
+        zoom,
+        sessionPreserved: true,
+        timestamp
+      }
+    )
 
     // 🧹 cleanup: unmount 시 iframe을 stash로 이동하여 세션 보존
     // ✅ appendChild로 stash 이동도 reload 없음!
     return () => {
-      console.log('[PersistentIframe] 🧹 detach (embedded) begin', { botId })
+      const unmountTime = new Date().toISOString()
+      console.log(
+        `%c[PersistentIframe] 🧹 UNMOUNT CLEANUP START: ${botId}`,
+        'color: #ffaa00; font-weight: bold; background: #333300; padding: 2px 8px',
+        { botId, unmountTime }
+      )
+      
       iframeManager.detach(botId)
-      console.log('[PersistentIframe] 📦 언마운트 → stash (세션 보존)', { botId })
+      
+      console.log(
+        `%c[PersistentIframe] 📦 DETACHED → STASH: ${botId}`,
+        'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px',
+        { 
+          botId,
+          sessionPreserved: true,
+          movedToStash: true,
+          unmountTime
+        }
+      )
     }
-  }, [botId]) // botId 변경 시에만 재부착
+  }, [botId, src]) // botId 또는 src 변경 시에만 재부착
 
   // zoom 변경 시에만 스타일 업데이트
   useEffect(() => {

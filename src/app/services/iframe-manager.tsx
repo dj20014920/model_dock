@@ -73,20 +73,34 @@ class IframeManager {
   }
 
   /**
-   * 전역 보관 컨테이너 (숨김용)
+   * 전역 고정 컨테이너 (절대 이동하지 않는 iframe 저장소)
    *
-   * 핵심: appendChild는 같은 document 내에서 iframe reload 안 함!
-   * → stash ↔ container 이동은 안전
+   * ✅ 새로운 접근: iframe을 절대 appendChild로 이동시키지 않음!
+   * - 모든 iframe은 이 컨테이너에 생성 후 평생 유지
+   * - CSS 클래스로만 표시/숨김 제어
+   * - appendChild 호출 없음 → reload 절대 발생 안 함!
    */
   private ensureStash(): HTMLDivElement {
-    let stashEl = document.getElementById('md-iframe-stash') as HTMLDivElement | null
+    let stashEl = document.getElementById('md-iframe-global-container') as HTMLDivElement | null
     if (!stashEl) {
       stashEl = document.createElement('div')
-      stashEl.id = 'md-iframe-stash'
-      // 화면에 보이지 않지만 iframe은 정상 렌더링되도록
-      stashEl.style.cssText = 'position: absolute; left: -9999px; top: 0; width: 100vw; height: 100vh; pointer-events: none; visibility: hidden;'
+      stashEl.id = 'md-iframe-global-container'
+      // 화면 전체를 덮는 고정 레이어 (모든 iframe의 영구 부모)
+      stashEl.style.cssText = `
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        overflow: hidden;
+      `.trim().replace(/\n\s+/g, ' ')
       document.body.appendChild(stashEl)
-      console.log('[IframeManager] 🗄️ Stash 컨테이너 생성')
+      console.log(
+        '%c[IframeManager] 🏗️ 전역 고정 컨테이너 생성 (CSS 기반 시스템)',
+        'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px'
+      )
     }
     return stashEl
   }
@@ -161,19 +175,26 @@ class IframeManager {
 
   private attachScrollSync(key: string) {
     const meta = this.metadata.get(key)
-    if (!meta || !meta.containerEl) return
+    if (!meta || !meta.containerEl || !meta.positionUpdater) return
+
     const parents = this.getScrollParents(meta.containerEl)
+    const userUpdater = meta.positionUpdater
+
     const onScroll = () => {
       if (meta!.rafId) return
       meta!.rafId = requestAnimationFrame(() => {
         meta!.rafId = undefined
-        this.updateOverlayFrame(key)
+        // ✅ 사용자가 정의한 positionUpdater 사용 (overlay 또는 CSS 모드)
+        if (userUpdater) {
+          userUpdater()
+        }
       })
     }
+
     parents.forEach((p) => p.addEventListener('scroll', onScroll, { passive: true, capture: true }))
     window.addEventListener('resize', onScroll, { passive: true })
     meta.scrollParents = parents
-    meta.positionUpdater = onScroll
+    // positionUpdater는 이미 외부에서 설정됨 (덮어쓰지 않음)
   }
 
   private detachScrollSync(key: string) {
@@ -208,19 +229,36 @@ class IframeManager {
       meta.lastUsedAt = Date.now()
       meta.mountCount++
 
-      console.log(`[IframeManager] ✅ 캐시 HIT: ${botId}`, {
-        mountCount: meta.mountCount,
-        ageSeconds: Math.round((Date.now() - meta.createdAt) / 1000),
-        currentUrl: iframe.src,
-      })
+      console.log(
+        `%c[IframeManager] ✅ CACHE HIT: ${botId}`,
+        'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px',
+        {
+          botId,
+          mountCount: meta.mountCount,
+          createdAgo: `${Math.round((Date.now() - meta.createdAt) / 1000)}s ago`,
+          lastUsedAgo: meta.lastUsedAt !== Date.now() ? `${Math.round((Date.now() - meta.lastUsedAt) / 1000)}s ago` : 'now',
+          currentUrl: iframe.src.substring(0, 50) + '...',
+          parentElement: iframe.parentElement?.id || iframe.parentElement?.tagName || 'DETACHED',
+          reloadCount: meta.reloadCount || 0,
+        }
+      )
 
       return iframe
     }
 
     // 🆕 캐시 MISS - 새로 생성
+    console.log(
+      `%c[IframeManager] 🆕 CACHE MISS: ${botId} - Creating new iframe...`,
+      'color: #ffaa00; font-weight: bold; background: #332200; padding: 2px 8px'
+    )
+    
     const config = getIframeConfig(botId)
     if (!config) {
-      console.warn(`[IframeManager] ⚠️ 지원하지 않는 봇: ${botId}`)
+      console.warn(
+        `%c[IframeManager] ⚠️ Unsupported bot: ${botId}`,
+        'color: #ff9500; font-weight: bold',
+        { botId }
+      )
       return null
     }
 
@@ -246,68 +284,170 @@ class IframeManager {
     // 🔍 LOAD 이벤트로 (재)로딩 탐지
     iframe.addEventListener('load', () => {
       const meta = this.metadata.get(key)
+      const loadTime = new Date().toISOString()
+      
       if (meta) {
-        meta.reloadCount = (meta.reloadCount || 0) + 1
+        const prevReloadCount = meta.reloadCount || 0
+        meta.reloadCount = prevReloadCount + 1
         meta.lastLoadAt = Date.now()
-        console.log('[IframeManager] 🔄 LOAD event:', {
-          botId,
-          src: iframe.src,
-          reloadCount: meta.reloadCount,
-          ageSec: Math.round((Date.now() - meta.createdAt) / 1000),
-        })
+        
+        const isInitialLoad = meta.reloadCount === 1
+        const ageSeconds = Math.round((Date.now() - meta.createdAt) / 1000)
+        
+        if (isInitialLoad) {
+          console.log(
+            `%c[IframeManager] 🎉 INITIAL LOAD: ${botId}`,
+            'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px',
+            {
+              botId,
+              src: iframe.src.substring(0, 60) + '...',
+              loadTime,
+              ageSeconds,
+            }
+          )
+        } else {
+          console.log(
+            `%c[IframeManager] 🔄 RELOAD DETECTED: ${botId} ⚠️`,
+            'color: #ff0000; font-weight: bold; background: #330000; padding: 4px 12px; font-size: 14px',
+            {
+              botId,
+              reloadCount: meta.reloadCount,
+              src: iframe.src.substring(0, 60) + '...',
+              loadTime,
+              ageSeconds,
+              WARNING: '⚠️ SESSION MAY BE LOST!',
+              parentElement: iframe.parentElement?.id || iframe.parentElement?.tagName || 'DETACHED',
+            }
+          )
+        }
       } else {
-        console.log('[IframeManager] 🔄 LOAD event (no meta):', { botId })
+        console.log(
+          `%c[IframeManager] 🔄 LOAD event (no meta): ${botId}`,
+          'color: #888888',
+          { botId, loadTime }
+        )
       }
     })
 
-    // 🗄️ 기본은 stash에 보관 (최초 1회). Overlay 부착 시 overlay로 이동
+    // 🗄️ 전역 고정 컨테이너에 추가 (최초 1회, 이후 절대 이동 안 함!)
+    // ✅ 초기에는 숨김 상태로 생성
+    iframe.style.position = 'absolute'
+    iframe.style.left = '-9999px'
+    iframe.style.top = '0'
+    iframe.style.visibility = 'hidden'
+    iframe.style.pointerEvents = 'none'
+    iframe.style.zIndex = '1'
+
     this.stash.appendChild(iframe)
     this.cache.set(key, iframe)
 
-    console.log(`[IframeManager] 🆕 새 iframe 생성: ${botId}`, {
-      src: config.src,
-      title: config.title,
-    })
+    console.log(
+      `%c[IframeManager] ✅ NEW IFRAME CREATED: ${botId}`,
+      'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px',
+      {
+        botId,
+        src: config.src,
+        title: config.title,
+        initialParent: 'md-iframe-stash',
+        cacheSize: this.cache.size,
+      }
+    )
 
     return iframe
   }
 
   /**
-   * iframe을 container에 부착 (appendChild 사용)
+   * iframe 표시 (CSS만 변경, appendChild 절대 안 함!)
    *
-   * 핵심: appendChild는 같은 document 내 이동 시 iframe reload 안 함!
-   * → stash에서 container로 이동해도 세션 유지 ✅
+   * ✅ 새로운 접근: appendChild 완전 제거!
+   * - iframe은 고정 컨테이너에서 절대 이동하지 않음
+   * - container의 위치/크기에 맞춰 CSS만 동적 변경
+   * - DOM 위치 변경 없음 → reload 절대 발생 안 함!
    *
    * @param botId - 봇 ID
-   * @param container - 부착할 컨테이너
+   * @param container - 표시할 영역의 참조 컨테이너
    * @returns 성공 여부
    */
   attachIframe(botId: BotId | string, container: HTMLElement): boolean {
+    const timestamp = new Date().toISOString()
+    const key = String(botId)
+
+    console.log(
+      `%c[IframeManager] 🎨 CSS ATTACH START: ${botId}`,
+      'color: #00ffff; font-weight: bold',
+      { botId, timestamp, containerTag: container.tagName }
+    )
+
     const iframe = this.getOrCreateIframe(botId)
-    if (!iframe) return false
+    if (!iframe) {
+      console.error(
+        `%c[IframeManager] ❌ ATTACH FAILED: iframe not found for ${botId}`,
+        'color: #ff0000; font-weight: bold',
+        { botId, timestamp }
+      )
+      return false
+    }
 
-    // 🔗 container로 이동 (appendChild는 자동으로 이전 위치에서 제거)
-    // ✅ 같은 document 내 이동이므로 iframe reload 없음!
-    const prevParent = iframe.parentElement?.id || iframe.parentElement?.getAttribute('data-iframe-stash') || iframe.parentElement?.tagName
-    container.appendChild(iframe)
+    // 🎨 CSS로 위치/크기 동기화 (appendChild 없음!)
+    const rect = container.getBoundingClientRect()
 
-    // 🎨 스타일 초기화 (stash에서 설정된 visibility 제거)
-    iframe.style.position = ''
+    iframe.style.position = 'absolute'
+    iframe.style.left = `${rect.left}px`
+    iframe.style.top = `${rect.top}px`
+    iframe.style.width = `${rect.width}px`
+    iframe.style.height = `${rect.height}px`
     iframe.style.visibility = 'visible'
     iframe.style.pointerEvents = 'auto'
     iframe.style.display = 'block'
+    iframe.style.zIndex = '10'
+    iframe.className = 'w-full h-full border-0 md-iframe-visible'
 
-    const meta = this.metadata.get(String(botId))
+    // 📍 ResizeObserver로 container 크기 변화 추적
+    const meta = this.metadata.get(key)
     if (meta) {
       meta.lastAttachAt = Date.now()
-      meta.lastContainerId = (container as any).id || (container as any).dataset?.iframeContainer || 'unknown-container'
+      meta.lastContainerId = (container as any).id || (container as any).dataset?.iframeContainer || 'css-positioned'
+      meta.containerEl = container
+
+      // 이전 observer 정리
+      if (meta.resizeObserver) {
+        meta.resizeObserver.disconnect()
+      }
+
+      // 새 observer 생성
+      const updatePosition = () => {
+        const newRect = container.getBoundingClientRect()
+        iframe.style.left = `${newRect.left}px`
+        iframe.style.top = `${newRect.top}px`
+        iframe.style.width = `${newRect.width}px`
+        iframe.style.height = `${newRect.height}px`
+      }
+
+      if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(updatePosition)
+        ro.observe(container)
+        meta.resizeObserver = ro as any
+      }
+
+      // 스크롤 동기화도 추가 (positionUpdater 먼저 설정!)
+      meta.positionUpdater = updatePosition
+      this.attachScrollSync(key)
     }
-    console.log('[IframeManager] 🔗 iframe 부착', {
-      botId,
-      from: prevParent || 'unknown',
-      to: meta?.lastContainerId,
-      reloadCount: meta?.reloadCount,
-    })
+
+    console.log(
+      `%c[IframeManager] ✅ CSS ATTACHED (NO DOM MOVE!): ${botId}`,
+      'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px',
+      {
+        botId,
+        method: 'CSS_ONLY',
+        position: `${Math.round(rect.left)},${Math.round(rect.top)}`,
+        size: `${Math.round(rect.width)}x${Math.round(rect.height)}`,
+        reloadCount: meta?.reloadCount,
+        noReloadRisk: true,
+        timestamp
+      }
+    )
+
     return true
   }
 
@@ -409,38 +549,75 @@ class IframeManager {
   }
 
   /**
-   * iframe을 stash로 이동 (숨김)
+   * iframe 숨김 (CSS만 변경, appendChild 절대 안 함!)
    *
-   * 핵심: stash로 appendChild해도 같은 document 내 이동이므로 reload 없음!
-   * → 세션 유지 ✅
+   * ✅ 새로운 접근: appendChild 완전 제거!
+   * - iframe은 고정 컨테이너에 그대로 유지
+   * - CSS만 변경하여 화면 밖으로 숨김
+   * - DOM 위치 변경 없음 → reload 절대 발생 안 함!
    *
    * @param botId - 봇 ID
    */
   detachIframe(botId: BotId | string): void {
     const key = String(botId)
+    const timestamp = new Date().toISOString()
+
+    console.log(
+      `%c[IframeManager] 🎨 CSS DETACH START: ${botId}`,
+      'color: #ffaa00; font-weight: bold',
+      { botId, timestamp }
+    )
+
     const iframe = this.cache.get(key)
 
-    if (!iframe) return
-
-    // overlay 모드였으면 스크롤 동기화 해제
-    const metaBefore = this.metadata.get(key)
-    if (metaBefore && this.isOverlayMode(iframe)) {
-      this.detachScrollSync(key)
+    if (!iframe) {
+      console.warn(
+        `%c[IframeManager] ⚠️ DETACH SKIPPED: iframe not found for ${botId}`,
+        'color: #ff9500',
+        { botId, timestamp }
+      )
+      return
     }
 
-    // 🗄️ stash로 이동 (appendChild는 reload 안 일으킴)
-    const prevParent = iframe.parentElement?.id || iframe.parentElement?.tagName
-    this.stash.appendChild(iframe)
+    // 🎨 CSS로 숨김 (appendChild 없음!)
+    iframe.style.position = 'absolute'
+    iframe.style.left = '-9999px'
+    iframe.style.top = '0'
+    iframe.style.visibility = 'hidden'
+    iframe.style.pointerEvents = 'none'
+    iframe.style.zIndex = '1'
+    iframe.className = 'w-full h-full border-0 md-iframe-hidden'
+
+    // 🧹 Observer 정리
     const meta = this.metadata.get(key)
     if (meta) {
+      // ResizeObserver 정리
+      if (meta.resizeObserver) {
+        meta.resizeObserver.disconnect()
+        meta.resizeObserver = undefined
+      }
+
+      // Scroll 동기화 해제
+      this.detachScrollSync(key)
+
       meta.lastDetachAt = Date.now()
-      meta.lastContainerId = 'md-iframe-stash'
+      meta.lastContainerId = 'css-hidden'
+      meta.containerEl = undefined
+      meta.positionUpdater = undefined
     }
-    console.log('[IframeManager] 📤 iframe 분리 → stash (세션 보존)', {
-      botId,
-      from: prevParent || 'unknown',
-      reloadCount: meta?.reloadCount,
-    })
+
+    console.log(
+      `%c[IframeManager] ✅ CSS DETACHED (NO DOM MOVE!): ${botId}`,
+      'color: #00ff00; font-weight: bold; background: #003300; padding: 2px 8px',
+      {
+        botId,
+        method: 'CSS_ONLY',
+        reloadCount: meta?.reloadCount,
+        sessionPreserved: true,
+        noReloadRisk: true,
+        timestamp
+      }
+    )
   }
 
   /**

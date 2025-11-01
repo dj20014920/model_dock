@@ -12,7 +12,13 @@
       "mcp__serena__list_memories",
       "mcp__serena__list_dir",
       "mcp__serena__find_file",
-      "mcp__desktop-commander__start_search"
+      "mcp__desktop-commander__start_search",
+      "mcp__serena__find_symbol",
+      "mcp__serena__search_for_pattern",
+      "Read(//Users/dj20014920/Desktop/**)",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__take_screenshot"
     ],
     "deny": [],
     "ask": []
